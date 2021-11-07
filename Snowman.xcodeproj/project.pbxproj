@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		641F87721BD4E2A9612BD226 /* Pods_Snowman.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA2FF155FE64827A2BCD39F /* Pods_Snowman.framework */; };
 		C7C9CDF32737625800DC2A09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9CDF22737625800DC2A09 /* AppDelegate.swift */; };
 		C7C9CDF52737625800DC2A09 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9CDF42737625800DC2A09 /* SceneDelegate.swift */; };
 		C7C9CDF72737625800DC2A09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9CDF62737625800DC2A09 /* ViewController.swift */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		788ACA07E071AF9CA17DB541 /* Pods-Snowman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowman.release.xcconfig"; path = "Target Support Files/Pods-Snowman/Pods-Snowman.release.xcconfig"; sourceTree = "<group>"; };
+		7CA2FF155FE64827A2BCD39F /* Pods_Snowman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snowman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9688495685D4CE9B2C338215 /* Pods-Snowman.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowman.debug.xcconfig"; path = "Target Support Files/Pods-Snowman/Pods-Snowman.debug.xcconfig"; sourceTree = "<group>"; };
 		C7C9CDEF2737625800DC2A09 /* Snowman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C9CDF22737625800DC2A09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7C9CDF42737625800DC2A09 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +35,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				641F87721BD4E2A9612BD226 /* Pods_Snowman.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2833E528DC527A38B49E41CE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9688495685D4CE9B2C338215 /* Pods-Snowman.debug.xcconfig */,
+				788ACA07E071AF9CA17DB541 /* Pods-Snowman.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B2A2769D15DD64A9E0F2E2EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7CA2FF155FE64827A2BCD39F /* Pods_Snowman.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C7C9CDE62737625800DC2A09 = {
 			isa = PBXGroup;
 			children = (
 				C7C9CDF12737625800DC2A09 /* Snowman */,
 				C7C9CDF02737625800DC2A09 /* Products */,
+				2833E528DC527A38B49E41CE /* Pods */,
+				B2A2769D15DD64A9E0F2E2EC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +99,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7C9CE032737625F00DC2A09 /* Build configuration list for PBXNativeTarget "Snowman" */;
 			buildPhases = (
+				12A64F28673309B6ED9A1B86 /* [CP] Check Pods Manifest.lock */,
 				C7C9CDEB2737625800DC2A09 /* Sources */,
 				C7C9CDEC2737625800DC2A09 /* Frameworks */,
 				C7C9CDED2737625800DC2A09 /* Resources */,
@@ -131,6 +157,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		12A64F28673309B6ED9A1B86 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Snowman-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C7C9CDEB2737625800DC2A09 /* Sources */ = {
@@ -283,6 +334,7 @@
 		};
 		C7C9CE042737625F00DC2A09 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9688495685D4CE9B2C338215 /* Pods-Snowman.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +354,7 @@
 		};
 		C7C9CE052737625F00DC2A09 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 788ACA07E071AF9CA17DB541 /* Pods-Snowman.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
