@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,12 @@
 		DD70F2FD27411EFB0053374B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2FC27411EFB0053374B /* Image.swift */; };
 		DD70F2FF27411F020053374B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2FE27411F020053374B /* Color.swift */; };
 		DD70F30127411F0A0053374B /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F30027411F0A0053374B /* Font.swift */; };
+		DD70F3042741202D0053374B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F3032741202D0053374B /* SnapKit */; };
+		DD70F30D2741209F0053374B /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F30C2741209F0053374B /* Then */; };
+		DD70F310274120C10053374B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F30F274120C10053374B /* Kingfisher */; };
+		DD70F313274121030053374B /* KDCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F312274121030053374B /* KDCalendar */; };
+		DD70F316274121570053374B /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F315274121570053374B /* PanModal */; };
+		DD70F31D2741254B0053374B /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F31C2741254B0053374B /* Moya */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +50,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				641F87721BD4E2A9612BD226 /* Pods_Snowman.framework in Frameworks */,
+				DD70F313274121030053374B /* KDCalendar in Frameworks */,
+				DD70F3042741202D0053374B /* SnapKit in Frameworks */,
+				DD70F30D2741209F0053374B /* Then in Frameworks */,
+				DD70F310274120C10053374B /* Kingfisher in Frameworks */,
+				DD70F31D2741254B0053374B /* Moya in Frameworks */,
+				DD70F316274121570053374B /* PanModal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,12 +198,21 @@
 				C7C9CDEB2737625800DC2A09 /* Sources */,
 				C7C9CDEC2737625800DC2A09 /* Frameworks */,
 				C7C9CDED2737625800DC2A09 /* Resources */,
+				DD70F31A274121EC0053374B /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Snowman;
+			packageProductDependencies = (
+				DD70F3032741202D0053374B /* SnapKit */,
+				DD70F30C2741209F0053374B /* Then */,
+				DD70F30F274120C10053374B /* Kingfisher */,
+				DD70F312274121030053374B /* KDCalendar */,
+				DD70F315274121570053374B /* PanModal */,
+				DD70F31C2741254B0053374B /* Moya */,
+			);
 			productName = Snowman;
 			productReference = C7C9CDEF2737625800DC2A09 /* Snowman.app */;
 			productType = "com.apple.product-type.application";
@@ -219,6 +240,14 @@
 				Base,
 			);
 			mainGroup = C7C9CDE62737625800DC2A09;
+			packageReferences = (
+				DD70F3022741202D0053374B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DD70F30B2741209F0053374B /* XCRemoteSwiftPackageReference "Then" */,
+				DD70F30E274120C10053374B /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				DD70F311274121030053374B /* XCRemoteSwiftPackageReference "CalendarView" */,
+				DD70F314274121570053374B /* XCRemoteSwiftPackageReference "PanModal" */,
+				DD70F31B2741254B0053374B /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = C7C9CDF02737625800DC2A09 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -262,6 +291,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DD70F31A274121EC0053374B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -420,7 +466,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5WP2UJAGJQ;
+				DEVELOPMENT_TEAM = 2N3PMJ78CA;
 				INFOPLIST_FILE = Snowman/Support/Config/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -440,7 +486,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5WP2UJAGJQ;
+				DEVELOPMENT_TEAM = 2N3PMJ78CA;
 				INFOPLIST_FILE = Snowman/Support/Config/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -475,6 +521,90 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DD70F3022741202D0053374B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		DD70F30B2741209F0053374B /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.0;
+			};
+		};
+		DD70F30E274120C10053374B /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.1;
+			};
+		};
+		DD70F311274121030053374B /* XCRemoteSwiftPackageReference "CalendarView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mmick66/CalendarView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.9;
+			};
+		};
+		DD70F314274121570053374B /* XCRemoteSwiftPackageReference "PanModal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/slackhq/PanModal";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.7;
+			};
+		};
+		DD70F31B2741254B0053374B /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD70F3032741202D0053374B /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD70F3022741202D0053374B /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		DD70F30C2741209F0053374B /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD70F30B2741209F0053374B /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		DD70F30F274120C10053374B /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD70F30E274120C10053374B /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		DD70F312274121030053374B /* KDCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD70F311274121030053374B /* XCRemoteSwiftPackageReference "CalendarView" */;
+			productName = KDCalendar;
+		};
+		DD70F315274121570053374B /* PanModal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD70F314274121570053374B /* XCRemoteSwiftPackageReference "PanModal" */;
+			productName = PanModal;
+		};
+		DD70F31C2741254B0053374B /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD70F31B2741254B0053374B /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C7C9CDE72737625800DC2A09 /* Project object */;
 }
