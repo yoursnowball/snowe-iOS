@@ -33,6 +33,7 @@
 		DDFAF15427458441005A3097 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF15327458441005A3097 /* UIView+.swift */; };
 		DDFAF15627458457005A3097 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF15527458457005A3097 /* UIButton+.swift */; };
 		DDFAF15827458488005A3097 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF15727458488005A3097 /* UIStackView+.swift */; };
+		DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF15A27458556005A3097 /* MoyaLoggingPlugin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		DDFAF15327458441005A3097 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		DDFAF15527458457005A3097 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		DDFAF15727458488005A3097 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		DDFAF15A27458556005A3097 /* MoyaLoggingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggingPlugin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 		DD70F2F327411E430053374B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				DDFAF15927458512005A3097 /* MoyaPlugin */,
 				DD70F2F427411E5F0053374B /* Network.swift */,
 			);
 			path = Network;
@@ -236,6 +239,14 @@
 				DDFAF14A27457FCB005A3097 /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		DDFAF15927458512005A3097 /* MoyaPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				DDFAF15A27458556005A3097 /* MoyaLoggingPlugin.swift */,
+			);
+			path = MoyaPlugin;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */,
 				DDFAF15427458441005A3097 /* UIView+.swift in Sources */,
 				C7C9CDF72737625800DC2A09 /* ViewController.swift in Sources */,
 				DD70F2FD27411EFB0053374B /* Image.swift in Sources */,
