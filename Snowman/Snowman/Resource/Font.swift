@@ -7,4 +7,13 @@
 
 import UIKit.UIFont
 
-enum Font {}
+extension UIFont {
+
+    enum Family: String {
+        case bold, medium, regular
+    }
+
+    static func roboto(size: CGFloat, family: Family) -> UIFont {
+        return UIFont(name: "SpoqaHanSansNeo-\(family)", size: size)!
+    }
+}
