@@ -189,7 +189,6 @@
 		DD70F2EF27411C3D0053374B /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				DDFAF14527457EF8005A3097 /* NewCharacter */,
 				C7C9CDF62737625800DC2A09 /* ViewController.swift */,
 			);
 			path = Feature;
@@ -223,13 +222,6 @@
 				DDFAF15727458488005A3097 /* UIStackView+.swift */,
 			);
 			path = Util;
-			sourceTree = "<group>";
-		};
-		DDFAF14527457EF8005A3097 /* NewCharacter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NewCharacter;
 			sourceTree = "<group>";
 		};
 		DDFAF14C27457FCF005A3097 /* Base */ = {
