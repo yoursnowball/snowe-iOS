@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "KDCalendar",
-        "repositoryURL": "https://github.com/mmick66/CalendarView",
-        "state": {
-          "branch": null,
-          "revision": "d0b4808bb3c98ec8ece7999508e3eb7bc415acda",
-          "version": "1.8.9"
-        }
-      },
-      {
         "package": "Kingfisher",
         "repositoryURL": "https://github.com/onevcat/Kingfisher",
         "state": {

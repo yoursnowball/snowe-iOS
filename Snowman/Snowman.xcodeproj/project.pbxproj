@@ -22,7 +22,6 @@
 		DD70F3042741202D0053374B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F3032741202D0053374B /* SnapKit */; };
 		DD70F30D2741209F0053374B /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F30C2741209F0053374B /* Then */; };
 		DD70F310274120C10053374B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F30F274120C10053374B /* Kingfisher */; };
-		DD70F313274121030053374B /* KDCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F312274121030053374B /* KDCalendar */; };
 		DD70F316274121570053374B /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F315274121570053374B /* PanModal */; };
 		DD70F31D2741254B0053374B /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F31C2741254B0053374B /* Moya */; };
 		DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */; };
@@ -70,7 +69,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				641F87721BD4E2A9612BD226 /* Pods_Snowman.framework in Frameworks */,
-				DD70F313274121030053374B /* KDCalendar in Frameworks */,
 				DD70F3042741202D0053374B /* SnapKit in Frameworks */,
 				DD70F30D2741209F0053374B /* Then in Frameworks */,
 				DD70F310274120C10053374B /* Kingfisher in Frameworks */,
@@ -263,7 +261,6 @@
 				DD70F3032741202D0053374B /* SnapKit */,
 				DD70F30C2741209F0053374B /* Then */,
 				DD70F30F274120C10053374B /* Kingfisher */,
-				DD70F312274121030053374B /* KDCalendar */,
 				DD70F315274121570053374B /* PanModal */,
 				DD70F31C2741254B0053374B /* Moya */,
 			);
@@ -298,7 +295,6 @@
 				DD70F3022741202D0053374B /* XCRemoteSwiftPackageReference "SnapKit" */,
 				DD70F30B2741209F0053374B /* XCRemoteSwiftPackageReference "Then" */,
 				DD70F30E274120C10053374B /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				DD70F311274121030053374B /* XCRemoteSwiftPackageReference "CalendarView" */,
 				DD70F314274121570053374B /* XCRemoteSwiftPackageReference "PanModal" */,
 				DD70F31B2741254B0053374B /* XCRemoteSwiftPackageReference "Moya" */,
 			);
@@ -611,14 +607,6 @@
 				minimumVersion = 7.1.1;
 			};
 		};
-		DD70F311274121030053374B /* XCRemoteSwiftPackageReference "CalendarView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mmick66/CalendarView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.8.9;
-			};
-		};
 		DD70F314274121570053374B /* XCRemoteSwiftPackageReference "PanModal" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/slackhq/PanModal";
@@ -652,11 +640,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD70F30E274120C10053374B /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		DD70F312274121030053374B /* KDCalendar */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DD70F311274121030053374B /* XCRemoteSwiftPackageReference "CalendarView" */;
-			productName = KDCalendar;
 		};
 		DD70F315274121570053374B /* PanModal */ = {
 			isa = XCSwiftPackageProductDependency;
