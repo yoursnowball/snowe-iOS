@@ -33,7 +33,10 @@ extension NameQuestionViewController {
     }
 
     private func goToNextViewController() {
-
+        let popUpView = PopUpViewController()
+        popUpView.modalPresentationStyle = .overCurrentContext
+        popUpView.modalTransitionStyle = .crossDissolve
+        present(popUpView, animated: true, completion: nil)
     }
 }
 extension NameQuestionViewController: UITextFieldDelegate {
