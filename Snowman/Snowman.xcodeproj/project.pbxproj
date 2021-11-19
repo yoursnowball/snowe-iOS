@@ -242,8 +242,8 @@
 			children = (
 				DDD50EEC274681E100EA508F /* QuestionBaseViewController.swift */,
 				DD894D2C27473833004AF5A6 /* GoalQuestionViewController.swift */,
-				DD894D2E2747384A004AF5A6 /* NameQuestionViewController.swift */,
 				DD894D3027473DEF004AF5A6 /* CharacterChoiceViewController.swift */,
+				DD894D2E2747384A004AF5A6 /* NameQuestionViewController.swift */,
 				DD894D3627474F98004AF5A6 /* PopUpViewController.swift */,
 			);
 			path = View;

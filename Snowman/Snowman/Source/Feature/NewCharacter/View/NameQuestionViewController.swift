@@ -33,6 +33,8 @@ extension NameQuestionViewController {
     }
 
     private func goToNextViewController() {
+        hideButton()
+
         let popUpView = PopUpViewController()
         popUpView.modalPresentationStyle = .overCurrentContext
         popUpView.modalTransitionStyle = .crossDissolve

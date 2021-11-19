@@ -101,6 +101,15 @@ class QuestionBaseViewController: BaseViewController {
 }
 
 extension QuestionBaseViewController {
+    public func hideButton() {
+        nextButton.isHidden = true
+    }
+
+    @objc
+    public func nextButtonDidTapped(_ sender: UIButton) {}
+}
+
+extension QuestionBaseViewController {
     private func setTextField() {
         textField.becomeFirstResponder()
     }
@@ -116,9 +125,6 @@ extension QuestionBaseViewController {
 }
 
 extension QuestionBaseViewController {
-    @objc
-    public func nextButtonDidTapped(_ sender: UIButton) {}
-
     @objc
     private func showKeyboard(notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
