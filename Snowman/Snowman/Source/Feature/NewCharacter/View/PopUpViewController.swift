@@ -10,8 +10,7 @@ import UIKit
 class PopUpViewController: UIViewController {
     private let backgroundView = UIView().then {
         $0.backgroundColor = .white
-        $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 16
+        $0.makeRound(16)
     }
 
     private let titleLabel = UILabel().then {
@@ -39,8 +38,7 @@ class PopUpViewController: UIViewController {
         $0.setBackgroundColor(.systemBlue, for: .normal)
         $0.titleLabel?.font = .spoqa(size: 18, family: .bold)
 
-        $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 10
+        $0.makeRound()
 
         $0.addTarget(self, action: #selector(buttonDidTapped(_:)), for: .touchUpInside)
     }

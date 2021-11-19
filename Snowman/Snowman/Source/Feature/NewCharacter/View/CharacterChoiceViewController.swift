@@ -31,8 +31,7 @@ class CharacterChoiceViewController: BaseViewController {
             $0.height.equalTo(53)
         }
 
-        $0.layer.masksToBounds = true
-        $0.layer.cornerRadius = 10
+        $0.makeRound()
 
         $0.isEnabled = false
     }
