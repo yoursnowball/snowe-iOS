@@ -27,6 +27,8 @@
 		DD70F31D2741254B0053374B /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F31C2741254B0053374B /* Moya */; };
 		DD894D2D27473833004AF5A6 /* GoalQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D2C27473833004AF5A6 /* GoalQuestionViewController.swift */; };
 		DD894D2F2747384A004AF5A6 /* NameQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D2E2747384A004AF5A6 /* NameQuestionViewController.swift */; };
+		DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3027473DEF004AF5A6 /* CharacterChoiceViewController.swift */; };
+		DD894D3527473FF7004AF5A6 /* CharacterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */; };
 		DDD50EED274681E100EA508F /* QuestionBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD50EEC274681E100EA508F /* QuestionBaseViewController.swift */; };
 		DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */; };
 		DDFAF14B27457FCB005A3097 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14A27457FCB005A3097 /* BaseViewController.swift */; };
@@ -58,6 +60,8 @@
 		DD70F30027411F0A0053374B /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		DD894D2C27473833004AF5A6 /* GoalQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalQuestionViewController.swift; sourceTree = "<group>"; };
 		DD894D2E2747384A004AF5A6 /* NameQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameQuestionViewController.swift; sourceTree = "<group>"; };
+		DD894D3027473DEF004AF5A6 /* CharacterChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterChoiceViewController.swift; sourceTree = "<group>"; };
+		DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDD50EEC274681E100EA508F /* QuestionBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBaseViewController.swift; sourceTree = "<group>"; };
 		DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		DDFAF14A27457FCB005A3097 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -231,12 +235,30 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		DDD50EEB274681C100EA508F /* NewCharacter */ = {
+		DD894D3227473FB9004AF5A6 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				DDD50EEC274681E100EA508F /* QuestionBaseViewController.swift */,
 				DD894D2C27473833004AF5A6 /* GoalQuestionViewController.swift */,
 				DD894D2E2747384A004AF5A6 /* NameQuestionViewController.swift */,
+				DD894D3027473DEF004AF5A6 /* CharacterChoiceViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DD894D3327473FD8004AF5A6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DDD50EEB274681C100EA508F /* NewCharacter */ = {
+			isa = PBXGroup;
+			children = (
+				DD894D3227473FB9004AF5A6 /* View */,
+				DD894D3327473FD8004AF5A6 /* Cell */,
 			);
 			path = NewCharacter;
 			sourceTree = "<group>";
@@ -390,6 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD894D3527473FF7004AF5A6 /* CharacterCollectionViewCell.swift in Sources */,
 				DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */,
 				DDFAF15427458441005A3097 /* UIView+.swift in Sources */,
 				DD894D2F2747384A004AF5A6 /* NameQuestionViewController.swift in Sources */,
@@ -408,6 +431,7 @@
 				DD70F2F527411E5F0053374B /* Network.swift in Sources */,
 				DDD50EED274681E100EA508F /* QuestionBaseViewController.swift in Sources */,
 				DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */,
+				DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

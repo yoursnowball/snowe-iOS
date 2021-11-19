@@ -54,12 +54,10 @@ class QuestionBaseViewController: BaseViewController {
     }
 
     private let questionLabel = UILabel().then {
-        $0.text = "눈덩이의 이름을 알려주세요"
         $0.font = .spoqa(size: 22, family: .medium)
     }
 
     private let descriptionLabel = UILabel().then {
-        $0.text = "이름"
         $0.font = .spoqa(size: 12, family: .regular)
         $0.textColor = .systemBlue
     }
@@ -79,13 +77,12 @@ class QuestionBaseViewController: BaseViewController {
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.setBackgroundColor(.systemBlue, for: .normal)
-        $0.setTitleColor(.gray, for: .disabled)
         $0.setBackgroundColor(.lightGray, for: .disabled)
         $0.titleLabel?.font = .spoqa(size: 18, family: .bold)
         $0.addTarget(self, action: #selector(nextButtonDidTapped(_:)), for: .touchUpInside)
 
         $0.snp.makeConstraints {
-            $0.height.equalTo(56)
+            $0.height.equalTo(53)
         }
 
         $0.isEnabled = false

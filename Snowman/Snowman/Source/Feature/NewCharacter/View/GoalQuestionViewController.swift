@@ -34,7 +34,7 @@ extension GoalQuestionViewController {
     }
 
     private func goToNextViewController() {
-        navigationController?.pushViewController(NameQuestionViewController(), animated: true)
+        navigationController?.pushViewController(CharacterChoiceViewController(), animated: true)
     }
 }
 extension GoalQuestionViewController: UITextFieldDelegate {
