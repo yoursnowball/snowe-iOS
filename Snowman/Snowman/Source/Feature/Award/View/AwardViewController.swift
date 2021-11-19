@@ -9,6 +9,13 @@ import UIKit
 
 final class AwardViewController: BaseViewController {
 
+    private let headerView = UIView()
+
+    private let headerTitleLabel = UILabel().then {
+        $0.font = .spoqa(size: 22, family: .medium)
+        $0.text = "총 3개의 눈사람을 만들었어요"
+    }
+
     private lazy var tableView = UITableView().then {
         $0.registerReusableCell(AwardTableViewCell.self)
         $0.dataSource = self
@@ -26,6 +33,10 @@ final class AwardViewController: BaseViewController {
 extension AwardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 121
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return headerView
     }
 }
 
@@ -52,6 +63,15 @@ extension AwardViewController {
         view.addSubviews(tableView)
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+
+        headerView.addSubviews(headerTitleLabel)
+        headerView.snp.makeConstraints {
+            $0.height.equalTo(77)
+        }
+        headerTitleLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(18)
         }
     }
 }
