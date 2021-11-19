@@ -38,6 +38,10 @@ extension BaseNavigationController {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [
+            .font: UIFont.spoqa(size: 16, family: .medium),
+            .foregroundColor: UIColor.black
+        ]
 
         navigationBar.standardAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
