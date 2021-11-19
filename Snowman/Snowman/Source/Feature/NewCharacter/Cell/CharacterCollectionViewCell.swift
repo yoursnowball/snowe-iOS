@@ -17,10 +17,14 @@ class CharacterCollectionViewCell: UICollectionViewCell {
 
     private let checkImageView = UIImageView()
 
-    private let characterImageView = UIImageView()
+    private let characterImageView = UIImageView().then {
+        $0.image = .add
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        round()
+        setLayouts()
         makeCollectionViewCell()
     }
 
@@ -30,18 +34,33 @@ class CharacterCollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        characterImageView.image = nil
+    }
+}
+extension CharacterCollectionViewCell {
+    public func setCharacterImage(with imageName: String) {
+        characterImageView.image = UIImage(named: imageName)
     }
 }
 
 extension CharacterCollectionViewCell {
-    private func makeCollectionViewCell() {
+    private func round() {
         layer.masksToBounds = true
         layer.cornerRadius = 24
-        layer.borderWidth =  isSelected ? 1 : 0
         layer.borderColor = UIColor.systemBlue.cgColor
+    }
+
+    private func makeCollectionViewCell() {
+        layer.borderWidth =  isSelected ? 1 : 0
 
         contentView.backgroundColor = isSelected ?
-            .systemBlue.withAlphaComponent(0.3) : .lightGray
+            .systemBlue.withAlphaComponent(0.3) : .lightGray.withAlphaComponent(0.3)
+
+        checkImageView.image = isSelected ?
+            UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "circle")
+
+        checkImageView.tintColor = isSelected ?
+            .systemBlue : .lightGray
     }
 }
 
@@ -62,6 +81,7 @@ extension CharacterCollectionViewCell {
         checkImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(22)
             $0.trailing.equalToSuperview().inset(20)
+            $0.width.height.equalTo(23)
         }
 
         characterImageView.snp.makeConstraints {
