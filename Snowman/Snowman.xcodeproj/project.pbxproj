@@ -31,6 +31,7 @@
 		DD894D3527473FF7004AF5A6 /* CharacterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */; };
 		DD894D3727474F98004AF5A6 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3627474F98004AF5A6 /* PopUpViewController.swift */; };
 		DDD50EED274681E100EA508F /* QuestionBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD50EEC274681E100EA508F /* QuestionBaseViewController.swift */; };
+		DDD748A52747B1D80056C505 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD748A42747B1D80056C505 /* UIImage+.swift */; };
 		DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */; };
 		DDFAF14B27457FCB005A3097 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14A27457FCB005A3097 /* BaseViewController.swift */; };
 		DDFAF14E274583AA005A3097 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14D274583AA005A3097 /* Reusable.swift */; };
@@ -65,6 +66,7 @@
 		DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD894D3627474F98004AF5A6 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		DDD50EEC274681E100EA508F /* QuestionBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBaseViewController.swift; sourceTree = "<group>"; };
+		DDD748A42747B1D80056C505 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		DDFAF14A27457FCB005A3097 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DDFAF14D274583AA005A3097 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				DDFAF15327458441005A3097 /* UIView+.swift */,
 				DDFAF15527458457005A3097 /* UIButton+.swift */,
 				DDFAF15727458488005A3097 /* UIStackView+.swift */,
+				DDD748A42747B1D80056C505 /* UIImage+.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				DD894D3727474F98004AF5A6 /* PopUpViewController.swift in Sources */,
 				DD70F2F527411E5F0053374B /* Network.swift in Sources */,
 				DDD50EED274681E100EA508F /* QuestionBaseViewController.swift in Sources */,
+				DDD748A52747B1D80056C505 /* UIImage+.swift in Sources */,
 				DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */,
 				DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */,
 			);
