@@ -18,7 +18,7 @@ class CharacterCollectionViewCell: UICollectionViewCell {
     private let checkImageView = UIImageView()
 
     private let characterImageView = UIImageView().then {
-        $0.image = .add
+        $0.contentMode = .scaleAspectFit
     }
 
     override init(frame: CGRect) {
@@ -39,7 +39,8 @@ class CharacterCollectionViewCell: UICollectionViewCell {
 }
 extension CharacterCollectionViewCell {
     public func setCharacterImage(with imageName: String) {
-        characterImageView.image = UIImage(named: imageName)
+//        characterImageView.image = UIImage(named: imageName)
+        characterImageView.image = UIImage(systemName: imageName)
     }
 }
 

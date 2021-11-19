@@ -87,6 +87,7 @@ extension CharacterChoiceViewController: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell: CharacterCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+        cell.setCharacterImage(with: "person.fill")
         return cell
     }
 }
