@@ -46,8 +46,7 @@ extension CharacterCollectionViewCell {
 
 extension CharacterCollectionViewCell {
     private func round() {
-        layer.masksToBounds = true
-        layer.cornerRadius = 24
+        makeRound(24)
         layer.borderColor = UIColor.systemBlue.cgColor
     }
 
