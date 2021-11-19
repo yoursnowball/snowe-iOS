@@ -65,7 +65,7 @@ extension TopTabBarViewController {
         vc1.view.frame = CGRect(
             x: 0,
             y: 0,
-            width: UIScreen.main.bounds.width,
+            width: 0,
             height: mainScrollView.frame.height
         )
         addChild(vc1)
@@ -74,7 +74,8 @@ extension TopTabBarViewController {
         let vc2 = UIViewController()
         vc2.view.frame = CGRect(
             x: UIScreen.main.bounds.width,
-            y: 0, width: UIScreen.main.bounds.width,
+            y: 0,
+            width: 0,
             height: mainScrollView.frame.height
         )
         addChild(vc2)
@@ -83,7 +84,8 @@ extension TopTabBarViewController {
         let vc3 = AwardViewController()
         vc3.view.frame = CGRect(
             x: UIScreen.main.bounds.width * 2,
-            y: 0, width: UIScreen.main.bounds.width,
+            y: 0,
+            width: 0,
             height: mainScrollView.frame.height
         )
         addChild(vc3)
@@ -109,6 +111,7 @@ extension TopTabBarViewController: UICollectionViewDataSource {
         if indexPath.row == 0 {
             cell.isSelected = true
         }
+
         return cell
     }
 }
@@ -145,14 +148,17 @@ extension TopTabBarViewController: UIScrollViewDelegate {
         }
 
         [0, 1, 2].forEach {
-            if let cell = customTabbar.cellForItem(at: IndexPath(row: $0, section: 0)) as? MenuItemCollectionViewCell {
+            if let cell = customTabbar.cellForItem(at: IndexPath(row: $0, section: 0))
+                as? MenuItemCollectionViewCell {
                 cell.isSelected = false
             }
         }
 
-        if let cell = customTabbar.cellForItem(at: IndexPath(row: Int(page), section: 0))
-            as? MenuItemCollectionViewCell {
-            cell.isSelected = true
+        if page == 0.0 || page == 1.0 || page == 2.0 {
+            if let cell = customTabbar.cellForItem(at: IndexPath(row: Int(page), section: 0))
+                as? MenuItemCollectionViewCell {
+                cell.isSelected = true
+            }
         }
     }
 }
