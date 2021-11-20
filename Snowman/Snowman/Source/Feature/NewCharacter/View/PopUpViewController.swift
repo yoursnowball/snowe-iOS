@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PopUpViewController: UIViewController {
+final class PopUpViewController: UIViewController {
 
     public var goalResponse: GoalResponse? {
         didSet {
