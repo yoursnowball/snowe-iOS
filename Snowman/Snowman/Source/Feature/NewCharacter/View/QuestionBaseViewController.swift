@@ -98,6 +98,11 @@ class QuestionBaseViewController: BaseViewController {
         setLayouts()
         registerNotification()
     }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        textFieldDelegate = nil
+    }
 }
 
 extension QuestionBaseViewController {
@@ -138,7 +143,7 @@ extension QuestionBaseViewController {
     }
 
     @objc
-    private func textFieldDidChange(_ textField: UITextField) {
+    public func textFieldDidChange(_ textField: UITextField) {
         let textCount = textField.text?.count ?? 0
         nextButton.isEnabled = textCount > 0 && textCount < textFieldTextCount
         bottomLineView.backgroundColor = nextButton.isEnabled ?

@@ -12,20 +12,20 @@ final class GoalQuestionViewController: QuestionBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setProperties()
-        setDelegation()
     }
 
     override func nextButtonDidTapped(_ sender: UIButton) {
         goToNextViewController()
     }
 
+    override func textFieldDidChange(_ textField: UITextField) {
+        super.textFieldDidChange(textField)
+        NewGoal.shared.name = textField.text
+    }
+
 }
 
 extension GoalQuestionViewController {
-    private func setDelegation() {
-        textFieldDelegate = self
-    }
-
     private func setProperties() {
         numberLabelText = "1/3"
         questionLabelText = "당신의 목표는 무엇인가요?"
@@ -34,10 +34,11 @@ extension GoalQuestionViewController {
     }
 
     private func goToNextViewController() {
-        navigationController?.pushViewController(CharacterChoiceViewController(), animated: true)
+        let viewController = CharacterChoiceViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
-extension GoalQuestionViewController: UITextFieldDelegate {
+extension GoalQuestionViewController {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.returnKeyType == .done {
             goToNextViewController()

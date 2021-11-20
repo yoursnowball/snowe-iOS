@@ -16,6 +16,9 @@
 		C7EDAD24274563EA008C699C /* SpoqaHanSansNeo-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */; };
 		C7EDAD25274563EA008C699C /* SpoqaHanSansNeo-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */; };
 		DD02A9762748B7E800D9B324 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9752748B7E800D9B324 /* UserDefaultKey.swift */; };
+		DD02A97A2748C09A00D9B324 /* CharacterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9792748C09A00D9B324 /* CharacterType.swift */; };
+		DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A97B2748CAE900D9B324 /* GoalRequest.swift */; };
+		DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A97E2749482900D9B324 /* NewGoal.swift */; };
 		DD70F2FD27411EFB0053374B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2FC27411EFB0053374B /* Image.swift */; };
 		DD70F2FF27411F020053374B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2FE27411F020053374B /* Color.swift */; };
 		DD70F30127411F0A0053374B /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F30027411F0A0053374B /* Font.swift */; };
@@ -70,6 +73,9 @@
 		C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-medium.otf"; sourceTree = "<group>"; };
 		C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-regular.otf"; sourceTree = "<group>"; };
 		DD02A9752748B7E800D9B324 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
+		DD02A9792748C09A00D9B324 /* CharacterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterType.swift; sourceTree = "<group>"; };
+		DD02A97B2748CAE900D9B324 /* GoalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRequest.swift; sourceTree = "<group>"; };
+		DD02A97E2749482900D9B324 /* NewGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoal.swift; sourceTree = "<group>"; };
 		DD70F2FC27411EFB0053374B /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		DD70F2FE27411F020053374B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DD70F30027411F0A0053374B /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -177,9 +183,28 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		DD02A9772748C02B00D9B324 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD86CBED2748253900F6EC8D /* APIModel */,
+				DD02A9782748C03800D9B324 /* AppModel */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DD02A9782748C03800D9B324 /* AppModel */ = {
+			isa = PBXGroup;
+			children = (
+				DD02A9792748C09A00D9B324 /* CharacterType.swift */,
+				DD02A97E2749482900D9B324 /* NewGoal.swift */,
+			);
+			path = AppModel;
+			sourceTree = "<group>";
+		};
 		DD70F2EA27411BD60053374B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				DD02A9772748C02B00D9B324 /* Model */,
 				DD70F2F627411E660053374B /* Component */,
 				DD70F2EF27411C3D0053374B /* Feature */,
 				DD70F2F327411E430053374B /* Network */,
@@ -246,7 +271,6 @@
 				DD86CBE92748232600F6EC8D /* URLConst.swift */,
 				DD86CBE327481EDF00F6EC8D /* API */,
 				DD86CBE427481EE800F6EC8D /* Service */,
-				DD86CBED2748253900F6EC8D /* APIModel */,
 				DDFAF15927458512005A3097 /* MoyaPlugin */,
 			);
 			path = Network;
@@ -296,6 +320,7 @@
 				DD86CBEE2748257B00F6EC8D /* ErrorResponse.swift */,
 				DD86CBF2274826FA00F6EC8D /* GoalResponse.swift */,
 				DD86CBF42748278E00F6EC8D /* TodoResponse.swift */,
+				DD02A97B2748CAE900D9B324 /* GoalRequest.swift */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -509,12 +534,14 @@
 				DDD7489F27477B980056C505 /* AwardTableViewCell.swift in Sources */,
 				DD86CBF52748278E00F6EC8D /* TodoResponse.swift in Sources */,
 				DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */,
+				DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */,
 				DD86CBEA2748232600F6EC8D /* URLConst.swift in Sources */,
 				DDFAF15427458441005A3097 /* UIView+.swift in Sources */,
 				DD894D2F2747384A004AF5A6 /* NameQuestionViewController.swift in Sources */,
 				DD86CBE62748210100F6EC8D /* BaseTargetType.swift in Sources */,
 				DD02A9762748B7E800D9B324 /* UserDefaultKey.swift in Sources */,
 				DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */,
+				DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */,
 				DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */,
 				C7C9CDF72737625800DC2A09 /* ViewController.swift in Sources */,
 				DD894D2D27473833004AF5A6 /* GoalQuestionViewController.swift in Sources */,
@@ -534,6 +561,7 @@
 				C7C9CDF32737625800DC2A09 /* AppDelegate.swift in Sources */,
 				DD86CBF12748265200F6EC8D /* NetworkResult.swift in Sources */,
 				DD894D3727474F98004AF5A6 /* PopUpViewController.swift in Sources */,
+				DD02A97A2748C09A00D9B324 /* CharacterType.swift in Sources */,
 				DDD50EED274681E100EA508F /* QuestionBaseViewController.swift in Sources */,
 				DDD748A52747B1D80056C505 /* UIImage+.swift in Sources */,
 				DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */,

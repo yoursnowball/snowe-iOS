@@ -8,6 +8,16 @@
 import UIKit
 
 class PopUpViewController: UIViewController {
+
+    public var goalResponse: GoalResponse? {
+        didSet {
+            guard let response = goalResponse else {return}
+            nameLabel.text = response.name
+            characterImageView.image = CharacterType(rawValue: response.type)?.getImage(level: response.level)
+            goalLabel.text = response.objective
+        }
+    }
+
     private let backgroundView = UIView().then {
         $0.backgroundColor = .white
         $0.makeRound(16)
@@ -18,18 +28,14 @@ class PopUpViewController: UIViewController {
         $0.text = "눈덩이 생성 완료!"
     }
 
-    private let characterImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "person.fill")
-    }
+    private let characterImageView = UIImageView()
 
     private let nameLabel = UILabel().then {
         $0.font = .spoqa(size: 16, family: .medium)
-        $0.text = "수줍은 눈사람"
     }
 
-    private let discriptionLabel = UILabel().then {
+    private let goalLabel = UILabel().then {
         $0.font = .spoqa(size: 16, family: .regular)
-        $0.text = "토익 900점 달성하기"
     }
 
     private lazy var okButton = UIButton().then {
@@ -78,7 +84,7 @@ extension PopUpViewController {
             titleLabel,
             characterImageView,
             nameLabel,
-            discriptionLabel,
+            goalLabel,
             okButton
         )
     }
@@ -106,7 +112,7 @@ extension PopUpViewController {
             $0.top.equalTo(characterImageView.snp.bottom).offset(17)
         }
 
-        discriptionLabel.snp.makeConstraints {
+        goalLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(nameLabel.snp.bottom).offset(17)
         }
