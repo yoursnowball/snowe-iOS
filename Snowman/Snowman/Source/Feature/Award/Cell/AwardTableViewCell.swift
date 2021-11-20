@@ -26,6 +26,8 @@ final class AwardTableViewCell: UITableViewCell {
         $0.contentMode = .scaleAspectFit
     }
 
+    private let levelStickerView = LevelStickerView()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setLayouts()
@@ -38,17 +40,18 @@ final class AwardTableViewCell: UITableViewCell {
 }
 
 extension AwardTableViewCell {
-    //TODO:- 캐릭터와 이미지는 enum 으로 관리 후 교체
     public func updateData(
-        with backgroundColor: UIColor,
+        with type: CharacterType,
         goalText: String,
         nameText: String,
-        characterImage: UIImage
+        level: Int
     ) {
-        cardView.backgroundColor = backgroundColor
+        cardView.backgroundColor = type.color.withAlphaComponent(0.3)
         goalLabel.text = goalText
         nameLabel.text = nameText
-        characterImageView.image = characterImage
+        characterImageView.image = type.getImage(level: level)
+        levelStickerView.level = level
+        levelStickerView.type = type
     }
 }
 
@@ -58,7 +61,8 @@ extension AwardTableViewCell {
         cardView.addSubviews(
             goalLabel,
             nameLabel,
-            characterImageView
+            characterImageView,
+            levelStickerView
         )
 
         cardView.snp.makeConstraints {
@@ -81,6 +85,13 @@ extension AwardTableViewCell {
             $0.trailing.bottom.equalToSuperview().inset(20)
             $0.height.equalTo(73)
             $0.width.equalTo(52)
+        }
+
+        levelStickerView.snp.makeConstraints {
+            $0.leading.equalTo(nameLabel.snp.trailing).offset(4)
+            $0.centerY.equalTo(nameLabel.snp.centerY)
+            $0.width.equalTo(32)
+            $0.height.equalTo(16)
         }
     }
 }

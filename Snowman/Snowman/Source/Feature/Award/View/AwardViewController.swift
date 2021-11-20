@@ -59,10 +59,10 @@ extension AwardViewController: UITableViewDataSource {
         let cell: AwardTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
         if let characterType = CharacterType(rawValue: awards[indexPath.row].type) {
             cell.updateData(
-                with: .red.withAlphaComponent(0.1),
+                with: characterType,
                 goalText: awards[indexPath.row].name,
                 nameText: awards[indexPath.row].name,
-                characterImage: characterType.getImage(level: awards[indexPath.row].level)
+                level: awards[indexPath.row].level
             )
             return cell
         } else {

@@ -25,6 +25,11 @@ enum CharacterType: String {
         }
     }
 
+    var color: UIColor {
+        //TODO: - 색상 적용
+        return .systemBlue
+    }
+
     func getImage(level: Int) -> UIImage {
         //TODO:- 단계별 캐릭터 확정되면 구현
         return UIImage(systemName: "person.fill")!
