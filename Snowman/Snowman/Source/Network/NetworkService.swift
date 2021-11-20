@@ -11,4 +11,6 @@ final class NetworkService {
     private init() { }
 
     let goal = GoalService()
+
+    let award = AwardService()
 }

@@ -43,13 +43,12 @@ extension AwardTableViewCell {
         with backgroundColor: UIColor,
         goalText: String,
         nameText: String,
-        characterImageName: String
+        characterImage: UIImage
     ) {
         cardView.backgroundColor = backgroundColor
         goalLabel.text = goalText
         nameLabel.text = nameText
-//        characterImageView.image = UIImage(named: characterImageName)
-        characterImageView.image = UIImage(systemName: characterImageName)
+        characterImageView.image = characterImage
     }
 }
 

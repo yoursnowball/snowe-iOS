@@ -1,24 +1,20 @@
 //
-//  GoalService.swift
+//  AwardService.swift
 //  Snowman
 //
-//  Created by 김윤서 on 2021/11/20.
+//  Created by 김윤서 on 2021/11/21.
 //
 
 import Foundation
 import Moya
 
-final class GoalService {
-    private let goalProvider = MoyaProvider<GoalAPI>(plugins: [MoyaLoggingPlugin()])
+final class AwardService {
+    private let awardProvider = MoyaProvider<AwardAPI>(plugins: [MoyaLoggingPlugin()])
 
-    public func postNewGoal(
-        name: String,
-        type: String,
-        objective: String,
+    public func getAwards(
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-
-        goalProvider.request(.postNewGoal(name: name, type: type, objective: objective)) { result in
+        awardProvider.request(.getAwards) { result in
             switch result {
             case.success(let response):
 
@@ -31,7 +27,6 @@ final class GoalService {
             case .failure(let err):
                 print(err)
             }
-
         }
     }
 
@@ -41,7 +36,7 @@ final class GoalService {
 
         switch statusCode {
         case 200:
-            guard let decodedData = try? decoder.decode(GoalResponse.self, from: data) else {
+            guard let decodedData = try? decoder.decode(AwardsResponse.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)

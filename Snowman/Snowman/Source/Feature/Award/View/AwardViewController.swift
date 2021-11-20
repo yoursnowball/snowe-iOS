@@ -9,11 +9,16 @@ import UIKit
 
 final class AwardViewController: BaseViewController {
 
+    private var awards: [Award] = [] {
+        didSet {
+            headerTitleLabel.text = "총 \(awards.count)개의 눈사람을 만들었어요"
+        }
+    }
+
     private let headerView = UIView()
 
     private let headerTitleLabel = UILabel().then {
         $0.font = .spoqa(size: 22, family: .medium)
-        $0.text = "총 3개의 눈사람을 만들었어요"
     }
 
     private lazy var tableView = UITableView().then {
@@ -21,6 +26,11 @@ final class AwardViewController: BaseViewController {
         $0.dataSource = self
         $0.delegate = self
         $0.separatorStyle = .none
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getAwards()
     }
 
     override func viewDidLoad() {
@@ -42,20 +52,41 @@ extension AwardViewController: UITableViewDelegate {
 
 extension AwardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return awards.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: AwardTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
-        cell.updateData(
-            with: .red.withAlphaComponent(0.1),
-            goalText: "900점 달성하고 놀러가기",
-            nameText: "수줍은눈사람",
-            characterImageName: "person.fill"
-        )
-        return cell
+        if let characterType = CharacterType(rawValue: awards[indexPath.row].type) {
+            cell.updateData(
+                with: .red.withAlphaComponent(0.1),
+                goalText: awards[indexPath.row].name,
+                nameText: awards[indexPath.row].name,
+                characterImage: characterType.getImage(level: awards[indexPath.row].level)
+            )
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
 
+}
+
+extension AwardViewController {
+    func getAwards() {
+        NetworkService.shared.award.getAwards {[weak self] result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? AwardsResponse else { return }
+                self?.awards = data.awards
+                self?.tableView.reloadData()
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
+    }
 }
 
 extension AwardViewController {

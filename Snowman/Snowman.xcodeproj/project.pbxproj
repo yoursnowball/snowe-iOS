@@ -19,6 +19,9 @@
 		DD02A97A2748C09A00D9B324 /* CharacterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9792748C09A00D9B324 /* CharacterType.swift */; };
 		DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A97B2748CAE900D9B324 /* GoalRequest.swift */; };
 		DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A97E2749482900D9B324 /* NewGoal.swift */; };
+		DD02A98127495CF000D9B324 /* AwardsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98027495CF000D9B324 /* AwardsResponse.swift */; };
+		DD02A98327495D9E00D9B324 /* AwardAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98227495D9E00D9B324 /* AwardAPI.swift */; };
+		DD02A98527495F5700D9B324 /* AwardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98427495F5700D9B324 /* AwardService.swift */; };
 		DD70F2FD27411EFB0053374B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2FC27411EFB0053374B /* Image.swift */; };
 		DD70F2FF27411F020053374B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2FE27411F020053374B /* Color.swift */; };
 		DD70F30127411F0A0053374B /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F30027411F0A0053374B /* Font.swift */; };
@@ -76,6 +79,9 @@
 		DD02A9792748C09A00D9B324 /* CharacterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterType.swift; sourceTree = "<group>"; };
 		DD02A97B2748CAE900D9B324 /* GoalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRequest.swift; sourceTree = "<group>"; };
 		DD02A97E2749482900D9B324 /* NewGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoal.swift; sourceTree = "<group>"; };
+		DD02A98027495CF000D9B324 /* AwardsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsResponse.swift; sourceTree = "<group>"; };
+		DD02A98227495D9E00D9B324 /* AwardAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardAPI.swift; sourceTree = "<group>"; };
+		DD02A98427495F5700D9B324 /* AwardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardService.swift; sourceTree = "<group>"; };
 		DD70F2FC27411EFB0053374B /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		DD70F2FE27411F020053374B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DD70F30027411F0A0053374B /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -302,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				DD86CBE72748216D00F6EC8D /* GoalAPI.swift */,
+				DD02A98227495D9E00D9B324 /* AwardAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -310,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				DD86CBEB274824EA00F6EC8D /* GoalService.swift */,
+				DD02A98427495F5700D9B324 /* AwardService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 				DD86CBF2274826FA00F6EC8D /* GoalResponse.swift */,
 				DD86CBF42748278E00F6EC8D /* TodoResponse.swift */,
 				DD02A97B2748CAE900D9B324 /* GoalRequest.swift */,
+				DD02A98027495CF000D9B324 /* AwardsResponse.swift */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -540,6 +549,7 @@
 				DD894D2F2747384A004AF5A6 /* NameQuestionViewController.swift in Sources */,
 				DD86CBE62748210100F6EC8D /* BaseTargetType.swift in Sources */,
 				DD02A9762748B7E800D9B324 /* UserDefaultKey.swift in Sources */,
+				DD02A98127495CF000D9B324 /* AwardsResponse.swift in Sources */,
 				DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */,
 				DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */,
 				DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */,
@@ -547,6 +557,7 @@
 				DD894D2D27473833004AF5A6 /* GoalQuestionViewController.swift in Sources */,
 				DD70F2FD27411EFB0053374B /* Image.swift in Sources */,
 				DDFAF15227458416005A3097 /* UICollectionView+Reusable.swift in Sources */,
+				DD02A98327495D9E00D9B324 /* AwardAPI.swift in Sources */,
 				DDFAF150274583F0005A3097 /* UITableVIew+Reusable.swift in Sources */,
 				DD70F2FF27411F020053374B /* Color.swift in Sources */,
 				DD86CBEF2748257B00F6EC8D /* ErrorResponse.swift in Sources */,
@@ -568,6 +579,7 @@
 				DD86CBEC274824EA00F6EC8D /* GoalService.swift in Sources */,
 				DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */,
 				DD86CBF3274826FA00F6EC8D /* GoalResponse.swift in Sources */,
+				DD02A98527495F5700D9B324 /* AwardService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

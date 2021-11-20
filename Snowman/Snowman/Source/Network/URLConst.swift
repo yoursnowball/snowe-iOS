@@ -11,4 +11,11 @@ enum URLConst {
 
     // MARK: - Goal
     static let goals = "/goals"
+
+    // MARK: - Awards
+    /// 명예의 전당 리스트 가져오기
+    static let awards = "/awards"
+
+    /// 명예의 전당 랭킹 가져오기
+    static let rank = awards + "/rank"
 }
