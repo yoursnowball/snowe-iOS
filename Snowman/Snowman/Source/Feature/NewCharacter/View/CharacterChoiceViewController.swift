@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharacterChoiceViewController: BaseViewController {
+final class CharacterChoiceViewController: BaseViewController {
 
     private let numberLabel = UILabel().then {
         $0.font = .spoqa(size: 16, family: .bold)
