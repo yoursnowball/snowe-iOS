@@ -12,6 +12,8 @@ final class AwardViewController: BaseViewController {
     private var awards: [Award] = [] {
         didSet {
             headerTitleLabel.text = "총 \(awards.count)개의 눈사람을 만들었어요"
+            noCharacterLabel.isHidden = awards.count != 0
+            tableView.isHidden = awards.count == 0
         }
     }
 
@@ -26,6 +28,17 @@ final class AwardViewController: BaseViewController {
         $0.dataSource = self
         $0.delegate = self
         $0.separatorStyle = .none
+    }
+
+    private let noCharacterLabel = UILabel().then {
+        $0.text = """
+            명예의 전당에 등록된
+            눈사람이 없어요😥
+            """
+        $0.font = .spoqa(size: 14, family: .regular)
+        $0.textColor = .lightGray
+        $0.numberOfLines = 2
+        $0.textAlignment = .center
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -91,9 +104,17 @@ extension AwardViewController {
 
 extension AwardViewController {
     private func setLayouts() {
-        view.addSubviews(tableView)
+        view.addSubviews(
+            tableView,
+            noCharacterLabel
+        )
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+
+        noCharacterLabel.snp.makeConstraints {
+            $0.center.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(36)
         }
 
         headerView.addSubviews(headerTitleLabel)
