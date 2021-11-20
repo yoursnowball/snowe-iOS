@@ -8,10 +8,10 @@
 import Foundation
 import Moya
 
-public class GoalService {
+final class GoalService {
     private let goalProvider = MoyaProvider<GoalAPI>(plugins: [MoyaLoggingPlugin()])
 
-    private func postNewGoal(
+    public func postNewGoal(
         name: String,
         type: String,
         objective: String,
@@ -48,7 +48,7 @@ public class GoalService {
             guard let decodedData = try? decoder.decode(ErrorResponse.self, from: data) else {
                 return .pathErr
             }
-            return .requestErr(decodedData.message)
+            return .requestErr(decodedData)
         case 500:
             return .serverErr
         default:

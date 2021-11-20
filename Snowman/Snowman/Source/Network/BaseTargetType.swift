@@ -17,12 +17,18 @@ extension BaseTargetType {
     }
 
     var headers: [String: String]? {
-        let token = UserDefaults.standard.value(forKey: UserDefaultKey.token)
-        let header = [
-            "Content-Type": "application/json",
-            "Authentication": "Bearer \(String(describing: token))"
-        ]
-        return header
+        if let token = UserDefaults.standard.value(forKey: UserDefaultKey.token) {
+            let header = [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer \(String(describing: token))"
+            ]
+            return header
+        } else {
+            let header = [
+                "Content-Type": "application/json"
+            ]
+            return header
+        }
     }
 
     var sampleData: Data {
