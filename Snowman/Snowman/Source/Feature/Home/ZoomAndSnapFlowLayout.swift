@@ -6,7 +6,6 @@
 //
 import UIKit
 
-/// UICollectionViewFlowLayout implementation for horizontal carousel layout.
 public class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
 
     public private(set) var activeDistance: CGFloat = 100
@@ -28,20 +27,32 @@ public class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else {
             fatalError("CollectionView not exist")
         }
+        // swiftlint:disable line_length
         let verticalInsets = (collectionView.frame.height - collectionView.adjustedContentInset.top - collectionView.adjustedContentInset.bottom - itemSize.height) / 2
+
+        // swiftlint:disable line_length
         let horizontalInsets = (collectionView.frame.width - collectionView.adjustedContentInset.right - collectionView.adjustedContentInset.left - itemSize.width) / 2
-        sectionInset = UIEdgeInsets(top: verticalInsets, left: horizontalInsets, bottom: verticalInsets, right: horizontalInsets)
+
+        sectionInset = UIEdgeInsets(
+            top: verticalInsets,
+            left: horizontalInsets,
+            bottom: verticalInsets,
+            right: horizontalInsets
+        )
 
         super.prepare()
     }
 
     public override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let collectionView = collectionView else { return nil }
-        // swiftlint:disable:next force_cast
-        let rectAttributes = super.layoutAttributesForElements(in: rect)!.map { $0.copy() as! UICollectionViewLayoutAttributes }
+
+        let rectAttributes = super.layoutAttributesForElements(in: rect)!
+            .map {
+                // swiftlint:disable:next force_cast
+                $0.copy() as! UICollectionViewLayoutAttributes
+            }
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.frame.size)
 
-        // Make the cells be zoomed when they reach the center of the screen
         for attributes in rectAttributes where attributes.frame.intersects(visibleRect) {
             let distance = visibleRect.midX - attributes.center.x
             let normalizedDistance = distance / activeDistance
@@ -56,11 +67,20 @@ public class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
         return rectAttributes
     }
 
-    public override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+    public override func targetContentOffset(
+        forProposedContentOffset proposedContentOffset: CGPoint,
+        withScrollingVelocity velocity: CGPoint
+    ) -> CGPoint {
+
         guard let collectionView = collectionView else { return .zero }
 
-        // Add some snapping behaviour so that the zoomed cell is always centered
-        let targetRect = CGRect(x: proposedContentOffset.x, y: 0, width: collectionView.frame.width, height: collectionView.frame.height)
+        let targetRect = CGRect(
+            x: proposedContentOffset.x,
+            y: 0,
+            width: collectionView.frame.width,
+            height: collectionView.frame.height
+        )
+
         guard let rectAttributes = super.layoutAttributesForElements(in: targetRect) else { return .zero }
 
         var offsetAdjustment = CGFloat.greatestFiniteMagnitude
@@ -73,17 +93,26 @@ public class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
             }
         }
 
-        return CGPoint(x: proposedContentOffset.x + offsetAdjustment, y: proposedContentOffset.y)
+        return CGPoint(
+            x: proposedContentOffset.x + offsetAdjustment,
+            y: proposedContentOffset.y
+        )
     }
 
-    public override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        // Invalidate layout so that every cell get a chance to be zoomed when it reaches the center of the screen
+    public override func shouldInvalidateLayout(
+        forBoundsChange newBounds: CGRect
+    ) -> Bool {
         return true
     }
 
-    public override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
+    public override func invalidationContext(
+        forBoundsChange newBounds: CGRect
+    ) -> UICollectionViewLayoutInvalidationContext {
+
+        let context = super.invalidationContext(
+            forBoundsChange: newBounds
         // swiftlint:disable:next force_cast
-        let context = super.invalidationContext(forBoundsChange: newBounds) as! UICollectionViewFlowLayoutInvalidationContext
+        ) as! UICollectionViewFlowLayoutInvalidationContext
         context.invalidateFlowLayoutDelegateMetrics = newBounds.size != collectionView?.bounds.size
         return context
     }
