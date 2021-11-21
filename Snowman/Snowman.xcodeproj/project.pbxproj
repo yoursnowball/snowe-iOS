@@ -29,6 +29,11 @@
 		C7D38D782748D8090049F3AA /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D38D772748D8090049F3AA /* Date+.swift */; };
 		C7DE7FC7274A5B6B00C8DFB4 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FC6274A5B6B00C8DFB4 /* HistoryViewController.swift */; };
 		C7DE7FCB274A6CEC00C8DFB4 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FCA274A6CEC00C8DFB4 /* HistoryCell.swift */; };
+		C7DE7FD2274A830300C8DFB4 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FD1274A830300C8DFB4 /* SignInViewController.swift */; };
+		C7DE7FD6274A830A00C8DFB4 /* SignUpNameIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FD5274A830A00C8DFB4 /* SignUpNameIdViewController.swift */; };
+		C7DE7FDA274A882300C8DFB4 /* StartSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FD9274A882300C8DFB4 /* StartSignInViewController.swift */; };
+		C7DE7FDF274A90B400C8DFB4 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FDE274A90B400C8DFB4 /* UITextField+.swift */; };
+		C7DE7FE4274A929A00C8DFB4 /* SignUpPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FE3274A929A00C8DFB4 /* SignUpPasswordViewController.swift */; };
 		C7EDAD23274563EA008C699C /* SpoqaHanSansNeo-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD20274563E8008C699C /* SpoqaHanSansNeo-bold.otf */; };
 		C7EDAD24274563EA008C699C /* SpoqaHanSansNeo-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */; };
 		C7EDAD25274563EA008C699C /* SpoqaHanSansNeo-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */; };
@@ -91,6 +96,11 @@
 		C7D38D772748D8090049F3AA /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		C7DE7FC6274A5B6B00C8DFB4 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		C7DE7FCA274A6CEC00C8DFB4 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		C7DE7FD1274A830300C8DFB4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		C7DE7FD5274A830A00C8DFB4 /* SignUpNameIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNameIdViewController.swift; sourceTree = "<group>"; };
+		C7DE7FD9274A882300C8DFB4 /* StartSignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSignInViewController.swift; sourceTree = "<group>"; };
+		C7DE7FDE274A90B400C8DFB4 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		C7DE7FE3274A929A00C8DFB4 /* SignUpPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPasswordViewController.swift; sourceTree = "<group>"; };
 		C7EDAD20274563E8008C699C /* SpoqaHanSansNeo-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-bold.otf"; sourceTree = "<group>"; };
 		C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-medium.otf"; sourceTree = "<group>"; };
 		C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-regular.otf"; sourceTree = "<group>"; };
@@ -218,6 +228,24 @@
 			path = History;
 			sourceTree = "<group>";
 		};
+		C7DE7FCF274A82D800C8DFB4 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				C7DE7FD5274A830A00C8DFB4 /* SignUpNameIdViewController.swift */,
+				C7DE7FE3274A929A00C8DFB4 /* SignUpPasswordViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		C7DE7FD0274A82F000C8DFB4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				C7DE7FD1274A830300C8DFB4 /* SignInViewController.swift */,
+				C7DE7FD9274A882300C8DFB4 /* StartSignInViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		C7EDAD1E274563D9008C699C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +309,8 @@
 		DD70F2EF27411C3D0053374B /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				C7DE7FD0274A82F000C8DFB4 /* Login */,
+				C7DE7FCF274A82D800C8DFB4 /* SignUp */,
 				C7DE7FC5274A5B5F00C8DFB4 /* History */,
 				DDD74899274776A00056C505 /* Award */,
 				DDD50EEB274681C100EA508F /* NewCharacter */,
@@ -320,6 +350,7 @@
 				DDD748A42747B1D80056C505 /* UIImage+.swift */,
 				C7D38D712748D5440049F3AA /* DateFormatters.swift */,
 				C7D38D772748D8090049F3AA /* Date+.swift */,
+				C7DE7FDE274A90B400C8DFB4 /* UITextField+.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -538,12 +569,14 @@
 				C7DE7FCB274A6CEC00C8DFB4 /* HistoryCell.swift in Sources */,
 				DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */,
 				DDFAF15427458441005A3097 /* UIView+.swift in Sources */,
+				C7DE7FE4274A929A00C8DFB4 /* SignUpPasswordViewController.swift in Sources */,
 				C768D12927499E04000E0677 /* CalendarView.swift in Sources */,
 				DD894D2F2747384A004AF5A6 /* NameQuestionViewController.swift in Sources */,
 				DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */,
 				C7C9CDF72737625800DC2A09 /* ViewController.swift in Sources */,
 				C7D38D722748D5440049F3AA /* DateFormatters.swift in Sources */,
 				C768D12827499E04000E0677 /* CalendarView+DataSource.swift in Sources */,
+				C7DE7FDF274A90B400C8DFB4 /* UITextField+.swift in Sources */,
 				C768D12E27499E04000E0677 /* CalendarView+Delegate.swift in Sources */,
 				DD894D2D27473833004AF5A6 /* GoalQuestionViewController.swift in Sources */,
 				DD70F2FD27411EFB0053374B /* Image.swift in Sources */,
@@ -553,6 +586,7 @@
 				DDFAF150274583F0005A3097 /* UITableVIew+Reusable.swift in Sources */,
 				DD70F2FF27411F020053374B /* Color.swift in Sources */,
 				DDD7489C274776C30056C505 /* AwardViewController.swift in Sources */,
+				C7DE7FD6274A830A00C8DFB4 /* SignUpNameIdViewController.swift in Sources */,
 				DD70F30127411F0A0053374B /* Font.swift in Sources */,
 				DDFAF15827458488005A3097 /* UIStackView+.swift in Sources */,
 				C768D11A2749955B000E0677 /* TodoModel.swift in Sources */,
@@ -561,9 +595,11 @@
 				DDFAF14E274583AA005A3097 /* Reusable.swift in Sources */,
 				C768D12B27499E04000E0677 /* CalendarView+Style.swift in Sources */,
 				C7D38D782748D8090049F3AA /* Date+.swift in Sources */,
+				C7DE7FD2274A830300C8DFB4 /* SignInViewController.swift in Sources */,
 				C768D12627499E04000E0677 /* EventsManager.swift in Sources */,
 				DDFAF14B27457FCB005A3097 /* BaseViewController.swift in Sources */,
 				C7DE7FC7274A5B6B00C8DFB4 /* HistoryViewController.swift in Sources */,
+				C7DE7FDA274A882300C8DFB4 /* StartSignInViewController.swift in Sources */,
 				C7C9CDF32737625800DC2A09 /* AppDelegate.swift in Sources */,
 				C7F4B8E427497EB0002DD317 /* TodoCell.swift in Sources */,
 				DD894D3727474F98004AF5A6 /* PopUpViewController.swift in Sources */,
