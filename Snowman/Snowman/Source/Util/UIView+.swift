@@ -14,6 +14,13 @@ extension UIView {
         }
     }
 
+    func updateConstraint(attribute: NSLayoutConstraint.Attribute, constant: CGFloat) {
+        if let constraint = (constraints.filter { $0.firstAttribute == attribute }.first) {
+            constraint.constant = constant
+            layoutIfNeeded()
+        }
+    }
+
     func makeRound(_ radius: CGFloat = 10) {
         layer.masksToBounds = true
         layer.cornerRadius = radius
