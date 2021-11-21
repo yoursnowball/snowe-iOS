@@ -147,7 +147,7 @@ extension HomeViewController {
 
             nameLabel.text = goal.name
             goalLabel.text = goal.objective
-            levelStickerView.type = CharacterType(rawValue: goal.type) ?? .pink
+            levelStickerView.type = Snowe(rawValue: goal.type) ?? .pink
             levelStickerView.level = goal.level
 
             if goal.todos.count == 0 {
@@ -188,7 +188,12 @@ extension HomeViewController: UIScrollViewDelegate {
         if roundedIndex > -1 && roundedIndex < 4 {
             updateGoal(goal: goals[roundedIndex])
             for index in 0...3 {
-                if let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SnoweCollectionViewCell {
+                if let cell = collectionView.cellForItem(
+                    at: IndexPath(
+                        item: index,
+                        section: 0
+                    )
+                ) as? SnoweCollectionViewCell {
                     if index == roundedIndex {
                         cell.characterImageView.alpha = 1
                     } else {

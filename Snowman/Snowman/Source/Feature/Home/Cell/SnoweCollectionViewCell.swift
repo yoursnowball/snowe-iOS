@@ -34,7 +34,7 @@ class SnoweCollectionViewCell: UICollectionViewCell {
 extension SnoweCollectionViewCell {
     public func updateData(goal: GoalResponse?) {
         if let goal = goal {
-            characterImageView.image = CharacterType(rawValue: goal.type)?.getImage(level: goal.level)
+            characterImageView.image = Snowe(rawValue: goal.type)?.getImage(level: goal.level)
         }
     }
 

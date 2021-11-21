@@ -70,7 +70,7 @@ extension CharacterChoiceViewController: UICollectionViewDelegate {
         let cell: CharacterCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         cell.isSelected = true
-        NewGoal.shared.type = CharacterType.getType(with: indexPath.item)
+        NewGoal.shared.type = Snowe.getType(with: indexPath.item)
         nextButton.isEnabled  = true
     }
 }

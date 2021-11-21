@@ -70,7 +70,7 @@ extension AwardViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: AwardTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
-        if let characterType = CharacterType(rawValue: awards[indexPath.row].type) {
+        if let characterType = Snowe(rawValue: awards[indexPath.row].type) {
             cell.updateData(
                 with: characterType,
                 goalText: awards[indexPath.row].name,

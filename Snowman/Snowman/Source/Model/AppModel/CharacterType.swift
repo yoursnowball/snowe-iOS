@@ -6,7 +6,7 @@
 //
 import UIKit.UIImage
 
-enum CharacterType: String {
+enum Snowe: String {
     case pink = "PINK"
     case orange = "ORANGE"
     case green = "GREEN"
@@ -35,7 +35,7 @@ enum CharacterType: String {
         return Image.sampleSnowe
     }
 
-    static func getType(with index: Int) -> CharacterType {
+    static func getType(with index: Int) -> Snowe {
         switch index {
         case 0:
             return .pink

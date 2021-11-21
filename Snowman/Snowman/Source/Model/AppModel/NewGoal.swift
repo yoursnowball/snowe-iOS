@@ -9,7 +9,7 @@ struct NewGoal {
     static var shared = NewGoal()
 
     public var name: String?
-    public var type: CharacterType?
+    public var type: Snowe?
     public var objective: String?
 
     public func makeNewGoal() -> GoalRequest? {

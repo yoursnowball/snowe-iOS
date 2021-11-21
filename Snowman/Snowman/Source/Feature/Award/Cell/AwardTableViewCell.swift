@@ -41,7 +41,7 @@ final class AwardTableViewCell: UITableViewCell {
 
 extension AwardTableViewCell {
     public func updateData(
-        with type: CharacterType,
+        with type: Snowe,
         goalText: String,
         nameText: String,
         level: Int

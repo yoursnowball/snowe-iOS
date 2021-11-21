@@ -9,7 +9,7 @@ import UIKit
 
 class LevelStickerView: UIView {
 
-    public var type: CharacterType = .orange {
+    public var type: Snowe = .orange {
         didSet {
             color()
         }

@@ -13,7 +13,7 @@ final class PopUpViewController: UIViewController {
         didSet {
             guard let response = goalResponse else {return}
             nameLabel.text = response.name
-            characterImageView.image = CharacterType(rawValue: response.type)?.getImage(level: response.level)
+            characterImageView.image = Snowe(rawValue: response.type)?.getImage(level: response.level)
             goalLabel.text = response.objective
         }
     }
