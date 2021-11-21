@@ -20,4 +20,9 @@ extension UIView {
             layoutIfNeeded()
         }
     }
+
+    func makeRound(_ radius: CGFloat = 10) {
+        layer.masksToBounds = true
+        layer.cornerRadius = radius
+    }
 }
