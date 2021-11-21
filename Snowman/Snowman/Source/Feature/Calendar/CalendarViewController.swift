@@ -261,7 +261,7 @@ extension CalendarViewController: CalendarViewDelegate {
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return 4
+        return sampleData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

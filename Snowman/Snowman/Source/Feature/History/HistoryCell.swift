@@ -1,5 +1,5 @@
 //
-//  TodoCell.swift
+//  HistoryCell.swift
 //  Snowman
 //
 //  Created by Yonghyun on 2021/11/21.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class TodoCell: UITableViewCell {
+class HistoryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -38,14 +38,10 @@ class TodoCell: UITableViewCell {
     }()
     
     private let todoCountLabel = UILabel().then {
-        $0.text = "0/0"
+        $0.text = "120/200"
         $0.textColor = .lightGray
         $0.font = UIFont.spoqa(size: 14, family: .regular)
         $0.sizeToFit()
-    }
-    
-    private let addButton = UIButton().then {
-        $0.setImage(UIImage(named: "plus_circle"), for: .normal)
     }
 
     private let contextView: UIView = {
@@ -81,7 +77,7 @@ class TodoCell: UITableViewCell {
     private func setupUI() {
         backgroundColor = .clear
         setLayout()
-        stackView.isUserInteractionEnabled = true
+        stackView.isUserInteractionEnabled = false
     }
 
     func setData(data: TodoListGroup) {
@@ -106,7 +102,7 @@ class TodoCell: UITableViewCell {
 }
 
 // MARK: - UI Layout & addSubview
-extension TodoCell {
+extension HistoryCell {
     private func setLayout() {
         self.addSubviews(
             titleView,
@@ -114,8 +110,7 @@ extension TodoCell {
         
         titleView.addSubviews(characterImageView,
                               titleLabel,
-                              todoCountLabel,
-                              addButton)
+                              todoCountLabel)
         
         contextView.addSubview(stackView)
         
@@ -137,13 +132,7 @@ extension TodoCell {
         
         todoCountLabel.snp.makeConstraints {
             $0.centerY.equalTo(characterImageView)
-            $0.leading.equalTo(titleLabel.snp.trailing).offset(8)
-        }
-        
-        addButton.snp.makeConstraints {
-            $0.centerY.equalTo(characterImageView)
             $0.trailing.equalToSuperview().offset(-2)
-            $0.width.height.equalTo(20)
         }
 
         contextView.snp.makeConstraints {
@@ -158,23 +147,13 @@ extension TodoCell {
 }
 
 // MARK: - addStackViewData
-extension TodoCell {
+extension HistoryCell {
     private func addStackViewData(todoList: TodoList) {
-        let backView: UIView = {
-            let v = UIView()
-            return v
-        }()
-        
-        let checkButtonView = CheckButtonView().then {
-            $0.backgroundColor = .lightGray
-            $0.characterType = todoList.characterType
-            $0.isDone = todoList.isDone
-        }
+        let backView = UIView()
         
         let checkButtonImage = UIImageView().then {
             if todoList.isDone {
                 
-                // 체크표시가 보이게 배경색 변경
                 $0.backgroundColor = .lightGray
                 
                 switch todoList.characterType {
@@ -211,7 +190,6 @@ extension TodoCell {
         
         backView.addSubview(view)
         view.addSubviews(
-            checkButtonView,
             checkButtonImage,
             todoTitleLabel)
         
@@ -231,50 +209,16 @@ extension TodoCell {
             $0.bottom.equalToSuperview().offset(-4)
         }
         
-        checkButtonView.snp.makeConstraints {
+        checkButtonImage.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(18)
             $0.width.height.equalTo(23.33)
             $0.centerY.equalToSuperview()
         }
         
-        checkButtonImage.snp.makeConstraints {
-            $0.edges.equalTo(checkButtonView)
-        }
-        
         todoTitleLabel.snp.makeConstraints {
-            $0.leading.equalTo(checkButtonView.snp.trailing).offset(12)
-            $0.centerY.equalTo(checkButtonView)
+            $0.leading.equalTo(checkButtonImage.snp.trailing).offset(12)
+            $0.centerY.equalTo(checkButtonImage)
             $0.trailing.equalToSuperview()
         }
-        
-        
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(checkTodo))
-        checkButtonView.addGestureRecognizer(gesture)
-        
-        
-        
-        // checkButton에 함수 연결하기
     }
-
-    @objc func checkTodo(_ sender: UIGestureRecognizer) {
-        if let view = sender.view as? CheckButtonView {
-            
-            
-            // todoListData 비교해서 바꾸고 api 날리기
-            // stackView  removeAllSubviews 하고
-            // 다시 setData
-            
-            if view.isDone {
-                
-            } else {
-                
-            }
-            
-        }
-    }
-}
-
-class CheckButtonView: UIView {
-    var characterType: CharacterType!
-    var isDone: Bool!
 }
