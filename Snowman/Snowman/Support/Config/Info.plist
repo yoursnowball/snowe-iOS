@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Poppins-Black.ttf</string>
 		<string>SpoqaHanSansNeo-bold.otf</string>
 		<string>SpoqaHanSansNeo-medium.otf</string>
 		<string>SpoqaHanSansNeo-regular.otf</string>
