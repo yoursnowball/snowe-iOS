@@ -8,6 +8,7 @@
 import UIKit.UIImage
 
 enum Image {
+    static let sampleSnowe = UIImage(named: "sampleSnowe")!
     static let bigMakecharacterCard = UIImage(named: "big_makecharacter_card")!
     static let todoCountBubble = UIImage(named: "todo_count_bubble")!
     static let checkBold = UIImage(named: "check_bold")!

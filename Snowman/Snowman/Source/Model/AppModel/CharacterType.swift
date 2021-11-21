@@ -32,7 +32,7 @@ enum CharacterType: String {
 
     func getImage(level: Int) -> UIImage {
         //TODO:- 단계별 캐릭터 확정되면 구현
-        return UIImage(systemName: "person.fill")!
+        return Image.sampleSnowe
     }
 
     static func getType(with index: Int) -> CharacterType {

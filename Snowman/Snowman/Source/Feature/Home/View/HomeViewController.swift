@@ -8,6 +8,56 @@
 import UIKit
 
 class HomeViewController: BaseViewController {
+
+    private var goals: [GoalResponse?] = [
+        GoalResponse(
+            createdAt: "",
+            id: 1,
+            level: 3,
+            levelTodoCount: 10,
+            name: "강호동",
+            objective: "밥먹자",
+            succeedTodoCount: 3, todos: [
+                TodoResponse(createdAt: "",
+                             finishedAt: "",
+                             id: 1,
+                             name: "배고파",
+                             succeed: true
+                )
+            ], type: "BLUE"
+        ),
+        GoalResponse(
+            createdAt: "",
+            id: 1,
+            level: 3,
+            levelTodoCount: 10,
+            name: "이수근",
+            objective: "오동잎댄스",
+            succeedTodoCount: 4, todos: [
+                TodoResponse(createdAt: "",
+                             finishedAt: "",
+                             id: 1,
+                             name: "배고파",
+                             succeed: false
+                )
+            ], type: "BLUE"
+        ),
+        GoalResponse(
+            createdAt: "",
+            id: 1,
+            level: 3,
+            levelTodoCount: 10,
+            name: "송민호",
+            objective: "마이노 노래해",
+            succeedTodoCount: 4, todos: [], type: "BLUE"
+        ),
+        nil
+    ] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+
     private let flowLayout = ZoomAndSnapFlowLayout()
 
     private lazy var collectionView: UICollectionView = {
@@ -57,13 +107,10 @@ class HomeViewController: BaseViewController {
         $0.axis = .horizontal
         $0.distribution = .fill
         $0.alignment = .center
-        $0.spacing = 4
+        $0.spacing = 6
     }
 
-    private let levelStickerView = LevelStickerView().then {
-        $0.level = 3
-        $0.type = .orange
-    }
+    private let levelStickerView = LevelStickerView()
 
     private let nameLabel = UILabel().then {
         $0.text = "수줍은 눈사람"
@@ -79,11 +126,6 @@ class HomeViewController: BaseViewController {
         $0.sizeToFit()
     }
 
-    private let checkImageView = UIImageView().then {
-        $0.image = Image.checkBold
-        $0.isHidden = true
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
@@ -91,26 +133,38 @@ class HomeViewController: BaseViewController {
 }
 
 extension HomeViewController {
-    private func updateData(goal: GoalResponse) {
-        levelStickerView.isHidden = false
-        hideBubble(isHidden: false)
-        if goal.todos.count == 0 {
-            bubbleTodoLabel.text = "오늘의 투두를 작성해보세요!"
-        } else {
-            levelStickerView.type = CharacterType(rawValue: goal.type) ?? .pink
-            countLabel.text = "\(goal.todos.count)"
-            bubbleTodoLabel.text = "개의 투두가 남았어요"
-        }
-    }
+    private func updateGoal(goal: GoalResponse?) {
+        if let goal = goal {
+            levelStickerView.isHidden = false
 
-    private func fetchGoals(goals: [GoalResponse]) {
-        if goals.count == 0 {
+            var count = goal.todos.count
+            for todo in goal.todos
+            where todo.succeed == true {
+                count -= 1
+            }
+
+            hideBubble(isHidden: false)
+
+            nameLabel.text = goal.name
+            goalLabel.text = goal.objective
+            levelStickerView.type = CharacterType(rawValue: goal.type) ?? .pink
+            levelStickerView.level = goal.level
+
+            if goal.todos.count == 0 {
+                countLabel.text = ""
+                bubbleTodoLabel.text = "오늘의 투두를 작성해보세요!"
+            } else if count == 0 {
+                countLabel.text = ""
+                bubbleTodoLabel.text = "💙"
+            } else {
+                countLabel.text = "\(count)"
+                bubbleTodoLabel.text = "개의 투두가 남았어요"
+            }
+        } else {
             levelStickerView.isHidden = true
             nameLabel.text = "눈덩이를 생성하세요!"
             goalLabel.text = "원하는 목표를 달성할 수 있도록 도와줄게요."
             hideBubble(isHidden: true)
-        } else {
-            hideBubble(isHidden: false)
         }
     }
 
@@ -130,17 +184,29 @@ extension HomeViewController: UIScrollViewDelegate {
             offsetX + collectionView.contentInset.left + collectionView.contentInset.right
         ) / cellWidthIncludeSpacing
 
-        let roundedIndex = round(index)
-        dump(roundedIndex)
+        let roundedIndex = Int(round(index))
+        if roundedIndex > -1 && roundedIndex < 4 {
+            updateGoal(goal: goals[roundedIndex])
+            for index in 0...3 {
+                if let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? SnoweCollectionViewCell {
+                    if index == roundedIndex {
+                        cell.characterImageView.alpha = 1
+                    } else {
+                        cell.characterImageView.alpha = 0.6
+                    }
+                }
+            }
+        }
     }
 }
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell: SnoweCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-        let nvc = BaseNavigationController(rootViewController: GoalQuestionViewController())
-        nvc.modalPresentationStyle = .fullScreen
-        present(nvc, animated: true, completion: nil)
+        if goals[indexPath.item] == nil {
+            let nvc = BaseNavigationController(rootViewController: GoalQuestionViewController())
+            nvc.modalPresentationStyle = .fullScreen
+            present(nvc, animated: true, completion: nil)
+        }
     }
 }
 
@@ -149,7 +215,7 @@ extension HomeViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 4
+        return goals.count
     }
 
     func collectionView(
@@ -157,6 +223,7 @@ extension HomeViewController: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell: SnoweCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+        cell.updateData(goal: goals[indexPath.item])
         return cell
     }
 }
@@ -178,7 +245,6 @@ extension HomeViewController {
         )
 
         todoBubbleImageView.addSubviews(
-            checkImageView,
             textStackView
         )
 
@@ -203,16 +269,9 @@ extension HomeViewController {
             $0.height.equalTo(30)
         }
 
-        checkImageView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(12).priority(.low)
-            $0.leading.trailing.equalToSuperview().inset(20).priority(.low)
-            $0.width.equalTo(20).priority(.low)
-            $0.height.equalTo(20).priority(.low)
-        }
-
         textStackView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(12).priority(.high)
-            $0.leading.trailing.equalToSuperview().inset(20).priority(.high)
+            $0.top.bottom.equalToSuperview().inset(12)
+            $0.leading.trailing.equalToSuperview().inset(20)
         }
 
         collectionView.snp.makeConstraints {
