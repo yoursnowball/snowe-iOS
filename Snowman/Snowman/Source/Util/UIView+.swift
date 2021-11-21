@@ -13,4 +13,11 @@ extension UIView {
             self.addSubview(view)
         }
     }
+
+    func updateConstraint(attribute: NSLayoutConstraint.Attribute, constant: CGFloat) {
+        if let constraint = (constraints.filter { $0.firstAttribute == attribute }.first) {
+            constraint.constant = constant
+            layoutIfNeeded()
+        }
+    }
 }
