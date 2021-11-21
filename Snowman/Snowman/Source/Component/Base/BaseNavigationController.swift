@@ -22,12 +22,12 @@ class BaseNavigationController: UINavigationController {
 
     private var backButtonImage: UIImage? {
         return UIImage(systemName: "chevron.backward")?
-            .resized(to: CGSize(width: 12, height: 19))
+            .resized(to: CGSize(width: 13, height: 21))
             .withAlignmentRectInsets(
                 UIEdgeInsets(
                     top: 0.0,
-                    left: -12.0,
-                    bottom: -5.0,
+                    left: -10.0,
+                    bottom: 0.0,
                     right: 0.0
                 )
             )
