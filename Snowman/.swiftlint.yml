@@ -3,3 +3,4 @@ excluded:
 - Snowman/Support/AppDelegate.swift
 - Snowman/Source/Component/CalendarView
 - Snowman/Source/Feature/Calendar
+- Snowman/Source/Feature/History
