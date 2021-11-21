@@ -7,4 +7,9 @@
 
 import UIKit.UIImage
 
-enum Image {}
+enum Image {
+    static let bigMakecharacterCard = UIImage(named: "big_makecharacter_card")!
+    static let todoCountBubble = UIImage(named: "todo_count_bubble")!
+    static let checkBold = UIImage(named: "check_bold")!
+    static let bubblePolygon = UIImage(named: "bubble_polygon")!
+}

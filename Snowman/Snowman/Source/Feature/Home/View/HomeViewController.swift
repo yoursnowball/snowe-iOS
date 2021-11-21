@@ -23,6 +23,19 @@ class HomeViewController: BaseViewController {
         return collectionView
     }()
 
+    private let todoBubbleImageView = UIImageView().then {
+        $0.image = Image.todoCountBubble
+    }
+
+    private let bubblePolygonImageView = UIImageView().then {
+        $0.image = Image.bubblePolygon
+        $0.contentMode = .scaleAspectFit
+    }
+
+    private let checkImageView = UIImageView().then {
+        $0.image = Image.checkBold
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
@@ -31,10 +44,31 @@ class HomeViewController: BaseViewController {
 
 extension HomeViewController {
     private func render() {
-        view.addSubview(collectionView)
+        view.backgroundColor = .systemBlue.withAlphaComponent(0.1)
+        todoBubbleImageView.addSubviews(checkImageView)
+        view.addSubviews(collectionView, todoBubbleImageView, bubblePolygonImageView)
+
+        checkImageView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(12)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.width.equalTo(20)
+            $0.height.equalTo(20)
+        }
+
         collectionView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(400)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(133)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(195)
+        }
+
+        todoBubbleImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(collectionView.snp.top).offset(-20)
+        }
+
+        bubblePolygonImageView.snp.makeConstraints {
+            $0.centerX.equalTo(todoBubbleImageView.snp.centerX)
+            $0.bottom.equalTo(todoBubbleImageView.snp.bottom).offset(10)
         }
     }
 }
