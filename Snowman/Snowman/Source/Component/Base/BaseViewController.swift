@@ -17,4 +17,19 @@ class BaseViewController: UIViewController {
     private func render() {
         view.backgroundColor = .white
     }
+
+    @objc
+    private func buttonDidTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension BaseViewController {
+    public func makeCloseButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"),
+            style: .plain,
+            target: self, action: #selector(buttonDidTapped)
+        )
+    }
 }

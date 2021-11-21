@@ -12,6 +12,7 @@ final class NameQuestionViewController: QuestionBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setProperties()
+        makeCloseButton()
     }
 
     override func nextButtonDidTapped(_ sender: UIButton) {

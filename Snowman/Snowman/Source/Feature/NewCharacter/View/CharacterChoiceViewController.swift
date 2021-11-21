@@ -51,6 +51,7 @@ final class CharacterChoiceViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayouts()
+        makeCloseButton()
     }
 }
 
