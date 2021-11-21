@@ -23,6 +23,9 @@
 		DD02A98327495D9E00D9B324 /* AwardAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98227495D9E00D9B324 /* AwardAPI.swift */; };
 		DD02A98527495F5700D9B324 /* AwardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98427495F5700D9B324 /* AwardService.swift */; };
 		DD02A98727496ABF00D9B324 /* LevelStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98627496ABF00D9B324 /* LevelStickerView.swift */; };
+		DD02A98B2749762300D9B324 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98A2749762300D9B324 /* HomeViewController.swift */; };
+		DD02A98E2749766500D9B324 /* SnoweCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98D2749766500D9B324 /* SnoweCollectionViewCell.swift */; };
+		DD02A990274976A700D9B324 /* ZoomAndSnapFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98F274976A700D9B324 /* ZoomAndSnapFlowLayout.swift */; };
 		DD70F2FD27411EFB0053374B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2FC27411EFB0053374B /* Image.swift */; };
 		DD70F2FF27411F020053374B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2FE27411F020053374B /* Color.swift */; };
 		DD70F30127411F0A0053374B /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F30027411F0A0053374B /* Font.swift */; };
@@ -84,6 +87,9 @@
 		DD02A98227495D9E00D9B324 /* AwardAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardAPI.swift; sourceTree = "<group>"; };
 		DD02A98427495F5700D9B324 /* AwardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardService.swift; sourceTree = "<group>"; };
 		DD02A98627496ABF00D9B324 /* LevelStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelStickerView.swift; sourceTree = "<group>"; };
+		DD02A98A2749762300D9B324 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DD02A98D2749766500D9B324 /* SnoweCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnoweCollectionViewCell.swift; sourceTree = "<group>"; };
+		DD02A98F274976A700D9B324 /* ZoomAndSnapFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAndSnapFlowLayout.swift; sourceTree = "<group>"; };
 		DD70F2FC27411EFB0053374B /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		DD70F2FE27411F020053374B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DD70F30027411F0A0053374B /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -209,6 +215,32 @@
 			path = AppModel;
 			sourceTree = "<group>";
 		};
+		DD02A988274975EF00D9B324 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				DD02A98C2749763800D9B324 /* Cell */,
+				DD02A989274975FF00D9B324 /* View */,
+				DD02A98F274976A700D9B324 /* ZoomAndSnapFlowLayout.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		DD02A989274975FF00D9B324 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD02A98A2749762300D9B324 /* HomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DD02A98C2749763800D9B324 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DD02A98D2749766500D9B324 /* SnoweCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		DD70F2EA27411BD60053374B /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +295,7 @@
 		DD70F2EF27411C3D0053374B /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				DD02A988274975EF00D9B324 /* Home */,
 				DDD74899274776A00056C505 /* Award */,
 				DDD50EEB274681C100EA508F /* NewCharacter */,
 				C7C9CDF62737625800DC2A09 /* ViewController.swift */,
@@ -553,6 +586,7 @@
 				DD86CBE62748210100F6EC8D /* BaseTargetType.swift in Sources */,
 				DD02A9762748B7E800D9B324 /* UserDefaultKey.swift in Sources */,
 				DD02A98127495CF000D9B324 /* AwardsResponse.swift in Sources */,
+				DD02A98E2749766500D9B324 /* SnoweCollectionViewCell.swift in Sources */,
 				DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */,
 				DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */,
 				DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */,
@@ -561,6 +595,7 @@
 				DD70F2FD27411EFB0053374B /* Image.swift in Sources */,
 				DD02A98727496ABF00D9B324 /* LevelStickerView.swift in Sources */,
 				DDFAF15227458416005A3097 /* UICollectionView+Reusable.swift in Sources */,
+				DD02A98B2749762300D9B324 /* HomeViewController.swift in Sources */,
 				DD02A98327495D9E00D9B324 /* AwardAPI.swift in Sources */,
 				DDFAF150274583F0005A3097 /* UITableVIew+Reusable.swift in Sources */,
 				DD70F2FF27411F020053374B /* Color.swift in Sources */,
@@ -570,6 +605,7 @@
 				DDFAF15827458488005A3097 /* UIStackView+.swift in Sources */,
 				DDD748A127477D430056C505 /* TopTabBarViewController.swift in Sources */,
 				DDFAF15627458457005A3097 /* UIButton+.swift in Sources */,
+				DD02A990274976A700D9B324 /* ZoomAndSnapFlowLayout.swift in Sources */,
 				DD86CBF72748284D00F6EC8D /* NetworkService.swift in Sources */,
 				DDFAF14E274583AA005A3097 /* Reusable.swift in Sources */,
 				DDFAF14B27457FCB005A3097 /* BaseViewController.swift in Sources */,
