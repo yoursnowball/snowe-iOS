@@ -26,12 +26,37 @@ enum Snowe: String {
     }
 
     var color: UIColor {
-        //TODO: - 색상 적용
-        return .systemBlue
+        switch self {
+        case .pink:
+            return .systemPink
+        case .orange:
+            return .systemOrange
+        case .green:
+            return .systemGreen
+        case .blue:
+            return .systemBlue
+        }
+    }
+
+    var doneText: String {
+        var text = "오늘의 투두를 완료했어요"
+        switch self {
+        case .pink:
+            text += "💗"
+        case .orange:
+            text += "💛"
+        case .green:
+            text += "💚"
+        case .blue:
+            text += "💙"
+        }
+        return text
     }
 
     func getImage(level: Int) -> UIImage {
-        //TODO:- 단계별 캐릭터 확정되면 구현
+        // TODO:- 단계별 캐릭터 확정되면 구현
+
+        // 0 - 목표 생성시 카드뷰
         switch self {
         case .pink:
             return Image.pinkCard
