@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharacterChoiceViewController: BaseViewController {
+final class CharacterChoiceViewController: BaseViewController {
 
     private let numberLabel = UILabel().then {
         $0.font = .spoqa(size: 16, family: .bold)
@@ -51,6 +51,7 @@ class CharacterChoiceViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayouts()
+        makeCloseButton()
     }
 }
 
@@ -69,6 +70,7 @@ extension CharacterChoiceViewController: UICollectionViewDelegate {
         let cell: CharacterCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         cell.isSelected = true
+        NewGoal.shared.type = Snowe.getType(with: indexPath.item)
         nextButton.isEnabled  = true
     }
 }
