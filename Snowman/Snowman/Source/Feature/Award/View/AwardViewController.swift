@@ -35,7 +35,7 @@ final class AwardViewController: BaseViewController {
             명예의 전당에 등록된
             눈사람이 없어요😥
             """
-        $0.font = .spoqa(size: 14, family: .regular)
+        $0.font = .spoqa(size: 16, family: .regular)
         $0.textColor = .lightGray
         $0.numberOfLines = 2
         $0.textAlignment = .center
@@ -113,8 +113,8 @@ extension AwardViewController {
         }
 
         noCharacterLabel.snp.makeConstraints {
-            $0.center.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(36)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-80)
         }
 
         headerView.addSubviews(headerTitleLabel)
