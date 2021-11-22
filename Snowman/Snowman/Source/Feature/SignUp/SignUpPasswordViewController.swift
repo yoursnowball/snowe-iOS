@@ -62,7 +62,7 @@ class SignUpPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        setNavBar()
+        navigationItem.title = "회원가입"
         setIdTextField()
         setPasswordTextField()
         setLayouts()
@@ -81,7 +81,6 @@ class SignUpPasswordViewController: UIViewController {
         switch sender {
         case signUpButton:
             signUp()
-        break
         default:
             return
         }
@@ -102,13 +101,6 @@ class SignUpPasswordViewController: UIViewController {
         passwordCheckTextField.becomeFirstResponder()
     }
 
-    private func setNavBar() {
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.title = "회원가입"
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.shadowImage = UIImage()
-    }
-
     func signUp() {
         guard let nickName = self.nickname else { return }
         guard let userName = self.id else { return }
@@ -124,13 +116,13 @@ class SignUpPasswordViewController: UIViewController {
                 UserDefaults.standard.setValue(true, forKey: UserDefaultKey.loginStatus)
                 UserDefaults.standard.setValue(data.token, forKey: UserDefaultKey.token)
                 UserDefaults.standard.synchronize()
-  
+
                 self.showToastMessageAlert(message: "회원가입 완료!")
                 RootViewControllerChanger.updateRootViewController()
             }
         }
     }
-    
+
     func postSignUp(nickName: String, password: String, userName: String, completion: @escaping (AuthResponse) -> Void) {
         NetworkService.shared.auth.postSignUp(nickName: nickName,
                                               password: password,

@@ -58,14 +58,14 @@ class SignUpNameIdViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        setNavBar()
+        navigationItem.title = "회원가입"
         setNameTextField()
         setIdTextField()
         setLayouts()
         registerTarget()
         registerForKeyboardNotification()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         nicknameTextField.becomeFirstResponder()
@@ -102,18 +102,11 @@ class SignUpNameIdViewController: UIViewController {
         idTextField.becomeFirstResponder()
     }
 
-    private func setNavBar() {
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.title = "회원가입"
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.shadowImage = UIImage()
-    }
-
     func goToNextVC() {
         let vc = SignUpPasswordViewController()
         vc.nickname = nicknameTextField.text
         vc.id = idTextField.text
-        
+
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

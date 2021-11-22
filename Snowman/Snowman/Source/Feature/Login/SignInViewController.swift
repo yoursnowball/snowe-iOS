@@ -51,8 +51,6 @@ class SignInViewController: UIViewController {
         $0.setTitle("로그인", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
         $0.setBackgroundColor(UIColor.gray, for: .normal)
         $0.isEnabled = false
     }
@@ -60,11 +58,12 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        setNavBar()
+        navigationItem.title = "로그인"
         setIdTextField()
         setPasswordTextField()
         setLayouts()
         registerTarget()
+        registerForKeyboardNotification()
     }
 
     private func registerTarget() {
@@ -78,7 +77,6 @@ class SignInViewController: UIViewController {
         switch sender {
         case signInButton:
             signIn()
-        break
         default:
             return
         }
@@ -99,18 +97,11 @@ class SignInViewController: UIViewController {
         passwordTextField.becomeFirstResponder()
     }
 
-    private func setNavBar() {
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.title = "로그인"
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.shadowImage = UIImage()
-    }
-
     func signIn() {
         guard let userName = self.idTextField.text else { return }
         guard let password = self.passwordTextField.text else { return }
 
-        postSignIn(password: password, userName: userName){ data in
+        postSignIn(password: password, userName: userName) { data in
             UserDefaults.standard.setValue(true, forKey: UserDefaultKey.loginStatus)
             UserDefaults.standard.setValue(data.token, forKey: UserDefaultKey.token)
             UserDefaults.standard.synchronize()
@@ -118,7 +109,7 @@ class SignInViewController: UIViewController {
             RootViewControllerChanger.updateRootViewController()
         }
     }
-    
+
     func postSignIn(password: String, userName: String, completion: @escaping (AuthResponse) -> Void) {
         NetworkService.shared.auth.postSignIn(password: password, userName: userName) { result in
             switch result {
@@ -132,7 +123,7 @@ class SignInViewController: UIViewController {
             }
         }
     }
-    
+
     func setIdTextField() {
         idTextField.placeholder = "아이디"
         idTextField.delegate = self
@@ -178,6 +169,20 @@ class SignInViewController: UIViewController {
             }
         }
     }
+    
+    func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustView), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
+    @objc private func adjustView(noti: Notification) {
+        guard let userInfo = noti.userInfo else { return }
+        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        let adjustmentHeight = keyboardFrame.height
+
+        signInButton.snp.updateConstraints { make in
+            make.bottom.equalToSuperview().offset(-adjustmentHeight)
+        }
+    }
 
     func setLayouts() {
         view.addSubviews(idLabel,
@@ -211,9 +216,10 @@ class SignInViewController: UIViewController {
         }
 
         signInButton.snp.makeConstraints {
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(41)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(53)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(56)
         }
     }
 }
