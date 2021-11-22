@@ -12,7 +12,7 @@ class RootViewControllerChanger {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
         if UserDefaults.standard.bool(forKey: UserDefaultKey.loginStatus) {
-            appDelegate?.window?.rootViewController = BaseNavigationController(rootViewController: HomeViewController())
+            appDelegate?.window?.rootViewController = HomeNavigationViewController(rootViewController: HomeViewController())
         } else {
             appDelegate?.window?.rootViewController = BaseNavigationController(rootViewController: StartSignInViewController())
         }

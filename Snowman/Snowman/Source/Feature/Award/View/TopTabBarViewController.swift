@@ -51,6 +51,11 @@ class TopTabBarViewController: BaseViewController {
         setNavigationTitle()
         setTabItemViews()
         setLayouts()
+        customTabbar.selectItem(
+            at: IndexPath(item: 0, section: 0),
+            animated: true,
+            scrollPosition: .centeredHorizontally
+        )
     }
 
 }
@@ -108,10 +113,6 @@ extension TopTabBarViewController: UICollectionViewDataSource {
         let cell: MenuItemCollectionViewCell = customTabbar.dequeueReusableCell(forIndexPath: indexPath)
         cell.setData(title: menuList[indexPath.row])
 
-        if indexPath.row == 0 {
-            cell.isSelected = true
-        }
-
         return cell
     }
 }
@@ -130,9 +131,6 @@ extension TopTabBarViewController: UICollectionViewDelegate {
             $0.leading.equalToSuperview().offset(40 + customTabBarWidth / 3 * page)
         }
 
-        let cell: MenuItemCollectionViewCell = customTabbar.dequeueReusableCell(forIndexPath: indexPath)
-        cell.isSelected = true
-
         collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
         collectionView.isPagingEnabled = true
     }
@@ -147,17 +145,12 @@ extension TopTabBarViewController: UIScrollViewDelegate {
             $0.leading.equalToSuperview().offset(40 + customTabBarWidth / 3 * page)
         }
 
-        [0, 1, 2].forEach {
-            if let cell = customTabbar.cellForItem(at: IndexPath(row: $0, section: 0))
-                as? MenuItemCollectionViewCell {
-                cell.isSelected = false
-            }
-        }
+        let roundedIndex = Int(round(page))
 
-        if page == 0.0 || page == 1.0 || page == 2.0 {
-            if let cell = customTabbar.cellForItem(at: IndexPath(row: Int(page), section: 0))
+        for index in 0...2 {
+            if let cell = customTabbar.cellForItem(at: IndexPath(row: index, section: 0))
                 as? MenuItemCollectionViewCell {
-                cell.isSelected = true
+                cell.isSelected = index == roundedIndex
             }
         }
     }
