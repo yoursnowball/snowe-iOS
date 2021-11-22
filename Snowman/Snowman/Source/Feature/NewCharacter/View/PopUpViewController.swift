@@ -58,7 +58,7 @@ final class PopUpViewController: UIViewController {
 
 extension PopUpViewController {
     private func render() {
-        view.backgroundColor = .black.withAlphaComponent(0.4)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
     }
 }
 
