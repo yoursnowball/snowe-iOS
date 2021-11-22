@@ -45,7 +45,7 @@ extension AppDelegate : MessagingDelegate {
             return
         }
         print("Firebase registration token: \(fcmTokenString)")
-        UserDefaults.standard.set(fcmTokenString, forKey: "fcmToken")
+        UserDefaults.standard.set(fcmTokenString, forKey: UserDefaultKey.fcmToken)
     }
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingDelegate) {
         print("Received data message: \(remoteMessage.description)")

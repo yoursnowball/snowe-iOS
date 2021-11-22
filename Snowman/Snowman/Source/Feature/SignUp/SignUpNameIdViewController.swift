@@ -65,7 +65,7 @@ class SignUpNameIdViewController: UIViewController {
         registerTarget()
         registerForKeyboardNotification()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         nicknameTextField.becomeFirstResponder()
@@ -113,7 +113,7 @@ class SignUpNameIdViewController: UIViewController {
         let vc = SignUpPasswordViewController()
         vc.nickname = nicknameTextField.text
         vc.id = idTextField.text
-        
+
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
