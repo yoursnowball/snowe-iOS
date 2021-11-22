@@ -43,7 +43,7 @@
 		C7F65E34274BCB5400D57086 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E33274BCB5400D57086 /* AuthResponse.swift */; };
 		C7F65E37274BD03600D57086 /* RootViewControllerChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E36274BD03600D57086 /* RootViewControllerChanger.swift */; };
 		DD02A9762748B7E800D9B324 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9752748B7E800D9B324 /* UserDefaultKey.swift */; };
-		DD02A97A2748C09A00D9B324 /* CharacterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9792748C09A00D9B324 /* CharacterType.swift */; };
+		DD02A97A2748C09A00D9B324 /* Snowe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9792748C09A00D9B324 /* Snowe.swift */; };
 		DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A97B2748CAE900D9B324 /* GoalRequest.swift */; };
 		DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A97E2749482900D9B324 /* NewGoal.swift */; };
 		DD02A98127495CF000D9B324 /* AwardsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98027495CF000D9B324 /* AwardsResponse.swift */; };
@@ -144,7 +144,7 @@
 		C7F65E33274BCB5400D57086 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		C7F65E36274BD03600D57086 /* RootViewControllerChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerChanger.swift; sourceTree = "<group>"; };
 		DD02A9752748B7E800D9B324 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
-		DD02A9792748C09A00D9B324 /* CharacterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterType.swift; sourceTree = "<group>"; };
+		DD02A9792748C09A00D9B324 /* Snowe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snowe.swift; sourceTree = "<group>"; };
 		DD02A97B2748CAE900D9B324 /* GoalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRequest.swift; sourceTree = "<group>"; };
 		DD02A97E2749482900D9B324 /* NewGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoal.swift; sourceTree = "<group>"; };
 		DD02A98027495CF000D9B324 /* AwardsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsResponse.swift; sourceTree = "<group>"; };
@@ -339,7 +339,7 @@
 		DD02A9782748C03800D9B324 /* AppModel */ = {
 			isa = PBXGroup;
 			children = (
-				DD02A9792748C09A00D9B324 /* CharacterType.swift */,
+				DD02A9792748C09A00D9B324 /* Snowe.swift */,
 				DD02A97E2749482900D9B324 /* NewGoal.swift */,
 			);
 			path = AppModel;
@@ -837,7 +837,7 @@
 				DD86CBF12748265200F6EC8D /* NetworkResult.swift in Sources */,
 				DD892245274AC72E00316FE0 /* UserResponse.swift in Sources */,
 				DD894D3727474F98004AF5A6 /* PopUpViewController.swift in Sources */,
-				DD02A97A2748C09A00D9B324 /* CharacterType.swift in Sources */,
+				DD02A97A2748C09A00D9B324 /* Snowe.swift in Sources */,
 				DDD50EED274681E100EA508F /* QuestionBaseViewController.swift in Sources */,
 				DDD748A52747B1D80056C505 /* UIImage+.swift in Sources */,
 				DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */,
