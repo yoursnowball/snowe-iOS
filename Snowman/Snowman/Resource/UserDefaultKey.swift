@@ -6,6 +6,11 @@
 //
 
 enum UserDefaultKey {
+    /// auth token
     static let token = "token"
+
     static let loginStatus = "loginStatus"
+
+    /// firebase token
+    static let fcmToken = "fcmToken"
 }

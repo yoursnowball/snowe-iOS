@@ -110,7 +110,7 @@ class SignInViewController: UIViewController {
         guard let userName = self.idTextField.text else { return }
         guard let password = self.passwordTextField.text else { return }
 
-        postSignIn(password: password, userName: userName){ data in
+        postSignIn(password: password, userName: userName) { data in
             UserDefaults.standard.setValue(true, forKey: UserDefaultKey.loginStatus)
             UserDefaults.standard.setValue(data.token, forKey: UserDefaultKey.token)
             UserDefaults.standard.synchronize()
@@ -118,7 +118,7 @@ class SignInViewController: UIViewController {
             RootViewControllerChanger.updateRootViewController()
         }
     }
-    
+
     func postSignIn(password: String, userName: String, completion: @escaping (AuthResponse) -> Void) {
         NetworkService.shared.auth.postSignIn(password: password, userName: userName) { result in
             switch result {
@@ -132,7 +132,7 @@ class SignInViewController: UIViewController {
             }
         }
     }
-    
+
     func setIdTextField() {
         idTextField.placeholder = "아이디"
         idTextField.delegate = self
