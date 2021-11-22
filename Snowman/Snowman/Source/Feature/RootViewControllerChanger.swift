@@ -8,13 +8,20 @@
 import UIKit
 
 class RootViewControllerChanger {
+    typealias Home = HomeViewController
+    typealias SignIn = StartSignInViewController
+
     static func updateRootViewController() {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
         if UserDefaults.standard.bool(forKey: UserDefaultKey.loginStatus) {
-            appDelegate?.window?.rootViewController = HomeNavigationViewController(rootViewController: HomeViewController())
+            guard let token = UserDefaults.standard.value(forKey: UserDefaultKey.fcmToken) as? String else { return }
+            NetworkService.shared.user.postFCMToken(fcm: token) { result in
+                dump(result)
+            }
+            appDelegate?.window?.rootViewController = HomeNavigationViewController(rootViewController: Home())
         } else {
-            appDelegate?.window?.rootViewController = BaseNavigationController(rootViewController: StartSignInViewController())
+            appDelegate?.window?.rootViewController = BaseNavigationController(rootViewController: SignIn())
         }
     }
 }
