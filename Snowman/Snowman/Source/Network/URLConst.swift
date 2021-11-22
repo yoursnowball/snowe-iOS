@@ -25,4 +25,11 @@ enum URLConst {
 
     /// 회원가입
     static let signUp = "/auth/sign-up"
+
+    // MARK: - User
+    /// 내 정보 가져오기 - 홈
+    static let users = "/users"
+
+    /// fcm Token
+    static let fcm = users + "/token"
 }
