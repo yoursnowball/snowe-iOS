@@ -60,7 +60,7 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setNavBar()
+//        setNavBar()
         setIdTextField()
         setPasswordTextField()
         setLayouts()
@@ -77,7 +77,7 @@ class SignInViewController: UIViewController {
     private func buttonTapAction(_ sender: UIButton) {
         switch sender {
         case signInButton:
-//            sendSignInData()
+            signIn()
         break
         default:
             return
@@ -99,10 +99,6 @@ class SignInViewController: UIViewController {
         passwordTextField.becomeFirstResponder()
     }
 
-    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
-        view.endEditing(true)
-    }
-
     private func setNavBar() {
         navigationController?.isNavigationBarHidden = false
         navigationItem.title = "로그인"
@@ -110,68 +106,33 @@ class SignInViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
-    
-    
-    
-//    func setAutoLogin(isAutoLogin: Bool) {
-//        UserDefaults.standard.setValue(isAutoLogin, forKey: UserDefaultKey.isAutoLogin)
-//        UserDefaults.standard.setValue(true, forKey: UserDefaultKey.loginStatus)
-//        LoginSwitcher.updateRootVC()
-//        dismiss(animated: true, completion: nil)
-//    }
-//
-//    func sendSignInData() {
-//        if let email = idTextField.text,
-//           let password = passwordTextField.text {
-//            let param = [
-//                "email": "\(email + "@soongsil.ac.kr")",
-//                "password": password,
-//            ]
-//
-//            Alamofire.request(URLModel.signInApiUrlString, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil)
-//                .responseJSON { response in
-//                    switch response.result {
-//                    case let .success(value):
-//                        do {
-//                            if let statusCode = response.response?.statusCode {
-//                                let json = SwiftyJSON.JSON(value)
-//                                if statusCode >= 200, statusCode < 300 {
-//                                    guard let accessTokenExpiredIn = json["accessTokenExpiredIn"].int,
-//                                          let refreshTokenExpiredIn = json["refreshTokenExpiredIn"].int
-//                                    else {
-//                                        self.showAlert(title: nil, message: "만료 시간이 잘못 설정됨", isCompleted: true)
-//                                        return
-//                                    }
-//
-//                                    let accessToken = AccessToken(json["accessToken"].stringValue, expiredIn: accessTokenExpiredIn)
-//                                    let refreshToken = RefreshToken(json["refreshToken"].stringValue, expiredIn: refreshTokenExpiredIn)
-//
-//                                    AuthData.accessToken = accessToken
-//                                    AuthData.refreshToken = refreshToken
-//
-//                                    AuthData.userId = email
-//
-//                                    UserDefaults.standard.setValue(email, forKey: UserDefaultKey.userId)
-//
-//                                    self.showAutoSignInAlert(title: "자동 로그인 활성화", message: "자동 로그인을 활성화 하시겠습니까?")
-//                                } else if json["error"].stringValue == "Auth-005" {
-//                                    self.showAlert(title: "로그인에 실패하였습니다.", message: "학교 메일 혹은 비밀번호가\n 일치하지 않습니다.", isCompleted: false)
-//                                } else {
-//                                    self.showAlert(title: nil, message: "\(json["message"].stringValue)", isCompleted: true)
-//                                }
-//                            }
-//                        }
-//                    case let .failure(err):
-//                        self.showAlert(title: nil, message: "네트워크 오류가 발생했습니다.", isCompleted: true)
-//                        print(err.localizedDescription)
-//                    }
-//                }
-//        }
-//    }
-    
-    
-    
+    func signIn() {
+        guard let userName = self.idTextField.text else { return }
+        guard let password = self.passwordTextField.text else { return }
 
+        postSignIn(password: password, userName: userName){ data in
+            UserDefaults.standard.setValue(true, forKey: UserDefaultKey.loginStatus)
+            UserDefaults.standard.setValue(data.token, forKey: UserDefaultKey.token)
+            UserDefaults.standard.synchronize()
+
+            RootViewControllerChanger.updateRootViewController()
+        }
+    }
+    
+    func postSignIn(password: String, userName: String, completion: @escaping (AuthResponse) -> Void) {
+        NetworkService.shared.auth.postSignIn(password: password, userName: userName) { result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? AuthResponse else { return }
+                completion(data)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("sign in error")
+            }
+        }
+    }
+    
     func setIdTextField() {
         idTextField.placeholder = "아이디"
         idTextField.delegate = self
@@ -184,6 +145,7 @@ class SignInViewController: UIViewController {
         idTextField.layer.borderWidth = 0
         idTextField.autocapitalizationType = .none
         idTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        idTextField.becomeFirstResponder()
     }
 
     func setPasswordTextField() {
@@ -224,8 +186,10 @@ class SignInViewController: UIViewController {
                          passwordTextField,
                          signInButton)
 
+        let guide = view.safeAreaLayoutGuide
+
         idLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(24)
+            $0.top.equalTo(guide).offset(24)
             $0.leading.equalToSuperview().offset(20)
         }
 
