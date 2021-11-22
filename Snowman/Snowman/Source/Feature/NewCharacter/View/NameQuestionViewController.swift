@@ -67,6 +67,7 @@ extension NameQuestionViewController {
             switch result {
             case .success(let response):
                 guard let data = response as? GoalResponse else { return }
+                NotificationCenter.default.post(name: .refreshHomeVC, object: nil)
                 completion(data)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
@@ -76,3 +77,5 @@ extension NameQuestionViewController {
         }
     }
 }
+
+

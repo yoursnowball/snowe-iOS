@@ -9,62 +9,14 @@ import UIKit
 
 class HomeViewController: BaseViewController {
 
-    private var goals: [GoalResponse?] = [
-        GoalResponse(
-            createdAt: "",
-            id: 1,
-            level: 3,
-            levelTodoCount: 10,
-            name: "강호동",
-            objective: "밥먹자",
-            succeedTodoCount: 3, todos: [
-                TodoResponse(createdAt: "",
-                             finishedAt: "",
-                             id: 1,
-                             name: "배고파",
-                             succeed: true, todoDate: ""
-                )
-            ], type: "BLUE"
-        ),
-        GoalResponse(
-            createdAt: "",
-            id: 1,
-            level: 3,
-            levelTodoCount: 10,
-            name: "이수근",
-            objective: "오동잎댄스",
-            succeedTodoCount: 4, todos: [
-                TodoResponse(createdAt: "",
-                             finishedAt: "",
-                             id: 1,
-                             name: "배고파",
-                             succeed: false, todoDate: ""
-                ),
-                TodoResponse(createdAt: "",
-                             finishedAt: "",
-                             id: 1,
-                             name: "배고파",
-                             succeed: true, todoDate: ""
-                ),
-                TodoResponse(createdAt: "",
-                             finishedAt: "",
-                             id: 1,
-                             name: "배고파",
-                             succeed: false, todoDate: ""
-                )
-            ], type: "BLUE"
-        ),
-        GoalResponse(
-            createdAt: "",
-            id: 1,
-            level: 3,
-            levelTodoCount: 10,
-            name: "송민호",
-            objective: "마이노 노래해",
-            succeedTodoCount: 4, todos: [], type: "BLUE"
-        ),
-        nil
-    ] {
+    private var userResponse: UserResponse? {
+        didSet {
+            guard let response = userResponse else { return }
+            self.goals = response.goals
+        }
+    }
+
+    private var goals: [GoalResponse?] = [] {
         didSet {
             collectionView.reloadData()
         }
@@ -102,14 +54,12 @@ class HomeViewController: BaseViewController {
     }
 
     private let countLabel = UILabel().then {
-        $0.text = "2"
         $0.font = .spoqa(size: 18, family: .bold)
         $0.textColor = .systemBlue // TODO:- 색상교체
         $0.sizeToFit()
     }
 
     private let bubbleTodoLabel = UILabel().then {
-        $0.text = "개의 투두가 남았어요!"
         $0.font = .spoqa(size: 16, family: .regular)
         $0.textColor = .lightGray // TODO:- 색상교체
         $0.sizeToFit()
@@ -122,17 +72,17 @@ class HomeViewController: BaseViewController {
         $0.spacing = 6
     }
 
-    private let levelStickerView = LevelStickerView()
+    private let levelStickerView = LevelStickerView().then {
+        $0.isHidden = true
+    }
 
     private let nameLabel = UILabel().then {
-        $0.text = "수줍은 눈사람"
         $0.font = .spoqa(size: 24, family: .bold)
         $0.textColor = .black // TODO:- 색상교체
         $0.sizeToFit()
     }
 
     private let goalLabel = UILabel().then {
-        $0.text = "토익 900점 달성하기"
         $0.font = .spoqa(size: 16, family: .regular)
         $0.textColor = .lightGray // TODO:- 색상교체
         $0.sizeToFit()
@@ -140,6 +90,9 @@ class HomeViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateGoal(goal: nil)
+        hideBubble(isHidden: true)
+        getHome()
         render()
     }
 }
@@ -197,7 +150,7 @@ extension HomeViewController: UIScrollViewDelegate {
         ) / cellWidthIncludeSpacing
 
         let roundedIndex = Int(round(index))
-        if roundedIndex > -1 && roundedIndex < 4 {
+        if roundedIndex > -1 && roundedIndex < goals.count {
             updateGoal(goal: goals[roundedIndex])
             for index in 0...3 {
                 if let cell = collectionView.cellForItem(
@@ -242,6 +195,22 @@ extension HomeViewController: UICollectionViewDataSource {
         let cell: SnoweCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         cell.updateData(goal: goals[indexPath.item])
         return cell
+    }
+}
+
+extension HomeViewController {
+    private func getHome() {
+        NetworkService.shared.user.getUsers {[weak self] result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? UserResponse else { return }
+                self?.userResponse = data
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("error")
+            }
+        }
     }
 }
 

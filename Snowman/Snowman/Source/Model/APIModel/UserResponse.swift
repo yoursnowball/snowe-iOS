@@ -8,6 +8,6 @@
 struct UserResponse: Codable {
     let createdAt: String
     let goalCount: Int
-    let goals: [GoalResponse]
+    let goals: [GoalResponse?]
     let nickName: String
 }

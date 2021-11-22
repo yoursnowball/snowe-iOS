@@ -83,11 +83,15 @@
 		DDD748A127477D430056C505 /* TopTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD748A027477D430056C505 /* TopTabBarViewController.swift */; };
 		DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD748A227477DA30056C505 /* MenuItemCollectionViewCell.swift */; };
 		DDD748A52747B1D80056C505 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD748A42747B1D80056C505 /* UIImage+.swift */; };
+		DDE00F09274B8B8900BD2C20 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE00F08274B8B8900BD2C20 /* PushKit.framework */; };
 		DDE00F0C274B8F7300BD2C20 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE00F0B274B8F7300BD2C20 /* NotificationViewController.swift */; };
 		DDE00F10274B902300BD2C20 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE00F0F274B902300BD2C20 /* NotificationTableViewCell.swift */; };
 		DDE00F09274B8B8900BD2C20 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE00F08274B8B8900BD2C20 /* PushKit.framework */; };
 		DDF283C0274BF5B800C426D7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDF283BF274BF5B800C426D7 /* GoogleService-Info.plist */; };
 		DDF283C1274BF88000C426D7 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE00F08274B8B8900BD2C20 /* PushKit.framework */; };
+		DDF283C5274C04E800C426D7 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF283C4274C04E800C426D7 /* UserAPI.swift */; };
+		DDF283C7274C064A00C426D7 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF283C6274C064A00C426D7 /* UserService.swift */; };
+		DDF283C9274C0FE100C426D7 /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF283C8274C0FE100C426D7 /* Notification.Name+.swift */; };
 		DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */; };
 		DDFAF14B27457FCB005A3097 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14A27457FCB005A3097 /* BaseViewController.swift */; };
 		DDFAF14E274583AA005A3097 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14D274583AA005A3097 /* Reusable.swift */; };
@@ -175,11 +179,14 @@
 		DDD748A027477D430056C505 /* TopTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabBarViewController.swift; sourceTree = "<group>"; };
 		DDD748A227477DA30056C505 /* MenuItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDD748A42747B1D80056C505 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
-		DDE00F0B274B8F7300BD2C20 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
-		DDE00F0F274B902300BD2C20 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		DDE00F07274B8B5D00BD2C20 /* Snowman.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snowman.entitlements; sourceTree = "<group>"; };
 		DDE00F08274B8B8900BD2C20 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		DDF283BF274BF5B800C426D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DDE00F0B274B8F7300BD2C20 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		DDE00F0F274B902300BD2C20 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		DDF283C4274C04E800C426D7 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		DDF283C6274C064A00C426D7 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		DDF283C8274C0FE100C426D7 /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		DDFAF14A27457FCB005A3097 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DDFAF14D274583AA005A3097 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -470,6 +477,7 @@
 				C7D38D712748D5440049F3AA /* DateFormatters.swift */,
 				C7D38D772748D8090049F3AA /* Date+.swift */,
 				C7DE7FDE274A90B400C8DFB4 /* UITextField+.swift */,
+				DDF283C8274C0FE100C426D7 /* Notification.Name+.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -480,6 +488,7 @@
 				DD86CBE72748216D00F6EC8D /* GoalAPI.swift */,
 				DD02A98227495D9E00D9B324 /* AwardAPI.swift */,
 				C7F65E2D274BC50200D57086 /* AuthAPI.swift */,
+				DDF283C4274C04E800C426D7 /* UserAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -490,6 +499,7 @@
 				DD86CBEB274824EA00F6EC8D /* GoalService.swift */,
 				DD02A98427495F5700D9B324 /* AwardService.swift */,
 				C7F65E30274BC50900D57086 /* AuthService.swift */,
+				DDF283C6274C064A00C426D7 /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -783,9 +793,11 @@
 				DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */,
 				DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */,
 				C7F65E34274BCB5400D57086 /* AuthResponse.swift in Sources */,
+				DDF283C9274C0FE100C426D7 /* Notification.Name+.swift in Sources */,
 				C7C9CDF72737625800DC2A09 /* ViewController.swift in Sources */,
 				C7D38D722748D5440049F3AA /* DateFormatters.swift in Sources */,
 				C768D12827499E04000E0677 /* CalendarView+DataSource.swift in Sources */,
+				DDF283C7274C064A00C426D7 /* UserService.swift in Sources */,
 				C7DE7FDF274A90B400C8DFB4 /* UITextField+.swift in Sources */,
 				C7F65E31274BC50900D57086 /* AuthService.swift in Sources */,
 				C768D12E27499E04000E0677 /* CalendarView+Delegate.swift in Sources */,
@@ -799,6 +811,7 @@
 				DD02A98327495D9E00D9B324 /* AwardAPI.swift in Sources */,
 				DDFAF150274583F0005A3097 /* UITableVIew+Reusable.swift in Sources */,
 				DD70F2FF27411F020053374B /* Color.swift in Sources */,
+				DDF283C5274C04E800C426D7 /* UserAPI.swift in Sources */,
 				DD86CBEF2748257B00F6EC8D /* ErrorResponse.swift in Sources */,
 				DDD7489C274776C30056C505 /* AwardViewController.swift in Sources */,
 				C7DE7FD6274A830A00C8DFB4 /* SignUpNameIdViewController.swift in Sources */,

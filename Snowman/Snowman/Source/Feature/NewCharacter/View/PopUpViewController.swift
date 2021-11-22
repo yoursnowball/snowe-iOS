@@ -28,10 +28,12 @@ final class PopUpViewController: UIViewController {
         $0.text = "눈덩이 생성 완료!"
     }
 
-    private let characterImageView = UIImageView()
+    private let characterImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+    }
 
     private let nameLabel = UILabel().then {
-        $0.font = .spoqa(size: 16, family: .medium)
+        $0.font = .spoqa(size: 18, family: .medium)
     }
 
     private let goalLabel = UILabel().then {
@@ -65,7 +67,10 @@ extension PopUpViewController {
 extension PopUpViewController {
     @objc
     public func buttonDidTapped(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        guard let pvc = self.presentingViewController else { return }
+        dismiss(animated: true) {
+            pvc.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

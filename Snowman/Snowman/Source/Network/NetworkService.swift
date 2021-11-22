@@ -15,4 +15,6 @@ final class NetworkService {
     let award = AwardService()
 
     let auth = AuthService()
+
+    let user = UserService()
 }
