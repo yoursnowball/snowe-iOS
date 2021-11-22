@@ -16,11 +16,7 @@ class HomeViewController: BaseViewController {
         }
     }
 
-    private var goals: [GoalResponse?] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    private var goals: [GoalResponse?] = []
 
     private let flowLayout = ZoomAndSnapFlowLayout()
 
@@ -88,17 +84,43 @@ class HomeViewController: BaseViewController {
         $0.sizeToFit()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setPlaceholderView()
+        getHome {
+            self.collectionView.reloadData()
+            self.updateGoal(goal: self.goals.first ?? nil)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateGoal(goal: nil)
-        hideBubble(isHidden: true)
-        getHome()
         render()
+        registerNotificationcenter()
+    }
+
+    private func registerNotificationcenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .refreshHomeVC, object: nil)
+    }
+
+    @objc
+    private func reloadView() {
+        getHome {[weak self] in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
+            self.collectionView.scrollToItem(
+                at: IndexPath(item: 0, section: 0),
+                at: .centeredHorizontally,
+                animated: true
+            )
+            self.updateGoal(goal: self.goals[0])
+        }
     }
 }
 
 extension HomeViewController {
     private func updateGoal(goal: GoalResponse?) {
+        dump(goal)
         if let goal = goal {
             levelStickerView.isHidden = false
 
@@ -133,10 +155,29 @@ extension HomeViewController {
         }
     }
 
+    private func setPlaceholderView() {
+        nameLabel.text = ""
+        goalLabel.text = ""
+        levelStickerView.isHidden = true
+        hideBubble(isHidden: true)
+    }
+
     private func hideBubble(isHidden: Bool) {
         bubbleTodoLabel.isHidden = isHidden
         bubblePolygonImageView.isHidden = isHidden
         todoBubbleImageView.isHidden = isHidden
+    }
+
+    private func setOpacityCell(index: Int, alpha: CGFloat) {
+        if let cell = collectionView.cellForItem(
+            at: IndexPath(
+                item: index,
+                section: 0
+            )
+        ) as? SnoweCollectionViewCell {
+            cell.characterImageView.alpha = alpha
+        }
+
     }
 }
 
@@ -153,17 +194,10 @@ extension HomeViewController: UIScrollViewDelegate {
         if roundedIndex > -1 && roundedIndex < goals.count {
             updateGoal(goal: goals[roundedIndex])
             for index in 0...3 {
-                if let cell = collectionView.cellForItem(
-                    at: IndexPath(
-                        item: index,
-                        section: 0
-                    )
-                ) as? SnoweCollectionViewCell {
-                    if index == roundedIndex {
-                        cell.characterImageView.alpha = 1
-                    } else {
-                        cell.characterImageView.alpha = 0.6
-                    }
+                if index == roundedIndex {
+                    setOpacityCell(index: index, alpha: 1)
+                } else {
+                    setOpacityCell(index: index, alpha: 0.6)
                 }
             }
         }
@@ -194,17 +228,21 @@ extension HomeViewController: UICollectionViewDataSource {
     ) -> UICollectionViewCell {
         let cell: SnoweCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         cell.updateData(goal: goals[indexPath.item])
+        if indexPath.row == 0 {
+            cell.characterImageView.alpha = 1
+        }
         return cell
     }
 }
 
 extension HomeViewController {
-    private func getHome() {
+    private func getHome(completion: @escaping () -> Void) {
         NetworkService.shared.user.getUsers {[weak self] result in
             switch result {
             case .success(let response):
                 guard let data = response as? UserResponse else { return }
                 self?.userResponse = data
+                completion()
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:

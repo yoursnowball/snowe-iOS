@@ -1,5 +1,5 @@
 //
-//  CharacterType.swift
+//  Snowe.swift
 //  Snowman
 //
 //  Created by 김윤서 on 2021/11/20.
@@ -32,7 +32,16 @@ enum Snowe: String {
 
     func getImage(level: Int) -> UIImage {
         //TODO:- 단계별 캐릭터 확정되면 구현
-        return Image.sampleSnowe
+        switch self {
+        case .pink:
+            return Image.pinkCard
+        case .orange:
+            return Image.orangeCard
+        case .green:
+            return Image.greenCard
+        case .blue:
+            return Image.blueCard
+        }
     }
 
     static func getType(with index: Int) -> Snowe {

@@ -12,6 +12,7 @@ class SnoweCollectionViewCell: UICollectionViewCell {
     public let characterImageView = UIImageView().then {
         $0.image = Image.bigMakecharacterCard
         $0.contentMode = .scaleAspectFit
+        $0.alpha = 0.6
     }
 
     override init(frame: CGRect) {

@@ -38,9 +38,8 @@ class CharacterCollectionViewCell: UICollectionViewCell {
     }
 }
 extension CharacterCollectionViewCell {
-    public func setCharacterImage(with imageName: String) {
-//        characterImageView.image = UIImage(named: imageName)
-        characterImageView.image = UIImage(systemName: imageName)
+    public func setCharacterImage(with image: UIImage) {
+        characterImageView.image = image
     }
 }
 
