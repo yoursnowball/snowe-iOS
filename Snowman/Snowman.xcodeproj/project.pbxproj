@@ -33,7 +33,6 @@
 		C7EDAD24274563EA008C699C /* SpoqaHanSansNeo-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */; };
 		C7EDAD25274563EA008C699C /* SpoqaHanSansNeo-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */; };
 		C7F4B8E427497EB0002DD317 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4B8E327497EB0002DD317 /* TodoCell.swift */; };
-		DD70F2F527411E5F0053374B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2F427411E5F0053374B /* Network.swift */; };
 		DD02A9762748B7E800D9B324 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9752748B7E800D9B324 /* UserDefaultKey.swift */; };
 		DD02A97A2748C09A00D9B324 /* CharacterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9792748C09A00D9B324 /* CharacterType.swift */; };
 		DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A97B2748CAE900D9B324 /* GoalRequest.swift */; };
@@ -62,6 +61,7 @@
 		DD86CBF3274826FA00F6EC8D /* GoalResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBF2274826FA00F6EC8D /* GoalResponse.swift */; };
 		DD86CBF52748278E00F6EC8D /* TodoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBF42748278E00F6EC8D /* TodoResponse.swift */; };
 		DD86CBF72748284D00F6EC8D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBF62748284D00F6EC8D /* NetworkService.swift */; };
+		DD892245274AC72E00316FE0 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD892244274AC72E00316FE0 /* UserResponse.swift */; };
 		DD894D2D27473833004AF5A6 /* GoalQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D2C27473833004AF5A6 /* GoalQuestionViewController.swift */; };
 		DD894D2F2747384A004AF5A6 /* NameQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D2E2747384A004AF5A6 /* NameQuestionViewController.swift */; };
 		DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3027473DEF004AF5A6 /* CharacterChoiceViewController.swift */; };
@@ -115,7 +115,6 @@
 		C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-medium.otf"; sourceTree = "<group>"; };
 		C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-regular.otf"; sourceTree = "<group>"; };
 		C7F4B8E327497EB0002DD317 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
-		DD70F2F427411E5F0053374B /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		DD02A9752748B7E800D9B324 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		DD02A9792748C09A00D9B324 /* CharacterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterType.swift; sourceTree = "<group>"; };
 		DD02A97B2748CAE900D9B324 /* GoalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRequest.swift; sourceTree = "<group>"; };
@@ -139,6 +138,7 @@
 		DD86CBF2274826FA00F6EC8D /* GoalResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalResponse.swift; sourceTree = "<group>"; };
 		DD86CBF42748278E00F6EC8D /* TodoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoResponse.swift; sourceTree = "<group>"; };
 		DD86CBF62748284D00F6EC8D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		DD892244274AC72E00316FE0 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		DD894D2C27473833004AF5A6 /* GoalQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalQuestionViewController.swift; sourceTree = "<group>"; };
 		DD894D2E2747384A004AF5A6 /* NameQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameQuestionViewController.swift; sourceTree = "<group>"; };
 		DD894D3027473DEF004AF5A6 /* CharacterChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterChoiceViewController.swift; sourceTree = "<group>"; };
@@ -443,6 +443,7 @@
 				DD86CBF42748278E00F6EC8D /* TodoResponse.swift */,
 				DD02A97B2748CAE900D9B324 /* GoalRequest.swift */,
 				DD02A98027495CF000D9B324 /* AwardsResponse.swift */,
+				DD892244274AC72E00316FE0 /* UserResponse.swift */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -705,6 +706,7 @@
 				C7C9CDF32737625800DC2A09 /* AppDelegate.swift in Sources */,
 				C7F4B8E427497EB0002DD317 /* TodoCell.swift in Sources */,
 				DD86CBF12748265200F6EC8D /* NetworkResult.swift in Sources */,
+				DD892245274AC72E00316FE0 /* UserResponse.swift in Sources */,
 				DD894D3727474F98004AF5A6 /* PopUpViewController.swift in Sources */,
 				DD02A97A2748C09A00D9B324 /* CharacterType.swift in Sources */,
 				DDD50EED274681E100EA508F /* QuestionBaseViewController.swift in Sources */,
