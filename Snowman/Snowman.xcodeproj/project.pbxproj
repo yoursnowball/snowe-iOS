@@ -33,7 +33,6 @@
 		C7EDAD24274563EA008C699C /* SpoqaHanSansNeo-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */; };
 		C7EDAD25274563EA008C699C /* SpoqaHanSansNeo-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */; };
 		C7F4B8E427497EB0002DD317 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4B8E327497EB0002DD317 /* TodoCell.swift */; };
-		DD70F2F527411E5F0053374B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2F427411E5F0053374B /* Network.swift */; };
 		DD02A9762748B7E800D9B324 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9752748B7E800D9B324 /* UserDefaultKey.swift */; };
 		DD02A97A2748C09A00D9B324 /* CharacterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9792748C09A00D9B324 /* CharacterType.swift */; };
 		DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A97B2748CAE900D9B324 /* GoalRequest.swift */; };
@@ -53,6 +52,7 @@
 		DD70F310274120C10053374B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F30F274120C10053374B /* Kingfisher */; };
 		DD70F316274121570053374B /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F315274121570053374B /* PanModal */; };
 		DD70F31D2741254B0053374B /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F31C2741254B0053374B /* Moya */; };
+		DD832D1D274B847300FAB6A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD832D1C274B847300FAB6A2 /* GoogleService-Info.plist */; };
 		DD86CBE62748210100F6EC8D /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBE52748210100F6EC8D /* BaseTargetType.swift */; };
 		DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBE72748216D00F6EC8D /* GoalAPI.swift */; };
 		DD86CBEA2748232600F6EC8D /* URLConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBE92748232600F6EC8D /* URLConst.swift */; };
@@ -73,6 +73,7 @@
 		DDD748A127477D430056C505 /* TopTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD748A027477D430056C505 /* TopTabBarViewController.swift */; };
 		DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD748A227477DA30056C505 /* MenuItemCollectionViewCell.swift */; };
 		DDD748A52747B1D80056C505 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD748A42747B1D80056C505 /* UIImage+.swift */; };
+		DDE00F09274B8B8900BD2C20 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE00F08274B8B8900BD2C20 /* PushKit.framework */; };
 		DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */; };
 		DDFAF14B27457FCB005A3097 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14A27457FCB005A3097 /* BaseViewController.swift */; };
 		DDFAF14E274583AA005A3097 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14D274583AA005A3097 /* Reusable.swift */; };
@@ -115,7 +116,6 @@
 		C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-medium.otf"; sourceTree = "<group>"; };
 		C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-regular.otf"; sourceTree = "<group>"; };
 		C7F4B8E327497EB0002DD317 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
-		DD70F2F427411E5F0053374B /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		DD02A9752748B7E800D9B324 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		DD02A9792748C09A00D9B324 /* CharacterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterType.swift; sourceTree = "<group>"; };
 		DD02A97B2748CAE900D9B324 /* GoalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRequest.swift; sourceTree = "<group>"; };
@@ -130,6 +130,7 @@
 		DD70F2FC27411EFB0053374B /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		DD70F2FE27411F020053374B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DD70F30027411F0A0053374B /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		DD832D1C274B847300FAB6A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD86CBE52748210100F6EC8D /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		DD86CBE72748216D00F6EC8D /* GoalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAPI.swift; sourceTree = "<group>"; };
 		DD86CBE92748232600F6EC8D /* URLConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConst.swift; sourceTree = "<group>"; };
@@ -150,6 +151,8 @@
 		DDD748A027477D430056C505 /* TopTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabBarViewController.swift; sourceTree = "<group>"; };
 		DDD748A227477DA30056C505 /* MenuItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDD748A42747B1D80056C505 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		DDE00F07274B8B5D00BD2C20 /* Snowman.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snowman.entitlements; sourceTree = "<group>"; };
+		DDE00F08274B8B8900BD2C20 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		DDFAF14A27457FCB005A3097 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DDFAF14D274583AA005A3097 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 				DD70F310274120C10053374B /* Kingfisher in Frameworks */,
 				DD70F31D2741254B0053374B /* Moya in Frameworks */,
 				DD70F316274121570053374B /* PanModal in Frameworks */,
+				DDE00F09274B8B8900BD2C20 /* PushKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +194,7 @@
 		B2A2769D15DD64A9E0F2E2EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DDE00F08274B8B8900BD2C20 /* PushKit.framework */,
 				7CA2FF155FE64827A2BCD39F /* Pods_Snowman.framework */,
 			);
 			name = Frameworks;
@@ -242,6 +247,7 @@
 		C7C9CDF12737625800DC2A09 /* Snowman */ = {
 			isa = PBXGroup;
 			children = (
+				DDE00F07274B8B5D00BD2C20 /* Snowman.entitlements */,
 				DD70F2EE27411C270053374B /* Support */,
 				DD70F2EB27411BF70053374B /* Resource */,
 				DD70F2EA27411BD60053374B /* Source */,
@@ -350,6 +356,7 @@
 		DD70F2ED27411C170053374B /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				DD832D1C274B847300FAB6A2 /* GoogleService-Info.plist */,
 				C7C9CE002737625F00DC2A09 /* Info.plist */,
 			);
 			path = Config;
@@ -533,6 +540,7 @@
 				C7C9CDEC2737625800DC2A09 /* Frameworks */,
 				C7C9CDED2737625800DC2A09 /* Resources */,
 				DD70F31A274121EC0053374B /* ShellScript */,
+				6FE6998687A600991CF0918D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -600,6 +608,7 @@
 				C7C9CDFF2737625F00DC2A09 /* LaunchScreen.storyboard in Resources */,
 				C7C9CDFC2737625F00DC2A09 /* Assets.xcassets in Resources */,
 				C7EDAD25274563EA008C699C /* SpoqaHanSansNeo-regular.otf in Resources */,
+				DD832D1D274B847300FAB6A2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +635,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FE6998687A600991CF0918D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Snowman/Pods-Snowman-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Snowman/Pods-Snowman-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Snowman/Pods-Snowman-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DD70F31A274121EC0053374B /* ShellScript */ = {
@@ -855,6 +881,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Snowman/Snowman.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2N3PMJ78CA;
 				INFOPLIST_FILE = Snowman/Support/Config/Info.plist;
@@ -862,7 +889,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourssu.Snowman;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourssu.snowe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -875,6 +902,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Snowman/Snowman.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2N3PMJ78CA;
 				INFOPLIST_FILE = Snowman/Support/Config/Info.plist;
@@ -882,7 +910,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourssu.Snowman;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourssu.snowe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
