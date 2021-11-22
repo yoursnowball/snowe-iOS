@@ -38,6 +38,10 @@
 		C7EDAD24274563EA008C699C /* SpoqaHanSansNeo-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */; };
 		C7EDAD25274563EA008C699C /* SpoqaHanSansNeo-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */; };
 		C7F4B8E427497EB0002DD317 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4B8E327497EB0002DD317 /* TodoCell.swift */; };
+		C7F65E2E274BC50200D57086 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E2D274BC50200D57086 /* AuthAPI.swift */; };
+		C7F65E31274BC50900D57086 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E30274BC50900D57086 /* AuthService.swift */; };
+		C7F65E34274BCB5400D57086 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E33274BCB5400D57086 /* AuthResponse.swift */; };
+		C7F65E37274BD03600D57086 /* RootViewControllerChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E36274BD03600D57086 /* RootViewControllerChanger.swift */; };
 		DD02A9762748B7E800D9B324 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9752748B7E800D9B324 /* UserDefaultKey.swift */; };
 		DD02A97A2748C09A00D9B324 /* CharacterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A9792748C09A00D9B324 /* CharacterType.swift */; };
 		DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A97B2748CAE900D9B324 /* GoalRequest.swift */; };
@@ -127,6 +131,10 @@
 		C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-medium.otf"; sourceTree = "<group>"; };
 		C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-regular.otf"; sourceTree = "<group>"; };
 		C7F4B8E327497EB0002DD317 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
+		C7F65E2D274BC50200D57086 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
+		C7F65E30274BC50900D57086 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		C7F65E33274BCB5400D57086 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		C7F65E36274BD03600D57086 /* RootViewControllerChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerChanger.swift; sourceTree = "<group>"; };
 		DD02A9752748B7E800D9B324 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		DD02A9792748C09A00D9B324 /* CharacterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterType.swift; sourceTree = "<group>"; };
 		DD02A97B2748CAE900D9B324 /* GoalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalRequest.swift; sourceTree = "<group>"; };
@@ -412,6 +420,7 @@
 				DDD50EEB274681C100EA508F /* NewCharacter */,
 				C75A5914274687980001CDD1 /* Calendar */,
 				C7C9CDF62737625800DC2A09 /* ViewController.swift */,
+				C7F65E36274BD03600D57086 /* RootViewControllerChanger.swift */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -462,6 +471,7 @@
 			children = (
 				DD86CBE72748216D00F6EC8D /* GoalAPI.swift */,
 				DD02A98227495D9E00D9B324 /* AwardAPI.swift */,
+				C7F65E2D274BC50200D57086 /* AuthAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -471,6 +481,7 @@
 			children = (
 				DD86CBEB274824EA00F6EC8D /* GoalService.swift */,
 				DD02A98427495F5700D9B324 /* AwardService.swift */,
+				C7F65E30274BC50900D57086 /* AuthService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -484,6 +495,7 @@
 				DD02A97B2748CAE900D9B324 /* GoalRequest.swift */,
 				DD02A98027495CF000D9B324 /* AwardsResponse.swift */,
 				DD892244274AC72E00316FE0 /* UserResponse.swift */,
+				C7F65E33274BCB5400D57086 /* AuthResponse.swift */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -719,6 +731,7 @@
 				DD894D3527473FF7004AF5A6 /* CharacterCollectionViewCell.swift in Sources */,
 				DDD7489F27477B980056C505 /* AwardTableViewCell.swift in Sources */,
 				DD86CBF52748278E00F6EC8D /* TodoResponse.swift in Sources */,
+				C7F65E2E274BC50200D57086 /* AuthAPI.swift in Sources */,
 				C7DE7FCB274A6CEC00C8DFB4 /* HistoryCell.swift in Sources */,
 				DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */,
 				DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */,
@@ -734,10 +747,12 @@
 				DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */,
 				DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */,
 				DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */,
+				C7F65E34274BCB5400D57086 /* AuthResponse.swift in Sources */,
 				C7C9CDF72737625800DC2A09 /* ViewController.swift in Sources */,
 				C7D38D722748D5440049F3AA /* DateFormatters.swift in Sources */,
 				C768D12827499E04000E0677 /* CalendarView+DataSource.swift in Sources */,
 				C7DE7FDF274A90B400C8DFB4 /* UITextField+.swift in Sources */,
+				C7F65E31274BC50900D57086 /* AuthService.swift in Sources */,
 				C768D12E27499E04000E0677 /* CalendarView+Delegate.swift in Sources */,
 				DD894D2D27473833004AF5A6 /* GoalQuestionViewController.swift in Sources */,
 				DD70F2FD27411EFB0053374B /* Image.swift in Sources */,
@@ -762,6 +777,7 @@
 				DDFAF14E274583AA005A3097 /* Reusable.swift in Sources */,
 				C768D12B27499E04000E0677 /* CalendarView+Style.swift in Sources */,
 				C7D38D782748D8090049F3AA /* Date+.swift in Sources */,
+				C7F65E37274BD03600D57086 /* RootViewControllerChanger.swift in Sources */,
 				C7DE7FD2274A830300C8DFB4 /* SignInViewController.swift in Sources */,
 				C768D12627499E04000E0677 /* EventsManager.swift in Sources */,
 				DDFAF14B27457FCB005A3097 /* BaseViewController.swift in Sources */,
