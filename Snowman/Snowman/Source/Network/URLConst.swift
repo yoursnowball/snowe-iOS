@@ -7,7 +7,7 @@
 
 enum URLConst {
     // MARK: - baseURL
-    static let base = "http://3.36.118.6:8080"
+    static let base = "http://52.79.60.149:8080"
 
     // MARK: - Goal
     static let goals = "/goals"
@@ -18,4 +18,11 @@ enum URLConst {
 
     /// 명예의 전당 랭킹 가져오기
     static let rank = awards + "/rank"
+
+    // MARK: - Auth
+    /// 로그인
+    static let signIn = "/auth/sign-in"
+
+    /// 회원가입
+    static let signUp = "/auth/sign-up"
 }
