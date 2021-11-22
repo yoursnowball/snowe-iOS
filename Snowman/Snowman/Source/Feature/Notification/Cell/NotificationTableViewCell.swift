@@ -28,6 +28,7 @@ final class NotificationTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setSelectedBackgroundView()
         setLayouts()
     }
 
@@ -41,13 +42,18 @@ final class NotificationTableViewCell: UITableViewCell {
         contentLabel.text = nil
         timeLabel.text = nil
     }
+
+    private func setSelectedBackgroundView() {
+        selectedBackgroundView = UIView()
+        selectedBackgroundView?.backgroundColor = .blue.withAlphaComponent(0.1)//TODO:- 컬러변경
+    }
 }
 
 extension NotificationTableViewCell {
-    public func updateData(notificationResponse: NotificationResponse) {
-        titleLabel.text = notificationResponse.title
-        contentLabel.text = notificationResponse.content
-        timeLabel.text = notificationResponse.time
+    public func updateData(response: NotificationResponse) {
+        titleLabel.text = response.title
+        contentLabel.text = response.content
+        timeLabel.text = response.time
     }
 }
 

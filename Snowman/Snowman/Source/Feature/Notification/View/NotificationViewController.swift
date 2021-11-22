@@ -23,16 +23,21 @@ final class NotificationViewController: BaseViewController {
         $0.dataSource = self
         $0.registerReusableCell(NotificationTableViewCell.self)
         $0.rowHeight = UITableView.automaticDimension
+        $0.separatorStyle = .none
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Alert"
         setLayouts()
     }
 
 }
 
 extension NotificationViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
 }
 
@@ -43,7 +48,7 @@ extension NotificationViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: NotificationTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
-        cell.updateData(notificationResponse: data[indexPath.row])
+        cell.updateData(response: data[indexPath.row])
         return cell
     }
 }
