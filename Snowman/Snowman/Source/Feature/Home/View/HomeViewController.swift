@@ -87,10 +87,7 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setPlaceholderView()
-        getHome {
-            self.collectionView.reloadData()
-            self.updateGoal(goal: self.goals.first ?? nil)
-        }
+        reloadView()
     }
 
     override func viewDidLoad() {
@@ -113,15 +110,15 @@ class HomeViewController: BaseViewController {
                 at: .centeredHorizontally,
                 animated: true
             )
-            self.updateGoal(goal: self.goals[0])
+            self.updateGoal(goal: self.goals.first ?? nil)
         }
     }
 }
 
 extension HomeViewController {
     private func updateGoal(goal: GoalResponse?) {
-        dump(goal)
         if let goal = goal {
+            let snowe = Snowe(rawValue: goal.type) ?? .pink
             levelStickerView.isHidden = false
 
             var count = goal.todos.count
@@ -134,7 +131,7 @@ extension HomeViewController {
 
             nameLabel.text = goal.name
             goalLabel.text = goal.objective
-            levelStickerView.type = Snowe(rawValue: goal.type) ?? .pink
+            levelStickerView.type = snowe
             levelStickerView.level = goal.level
 
             if goal.todos.count == 0 {
@@ -142,7 +139,7 @@ extension HomeViewController {
                 bubbleTodoLabel.text = "오늘의 투두를 작성해보세요!"
             } else if count == 0 {
                 countLabel.text = ""
-                bubbleTodoLabel.text = "💙"
+                bubbleTodoLabel.text = snowe.doneText
             } else {
                 countLabel.text = "\(count)"
                 bubbleTodoLabel.text = "개의 투두가 남았어요"
