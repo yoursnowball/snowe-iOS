@@ -53,6 +53,7 @@
 		DD02A98B2749762300D9B324 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98A2749762300D9B324 /* HomeViewController.swift */; };
 		DD02A98E2749766500D9B324 /* SnoweCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98D2749766500D9B324 /* SnoweCollectionViewCell.swift */; };
 		DD02A990274976A700D9B324 /* ZoomAndSnapFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD02A98F274976A700D9B324 /* ZoomAndSnapFlowLayout.swift */; };
+		DD18EDF4274B93F700F4BCC1 /* NotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD18EDF3274B93F700F4BCC1 /* NotificationResponse.swift */; };
 		DD70F2FD27411EFB0053374B /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2FC27411EFB0053374B /* Image.swift */; };
 		DD70F2FF27411F020053374B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F2FE27411F020053374B /* Color.swift */; };
 		DD70F30127411F0A0053374B /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD70F30027411F0A0053374B /* Font.swift */; };
@@ -83,6 +84,8 @@
 		DDD748A127477D430056C505 /* TopTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD748A027477D430056C505 /* TopTabBarViewController.swift */; };
 		DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD748A227477DA30056C505 /* MenuItemCollectionViewCell.swift */; };
 		DDD748A52747B1D80056C505 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD748A42747B1D80056C505 /* UIImage+.swift */; };
+		DDE00F0C274B8F7300BD2C20 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE00F0B274B8F7300BD2C20 /* NotificationViewController.swift */; };
+		DDE00F10274B902300BD2C20 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE00F0F274B902300BD2C20 /* NotificationTableViewCell.swift */; };
 		DDE00F09274B8B8900BD2C20 /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE00F08274B8B8900BD2C20 /* PushKit.framework */; };
 		DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */; };
 		DDFAF14B27457FCB005A3097 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14A27457FCB005A3097 /* BaseViewController.swift */; };
@@ -146,6 +149,7 @@
 		DD02A98A2749762300D9B324 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DD02A98D2749766500D9B324 /* SnoweCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnoweCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD02A98F274976A700D9B324 /* ZoomAndSnapFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAndSnapFlowLayout.swift; sourceTree = "<group>"; };
+		DD18EDF3274B93F700F4BCC1 /* NotificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationResponse.swift; sourceTree = "<group>"; };
 		DD70F2FC27411EFB0053374B /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		DD70F2FE27411F020053374B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DD70F30027411F0A0053374B /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 		DDD748A027477D430056C505 /* TopTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabBarViewController.swift; sourceTree = "<group>"; };
 		DDD748A227477DA30056C505 /* MenuItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDD748A42747B1D80056C505 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		DDE00F0B274B8F7300BD2C20 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		DDE00F0F274B902300BD2C20 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		DDE00F07274B8B5D00BD2C20 /* Snowman.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Snowman.entitlements; sourceTree = "<group>"; };
 		DDE00F08274B8B8900BD2C20 /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
@@ -412,6 +418,7 @@
 		DD70F2EF27411C3D0053374B /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				DDE00F0A274B8F3A00BD2C20 /* Notification */,
 				C7DE7FD0274A82F000C8DFB4 /* Login */,
 				C7DE7FCF274A82D800C8DFB4 /* SignUp */,
 				DD02A988274975EF00D9B324 /* Home */,
@@ -494,6 +501,7 @@
 				DD86CBF42748278E00F6EC8D /* TodoResponse.swift */,
 				DD02A97B2748CAE900D9B324 /* GoalRequest.swift */,
 				DD02A98027495CF000D9B324 /* AwardsResponse.swift */,
+				DD18EDF3274B93F700F4BCC1 /* NotificationResponse.swift */,
 				DD892244274AC72E00316FE0 /* UserResponse.swift */,
 				C7F65E33274BCB5400D57086 /* AuthResponse.swift */,
 			);
@@ -552,6 +560,31 @@
 			children = (
 				DDD7489E27477B980056C505 /* AwardTableViewCell.swift */,
 				DDD748A227477DA30056C505 /* MenuItemCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DDE00F0A274B8F3A00BD2C20 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				DDE00F0D274B8FE900BD2C20 /* View */,
+				DDE00F0E274B8FF300BD2C20 /* Cell */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		DDE00F0D274B8FE900BD2C20 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DDE00F0B274B8F7300BD2C20 /* NotificationViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DDE00F0E274B8FF300BD2C20 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DDE00F0F274B902300BD2C20 /* NotificationTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -742,6 +775,7 @@
 				DD894D2F2747384A004AF5A6 /* NameQuestionViewController.swift in Sources */,
 				DD86CBE62748210100F6EC8D /* BaseTargetType.swift in Sources */,
 				DD02A9762748B7E800D9B324 /* UserDefaultKey.swift in Sources */,
+				DD18EDF4274B93F700F4BCC1 /* NotificationResponse.swift in Sources */,
 				DD02A98127495CF000D9B324 /* AwardsResponse.swift in Sources */,
 				DD02A98E2749766500D9B324 /* SnoweCollectionViewCell.swift in Sources */,
 				DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */,
@@ -781,6 +815,7 @@
 				C7DE7FD2274A830300C8DFB4 /* SignInViewController.swift in Sources */,
 				C768D12627499E04000E0677 /* EventsManager.swift in Sources */,
 				DDFAF14B27457FCB005A3097 /* BaseViewController.swift in Sources */,
+				DDE00F10274B902300BD2C20 /* NotificationTableViewCell.swift in Sources */,
 				C7DE7FC7274A5B6B00C8DFB4 /* HistoryViewController.swift in Sources */,
 				C7DE7FDA274A882300C8DFB4 /* StartSignInViewController.swift in Sources */,
 				C7C9CDF32737625800DC2A09 /* AppDelegate.swift in Sources */,
@@ -793,6 +828,7 @@
 				DDD748A52747B1D80056C505 /* UIImage+.swift in Sources */,
 				DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */,
 				DD86CBEC274824EA00F6EC8D /* GoalService.swift in Sources */,
+				DDE00F0C274B8F7300BD2C20 /* NotificationViewController.swift in Sources */,
 				DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */,
 				DD86CBF3274826FA00F6EC8D /* GoalResponse.swift in Sources */,
 				DD02A98527495F5700D9B324 /* AwardService.swift in Sources */,
