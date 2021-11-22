@@ -62,8 +62,8 @@ class StartSignInViewController: UIViewController {
     func setConstraints() {
         logoImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.height.equalTo(172)
-            make.width.equalTo(41)
+            make.width.equalTo(172)
+            make.height.equalTo(41)
         }
         
         signUpButton.snp.makeConstraints { make in
