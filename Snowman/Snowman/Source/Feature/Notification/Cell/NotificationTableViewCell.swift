@@ -50,10 +50,10 @@ final class NotificationTableViewCell: UITableViewCell {
 }
 
 extension NotificationTableViewCell {
-    public func updateData(response: NotificationResponse) {
+    public func updateData(response: Alarm) {
         titleLabel.text = response.title
-        contentLabel.text = response.content
-        timeLabel.text = response.time
+        contentLabel.text = response.body
+        timeLabel.text = response.alarmAt
     }
 }
 

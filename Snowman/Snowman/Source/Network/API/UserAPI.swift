@@ -10,6 +10,7 @@ import Moya
 
 enum UserAPI {
     case getUsers
+    case getAlarms
     case postPushToken(token: String)
 }
 
@@ -18,6 +19,8 @@ extension UserAPI: BaseTargetType {
         switch self {
         case .getUsers:
             return URLConst.users
+        case .getAlarms:
+            return URLConst.alarms
         case .postPushToken:
             return URLConst.fcm
         }
@@ -25,7 +28,7 @@ extension UserAPI: BaseTargetType {
 
     var method: Moya.Method {
         switch self {
-        case .getUsers:
+        case .getUsers, .getAlarms:
             return .get
         case .postPushToken:
             return .post
@@ -34,7 +37,7 @@ extension UserAPI: BaseTargetType {
 
     var task: Task {
         switch self {
-        case .getUsers:
+        case .getUsers, .getAlarms:
             return .requestPlain
         case .postPushToken(let token):
             return .requestParameters(parameters: [
