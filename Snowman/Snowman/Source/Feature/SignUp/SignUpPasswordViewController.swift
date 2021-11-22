@@ -9,6 +9,10 @@ import SnapKit
 import UIKit
 
 class SignUpPasswordViewController: UIViewController {
+    
+    var nickname: String!
+    var id: String!
+
     var isButtonStatusChange: Bool = false {
         didSet {
             if isButtonStatusChange {
@@ -51,8 +55,6 @@ class SignUpPasswordViewController: UIViewController {
         $0.setTitle("회원가입", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
         $0.setBackgroundColor(UIColor.gray, for: .normal)
         $0.isEnabled = false
     }
@@ -60,11 +62,12 @@ class SignUpPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setNavBar()
+//        setNavBar()
         setIdTextField()
         setPasswordTextField()
         setLayouts()
         registerTarget()
+        registerForKeyboardNotification()
     }
 
     private func registerTarget() {
@@ -77,7 +80,7 @@ class SignUpPasswordViewController: UIViewController {
     private func buttonTapAction(_ sender: UIButton) {
         switch sender {
         case signUpButton:
-//            sendSignUpData()
+            signUp()
         break
         default:
             return
@@ -99,10 +102,6 @@ class SignUpPasswordViewController: UIViewController {
         passwordCheckTextField.becomeFirstResponder()
     }
 
-    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
-        view.endEditing(true)
-    }
-
     private func setNavBar() {
         navigationController?.isNavigationBarHidden = false
         navigationItem.title = "회원가입"
@@ -110,64 +109,49 @@ class SignUpPasswordViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
 
+    func signUp() {
+        guard let nickName = self.nickname else { return }
+        guard let userName = self.id else { return }
+        guard let password = self.passwordTextField.text else { return }
+        guard let passwordCheck = self.passwordCheckTextField.text else { return }
+
+        if userName == password || userName == passwordCheck {
+            showToastMessageAlert(message: "아이디, 비밀번호가 일치합니다. 다르게 입력해주세요.")
+        } else if password != passwordCheck {
+            showToastMessageAlert(message: "비밀번호가 일치하지 않습니다.")
+        } else {
+            postSignUp(nickName: nickName, password: password, userName: userName) { data in
+                UserDefaults.standard.setValue(true, forKey: UserDefaultKey.loginStatus)
+                UserDefaults.standard.setValue(data.token, forKey: UserDefaultKey.token)
+                UserDefaults.standard.synchronize()
+  
+                self.showToastMessageAlert(message: "회원가입 완료!")
+                RootViewControllerChanger.updateRootViewController()
+            }
+        }
+    }
     
-    
-//    func sendSignUpData() {
-//        if let email = idTextField.text,
-//           let password = passwordTextField.text {
-//            let param = [
-//                "email": "\(email + "@soongsil.ac.kr")",
-//                "password": password,
-//            ]
-//
-//            Alamofire.request(URLModel.signInApiUrlString, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil)
-//                .responseJSON { response in
-//                    switch response.result {
-//                    case let .success(value):
-//                        do {
-//                            if let statusCode = response.response?.statusCode {
-//                                let json = SwiftyJSON.JSON(value)
-//                                if statusCode >= 200, statusCode < 300 {
-//                                    guard let accessTokenExpiredIn = json["accessTokenExpiredIn"].int,
-//                                          let refreshTokenExpiredIn = json["refreshTokenExpiredIn"].int
-//                                    else {
-//                                        self.showAlert(title: nil, message: "만료 시간이 잘못 설정됨", isCompleted: true)
-//                                        return
-//                                    }
-//
-//                                    let accessToken = AccessToken(json["accessToken"].stringValue, expiredIn: accessTokenExpiredIn)
-//                                    let refreshToken = RefreshToken(json["refreshToken"].stringValue, expiredIn: refreshTokenExpiredIn)
-//
-//                                    AuthData.accessToken = accessToken
-//                                    AuthData.refreshToken = refreshToken
-//
-//                                    AuthData.userId = email
-//
-//                                    UserDefaults.standard.setValue(email, forKey: UserDefaultKey.userId)
-//
-//                                    self.showAutoSignInAlert(title: "자동 로그인 활성화", message: "자동 로그인을 활성화 하시겠습니까?")
-//                                } else if json["error"].stringValue == "Auth-005" {
-//                                    self.showAlert(title: "로그인에 실패하였습니다.", message: "학교 메일 혹은 비밀번호가\n 일치하지 않습니다.", isCompleted: false)
-//                                } else {
-//                                    self.showAlert(title: nil, message: "\(json["message"].stringValue)", isCompleted: true)
-//                                }
-//                            }
-//                        }
-//                    case let .failure(err):
-//                        self.showAlert(title: nil, message: "네트워크 오류가 발생했습니다.", isCompleted: true)
-//                        print(err.localizedDescription)
-//                    }
-//                }
-//        }
-//    }
-    
-    
-    
+    func postSignUp(nickName: String, password: String, userName: String, completion: @escaping (AuthResponse) -> Void) {
+        NetworkService.shared.auth.postSignUp(nickName: nickName,
+                                              password: password,
+                                              userName: userName) { result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? AuthResponse else { return }
+                completion(data)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("sign up error")
+            }
+        }
+    }
 
     func setIdTextField() {
         passwordTextField.placeholder = "아이디"
         passwordTextField.delegate = self
         passwordTextField.backgroundColor = UIColor.lightGray
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.clipsToBounds = true
         passwordTextField.layer.cornerRadius = 8
         passwordTextField.clearButtonMode = .never
@@ -176,12 +160,14 @@ class SignUpPasswordViewController: UIViewController {
         passwordTextField.layer.borderWidth = 0
         passwordTextField.autocapitalizationType = .none
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        passwordTextField.becomeFirstResponder()
     }
 
     func setPasswordTextField() {
         passwordCheckTextField.placeholder = "비밀번호"
         passwordCheckTextField.delegate = self
         passwordCheckTextField.backgroundColor = UIColor.lightGray
+        passwordCheckTextField.isSecureTextEntry = true
         passwordCheckTextField.isSecureTextEntry = true
         passwordCheckTextField.clipsToBounds = true
         passwordCheckTextField.layer.cornerRadius = 8
@@ -208,6 +194,32 @@ class SignUpPasswordViewController: UIViewController {
             }
         }
     }
+    
+    func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustView), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+
+    @objc private func adjustView(noti: Notification) {
+        guard let userInfo = noti.userInfo else { return }
+        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        let adjustmentHeight = keyboardFrame.height
+
+        signUpButton.snp.updateConstraints { make in
+            make.bottom.equalToSuperview().offset(-adjustmentHeight)
+        }
+    }
+    
+    func showToastMessageAlert(message: String) {
+        let alert = UIAlertController(title: message,
+                                      message: "",
+                                      preferredStyle: .alert)
+
+        present(alert, animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            alert.dismiss(animated: true)
+        }
+    }
 
     func setLayouts() {
         view.addSubviews(passwordLabel,
@@ -215,9 +227,11 @@ class SignUpPasswordViewController: UIViewController {
                          passwordCheckLabel,
                          passwordCheckTextField,
                          signUpButton)
+        
+        let guide = view.safeAreaLayoutGuide
 
         passwordLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(24)
+            $0.top.equalTo(guide).offset(24)
             $0.leading.equalToSuperview().offset(20)
         }
 
@@ -239,9 +253,10 @@ class SignUpPasswordViewController: UIViewController {
         }
 
         signUpButton.snp.makeConstraints {
-            $0.top.equalTo(passwordCheckTextField.snp.bottom).offset(41)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(53)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(56)
         }
     }
 }
