@@ -66,17 +66,20 @@ extension NotificationTableViewCell {
         )
 
         titleLabel.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(56)
+            $0.trailing.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(16)
         }
 
         contentLabel.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(56)
+            $0.trailing.equalToSuperview().inset(20)
             $0.top.equalTo(titleLabel.snp.bottom).offset(2)
         }
 
         timeLabel.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(56)
+            $0.trailing.equalToSuperview().inset(20)
             $0.top.equalTo(contentLabel.snp.bottom).offset(4)
             $0.bottom.equalToSuperview().inset(16)
         }
