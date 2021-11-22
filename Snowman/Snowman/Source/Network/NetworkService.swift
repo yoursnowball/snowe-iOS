@@ -13,4 +13,6 @@ final class NetworkService {
     let goal = GoalService()
 
     let award = AwardService()
+
+    let auth = AuthService()
 }

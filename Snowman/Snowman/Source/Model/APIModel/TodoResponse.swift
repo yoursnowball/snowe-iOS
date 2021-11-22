@@ -10,4 +10,5 @@ struct TodoResponse: Codable {
     let id: Int
     let name: String
     let succeed: Bool
+    let todoDate: String
 }

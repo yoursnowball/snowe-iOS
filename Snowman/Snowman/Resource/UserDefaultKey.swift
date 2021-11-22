@@ -7,4 +7,5 @@
 
 enum UserDefaultKey {
     static let token = "token"
+    static let loginStatus = "loginStatus"
 }

@@ -43,7 +43,6 @@ extension BaseNavigationController {
     private func setNavigationBarAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .white
         appearance.titleTextAttributes = [
             .font: UIFont.spoqa(size: 16, family: .medium),
             .foregroundColor: UIColor.black
