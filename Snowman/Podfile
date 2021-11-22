@@ -7,5 +7,7 @@ target 'Snowman' do
 
   # Pods for Snowman
 	pod 'SwiftLint'
+	pod 'Firebase/Core'
+	pod 'Firebase/Messaging'
  
 end
