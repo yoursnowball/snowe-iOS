@@ -8,5 +8,6 @@
 struct ErrorResponse: Codable {
     let timestamp: String
     let status: Int
-    let error, message, path: String
+    let message: String
+    let path, code, error: String?
 }

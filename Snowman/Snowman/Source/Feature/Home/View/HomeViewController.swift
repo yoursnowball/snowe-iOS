@@ -22,7 +22,7 @@ class HomeViewController: BaseViewController {
                              finishedAt: "",
                              id: 1,
                              name: "배고파",
-                             succeed: true
+                             succeed: true, todoDate: ""
                 )
             ], type: "BLUE"
         ),
@@ -38,7 +38,19 @@ class HomeViewController: BaseViewController {
                              finishedAt: "",
                              id: 1,
                              name: "배고파",
-                             succeed: false
+                             succeed: false, todoDate: ""
+                ),
+                TodoResponse(createdAt: "",
+                             finishedAt: "",
+                             id: 1,
+                             name: "배고파",
+                             succeed: true, todoDate: ""
+                ),
+                TodoResponse(createdAt: "",
+                             finishedAt: "",
+                             id: 1,
+                             name: "배고파",
+                             succeed: false, todoDate: ""
                 )
             ], type: "BLUE"
         ),
