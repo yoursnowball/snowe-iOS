@@ -11,7 +11,7 @@ import UIKit
 class StartSignInViewController: UIViewController {
     
     let logoImageView = UIImageView().then {
-        $0.image = UIImage(named: "signup_ground_logo")
+        $0.image = UIImage(named: "snoweLogo")
     }
 
     let signInButton = UIButton().then {

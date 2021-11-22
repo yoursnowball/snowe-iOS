@@ -54,7 +54,7 @@ extension CharacterCollectionViewCell {
         layer.borderWidth =  isSelected ? 1 : 0
 
         contentView.backgroundColor = isSelected ?
-            .systemBlue.withAlphaComponent(0.3) : .lightGray.withAlphaComponent(0.3)
+            UIColor.systemBlue.withAlphaComponent(0.3) : UIColor.lightGray.withAlphaComponent(0.3)
 
         checkImageView.image = isSelected ?
             UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "circle")

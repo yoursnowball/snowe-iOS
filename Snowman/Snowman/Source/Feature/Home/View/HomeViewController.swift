@@ -247,7 +247,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController {
     private func render() {
-        view.backgroundColor = .systemBlue.withAlphaComponent(0.1)
+        view.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1)
         view.addSubviews(
             collectionView,
             todoBubbleImageView,
