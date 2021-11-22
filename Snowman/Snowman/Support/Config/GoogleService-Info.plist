@@ -3,32 +3,32 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>899694146868-6dr67h7hm72osm6ec7sbnkvcsguqe48b.apps.googleusercontent.com</string>
+	<string>235681016540-uhaev25raq1j7c294nc6rdd0pl5k0mba.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.899694146868-6dr67h7hm72osm6ec7sbnkvcsguqe48b</string>
+	<string>com.googleusercontent.apps.235681016540-uhaev25raq1j7c294nc6rdd0pl5k0mba</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDq3H1m81qzT-UBD1n90sdBuBr_2tZzKfs</string>
+	<string>AIzaSyAxxb4QvHqhFZfV6268dHzvpNU2fahdors</string>
 	<key>GCM_SENDER_ID</key>
-	<string>899694146868</string>
+	<string>235681016540</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.yourssu.snowe</string>
 	<key>PROJECT_ID</key>
-	<string>snowe-4e3c2</string>
+	<string>snowe-ec707</string>
 	<key>STORAGE_BUCKET</key>
-	<string>snowe-4e3c2.appspot.com</string>
+	<string>snowe-ec707.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:899694146868:ios:965c340ce9a28b242ee161</string>
+	<string>1:235681016540:ios:14f29dd66b0dbc5fdba219</string>
 </dict>
 </plist>
