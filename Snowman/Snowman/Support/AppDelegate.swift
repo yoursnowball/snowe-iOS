@@ -37,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
 }
 
 extension AppDelegate : MessagingDelegate {
@@ -47,6 +50,7 @@ extension AppDelegate : MessagingDelegate {
         print("Firebase registration token: \(fcmTokenString)")
         UserDefaults.standard.set(fcmTokenString, forKey: UserDefaultKey.fcmToken)
     }
+
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingDelegate) {
         print("Received data message: \(remoteMessage.description)")
     }
