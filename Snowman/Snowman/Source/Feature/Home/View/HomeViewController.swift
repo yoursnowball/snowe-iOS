@@ -108,7 +108,7 @@ class HomeViewController: BaseViewController {
             self.collectionView.scrollToItem(
                 at: IndexPath(item: 0, section: 0),
                 at: .centeredHorizontally,
-                animated: true
+                animated: false
             )
             self.updateGoal(goal: self.goals.first ?? nil)
         }

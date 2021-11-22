@@ -30,6 +30,9 @@ enum URLConst {
     /// 내 정보 가져오기 - 홈
     static let users = "/users"
 
+    /// 알람 목록
+    static let alarms = users + "/alarms"
+
     /// fcm Token
     static let fcm = users + "/token"
 }
