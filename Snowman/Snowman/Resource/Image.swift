@@ -17,4 +17,10 @@ enum Image {
     static let greenCard = UIImage(named: "180_green_card_character")!
     static let orangeCard = UIImage(named: "180_orange_card_character")!
     static let pinkCard = UIImage(named: "180_pink_card_character")!
+    static let snoweLogo = UIImage(named: "snoweLogo")!
+
+    /// navi
+    static let hamburger = UIImage(named: "hamburger")!
+    static let notification = UIImage(named: "notification_outline")!
+    static let heart = UIImage(named: "heart_outline")!
 }

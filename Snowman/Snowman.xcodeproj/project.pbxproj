@@ -92,6 +92,7 @@
 		DDF283C5274C04E800C426D7 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF283C4274C04E800C426D7 /* UserAPI.swift */; };
 		DDF283C7274C064A00C426D7 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF283C6274C064A00C426D7 /* UserService.swift */; };
 		DDF283C9274C0FE100C426D7 /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF283C8274C0FE100C426D7 /* Notification.Name+.swift */; };
+		DDF283CE274C346600C426D7 /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF283CD274C346600C426D7 /* HomeNavigationViewController.swift */; };
 		DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */; };
 		DDFAF14B27457FCB005A3097 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14A27457FCB005A3097 /* BaseViewController.swift */; };
 		DDFAF14E274583AA005A3097 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFAF14D274583AA005A3097 /* Reusable.swift */; };
@@ -187,6 +188,7 @@
 		DDF283C4274C04E800C426D7 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		DDF283C6274C064A00C426D7 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		DDF283C8274C0FE100C426D7 /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
+		DDF283CD274C346600C426D7 /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationViewController.swift; sourceTree = "<group>"; };
 		DDFAF14827457FA4005A3097 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		DDFAF14A27457FCB005A3097 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DDFAF14D274583AA005A3097 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				DD02A98A2749762300D9B324 /* HomeViewController.swift */,
+				DDF283CD274C346600C426D7 /* HomeNavigationViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -458,7 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				DDFAF14C27457FCF005A3097 /* Base */,
-				DD02A98627496ABF00D9B324 /* LevelStickerView.swift */,
+				DDF283CA274C30D800C426D7 /* View */,
 				C75A5900274687650001CDD1 /* CalendarView */,
 			);
 			path = Component;
@@ -598,6 +601,14 @@
 				DDE00F0F274B902300BD2C20 /* NotificationTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DDF283CA274C30D800C426D7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD02A98627496ABF00D9B324 /* LevelStickerView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		DDFAF14C27457FCF005A3097 /* Base */ = {
@@ -821,6 +832,7 @@
 				DDD748A127477D430056C505 /* TopTabBarViewController.swift in Sources */,
 				DDFAF15627458457005A3097 /* UIButton+.swift in Sources */,
 				DD02A990274976A700D9B324 /* ZoomAndSnapFlowLayout.swift in Sources */,
+				DDF283CE274C346600C426D7 /* HomeNavigationViewController.swift in Sources */,
 				DD86CBF72748284D00F6EC8D /* NetworkService.swift in Sources */,
 				DDFAF14E274583AA005A3097 /* Reusable.swift in Sources */,
 				C768D12B27499E04000E0677 /* CalendarView+Style.swift in Sources */,
