@@ -103,6 +103,10 @@ enum Color {
     static var pinbg_green: UIColor {
         return UIColor(hex: "#AEF2D3")
     }
+
+    static var text_Gold: UIColor {
+        return UIColor(hex: "#E2AE28")
+    }
 }
 
 fileprivate extension UIColor {

@@ -46,7 +46,7 @@ extension AwardTableViewCell {
         nameText: String,
         level: Int
     ) {
-        cardView.backgroundColor = type.color.withAlphaComponent(0.1)
+        cardView.backgroundColor = type.todoColor.withAlphaComponent(0.2)
         goalLabel.text = goalText
         nameLabel.text = nameText
         characterImageView.image = type.getImage(level: level)

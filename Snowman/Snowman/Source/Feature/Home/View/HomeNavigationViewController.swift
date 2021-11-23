@@ -8,14 +8,14 @@
 import UIKit
 
 final class HomeNavigationViewController: BaseNavigationController {
-
-    private let imageView = UIImageView(
-        image: Image.snoweLogo
-            .resized(to: CGSize(width: 100, height: 24))
-    )
-
     // MARK: - Properties
     private lazy var logoItem = UIBarButtonItem().then {
+        let imageView = UIImageView(
+            image: Image.snoweLogo
+                .resized(to: CGSize(width: 100, height: 24))
+        )
+        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = Color.text_Primary
         $0.customView = imageView
     }
 
@@ -35,9 +35,6 @@ final class HomeNavigationViewController: BaseNavigationController {
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         initNavigationItem(navigationItem: rootViewController.navigationItem)
-
-        guard let homeViewController = rootViewController as? HomeViewController else { return }
-        homeViewController.delegate = self
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -74,14 +71,6 @@ final class HomeNavigationViewController: BaseNavigationController {
         default:
             break
         }
-    }
-
-}
-
-extension HomeNavigationViewController: HomeViewControllerDelegate {
-    func changeLogoColor(_ homeViewController: HomeViewController, type: Snowe) {
-        imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = type.color.withAlphaComponent(0.5)
     }
 
 }

@@ -10,14 +10,14 @@ import UIKit
 final class RankCollectionViewCell: UICollectionViewCell {
 
     private let topBackgroundView = UIView().then {
-        $0.backgroundColor = UIColor.white.withAlphaComponent(0.7)  //TODO:- 컬러 교체
+        $0.backgroundColor = Color.bg_blue
         $0.makeRound(13)
     }
 
     private let rankLabel = UILabel().then {
         $0.font = .poppins(size: 24)
         $0.textAlignment = .center
-        $0.textColor = .lightText // TODO:- 컬러교체
+        $0.textColor = Color.text_Teritary
     }
 
     private let rankImageView = UIImageView().then {
@@ -34,17 +34,17 @@ final class RankCollectionViewCell: UICollectionViewCell {
 
     private let userNameLabel = UILabel().then {
         $0.font = .spoqa(size: 8, family: .regular)
-        $0.textColor = .lightGray // TODO:- 컬러교체
+        $0.textColor = Color.text_Secondary
     }
 
     private let snoweNameLabel = UILabel().then {
         $0.font = .spoqa(size: 14, family: .medium)
-        $0.textColor = .black // TODO:- 컬러교체
+        $0.textColor = Color.text_Primary
     }
 
     private let goalLabel = UILabel().then {
         $0.font = .spoqa(size: 11, family: .regular)
-        $0.textColor = .black // TODO:- 컬러교체
+        $0.textColor = Color.text_Primary
     }
 
     private let levelStickerView = LevelStickerView()
@@ -57,13 +57,13 @@ final class RankCollectionViewCell: UICollectionViewCell {
 
     private let todoCountLabel = UILabel().then {
         $0.font = .spoqa(size: 14, family: .bold)
-        $0.textColor = .systemBlue // TODO:- 컬러교체
+        $0.textColor = Color.line_blue
     }
 
     private let rightLabel = UILabel().then {
         $0.text = "개"
         $0.font = .spoqa(size: 14, family: .regular)
-        $0.textColor = .black // TODO:- 컬러교체
+        $0.textColor = Color.text_Primary
     }
 
     override init(frame: CGRect) {
@@ -95,12 +95,12 @@ extension RankCollectionViewCell {
         levelStickerView.type = Snowe(rawValue: rankUserInfo.type) ?? .pink
         todoCountLabel.text = "\(rankUserInfo.succeedTodoCount)"
 
-        if rank > 0 && rank < 3 {
+        if rank > 0 && rank <= 3 {
             rankImageView.isHidden = false
-            rankLabel.textColor = .yellow
+            rankLabel.textColor = Color.text_Gold
         } else {
             rankImageView.isHidden = true
-            rankLabel.textColor = .lightText
+            rankLabel.textColor = Color.text_Secondary
         }
 
         rankLabel.text = "\(rank)"
@@ -110,7 +110,7 @@ extension RankCollectionViewCell {
 
 extension RankCollectionViewCell {
     private func render() {
-        backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)   //TODO:- 컬러 교체
+        backgroundColor = Color.line_blue.withAlphaComponent(0.43)
         contentView.addSubviews(
             topBackgroundView,
             rankImageView,

@@ -7,13 +7,7 @@
 
 import UIKit
 
-protocol HomeViewControllerDelegate: AnyObject{
-    func changeLogoColor(_ homeViewController: HomeViewController, type: Snowe)
-}
-
-class HomeViewController: BaseViewController {
-
-    weak var delegate: HomeViewControllerDelegate?
+final class HomeViewController: BaseViewController {
 
     private var userResponse: UserResponse? {
         didSet {
@@ -57,13 +51,12 @@ class HomeViewController: BaseViewController {
 
     private let countLabel = UILabel().then {
         $0.font = .spoqa(size: 18, family: .bold)
-        $0.textColor = .systemBlue // TODO:- 색상교체
         $0.sizeToFit()
     }
 
     private let bubbleTodoLabel = UILabel().then {
         $0.font = .spoqa(size: 16, family: .regular)
-        $0.textColor = .lightGray // TODO:- 색상교체
+        $0.textColor = Color.text_Secondary
         $0.sizeToFit()
     }
 
@@ -80,13 +73,13 @@ class HomeViewController: BaseViewController {
 
     private let nameLabel = UILabel().then {
         $0.font = .spoqa(size: 24, family: .bold)
-        $0.textColor = .black // TODO:- 색상교체
+        $0.textColor = Color.text_Primary
         $0.sizeToFit()
     }
 
     private let goalLabel = UILabel().then {
         $0.font = .spoqa(size: 16, family: .regular)
-        $0.textColor = .lightGray // TODO:- 색상교체
+        $0.textColor = Color.text_Secondary
         $0.sizeToFit()
     }
 
@@ -127,9 +120,8 @@ extension HomeViewController {
 
             let snowe = Snowe(rawValue: goal.type) ?? .pink
 
-            delegate?.changeLogoColor(self, type: snowe)
-
-            view.backgroundColor = snowe.color.withAlphaComponent(0.1)
+            view.backgroundColor = snowe.bgColor
+            countLabel.textColor = snowe.lineColor
 
             levelStickerView.isHidden = false
 

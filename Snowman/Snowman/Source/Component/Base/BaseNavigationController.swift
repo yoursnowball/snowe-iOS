@@ -45,7 +45,7 @@ extension BaseNavigationController {
         appearance.configureWithTransparentBackground()
         appearance.titleTextAttributes = [
             .font: UIFont.spoqa(size: 16, family: .medium),
-            .foregroundColor: UIColor.black
+            .foregroundColor: Color.text_Primary
         ]
 
         appearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
@@ -54,7 +54,6 @@ extension BaseNavigationController {
         navigationBar.standardAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
         navigationBar.compactAppearance = appearance
-        //TODO:- tintColor 교체
-        navigationBar.tintColor = .darkGray
+        navigationBar.tintColor = Color.text_Primary
     }
 }

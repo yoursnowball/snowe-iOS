@@ -25,6 +25,7 @@ final class LevelStickerView: UIView {
 
     private let label = UILabel().then {
         $0.font = .spoqa(size: 11, family: .medium)
+        $0.textAlignment = .center
     }
 
     override init(frame: CGRect) {
@@ -53,8 +54,8 @@ extension LevelStickerView {
     }
 
     private func color() {
-        label.textColor = type.color
-        layer.borderColor = type.color.cgColor
-        backgroundColor = type.color.withAlphaComponent(0.1)
+        label.textColor = type.lineColor
+        layer.borderColor = type.lineColor.cgColor
+        backgroundColor = type.pinBgColor
     }
 }
