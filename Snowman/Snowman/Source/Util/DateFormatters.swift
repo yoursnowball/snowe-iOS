@@ -32,13 +32,13 @@ struct DateFormatters {
         dateFormatter.dateFormat = "LLLL"
         return dateFormatter
     }()
-  
+
     static var yearFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "y"
         return dateFormatter
     }()
-    
+
     static var numberMonthFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM"

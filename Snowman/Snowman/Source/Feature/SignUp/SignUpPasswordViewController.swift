@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 class SignUpPasswordViewController: UIViewController {
-    
+
     var nickname: String!
     var id: String!
 
@@ -81,7 +81,6 @@ class SignUpPasswordViewController: UIViewController {
         switch sender {
         case signUpButton:
             signUp()
-        break
         default:
             return
         }
@@ -124,14 +123,19 @@ class SignUpPasswordViewController: UIViewController {
                 UserDefaults.standard.setValue(true, forKey: UserDefaultKey.loginStatus)
                 UserDefaults.standard.setValue(data.token, forKey: UserDefaultKey.token)
                 UserDefaults.standard.synchronize()
-  
+
                 self.showToastMessageAlert(message: "회원가입 완료!")
                 RootViewControllerChanger.updateRootViewController()
             }
         }
     }
-    
-    func postSignUp(nickName: String, password: String, userName: String, completion: @escaping (AuthResponse) -> Void) {
+
+    func postSignUp(
+        nickName: String,
+        password: String,
+        userName: String,
+        completion: @escaping (AuthResponse) -> Void
+    ) {
         NetworkService.shared.auth.postSignUp(nickName: nickName,
                                               password: password,
                                               userName: userName) { result in
@@ -194,21 +198,28 @@ class SignUpPasswordViewController: UIViewController {
             }
         }
     }
-    
+
     func registerForKeyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustView), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(adjustView),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
     }
 
     @objc private func adjustView(noti: Notification) {
         guard let userInfo = noti.userInfo else { return }
-        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let keyboardFrame = (
+            userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+        )?.cgRectValue else { return }
         let adjustmentHeight = keyboardFrame.height
 
         signUpButton.snp.updateConstraints { make in
             make.bottom.equalToSuperview().offset(-adjustmentHeight)
         }
     }
-    
+
     func showToastMessageAlert(message: String) {
         let alert = UIAlertController(title: message,
                                       message: "",
@@ -227,7 +238,7 @@ class SignUpPasswordViewController: UIViewController {
                          passwordCheckLabel,
                          passwordCheckTextField,
                          signUpButton)
-        
+
         let guide = view.safeAreaLayoutGuide
 
         passwordLabel.snp.makeConstraints {

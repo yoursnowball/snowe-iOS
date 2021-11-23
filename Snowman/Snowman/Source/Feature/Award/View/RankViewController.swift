@@ -77,7 +77,7 @@ extension RankViewController: UICollectionViewDelegate {
         willDisplay cell: UICollectionViewCell,
         forItemAt indexPath: IndexPath
     ) {
-         if (indexPath.row == rankInfos.count - 1 ) {
+         if indexPath.row == rankInfos.count - 1 {
              getRank(page: nextPage)
          }
     }

@@ -9,7 +9,7 @@ import SnapKit
 import UIKit
 
 class StartSignInViewController: UIViewController {
-    
+
     let logoImageView = UIImageView().then {
         $0.image = UIImage(named: "snoweLogo")
     }
@@ -44,13 +44,13 @@ class StartSignInViewController: UIViewController {
     }
 
     @objc private func signInTap() {
-        let vc = SignInViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let viewController = SignInViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 
     @objc private func signUpTap() {
-        let vc = SignUpNameIdViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let viewController = SignUpNameIdViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 
     func setStructure() {
@@ -65,7 +65,7 @@ class StartSignInViewController: UIViewController {
             make.width.equalTo(172)
             make.height.equalTo(41)
         }
-        
+
         signUpButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview().offset(-34)
@@ -79,4 +79,3 @@ class StartSignInViewController: UIViewController {
         }
     }
 }
-

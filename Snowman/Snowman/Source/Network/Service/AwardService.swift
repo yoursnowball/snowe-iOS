@@ -72,7 +72,6 @@ final class AwardService {
         }
     }
 
-
     private func isValidData(data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
 

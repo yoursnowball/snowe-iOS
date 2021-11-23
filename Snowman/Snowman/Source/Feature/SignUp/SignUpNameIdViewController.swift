@@ -110,11 +110,11 @@ class SignUpNameIdViewController: UIViewController {
     }
 
     func goToNextVC() {
-        let vc = SignUpPasswordViewController()
-        vc.nickname = nicknameTextField.text
-        vc.id = idTextField.text
+        let viewController = SignUpPasswordViewController()
+        viewController.nickname = nicknameTextField.text
+        viewController.id = idTextField.text
 
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 
     func setNameTextField() {
@@ -161,12 +161,20 @@ class SignUpNameIdViewController: UIViewController {
     }
 
     func registerForKeyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustView), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(adjustView),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
     }
 
     @objc private func adjustView(noti: Notification) {
         guard let userInfo = noti.userInfo else { return }
-        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let keyboardFrame = (
+            userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+        )?.cgRectValue else { return }
+
         let adjustmentHeight = keyboardFrame.height
 
         nextButton.snp.updateConstraints { make in
