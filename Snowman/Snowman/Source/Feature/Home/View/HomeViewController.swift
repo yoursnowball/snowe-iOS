@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol HomeViewControllerDelegate: AnyObject{
+    func changeLogoColor(_ homeViewController: HomeViewController, type: Snowe)
+}
+
 class HomeViewController: BaseViewController {
+
+    weak var delegate: HomeViewControllerDelegate?
 
     private var userResponse: UserResponse? {
         didSet {
@@ -118,7 +124,10 @@ class HomeViewController: BaseViewController {
 extension HomeViewController {
     private func updateGoal(goal: GoalResponse?) {
         if let goal = goal {
+
             let snowe = Snowe(rawValue: goal.type) ?? .pink
+
+            delegate?.changeLogoColor(self, type: snowe)
 
             view.backgroundColor = snowe.color.withAlphaComponent(0.1)
 
