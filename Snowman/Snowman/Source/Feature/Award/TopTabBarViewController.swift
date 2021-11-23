@@ -46,6 +46,8 @@ class TopTabBarViewController: BaseViewController {
 
     private let contentView = UIView()
 
+    private let generator = UIImpactFeedbackGenerator(style: .light)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationTitle()
@@ -122,6 +124,8 @@ extension TopTabBarViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
+        generator.impactOccurred()
+
         let newOffset = CGPoint(x: Int(UIScreen.main.bounds.width) * indexPath.row, y: 0)
         mainScrollView.setContentOffset(newOffset, animated: true)
 
@@ -153,6 +157,14 @@ extension TopTabBarViewController: UIScrollViewDelegate {
                 cell.isSelected = index == roundedIndex
             }
         }
+    }
+
+    func scrollViewWillEndDragging(
+        _ scrollView: UIScrollView,
+        withVelocity velocity: CGPoint,
+        targetContentOffset: UnsafeMutablePointer<CGPoint>
+    ) {
+        generator.impactOccurred()
     }
 }
 

@@ -100,7 +100,7 @@ final class HomeViewController: BaseViewController {
         $0.adjustsImageWhenHighlighted = false
     }
 
-    private let generator = UIImpactFeedbackGenerator(style: .medium)
+    private let generator = UIImpactFeedbackGenerator(style: .light)
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -170,10 +170,9 @@ extension HomeViewController {
                 bubbleTodoLabel.text = "개의 투두가 남았어요"
             }
         } else {
-            levelStickerView.isHidden = true
+            setPlaceholderView()
             nameLabel.text = "눈덩이를 생성하세요!"
             goalLabel.text = "원하는 목표를 달성할 수 있도록 도와줄게요."
-            hideBubble(isHidden: true)
         }
     }
 
@@ -240,6 +239,8 @@ extension HomeViewController: UIScrollViewDelegate {
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if goals[indexPath.item] == nil {
+            generator.impactOccurred()
+
             let nvc = BaseNavigationController(rootViewController: GoalQuestionViewController())
             nvc.modalPresentationStyle = .fullScreen
             present(nvc, animated: true, completion: nil)
