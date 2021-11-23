@@ -7,7 +7,8 @@
 
 import UIKit
 
-class LevelStickerView: UIView {
+/// level sticker 높이는 무조건 16
+final class LevelStickerView: UIView {
 
     public var type: Snowe = .orange {
         didSet {

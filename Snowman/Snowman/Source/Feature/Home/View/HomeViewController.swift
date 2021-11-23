@@ -119,6 +119,9 @@ extension HomeViewController {
     private func updateGoal(goal: GoalResponse?) {
         if let goal = goal {
             let snowe = Snowe(rawValue: goal.type) ?? .pink
+
+            view.backgroundColor = snowe.color.withAlphaComponent(0.1)
+
             levelStickerView.isHidden = false
 
             var count = goal.todos.count

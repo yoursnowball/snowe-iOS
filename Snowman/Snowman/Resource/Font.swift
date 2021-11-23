@@ -16,7 +16,7 @@ extension UIFont {
     static func spoqa(size: CGFloat, family: Family) -> UIFont {
         return UIFont(name: "SpoqaHanSansNeo-\(family)", size: size)!
     }
-    
+
     static func poppins(size: CGFloat = 10) -> UIFont {
         return UIFont(name: "Poppins-Black", size: size)!
     }
