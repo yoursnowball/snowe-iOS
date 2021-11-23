@@ -23,4 +23,6 @@ enum Image {
     static let hamburger = UIImage(named: "hamburger")!
     static let notification = UIImage(named: "notification_outline")!
     static let heart = UIImage(named: "heart_outline")!
+
+    static let rankAward = UIImage(named: "rankAward")!
 }
