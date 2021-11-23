@@ -7,12 +7,26 @@
 
 import UIKit
 
-class RankViewController: BaseNavigationController {
+final class RankViewController: BaseViewController {
 
-    private var ranks: RankResponse?
-    private var rankInfos: [RankUserInfo] = [
-        RankUserInfo(awardAt: "", createdAt: "", id: 1, level: 10, name: "스노위하위", objective: "밥좀먹자", succeedTodoCount: 1000, totalTodoCount: 10000, type: "PINK", userName: "뮨서")
-    ]
+    private var ranks: RankResponse? {
+        didSet {
+            guard let ranks = ranks else {
+                return
+            }
+            nextPage = ranks.currentPage + 1
+            isLast = ranks.isLast
+        }
+    }
+
+    private var rankInfos: [RankUserInfo] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+
+    var nextPage: Int = 0
+    var isLast: Bool = false
 
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -26,6 +40,11 @@ class RankViewController: BaseNavigationController {
         return collectionView
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getRank(page: nextPage)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
@@ -34,17 +53,34 @@ class RankViewController: BaseNavigationController {
 }
 
 extension RankViewController {
-    private func render() {
-        view.addSubviews(collectionView)
-        collectionView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalToSuperview()
+    private func getRank(page: Int) {
+        if !isLast {
+            NetworkService.shared.award.getRank(page: page) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    guard let data = response as? RankResponse else { return }
+                    self?.ranks = data
+                    self?.rankInfos.append(contentsOf: data.content)
+                case .requestErr(let errorResponse):
+                    dump(errorResponse)
+                default:
+                    print("error")
+                }
+            }
         }
     }
 }
 
 extension RankViewController: UICollectionViewDelegate {
-
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+         if (indexPath.row == rankInfos.count - 1 ) {
+             getRank(page: nextPage)
+         }
+    }
 }
 
 extension RankViewController: UICollectionViewDataSource {
@@ -100,5 +136,15 @@ extension RankViewController: UICollectionViewDelegateFlowLayout {
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
         return 14
+    }
+}
+
+extension RankViewController {
+    private func render() {
+        view.addSubviews(collectionView)
+        collectionView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
+        }
     }
 }
