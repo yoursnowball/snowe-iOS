@@ -21,12 +21,12 @@ class BaseNavigationController: UINavigationController {
     }
 
     private var backButtonImage: UIImage? {
-        return UIImage(systemName: "chevron.backward")?
-            .resized(to: CGSize(width: 13, height: 21))
+        return Image.chevronLeft
+            .resized(to: CGSize(width: 24, height: 24))
             .withAlignmentRectInsets(
                 UIEdgeInsets(
                     top: 0.0,
-                    left: -10.0,
+                    left: -12.0,
                     bottom: 0.0,
                     right: 0.0
                 )
@@ -54,6 +54,6 @@ extension BaseNavigationController {
         navigationBar.standardAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
         navigationBar.compactAppearance = appearance
-        navigationBar.tintColor = Color.text_Primary
+        navigationBar.tintColor = Color.text_Teritary
     }
 }

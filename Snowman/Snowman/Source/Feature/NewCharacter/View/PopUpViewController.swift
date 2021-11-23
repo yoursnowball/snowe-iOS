@@ -43,7 +43,7 @@ final class PopUpViewController: UIViewController {
     private lazy var okButton = UIButton().then {
         $0.setTitle("확인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.setBackgroundColor(.systemBlue, for: .normal)
+        $0.setBackgroundColor(Color.button_blue, for: .normal)
         $0.titleLabel?.font = .spoqa(size: 18, family: .bold)
 
         $0.makeRound()

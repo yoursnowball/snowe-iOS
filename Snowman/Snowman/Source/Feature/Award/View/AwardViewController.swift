@@ -119,7 +119,7 @@ extension AwardViewController {
 
         headerView.addSubviews(headerTitleLabel)
         headerView.snp.makeConstraints {
-            $0.height.equalTo(77)
+            $0.height.equalTo(72)
         }
         headerTitleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)

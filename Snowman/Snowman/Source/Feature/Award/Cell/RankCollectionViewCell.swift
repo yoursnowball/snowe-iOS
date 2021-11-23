@@ -33,17 +33,17 @@ final class RankCollectionViewCell: UICollectionViewCell {
     }
 
     private let userNameLabel = UILabel().then {
-        $0.font = .spoqa(size: 8, family: .regular)
+        $0.font = .spoqa(size: 10, family: .regular)
         $0.textColor = Color.text_Secondary
     }
 
     private let snoweNameLabel = UILabel().then {
-        $0.font = .spoqa(size: 14, family: .medium)
+        $0.font = .spoqa(size: 16, family: .medium)
         $0.textColor = Color.text_Primary
     }
 
     private let goalLabel = UILabel().then {
-        $0.font = .spoqa(size: 11, family: .regular)
+        $0.font = .spoqa(size: 13, family: .regular)
         $0.textColor = Color.text_Primary
     }
 
@@ -56,13 +56,13 @@ final class RankCollectionViewCell: UICollectionViewCell {
     }
 
     private let todoCountLabel = UILabel().then {
-        $0.font = .spoqa(size: 14, family: .bold)
+        $0.font = .spoqa(size: 16, family: .bold)
         $0.textColor = Color.line_blue
     }
 
     private let rightLabel = UILabel().then {
         $0.text = "개"
-        $0.font = .spoqa(size: 14, family: .regular)
+        $0.font = .spoqa(size: 16, family: .regular)
         $0.textColor = Color.text_Primary
     }
 
@@ -110,7 +110,7 @@ extension RankCollectionViewCell {
 
 extension RankCollectionViewCell {
     private func render() {
-        backgroundColor = Color.line_blue.withAlphaComponent(0.43)
+        backgroundColor = Color.line_blue.withAlphaComponent(0.2)
         contentView.addSubviews(
             topBackgroundView,
             rankImageView,

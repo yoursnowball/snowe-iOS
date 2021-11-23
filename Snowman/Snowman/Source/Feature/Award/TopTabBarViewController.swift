@@ -41,7 +41,7 @@ class TopTabBarViewController: BaseViewController {
     }
 
     private let indicator = UIView().then {
-        $0.backgroundColor = .systemBlue
+        $0.backgroundColor = Color.button_blue
     }
 
     private let contentView = UIView()

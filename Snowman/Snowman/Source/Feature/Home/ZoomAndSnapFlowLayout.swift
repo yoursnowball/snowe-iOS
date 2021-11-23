@@ -8,7 +8,7 @@ import UIKit
 
 public class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
 
-    public private(set) var activeDistance: CGFloat = 400
+    public private(set) var activeDistance: CGFloat = 600
     public private(set) var zoomFactor: CGFloat = 1.2
 
     override init() {

@@ -72,7 +72,7 @@ extension AwardTableViewCell {
         }
 
         goalLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(48)
+            $0.top.equalToSuperview().inset(41)
             $0.leading.equalToSuperview().inset(20)
         }
 

@@ -37,7 +37,7 @@ class QuestionBaseViewController: BaseViewController {
                 attributes: [
                     .kern: -0.32,
                     .font: UIFont.spoqa(size: 16, family: .regular),
-                    .foregroundColor: UIColor.lightGray
+                    .foregroundColor: Color.text_Teritary
                 ]
             )
         }
@@ -59,12 +59,12 @@ class QuestionBaseViewController: BaseViewController {
 
     private let descriptionLabel = UILabel().then {
         $0.font = .spoqa(size: 12, family: .regular)
-        $0.textColor = .systemBlue
+        $0.textColor = Color.button_blue
     }
 
     private lazy var textField = UITextField().then {
         $0.font = .spoqa(size: 16, family: .regular)
-        $0.textColor = .black
+        $0.textColor = Color.text_Primary
         $0.clearButtonMode = .whileEditing
         $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
@@ -133,8 +133,9 @@ extension QuestionBaseViewController {
     @objc
     private func showKeyboard(notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
-        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?
-                .cgRectValue
+        guard let keyboardFrame = (
+            userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+        )?.cgRectValue
         else { return }
 
         nextButton.snp.updateConstraints {
@@ -147,7 +148,7 @@ extension QuestionBaseViewController {
         let textCount = textField.text?.count ?? 0
         nextButton.isEnabled = textCount > 0 && textCount < textFieldTextCount
         bottomLineView.backgroundColor = nextButton.isEnabled ?
-            .systemBlue : .lightGray
+            Color.button_blue : Color.text_Teritary
         textField.returnKeyType = nextButton.isEnabled ?
             .done : .default
         textField.reloadInputViews()

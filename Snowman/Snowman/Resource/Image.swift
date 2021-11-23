@@ -8,7 +8,6 @@
 import UIKit.UIImage
 
 enum Image {
-    static let sampleSnowe = UIImage(named: "sampleSnowe")!
     static let bigMakecharacterCard = UIImage(named: "big_makecharacter_card")!
     static let todoCountBubble = UIImage(named: "todo_count_bubble")!
     static let checkBold = UIImage(named: "check_bold")!
@@ -23,6 +22,11 @@ enum Image {
     static let hamburger = UIImage(named: "hamburger")!
     static let notification = UIImage(named: "notification_outline")!
     static let heart = UIImage(named: "heart_outline")!
+    static let chevronLeft = UIImage(named: "chevron_big_left")!
 
     static let rankAward = UIImage(named: "rankAward")!
+
+    /// chevron
+    static let chevronLeftBold = UIImage(named: "24_left")!
+    static let chevronRightBold = UIImage(named: "24_right")!
 }

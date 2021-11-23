@@ -83,6 +83,25 @@ final class HomeViewController: BaseViewController {
         $0.sizeToFit()
     }
 
+    private let leftChervonButton = UIButton().then {
+        $0.setImage(
+            Image.chevronLeftBold
+                .withRenderingMode(.alwaysTemplate),
+            for: .normal
+        )
+        $0.adjustsImageWhenHighlighted = false
+    }
+    private let rightChervonButton = UIButton().then {
+        $0.setImage(
+            Image.chevronRightBold
+                .withRenderingMode(.alwaysTemplate),
+            for: .normal
+        )
+        $0.adjustsImageWhenHighlighted = false
+    }
+
+    private let generator = UIImpactFeedbackGenerator(style: .medium)
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setPlaceholderView()
@@ -122,6 +141,8 @@ extension HomeViewController {
 
             view.backgroundColor = snowe.bgColor
             countLabel.textColor = snowe.lineColor
+            leftChervonButton.tintColor = snowe.todoColor
+            rightChervonButton.tintColor = snowe.todoColor
 
             levelStickerView.isHidden = false
 
@@ -161,6 +182,9 @@ extension HomeViewController {
         goalLabel.text = ""
         levelStickerView.isHidden = true
         hideBubble(isHidden: true)
+        view.backgroundColor = Color.bg_blue
+        leftChervonButton.tintColor = Color.todo_blue
+        rightChervonButton.tintColor = Color.todo_blue
     }
 
     private func hideBubble(isHidden: Bool) {
@@ -202,6 +226,14 @@ extension HomeViewController: UIScrollViewDelegate {
                 }
             }
         }
+    }
+
+    func scrollViewWillEndDragging(
+        _ scrollView: UIScrollView,
+        withVelocity velocity: CGPoint,
+        targetContentOffset: UnsafeMutablePointer<CGPoint>
+    ) {
+        generator.impactOccurred()
     }
 }
 
@@ -254,14 +286,16 @@ extension HomeViewController {
 }
 
 extension HomeViewController {
+    // swiftlint:disable function_body_length
     private func render() {
-        view.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1)
         view.addSubviews(
             collectionView,
             todoBubbleImageView,
             bubblePolygonImageView,
             characterInfoStackView,
-            goalLabel
+            goalLabel,
+            leftChervonButton,
+            rightChervonButton
         )
 
         textStackView.addArrangedSubviews(
@@ -313,6 +347,18 @@ extension HomeViewController {
         bubblePolygonImageView.snp.makeConstraints {
             $0.centerX.equalTo(todoBubbleImageView.snp.centerX)
             $0.bottom.equalTo(todoBubbleImageView.snp.bottom).offset(10)
+        }
+
+        leftChervonButton.snp.makeConstraints {
+            $0.width.height.equalTo(24)
+            $0.centerY.equalTo(collectionView.snp.centerY).offset(12)
+            $0.centerX.equalTo(collectionView.snp.centerX).offset(-115)
+        }
+
+        rightChervonButton.snp.makeConstraints {
+            $0.width.height.equalTo(24)
+            $0.centerY.equalTo(collectionView.snp.centerY).offset(12)
+            $0.centerX.equalTo(collectionView.snp.centerX).offset(115)
         }
     }
 }
