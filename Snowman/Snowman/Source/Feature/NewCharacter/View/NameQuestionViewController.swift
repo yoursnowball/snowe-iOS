@@ -27,6 +27,7 @@ final class NameQuestionViewController: QuestionBaseViewController {
 
 extension NameQuestionViewController {
     private func setProperties() {
+        textFieldDelegate = self
         numberLabelText = "3/3"
         questionLabelText = "눈덩이의 이름을 알려주세요"
         descriptionLabelText = "이름"
@@ -45,9 +46,9 @@ extension NameQuestionViewController {
     }
 }
 
-extension NameQuestionViewController {
+extension NameQuestionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.returnKeyType == .done {
+        if textField.returnKeyType == .next {
             goToNextViewController()
             return true
         } else {

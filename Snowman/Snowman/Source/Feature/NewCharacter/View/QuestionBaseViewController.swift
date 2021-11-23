@@ -62,7 +62,7 @@ class QuestionBaseViewController: BaseViewController {
         $0.textColor = Color.button_blue
     }
 
-    private lazy var textField = UITextField().then {
+    public lazy var textField = UITextField().then {
         $0.font = .spoqa(size: 16, family: .regular)
         $0.textColor = Color.text_Primary
         $0.clearButtonMode = .whileEditing
@@ -76,8 +76,8 @@ class QuestionBaseViewController: BaseViewController {
     private lazy var nextButton = UIButton(type: .system).then {
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.setBackgroundColor(.systemBlue, for: .normal)
-        $0.setBackgroundColor(.lightGray, for: .disabled)
+        $0.setBackgroundColor(Color.button_blue, for: .normal)
+        $0.setBackgroundColor(Color.Gray500, for: .disabled)
         $0.titleLabel?.font = .spoqa(size: 18, family: .bold)
         $0.addTarget(self, action: #selector(nextButtonDidTapped(_:)), for: .touchUpInside)
 
@@ -97,11 +97,6 @@ class QuestionBaseViewController: BaseViewController {
         super.viewDidLoad()
         setLayouts()
         registerNotification()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        textFieldDelegate = nil
     }
 }
 
@@ -150,7 +145,7 @@ extension QuestionBaseViewController {
         bottomLineView.backgroundColor = nextButton.isEnabled ?
             Color.button_blue : Color.text_Teritary
         textField.returnKeyType = nextButton.isEnabled ?
-            .done : .default
+            .next : .default
         textField.reloadInputViews()
     }
 }

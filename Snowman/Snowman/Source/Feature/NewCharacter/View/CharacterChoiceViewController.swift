@@ -67,11 +67,19 @@ extension CharacterChoiceViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let cell: CharacterCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        cell.isSelected = true
-        NewGoal.shared.type = Snowe.getType(with: indexPath.item)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if collectionView.cellForItem(at: indexPath)?.isSelected ?? false {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            nextButton.isEnabled  = false
+            NewGoal.shared.type = nil
+            return false
+        }
         nextButton.isEnabled  = true
+        NewGoal.shared.type = Snowe.getType(with: indexPath.item)
+        return true
     }
 }
 

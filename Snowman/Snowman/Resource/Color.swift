@@ -44,11 +44,11 @@ enum Color {
         return UIColor(hex: "#D4D4D4")
     }
     
-    static var Gray300: UIColor {
+    static var Gray100: UIColor {
         return UIColor(hex: "#F6F6F6")
     }
     
-    static var Gray100: UIColor {
+    static var Gray300: UIColor {
         return UIColor(hex: "#E5E5E5")
     }
     

@@ -28,6 +28,7 @@ final class GoalQuestionViewController: QuestionBaseViewController {
 
 extension GoalQuestionViewController {
     private func setProperties() {
+        textFieldDelegate = self
         numberLabelText = "1/3"
         questionLabelText = "당신의 목표는 무엇인가요?"
         descriptionLabelText = "목표"
@@ -39,9 +40,9 @@ extension GoalQuestionViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
-extension GoalQuestionViewController {
+extension GoalQuestionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.returnKeyType == .done {
+        if textField.returnKeyType == .next {
             goToNextViewController()
             return true
         } else {

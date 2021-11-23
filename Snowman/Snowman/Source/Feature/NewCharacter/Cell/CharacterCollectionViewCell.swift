@@ -56,7 +56,7 @@ extension CharacterCollectionViewCell {
             Color.bg_blue : Color.Gray100
 
         checkImageView.image = isSelected ?
-            UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "circle")
+            UIImage(named: "24_check_blue") : UIImage(systemName: "circle")
 
         checkImageView.tintColor = isSelected ?
             Color.bg_blue : Color.Gray300
