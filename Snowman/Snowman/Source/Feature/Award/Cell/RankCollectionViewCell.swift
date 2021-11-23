@@ -10,7 +10,7 @@ import UIKit
 final class RankCollectionViewCell: UICollectionViewCell {
 
     private let topBackgroundView = UIView().then {
-        $0.backgroundColor = .white.withAlphaComponent(0.7)  //TODO:- 컬러 교체
+        $0.backgroundColor = UIColor.white.withAlphaComponent(0.7)  //TODO:- 컬러 교체
         $0.makeRound(13)
     }
 
@@ -110,7 +110,7 @@ extension RankCollectionViewCell {
 
 extension RankCollectionViewCell {
     private func render() {
-        backgroundColor = .systemBlue.withAlphaComponent(0.3)   //TODO:- 컬러 교체
+        backgroundColor = UIColor.systemBlue.withAlphaComponent(0.3)   //TODO:- 컬러 교체
         contentView.addSubviews(
             topBackgroundView,
             rankImageView,

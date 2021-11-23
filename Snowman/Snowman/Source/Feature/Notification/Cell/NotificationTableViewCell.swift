@@ -45,7 +45,7 @@ final class NotificationTableViewCell: UITableViewCell {
 
     private func setSelectedBackgroundView() {
         selectedBackgroundView = UIView()
-        selectedBackgroundView?.backgroundColor = .blue.withAlphaComponent(0.1)//TODO:- 컬러변경
+        selectedBackgroundView?.backgroundColor = UIColor.blue.withAlphaComponent(0.1)//TODO:- 컬러변경
     }
 }
 
