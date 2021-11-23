@@ -53,19 +53,44 @@ enum Snowe: String {
         return text
     }
 
+    // swiftlint:disable cyclomatic_complexity
     func getImage(level: Int) -> UIImage {
-        // TODO:- 단계별 캐릭터 확정되면 구현
+        switch level {
+            // 0 - 목표 생성시 카드뷰
+        case 0:
+            switch self {
+            case .pink:
+                return Image.pinkCard
+            case .orange:
+                return Image.orangeCard
+            case .green:
+                return Image.greenCard
+            case .blue:
+                return Image.blueCard
+            }
+        case 1, 2, 3, 4:
+            switch self {
+            case .pink:
+                return UIImage(named: "char\(level)_pink")!
+            case .orange:
+                return UIImage(named: "char\(level)_orange")!
+            case .green:
+                return UIImage(named: "char\(level)_green")!
+            case .blue:
+                return UIImage(named: "char\(level)_blue")!
+            }
+        default:
+            switch self {
+            case .pink:
+                return UIImage(named: "char5_pink")!
+            case .orange:
+                return UIImage(named: "char5_orange")!
+            case .green:
+                return UIImage(named: "char5_green")!
+            case .blue:
+                return UIImage(named: "char5_blue")!
+            }
 
-        // 0 - 목표 생성시 카드뷰
-        switch self {
-        case .pink:
-            return Image.pinkCard
-        case .orange:
-            return Image.orangeCard
-        case .green:
-            return Image.greenCard
-        case .blue:
-            return Image.blueCard
         }
     }
 
