@@ -4,3 +4,4 @@ excluded:
 - Snowman/Source/Component/CalendarView
 - Snowman/Source/Feature/Calendar
 - Snowman/Source/Feature/History
+- Snowman/Resource/Color.swift
