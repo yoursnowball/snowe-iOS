@@ -12,7 +12,7 @@ import Then
 
 class TopTabBarViewController: BaseViewController {
 
-    private let menuList = ["도감", "뱃지", "명예의 전당"]
+    private let menuList = ["랭킹", "뱃지", "명예의 전당"]
 
     private lazy var menuCount: CGFloat = CGFloat(menuList.count)
 
@@ -66,7 +66,7 @@ extension TopTabBarViewController {
     }
 
     func setTabItemViews() {
-        let vc1 = UIViewController()
+        let vc1 = RankViewController()
         vc1.view.frame = CGRect(
             x: 0,
             y: 0,
