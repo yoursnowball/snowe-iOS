@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class HistoryCell: UITableViewCell {
+    var type: Snowe?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -17,8 +19,6 @@ class HistoryCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
-    var todoListData: TodoListGroup!
 
     private let titleView: UIView = {
         let v = UIView()
@@ -30,17 +30,27 @@ class HistoryCell: UITableViewCell {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "토익 900점 달성하기"
-        label.textColor = .black
+        label.textColor = Color.text_Primary
         label.font = UIFont.spoqa(size: 14, family: .bold)
         label.sizeToFit()
         return label
     }()
     
-    private let todoCountLabel = UILabel().then {
-        $0.text = "120/200"
-        $0.textColor = .lightGray
+    private let todoTotalCountLabel = UILabel().then {
+        $0.textColor = Color.text_Teritary
         $0.font = UIFont.spoqa(size: 14, family: .regular)
+        $0.sizeToFit()
+    }
+    
+    private let dateLabel = UILabel().then {
+        $0.textColor = Color.text_Primary
+        $0.font = UIFont.spoqa(size: 14, family: .bold)
+        $0.sizeToFit()
+    }
+    
+    private let todoCountLabel = UILabel().then {
+        $0.textColor = Color.text_Teritary
+        $0.font = UIFont.spoqa(size: 14, family: .medium)
         $0.sizeToFit()
     }
 
@@ -56,8 +66,6 @@ class HistoryCell: UITableViewCell {
         sv.alignment = .fill
         return sv
     }()
-
-    private var stackViewData: [TodoList] = []
 
     override func prepareForReuse() {
         titleLabel.text = nil
@@ -80,23 +88,36 @@ class HistoryCell: UITableViewCell {
         stackView.isUserInteractionEnabled = false
     }
 
-    func setData(data: TodoListGroup) {
-        titleLabel.text = data.title
-        self.todoListData = data
+    func setData(historyTodoGroup: HistoryTodoGroup) {
         
-        switch data.characterType {
-            case .blue:
-                characterImageView.image = UIImage(named: "blue_snow")
-            case .green:
-                characterImageView.image = UIImage(named: "green_snow")
-            case .orange:
-                characterImageView.image = UIImage(named: "orange_snow")
-            case .pink:
-                characterImageView.image = UIImage(named: "pink_snow")
+        self.type = historyTodoGroup.type
+        
+        if historyTodoGroup.title == nil {
+            // titleview 높이 줄이기 (높이값 괜찮은지 확인해보기)
+            titleView.updateConstraint(attribute: NSLayoutConstraint.Attribute.height, constant: 8)
+        } else {
+            titleView.updateConstraint(attribute: NSLayoutConstraint.Attribute.height, constant: 32)
+            
+            switch historyTodoGroup.type {
+                case .blue:
+                    characterImageView.image = UIImage(named: "char2_blue_history")
+                case .green:
+                    characterImageView.image = UIImage(named: "char2_green_history")
+                case .orange:
+                    characterImageView.image = UIImage(named: "char2_orange_history")
+                case .pink:
+                    characterImageView.image = UIImage(named: "char2_pink_history")
+            }
+
+            titleLabel.text = historyTodoGroup.title
+            todoTotalCountLabel.text = historyTodoGroup.todoTotalCount
         }
 
-        for list in data.todoList {
-            addStackViewData(todoList: list)
+        dateLabel.text = historyTodoGroup.date  // 날짜 가공하기
+        todoCountLabel.text = "\(historyTodoGroup.historyTodos.filter { $0.succeed == true }.count)/\(historyTodoGroup.historyTodos.count)"
+
+        for todo in historyTodoGroup.historyTodos {
+            addStackViewData(todo)
         }
     }
 }
@@ -106,11 +127,13 @@ extension HistoryCell {
     private func setLayout() {
         self.addSubviews(
             titleView,
+            dateLabel,
+            todoCountLabel,
             contextView)
         
         titleView.addSubviews(characterImageView,
                               titleLabel,
-                              todoCountLabel)
+                              todoTotalCountLabel)
         
         contextView.addSubview(stackView)
         
@@ -130,9 +153,19 @@ extension HistoryCell {
             $0.leading.equalTo(characterImageView.snp.trailing).offset(8)
         }
         
-        todoCountLabel.snp.makeConstraints {
+        todoTotalCountLabel.snp.makeConstraints {
             $0.centerY.equalTo(characterImageView)
             $0.trailing.equalToSuperview().offset(-2)
+        }
+        
+        dateLabel.snp.makeConstraints {
+            $0.top.equalTo(titleView.snp.bottom).offset(9)
+            $0.leading.equalToSuperview()
+        }
+        
+        todoCountLabel.snp.makeConstraints {
+            $0.centerY.equalTo(dateLabel)
+            $0.leading.equalTo(dateLabel.snp.trailing).offset(8)
         }
 
         contextView.snp.makeConstraints {
@@ -148,15 +181,15 @@ extension HistoryCell {
 
 // MARK: - addStackViewData
 extension HistoryCell {
-    private func addStackViewData(todoList: TodoList) {
+    private func addStackViewData(_ todo: HistoryTodo) {
         let backView = UIView()
         
         let checkButtonImage = UIImageView().then {
-            if todoList.isDone {
-                
-                $0.backgroundColor = .lightGray
-                
-                switch todoList.characterType {
+            $0.backgroundColor = Color.Gray100
+            
+            if todo.succeed {
+                guard let type = self.type else { return }
+                switch type {
                 case .blue:
                     $0.image = UIImage(named: "24_check_blue")
                 case .green:
@@ -169,14 +202,13 @@ extension HistoryCell {
             } else {
                 $0.image = nil
                 $0.layer.cornerRadius = 23.33 / 2
-                $0.backgroundColor = .white
                 $0.layer.borderWidth = 1.33
-                $0.layer.borderColor = UIColor.gray.cgColor
+                $0.layer.borderColor = Color.Gray500.cgColor
             }
         }
         
         let todoTitleLabel = UILabel().then {
-            $0.text = todoList.title
+            $0.text = todo.name
             $0.font = UIFont.spoqa(size: 14, family: .regular)
             $0.textColor = .black
         }
@@ -185,8 +217,6 @@ extension HistoryCell {
             $0.backgroundColor = .lightGray
             $0.layer.cornerRadius = 8
         }
-        
-        stackViewData.append(todoList)
         
         backView.addSubview(view)
         view.addSubviews(
