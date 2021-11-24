@@ -1,0 +1,14 @@
+//
+//  RankUserInfoResponse.swift
+//  Snowman
+//
+//  Created by 김윤서 on 2021/11/25.
+//
+
+struct RankInfoResponse: Codable {
+    let awardAt, createdAt: String
+    let id, level: Int
+    let name, objective: String
+    let succeedTodoCount, totalTodoCount: Int
+    let type, userName: String
+}

@@ -9,24 +9,25 @@ import UIKit
 
 final class RankViewController: BaseViewController {
 
-    private var ranks: RankResponse? {
+    var nextPage: Int = 0
+    var isLast: Bool = false
+
+    private var data: GenericPageArrayResponse<RankInfoResponse>? {
         didSet {
-            guard let ranks = ranks else {
+            guard let data = data else {
                 return
             }
-            nextPage = ranks.currentPage + 1
-            isLast = ranks.isLast
+            rankInfos.append(contentsOf: data.content)
+            nextPage = data.currentPage + 1
+            isLast = data.isLast
         }
     }
 
-    private var rankInfos: [RankUserInfo] = [] {
+    private var rankInfos: [RankInfoResponse] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
-
-    var nextPage: Int = 0
-    var isLast: Bool = false
 
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -58,9 +59,8 @@ extension RankViewController {
             NetworkService.shared.award.getRank(page: page) { [weak self] result in
                 switch result {
                 case .success(let response):
-                    guard let data = response as? RankResponse else { return }
-                    self?.ranks = data
-                    self?.rankInfos.append(contentsOf: data.content)
+                    guard let data = response as? GenericPageArrayResponse<RankInfoResponse> else { return }
+                    self?.data = data
                 case .requestErr(let errorResponse):
                     dump(errorResponse)
                 default:
