@@ -173,7 +173,6 @@ class CalendarViewController: BaseViewController {
         todoTableView.delegate = self
         todoTableView.dataSource = self
         todoTableView.isScrollEnabled = false
-        
         todoTableView.register(TodoCell.self, forCellReuseIdentifier: "TodoCell")
     }
     

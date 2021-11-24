@@ -23,7 +23,7 @@ class HomeViewController: BaseViewController {
     }
 
     private var goals: [GoalResponse?] = []
-
+    private var todayTodoGroup: TodayTodoGroup?
     private let flowLayout = ZoomAndSnapFlowLayout()
 
     private lazy var collectionView: UICollectionView = {
@@ -89,6 +89,20 @@ class HomeViewController: BaseViewController {
         $0.textColor = .lightGray // TODO:- 색상교체
         $0.sizeToFit()
     }
+    
+    private lazy var todoTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.isScrollEnabled = false
+        tableView.register(TodoCell.self, forCellReuseIdentifier: "TodoCell")
+        tableView.backgroundColor = .white
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 10
+        tableView.separatorStyle = .none
+        tableView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+        return tableView
+    }()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -210,6 +224,24 @@ extension HomeViewController: UIScrollViewDelegate {
                 }
             }
         }
+    }
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        return sampleData.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: TodoCell = todoTableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoCell
+        cell.selectionStyle = .none
+        cell.setData(data: sampleData[indexPath.item])
+        cell.contentView.isUserInteractionEnabled = false
+        return cell
+    }
+
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 
