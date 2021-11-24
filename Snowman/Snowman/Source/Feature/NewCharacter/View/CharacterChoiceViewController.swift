@@ -48,6 +48,8 @@ final class CharacterChoiceViewController: BaseViewController {
         return collectionView
     }()
 
+    private let generator = UIImpactFeedbackGenerator(style: .light)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayouts()
@@ -72,11 +74,12 @@ extension CharacterChoiceViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if collectionView.cellForItem(at: indexPath)?.isSelected ?? false {
-            collectionView.deselectItem(at: indexPath, animated: true)
+            collectionView.deselectItem(at: indexPath, animated: false)
             nextButton.isEnabled  = false
             NewGoal.shared.type = nil
             return false
         }
+        generator.impactOccurred()
         nextButton.isEnabled  = true
         NewGoal.shared.type = Snowe.getType(with: indexPath.item)
         return true
