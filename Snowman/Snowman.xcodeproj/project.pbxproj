@@ -65,6 +65,8 @@
 		DD70F310274120C10053374B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F30F274120C10053374B /* Kingfisher */; };
 		DD70F316274121570053374B /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F315274121570053374B /* PanModal */; };
 		DD70F31D2741254B0053374B /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F31C2741254B0053374B /* Moya */; };
+		DD7D17DE274EA16C00462331 /* MakerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7D17DD274EA16C00462331 /* MakerInfoViewController.swift */; };
+		DD7D17E0274EA6F600462331 /* MakerInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7D17DF274EA6F600462331 /* MakerInfoHeaderView.swift */; };
 		DD86CBE62748210100F6EC8D /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBE52748210100F6EC8D /* BaseTargetType.swift */; };
 		DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBE72748216D00F6EC8D /* GoalAPI.swift */; };
 		DD86CBEA2748232600F6EC8D /* URLConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBE92748232600F6EC8D /* URLConst.swift */; };
@@ -171,6 +173,8 @@
 		DD70F2FC27411EFB0053374B /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		DD70F2FE27411F020053374B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DD70F30027411F0A0053374B /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		DD7D17DD274EA16C00462331 /* MakerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerInfoViewController.swift; sourceTree = "<group>"; };
+		DD7D17DF274EA6F600462331 /* MakerInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerInfoHeaderView.swift; sourceTree = "<group>"; };
 		DD86CBE52748210100F6EC8D /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		DD86CBE72748216D00F6EC8D /* GoalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAPI.swift; sourceTree = "<group>"; };
 		DD86CBE92748232600F6EC8D /* URLConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConst.swift; sourceTree = "<group>"; };
@@ -583,6 +587,7 @@
 			isa = PBXGroup;
 			children = (
 				DDBAFAE9274E578A0089CCD9 /* MyPageViewController.swift */,
+				DD7D17DD274EA16C00462331 /* MakerInfoViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -599,6 +604,7 @@
 			isa = PBXGroup;
 			children = (
 				DDBAFAF0274E5C7E0089CCD9 /* MyPageHeaderView.swift */,
+				DD7D17DF274EA6F600462331 /* MakerInfoHeaderView.swift */,
 			);
 			path = Header;
 			sourceTree = "<group>";
@@ -852,10 +858,12 @@
 				DDBF0A6D274CE88F00DA429D /* GenericPageArrayResponse.swift in Sources */,
 				DD86CBF52748278E00F6EC8D /* TodoResponse.swift in Sources */,
 				C7F65E2E274BC50200D57086 /* AuthAPI.swift in Sources */,
+				DD7D17E0274EA6F600462331 /* MakerInfoHeaderView.swift in Sources */,
 				C7DE7FCB274A6CEC00C8DFB4 /* HistoryCell.swift in Sources */,
 				DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */,
 				DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */,
 				DDBF0A69274CC7AD00DA429D /* RankViewController.swift in Sources */,
+				DD7D17DE274EA16C00462331 /* MakerInfoViewController.swift in Sources */,
 				DD86CBEA2748232600F6EC8D /* URLConst.swift in Sources */,
 				DDFAF15427458441005A3097 /* UIView+.swift in Sources */,
 				C7DE7FE4274A929A00C8DFB4 /* SignUpPasswordViewController.swift in Sources */,

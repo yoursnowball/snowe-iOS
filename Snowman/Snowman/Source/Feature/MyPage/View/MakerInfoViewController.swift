@@ -1,13 +1,15 @@
 //
-//  MyPageViewController.swift
+//  MakerInfoViewController.swift
 //  Snowman
 //
-//  Created by 김윤서 on 2021/11/24.
+//  Created by 김윤서 on 2021/11/25.
 //
 
 import UIKit
 
-final class MyPageViewController: BaseViewController {
+final class MakerInfoViewController: BaseViewController {
+    private lazy var headerView = MakerInfoHeaderView()
+
     private lazy var tableView = UITableView(frame: .zero, style: .grouped).then {
         $0.showsVerticalScrollIndicator = false
         $0.separatorStyle = .none
@@ -16,21 +18,35 @@ final class MyPageViewController: BaseViewController {
         $0.delegate = self
         $0.dataSource = self
         $0.registerReusableCell(MyPageContentTableViewCell.self)
+        $0.tableHeaderView = headerView
+        $0.tableHeaderView?.frame.size.height = 240
     }
 
     private let datasource = [
-        ["캐릭터 삭제", "로그아웃"],
-        ["제작자들"]
+        ["김용현", "김윤서", "김태준"],
+        ["김주현", "이시은"]
+    ]
+
+    private let linkDatasource = [
+        [
+            "https://github.com/lygon55555",
+            "https://github.com/ezidayzi",
+            "https://github.com/ktj1997"
+        ],
+        [
+            "",
+            "https://www.notion.so/joeum/0370e5a5de8f461da434a8a8e91279a9"
+        ]
     ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "마이페이지"
+        title = "제작자들"
         setLayouts()
     }
 }
 
-extension MyPageViewController: UITableViewDelegate {
+extension MakerInfoViewController: UITableViewDelegate {
     func numberOfSections(in _: UITableView) -> Int {
         return 2
     }
@@ -39,9 +55,9 @@ extension MyPageViewController: UITableViewDelegate {
         let header = MyPageSectionHeaderView()
         switch section {
         case 0:
-            header.setTitleText(title: "My")
+            header.setTitleText(title: "⚙️Developer")
         case 1:
-            header.setTitleText(title: "앱 정보")
+            header.setTitleText(title: "🎨Designer")
         default:
             break
         }
@@ -66,49 +82,16 @@ extension MyPageViewController: UITableViewDelegate {
         }
     }
 
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = UIView()
-        let seperator = UIView()
-        footer.addSubviews(seperator)
-        seperator.snp.makeConstraints {
-            $0.height.equalTo(1)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-        seperator.backgroundColor = Color.Gray300
-        return footer
-    }
-
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 1:
-                let defaults = UserDefaults.standard
-                let dictionary = defaults.dictionaryRepresentation()
-                dictionary.keys.forEach { key in
-                    defaults.removeObject(forKey: key)
-                }
-                RootViewControllerChanger.updateRootViewController()
-            default:
-                break
-            }
-        case 1:
-            switch indexPath.row {
-            case 0:
-                let view = MakerInfoViewController()
-                navigationController?.pushViewController(view, animated: true)
-            default:
-                break
-            }
-        default:
-            break
+        if let url = URL(string: linkDatasource[indexPath.section][indexPath.row]) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
 }
 
-extension MyPageViewController: UITableViewDataSource {
+extension MakerInfoViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         return datasource[section].count
     }
@@ -120,7 +103,7 @@ extension MyPageViewController: UITableViewDataSource {
     }
 }
 
-extension MyPageViewController {
+extension MakerInfoViewController {
     private func setLayouts() {
         setViewHierarchy()
         setConstraints()
