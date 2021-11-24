@@ -80,7 +80,7 @@ final class UserService {
 
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         switch statusCode {
-        case 200:
+        case 200..<300:
             switch responseData {
             case .getUsers, .getAlarmList, .postFCMToken:
                 return isValidData(data: data, responseData: responseData)
