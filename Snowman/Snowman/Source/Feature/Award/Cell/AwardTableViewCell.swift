@@ -8,6 +8,9 @@
 import UIKit
 
 final class AwardTableViewCell: UITableViewCell {
+    
+    var goalId: Int?
+    var awardAt: String?
 
     private let cardView = UIView().then {
         $0.makeRound(16)
@@ -44,7 +47,9 @@ extension AwardTableViewCell {
         with type: Snowe,
         goalText: String,
         nameText: String,
-        level: Int
+        level: Int,
+        goalId: Int,
+        awardAt: String
     ) {
         cardView.backgroundColor = type.todoColor.withAlphaComponent(0.2)
         goalLabel.text = goalText
@@ -52,6 +57,8 @@ extension AwardTableViewCell {
         characterImageView.image = type.getImage(level: level)
         levelStickerView.level = level
         levelStickerView.type = type
+        self.goalId = goalId
+        self.awardAt = awardAt
     }
 }
 
