@@ -1,5 +1,5 @@
 //
-//  PopUpViewController.swift
+//  GoalCreationViewController.swift
 //  Snowman
 //
 //  Created by 김윤서 on 2021/11/19.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PopUpViewController: UIViewController {
+final class GoalCreationViewController: UIViewController {
 
     public var goalResponse: GoalResponse? {
         didSet {
@@ -61,13 +61,13 @@ final class PopUpViewController: UIViewController {
     }
 }
 
-extension PopUpViewController {
+extension GoalCreationViewController {
     private func render() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
     }
 }
 
-extension PopUpViewController {
+extension GoalCreationViewController {
     @objc
     public func buttonDidTapped(_ sender: UIButton) {
         guard let pvc = self.presentingViewController else { return }
@@ -77,7 +77,7 @@ extension PopUpViewController {
     }
 }
 
-extension PopUpViewController {
+extension GoalCreationViewController {
     private func setLayouts() {
         setViewHierachies()
         setConstraints()

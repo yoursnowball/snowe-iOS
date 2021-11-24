@@ -55,6 +55,21 @@ final class GoalService {
         }
     }
 
+    public func deleteGoal(
+        goalId: Int,
+        completion: @escaping (Int) -> Void
+    ) {
+        goalProvider.request(.deleteGoal(goalId: goalId)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                completion(statusCode)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
 
         let decoder = JSONDecoder()
