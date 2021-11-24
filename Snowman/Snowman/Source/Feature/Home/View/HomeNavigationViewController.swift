@@ -63,7 +63,7 @@ final class HomeNavigationViewController: BaseNavigationController {
     private func buttonDidTapped(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            break
+            pushViewController(MyPageViewController(), animated: true)
         case 1:
             pushViewController(NotificationViewController(), animated: true)
         case 2:

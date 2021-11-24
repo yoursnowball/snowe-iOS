@@ -65,6 +65,10 @@ extension AwardViewController: UITableViewDelegate {
 }
 
 extension AwardViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dump(indexPath)
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return awards.count
     }
