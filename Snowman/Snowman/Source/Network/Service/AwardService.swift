@@ -45,7 +45,6 @@ final class AwardService {
 
                 let statusCode = response.statusCode
                 let data = response.data
-
                 let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getRank)
                 completion(networkResult)
 
@@ -54,6 +53,7 @@ final class AwardService {
             }
         }
     }
+
 
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         switch statusCode {
