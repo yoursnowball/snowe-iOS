@@ -11,7 +11,8 @@ struct AwardsResponse: Codable {
 
 struct Award: Codable {
     let awardAt, createdAt: String
-    let id, level: Int
+    let id: Int
+    let level: Int
     let name: String
     let succeedTodoCount, totalTodoCount: Int
     let type: String
