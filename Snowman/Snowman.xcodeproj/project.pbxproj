@@ -27,6 +27,9 @@
 		C7C9CDFF2737625F00DC2A09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C9CDFD2737625F00DC2A09 /* LaunchScreen.storyboard */; };
 		C7D38D722748D5440049F3AA /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D38D712748D5440049F3AA /* DateFormatters.swift */; };
 		C7D38D782748D8090049F3AA /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D38D772748D8090049F3AA /* Date+.swift */; };
+		C7D92FBF274D1D4400DAA184 /* HistoryTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FBE274D1D4400DAA184 /* HistoryTodo.swift */; };
+		C7D92FC2274D402E00DAA184 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FC1274D402E00DAA184 /* String+.swift */; };
+		C7D92FC5274D442F00DAA184 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FC4274D442F00DAA184 /* Sequence+.swift */; };
 		C7DE7FC7274A5B6B00C8DFB4 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FC6274A5B6B00C8DFB4 /* HistoryViewController.swift */; };
 		C7DE7FCB274A6CEC00C8DFB4 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FCA274A6CEC00C8DFB4 /* HistoryCell.swift */; };
 		C7DE7FD2274A830300C8DFB4 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FD1274A830300C8DFB4 /* SignInViewController.swift */; };
@@ -131,6 +134,9 @@
 		C7C9CE002737625F00DC2A09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D38D712748D5440049F3AA /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 		C7D38D772748D8090049F3AA /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		C7D92FBE274D1D4400DAA184 /* HistoryTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTodo.swift; sourceTree = "<group>"; };
+		C7D92FC1274D402E00DAA184 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		C7D92FC4274D442F00DAA184 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
 		C7DE7FC6274A5B6B00C8DFB4 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		C7DE7FCA274A6CEC00C8DFB4 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		C7DE7FD1274A830300C8DFB4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -349,6 +355,7 @@
 			children = (
 				DD02A9792748C09A00D9B324 /* Snowe.swift */,
 				DD02A97E2749482900D9B324 /* NewGoal.swift */,
+				C7D92FBE274D1D4400DAA184 /* HistoryTodo.swift */,
 			);
 			path = AppModel;
 			sourceTree = "<group>";
@@ -487,6 +494,8 @@
 				C7D38D772748D8090049F3AA /* Date+.swift */,
 				C7DE7FDE274A90B400C8DFB4 /* UITextField+.swift */,
 				DDF283C8274C0FE100C426D7 /* Notification.Name+.swift */,
+				C7D92FC1274D402E00DAA184 /* String+.swift */,
+				C7D92FC4274D442F00DAA184 /* Sequence+.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -809,6 +818,7 @@
 				C768D12927499E04000E0677 /* CalendarView.swift in Sources */,
 				DD894D2F2747384A004AF5A6 /* NameQuestionViewController.swift in Sources */,
 				DD86CBE62748210100F6EC8D /* BaseTargetType.swift in Sources */,
+				C7D92FBF274D1D4400DAA184 /* HistoryTodo.swift in Sources */,
 				DD02A9762748B7E800D9B324 /* UserDefaultKey.swift in Sources */,
 				DD18EDF4274B93F700F4BCC1 /* NotificationResponse.swift in Sources */,
 				DD02A98127495CF000D9B324 /* AwardsResponse.swift in Sources */,
@@ -860,6 +870,7 @@
 				C7DE7FDA274A882300C8DFB4 /* StartSignInViewController.swift in Sources */,
 				C7C9CDF32737625800DC2A09 /* AppDelegate.swift in Sources */,
 				C7F4B8E427497EB0002DD317 /* TodoCell.swift in Sources */,
+				C7D92FC5274D442F00DAA184 /* Sequence+.swift in Sources */,
 				DD86CBF12748265200F6EC8D /* NetworkResult.swift in Sources */,
 				DD892245274AC72E00316FE0 /* UserResponse.swift in Sources */,
 				DD894D3727474F98004AF5A6 /* PopUpViewController.swift in Sources */,
@@ -870,6 +881,7 @@
 				DD86CBEC274824EA00F6EC8D /* GoalService.swift in Sources */,
 				DDE00F0C274B8F7300BD2C20 /* NotificationViewController.swift in Sources */,
 				DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */,
+				C7D92FC2274D402E00DAA184 /* String+.swift in Sources */,
 				DD86CBF3274826FA00F6EC8D /* GoalResponse.swift in Sources */,
 				DD02A98527495F5700D9B324 /* AwardService.swift in Sources */,
 			);
