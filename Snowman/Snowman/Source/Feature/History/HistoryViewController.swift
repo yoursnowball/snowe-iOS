@@ -11,47 +11,10 @@ import Then
 
 class HistoryViewController: BaseViewController {
     
-    let sampleData: [TodoListGroup] = [
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .blue, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue)
-        ]),
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .green, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green)
-        ]),
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .orange, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange)
-        ]),
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .pink, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink)
-        ])
-    ]
-    
-//    let sampleData: [TodoListGroup] = [
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .blue, todoList: [
-//
-//        ]),
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .green, todoList: [
-//
-//        ]),
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .orange, todoList: [
-//
-//        ]),
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .pink, todoList: [
-//
-//        ])
-//    ]
+    // TODO - 윤서 (이전 뷰에서 데이터 넣어주고 푸시하기)
+    var goalId: Int?
+    var awardAt: String?
+    var historyTodoGroups: [HistoryTodoGroup] = []
 
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -72,14 +35,12 @@ class HistoryViewController: BaseViewController {
     
     let levelLabel = UILabel().then {
         $0.font = UIFont.spoqa(size: 11, family: .medium)
-        $0.text = "lv 10"
         $0.textColor = .blue
         $0.sizeToFit()
     }
     
     let nameLabel = UILabel().then {
         $0.font = UIFont.spoqa(size: 16, family: .regular)
-        $0.text = "수줍은눈사람"
         $0.textColor = .black
         $0.sizeToFit()
     }
@@ -118,8 +79,9 @@ class HistoryViewController: BaseViewController {
         historyTableView.delegate = self
         historyTableView.dataSource = self
         historyTableView.isScrollEnabled = false
-        
         historyTableView.register(HistoryCell.self, forCellReuseIdentifier: "HistoryCell")
+        
+        getGoal()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,20 +90,76 @@ class HistoryViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        historyTableView.reloadData()
+//        historyTableView.reloadData()
+    }
+    
+    func getGoal() {
+        guard let goalId = goalId else { return }
+        NetworkService.shared.goal.getGoal(goalId: goalId) { [weak self] result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? GoalResponse else { return }
+                
+                print("데이터 출력")
+                print(data)
+                
+                self?.characterImageView.image = Snowe(rawValue: data.type)?.getImage(level: data.level)
+                self?.levelLabel.text = "lv \(data.level)"
+                self?.nameLabel.text = data.name
+
+                self?.infoContentLabel[0].text = data.type
+                self?.infoContentLabel[1].text = data.createdAt
+                self?.infoContentLabel[2].text = self?.awardAt
+
+                let df = DateFormatter()
+                df.dateFormat = "yyyy-MM-dd"
+                df.timeZone = TimeZone(identifier: "UTC")
+                
+                let dates = data.todos.map { $0.todoDate }.uniqued()
+                let sortedDates = dates.sorted { df.date(from: $0)! > df.date(from: $1)! }
+                var tempArr: [HistoryTodoGroup] = []
+                
+                for i in 0 ..< sortedDates.count {
+                    let arr = data.todos.filter { $0.todoDate == sortedDates[i] }
+                    if i == 0 {
+                        let historyTodoData = HistoryTodoGroup(type: Snowe(rawValue: data.type)!,
+                                                               title: data.name,
+                                                               date: sortedDates[i],
+                                                               todoTotalCount: "\(data.succeedTodoCount)/\(data.todos.count)",
+                                                               historyTodos: arr.map { HistoryTodo(name: $0.name,
+                                                                                                   succeed: $0.succeed) })
+                        tempArr.append(historyTodoData)
+                    } else {
+                        let historyTodoData = HistoryTodoGroup(type: Snowe(rawValue: data.type)!,
+                                                               title: nil,
+                                                               date: sortedDates[i],
+                                                               todoTotalCount: nil,
+                                                               historyTodos: arr.map { HistoryTodo(name: $0.name,
+                                                                                                   succeed: $0.succeed) })
+                        tempArr.append(historyTodoData)
+                    }
+                }
+                
+                self?.historyTodoGroups = tempArr
+                self?.historyTableView.reloadData()
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("history - error")
+            }
+        }
     }
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return sampleData.count
+        return historyTodoGroups.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: HistoryCell = historyTableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
         cell.selectionStyle = .none
-        cell.setData(data: sampleData[indexPath.item])
+        cell.setData(historyTodoGroup: historyTodoGroups[indexPath.item])
         cell.contentView.isUserInteractionEnabled = false
         return cell
     }
@@ -154,27 +172,28 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
 extension HistoryViewController {
     private func setLayout() {
         
-        for _ in 0...2 {
+        let titleArr: [String] = ["Type", "Start", "Finish"]
+        
+        for i in 0...2 {
             infoStackSubViews.append(UIStackView().then {
                 $0.axis = .vertical
                 $0.alignment = .center
                 $0.distribution = .fillEqually
             })
-            
+
             infoTitleLabel.append(UILabel().then {
                 $0.font = UIFont.spoqa(size: 12, family: .medium)
-                $0.text = "TEST"
+                $0.text = titleArr[i]
                 $0.textColor = .blue
             })
-            
+
             infoContentLabel.append(UILabel().then {
                 $0.font = UIFont.spoqa(size: 11, family: .regular)
-                $0.text = "TEST"
                 $0.textColor = .black
                 $0.sizeToFit()
             })
         }
-        
+
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(

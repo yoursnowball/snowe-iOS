@@ -10,6 +10,7 @@ import Moya
 
 enum AwardAPI {
     case getAwards
+    case getRank(page: Int)
 }
 
 extension AwardAPI: BaseTargetType {
@@ -17,12 +18,16 @@ extension AwardAPI: BaseTargetType {
         switch self {
         case .getAwards:
             return URLConst.awards
+        case .getRank:
+            return URLConst.rank
         }
     }
 
     var method: Moya.Method {
         switch self {
         case .getAwards:
+            return .get
+        case .getRank:
             return .get
         }
     }
@@ -31,6 +36,10 @@ extension AwardAPI: BaseTargetType {
         switch self {
         case .getAwards:
             return .requestPlain
+        case .getRank(let page):
+            return .requestParameters(parameters: [
+                "page": page
+            ], encoding: URLEncoding.queryString)
         }
     }
 }

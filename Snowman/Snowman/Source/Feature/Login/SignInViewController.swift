@@ -78,7 +78,6 @@ class SignInViewController: UIViewController {
         switch sender {
         case signInButton:
             signIn()
-        break
         default:
             return
         }

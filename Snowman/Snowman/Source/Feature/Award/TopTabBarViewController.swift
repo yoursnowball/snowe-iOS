@@ -41,16 +41,18 @@ class TopTabBarViewController: BaseViewController {
     }
 
     private let indicator = UIView().then {
-        $0.backgroundColor = .systemBlue
+        $0.backgroundColor = Color.button_blue
     }
 
     private let contentView = UIView()
 
+    private let generator = UIImpactFeedbackGenerator(style: .light)
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLayouts()
         setNavigationTitle()
         setTabItemViews()
-        setLayouts()
         customTabbar.selectItem(
             at: IndexPath(item: 0, section: 0),
             animated: true,
@@ -122,6 +124,8 @@ extension TopTabBarViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
+        generator.impactOccurred()
+
         let newOffset = CGPoint(x: Int(UIScreen.main.bounds.width) * indexPath.row, y: 0)
         mainScrollView.setContentOffset(newOffset, animated: true)
 
@@ -153,6 +157,14 @@ extension TopTabBarViewController: UIScrollViewDelegate {
                 cell.isSelected = index == roundedIndex
             }
         }
+    }
+
+    func scrollViewWillEndDragging(
+        _ scrollView: UIScrollView,
+        withVelocity velocity: CGPoint,
+        targetContentOffset: UnsafeMutablePointer<CGPoint>
+    ) {
+        generator.impactOccurred()
     }
 }
 

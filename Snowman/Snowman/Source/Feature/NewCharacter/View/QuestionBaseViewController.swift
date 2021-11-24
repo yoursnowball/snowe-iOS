@@ -37,7 +37,7 @@ class QuestionBaseViewController: BaseViewController {
                 attributes: [
                     .kern: -0.32,
                     .font: UIFont.spoqa(size: 16, family: .regular),
-                    .foregroundColor: UIColor.lightGray
+                    .foregroundColor: Color.text_Teritary
                 ]
             )
         }
@@ -59,12 +59,12 @@ class QuestionBaseViewController: BaseViewController {
 
     private let descriptionLabel = UILabel().then {
         $0.font = .spoqa(size: 12, family: .regular)
-        $0.textColor = .systemBlue
+        $0.textColor = Color.button_blue
     }
 
-    private lazy var textField = UITextField().then {
+    public lazy var textField = UITextField().then {
         $0.font = .spoqa(size: 16, family: .regular)
-        $0.textColor = .black
+        $0.textColor = Color.text_Primary
         $0.clearButtonMode = .whileEditing
         $0.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
@@ -76,8 +76,8 @@ class QuestionBaseViewController: BaseViewController {
     private lazy var nextButton = UIButton(type: .system).then {
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.setBackgroundColor(.systemBlue, for: .normal)
-        $0.setBackgroundColor(.lightGray, for: .disabled)
+        $0.setBackgroundColor(Color.button_blue, for: .normal)
+        $0.setBackgroundColor(Color.Gray500, for: .disabled)
         $0.titleLabel?.font = .spoqa(size: 18, family: .bold)
         $0.addTarget(self, action: #selector(nextButtonDidTapped(_:)), for: .touchUpInside)
 
@@ -97,11 +97,6 @@ class QuestionBaseViewController: BaseViewController {
         super.viewDidLoad()
         setLayouts()
         registerNotification()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        textFieldDelegate = nil
     }
 }
 
@@ -133,8 +128,9 @@ extension QuestionBaseViewController {
     @objc
     private func showKeyboard(notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
-        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?
-                .cgRectValue
+        guard let keyboardFrame = (
+            userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+        )?.cgRectValue
         else { return }
 
         nextButton.snp.updateConstraints {
@@ -147,9 +143,9 @@ extension QuestionBaseViewController {
         let textCount = textField.text?.count ?? 0
         nextButton.isEnabled = textCount > 0 && textCount < textFieldTextCount
         bottomLineView.backgroundColor = nextButton.isEnabled ?
-            .systemBlue : .lightGray
+            Color.button_blue : Color.text_Teritary
         textField.returnKeyType = nextButton.isEnabled ?
-            .done : .default
+            .next : .default
         textField.reloadInputViews()
     }
 }

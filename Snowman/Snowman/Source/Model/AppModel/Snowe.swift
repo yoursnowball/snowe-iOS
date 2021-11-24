@@ -25,16 +25,55 @@ enum Snowe: String {
         }
     }
 
-    var color: UIColor {
+    var bgColor: UIColor {
         switch self {
         case .pink:
-            return .systemPink
+            return Color.bg_pink
         case .orange:
-            return .systemOrange
+            return Color.bg_orange
         case .green:
-            return .systemGreen
+            return Color.bg_green
         case .blue:
-            return .systemBlue
+            return Color.bg_blue
+        }
+    }
+
+    var todoColor: UIColor {
+        switch self {
+        case .pink:
+            return Color.todo_pink
+        case .orange:
+            return Color.todo_orange
+        case .green:
+            return Color.todo_green
+        case .blue:
+            return Color.todo_blue
+        }
+    }
+
+    var lineColor: UIColor {
+        switch self {
+        case .pink:
+            return Color.line_pink
+        case .orange:
+            return Color.line_orange
+        case .green:
+            return Color.line_green
+        case .blue:
+            return Color.line_blue
+        }
+    }
+
+    var pinBgColor: UIColor {
+        switch self {
+        case .pink:
+            return Color.pinbg_pink
+        case .orange:
+            return Color.pinbg_orange
+        case .green:
+            return Color.pinbg_green
+        case .blue:
+            return Color.pinbg_blue
         }
     }
 

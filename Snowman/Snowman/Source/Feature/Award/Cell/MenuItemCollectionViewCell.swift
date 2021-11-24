@@ -14,13 +14,13 @@ class MenuItemCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             menuTitle.textColor = isSelected ?
-                .systemBlue : .lightGray
+            Color.button_blue : Color.Gray500
         }
     }
 
     private let menuTitle = UILabel().then {
         $0.font = .spoqa(size: 14, family: .medium)
-        $0.textColor = .lightGray
+        $0.textColor = Color.Gray500
     }
 
     override init(frame: CGRect) {

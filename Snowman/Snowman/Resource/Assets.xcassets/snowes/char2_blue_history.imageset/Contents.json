@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "sampleSnowe.png",
+      "filename" : "char2_blue_history.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "sampleSnowe@2x.png",
+      "filename" : "char2_blue_history@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "sampleSnowe@3x.png",
+      "filename" : "char2_blue_history@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

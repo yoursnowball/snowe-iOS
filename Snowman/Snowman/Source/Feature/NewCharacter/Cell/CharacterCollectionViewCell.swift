@@ -46,20 +46,20 @@ extension CharacterCollectionViewCell {
 extension CharacterCollectionViewCell {
     private func round() {
         makeRound(24)
-        layer.borderColor = UIColor.systemBlue.cgColor
+        layer.borderColor = Color.line_blue.cgColor
     }
 
     private func makeCollectionViewCell() {
         layer.borderWidth =  isSelected ? 1 : 0
 
         contentView.backgroundColor = isSelected ?
-            UIColor.systemBlue.withAlphaComponent(0.3) : UIColor.lightGray.withAlphaComponent(0.3)
+            Color.bg_blue : Color.Gray100
 
         checkImageView.image = isSelected ?
-            UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "circle")
+            UIImage(named: "24_check_blue") : UIImage(systemName: "circle")
 
         checkImageView.tintColor = isSelected ?
-            .systemBlue : .lightGray
+            Color.bg_blue : Color.Gray300
     }
 }
 

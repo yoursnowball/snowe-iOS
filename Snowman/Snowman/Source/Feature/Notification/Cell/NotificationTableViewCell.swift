@@ -14,16 +14,18 @@ final class NotificationTableViewCell: UITableViewCell {
 
     private let titleLabel = UILabel().then {
         $0.font = .spoqa(size: 14, family: .bold)
+        $0.textColor = Color.text_Primary
     }
 
     private let contentLabel = UILabel().then {
         $0.numberOfLines = 0
         $0.font = .spoqa(size: 14, family: .regular)
+        $0.textColor = Color.text_Primary
     }
 
     private let timeLabel = UILabel().then {
         $0.font = .spoqa(size: 10, family: .regular)
-        $0.textColor = .systemBlue //TODO:- 컬러변경
+        $0.textColor = Color.button_blue
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -45,7 +47,7 @@ final class NotificationTableViewCell: UITableViewCell {
 
     private func setSelectedBackgroundView() {
         selectedBackgroundView = UIView()
-        selectedBackgroundView?.backgroundColor = UIColor.blue.withAlphaComponent(0.1)//TODO:- 컬러변경
+        selectedBackgroundView?.backgroundColor = Color.bg_blue
     }
 }
 

@@ -22,8 +22,8 @@ final class CharacterChoiceViewController: BaseViewController {
     private lazy var nextButton = UIButton(type: .system).then {
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.setBackgroundColor(.systemBlue, for: .normal)
-        $0.setBackgroundColor(.lightGray, for: .disabled)
+        $0.setBackgroundColor(Color.button_blue, for: .normal)
+        $0.setBackgroundColor(Color.Gray500, for: .disabled)
         $0.titleLabel?.font = .spoqa(size: 18, family: .bold)
         $0.addTarget(self, action: #selector(nextButtonDidTapped(_:)), for: .touchUpInside)
 
@@ -40,13 +40,15 @@ final class CharacterChoiceViewController: BaseViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor.white
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(cell: CharacterCollectionViewCell.self)
         return collectionView
     }()
+
+    private let generator = UIImpactFeedbackGenerator(style: .light)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,11 +69,20 @@ extension CharacterChoiceViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let cell: CharacterCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        cell.isSelected = true
-        NewGoal.shared.type = Snowe.getType(with: indexPath.item)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if collectionView.cellForItem(at: indexPath)?.isSelected ?? false {
+            collectionView.deselectItem(at: indexPath, animated: false)
+            nextButton.isEnabled  = false
+            NewGoal.shared.type = nil
+            return false
+        }
+        generator.impactOccurred()
         nextButton.isEnabled  = true
+        NewGoal.shared.type = Snowe.getType(with: indexPath.item)
+        return true
     }
 }
 

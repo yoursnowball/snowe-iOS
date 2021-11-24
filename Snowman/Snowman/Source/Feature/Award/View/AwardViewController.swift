@@ -28,6 +28,7 @@ final class AwardViewController: BaseViewController {
         $0.dataSource = self
         $0.delegate = self
         $0.separatorStyle = .none
+        $0.allowsSelection = true
     }
 
     private let noCharacterLabel = UILabel().then {
@@ -70,17 +71,28 @@ extension AwardViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: AwardTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+        cell.selectionStyle = .none
         if let characterType = Snowe(rawValue: awards[indexPath.row].type) {
             cell.updateData(
                 with: characterType,
                 goalText: awards[indexPath.row].name,
                 nameText: awards[indexPath.row].name,
-                level: awards[indexPath.row].level
+                level: awards[indexPath.row].level,
+                goalId: awards[indexPath.row].id,
+                awardAt: awards[indexPath.row].awardAt
             )
             return cell
         } else {
             return UITableViewCell()
         }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell: AwardTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+        let vc = HistoryViewController()
+        vc.goalId = cell.goalId
+        vc.awardAt = cell.awardAt
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
@@ -119,7 +131,7 @@ extension AwardViewController {
 
         headerView.addSubviews(headerTitleLabel)
         headerView.snp.makeConstraints {
-            $0.height.equalTo(77)
+            $0.height.equalTo(72)
         }
         headerTitleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)

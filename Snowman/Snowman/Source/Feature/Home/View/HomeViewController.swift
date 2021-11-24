@@ -7,13 +7,8 @@
 
 import UIKit
 
-protocol HomeViewControllerDelegate: AnyObject{
-    func changeLogoColor(_ homeViewController: HomeViewController, type: Snowe)
-}
-
-class HomeViewController: BaseViewController {
-
-    weak var delegate: HomeViewControllerDelegate?
+// swiftlint:disable file_length
+final class HomeViewController: BaseViewController {
 
     private var userResponse: UserResponse? {
         didSet {
@@ -24,6 +19,27 @@ class HomeViewController: BaseViewController {
 
     private var goals: [GoalResponse?] = []
     private var todayTodoGroup: TodayTodoGroup?
+
+    private let maxIndex: Int = 4
+
+    private lazy var currentIndex: Int = 0 {
+        didSet {
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                guard let self = self else {return}
+                if self.currentIndex == 0 {
+                    self.leftChervonButton.alpha = 0
+                    self.rightChervonButton.alpha = 1
+                } else if self.currentIndex == self.maxIndex - 1 {
+                    self.rightChervonButton.alpha = 0
+                    self.leftChervonButton.alpha = 1
+                } else {
+                    self.rightChervonButton.alpha = 1
+                    self.leftChervonButton.alpha = 1
+                }
+            }
+        }
+    }
+
     private let flowLayout = ZoomAndSnapFlowLayout()
 
     private lazy var collectionView: UICollectionView = {
@@ -57,13 +73,12 @@ class HomeViewController: BaseViewController {
 
     private let countLabel = UILabel().then {
         $0.font = .spoqa(size: 18, family: .bold)
-        $0.textColor = .systemBlue // TODO:- 색상교체
         $0.sizeToFit()
     }
 
     private let bubbleTodoLabel = UILabel().then {
         $0.font = .spoqa(size: 16, family: .regular)
-        $0.textColor = .lightGray // TODO:- 색상교체
+        $0.textColor = Color.text_Secondary
         $0.sizeToFit()
     }
 
@@ -80,13 +95,13 @@ class HomeViewController: BaseViewController {
 
     private let nameLabel = UILabel().then {
         $0.font = .spoqa(size: 24, family: .bold)
-        $0.textColor = .black // TODO:- 색상교체
+        $0.textColor = Color.text_Primary
         $0.sizeToFit()
     }
 
     private let goalLabel = UILabel().then {
         $0.font = .spoqa(size: 16, family: .regular)
-        $0.textColor = .lightGray // TODO:- 색상교체
+        $0.textColor = Color.text_Secondary
         $0.sizeToFit()
     }
     
@@ -104,8 +119,29 @@ class HomeViewController: BaseViewController {
         return tableView
     }()
 
+    private lazy var leftChervonButton = UIButton().then {
+        $0.setImage(
+            Image.chevronLeftBold
+                .withRenderingMode(.alwaysTemplate),
+            for: .normal
+        )
+        $0.adjustsImageWhenHighlighted = false
+    }
+
+    private lazy var rightChervonButton = UIButton().then {
+        $0.setImage(
+            Image.chevronRightBold
+                .withRenderingMode(.alwaysTemplate),
+            for: .normal
+        )
+        $0.adjustsImageWhenHighlighted = false
+    }
+
+    private let generator = UIImpactFeedbackGenerator(style: .light)
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        currentIndex = 0
         setPlaceholderView()
         reloadView()
     }
@@ -126,7 +162,7 @@ class HomeViewController: BaseViewController {
             guard let self = self else { return }
             self.collectionView.reloadData()
             self.collectionView.scrollToItem(
-                at: IndexPath(item: 0, section: 0),
+                at: IndexPath(item: self.currentIndex, section: 0),
                 at: .centeredHorizontally,
                 animated: false
             )
@@ -141,9 +177,10 @@ extension HomeViewController {
 
             let snowe = Snowe(rawValue: goal.type) ?? .pink
 
-            delegate?.changeLogoColor(self, type: snowe)
-
-            view.backgroundColor = snowe.color.withAlphaComponent(0.1)
+            view.backgroundColor = snowe.bgColor
+            countLabel.textColor = snowe.lineColor
+            leftChervonButton.tintColor = snowe.todoColor
+            rightChervonButton.tintColor = snowe.todoColor
 
             levelStickerView.isHidden = false
 
@@ -171,18 +208,20 @@ extension HomeViewController {
                 bubbleTodoLabel.text = "개의 투두가 남았어요"
             }
         } else {
-            levelStickerView.isHidden = true
+            setPlaceholderView()
             nameLabel.text = "눈덩이를 생성하세요!"
             goalLabel.text = "원하는 목표를 달성할 수 있도록 도와줄게요."
-            hideBubble(isHidden: true)
         }
     }
 
     private func setPlaceholderView() {
         nameLabel.text = ""
         goalLabel.text = ""
+        view.backgroundColor = Color.bg_blue
         levelStickerView.isHidden = true
         hideBubble(isHidden: true)
+        leftChervonButton.tintColor = Color.todo_blue
+        rightChervonButton.tintColor = Color.todo_blue
     }
 
     private func hideBubble(isHidden: Bool) {
@@ -214,16 +253,26 @@ extension HomeViewController: UIScrollViewDelegate {
         ) / cellWidthIncludeSpacing
 
         let roundedIndex = Int(round(index))
-        if roundedIndex > -1 && roundedIndex < goals.count {
-            updateGoal(goal: goals[roundedIndex])
-            for index in 0...3 {
-                if index == roundedIndex {
-                    setOpacityCell(index: index, alpha: 1)
-                } else {
-                    setOpacityCell(index: index, alpha: 0.6)
+
+        if roundedIndex > -1 && roundedIndex < maxIndex {
+            if goals.count > 0 {
+                updateGoal(goal: goals[roundedIndex % goals.count])
+                currentIndex = roundedIndex
+                setOpacityCell(index: roundedIndex, alpha: 1)
+                if roundedIndex > 0 && roundedIndex < maxIndex - 1 {
+                    setOpacityCell(index: roundedIndex-1, alpha: 0.5)
+                    setOpacityCell(index: roundedIndex+1, alpha: 0.5)
                 }
             }
         }
+    }
+
+    func scrollViewWillEndDragging(
+        _ scrollView: UIScrollView,
+        withVelocity velocity: CGPoint,
+        targetContentOffset: UnsafeMutablePointer<CGPoint>
+    ) {
+        generator.impactOccurred()
     }
 }
 
@@ -247,7 +296,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if goals[indexPath.item] == nil {
+        if goals[indexPath.item % goals.count] == nil {
+            generator.impactOccurred()
+
             let nvc = BaseNavigationController(rootViewController: GoalQuestionViewController())
             nvc.modalPresentationStyle = .fullScreen
             present(nvc, animated: true, completion: nil)
@@ -260,7 +311,7 @@ extension HomeViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return goals.count
+        return maxIndex
     }
 
     func collectionView(
@@ -268,8 +319,12 @@ extension HomeViewController: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell: SnoweCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.updateData(goal: goals[indexPath.item])
-        if indexPath.row == 0 {
+
+        if goals.count>0 {
+            cell.updateData(goal: goals[indexPath.item % goals.count])
+        }
+
+        if indexPath.item == currentIndex {
             cell.characterImageView.alpha = 1
         }
         return cell
@@ -294,14 +349,16 @@ extension HomeViewController {
 }
 
 extension HomeViewController {
+    // swiftlint:disable function_body_length
     private func render() {
-        view.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1)
         view.addSubviews(
             collectionView,
             todoBubbleImageView,
             bubblePolygonImageView,
             characterInfoStackView,
-            goalLabel
+            goalLabel,
+            leftChervonButton,
+            rightChervonButton
         )
 
         textStackView.addArrangedSubviews(
@@ -353,6 +410,18 @@ extension HomeViewController {
         bubblePolygonImageView.snp.makeConstraints {
             $0.centerX.equalTo(todoBubbleImageView.snp.centerX)
             $0.bottom.equalTo(todoBubbleImageView.snp.bottom).offset(10)
+        }
+
+        leftChervonButton.snp.makeConstraints {
+            $0.width.height.equalTo(24)
+            $0.centerY.equalTo(collectionView.snp.centerY).offset(12)
+            $0.centerX.equalTo(collectionView.snp.centerX).offset(-115)
+        }
+
+        rightChervonButton.snp.makeConstraints {
+            $0.width.height.equalTo(24)
+            $0.centerY.equalTo(collectionView.snp.centerY).offset(12)
+            $0.centerX.equalTo(collectionView.snp.centerX).offset(115)
         }
     }
 }

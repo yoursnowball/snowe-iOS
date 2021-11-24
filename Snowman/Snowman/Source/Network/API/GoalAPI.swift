@@ -10,6 +10,7 @@ import Moya
 
 enum GoalAPI {
     case postNewGoal(name: String, type: String, objective: String)
+    case getGoal(goalId: Int, date: String? = nil)
 }
 
 extension GoalAPI: BaseTargetType {
@@ -17,6 +18,12 @@ extension GoalAPI: BaseTargetType {
         switch self {
         case .postNewGoal:
             return URLConst.goals
+        case .getGoal(let goalId, let date):
+            if let date = date {
+                return URLConst.goals + "/\(goalId)?date=\(date)"
+            } else {
+                return URLConst.goals + "/\(goalId)"
+            }
         }
     }
 
@@ -24,6 +31,8 @@ extension GoalAPI: BaseTargetType {
         switch self {
         case .postNewGoal:
             return .post
+        case .getGoal:
+            return .get
         }
     }
 
@@ -35,6 +44,8 @@ extension GoalAPI: BaseTargetType {
                 "type": type,
                 "objective": objective
             ], encoding: JSONEncoding.default)
+        case .getGoal:
+            return .requestPlain
         }
     }
 }

@@ -13,7 +13,7 @@ final class PopUpViewController: UIViewController {
         didSet {
             guard let response = goalResponse else {return}
             nameLabel.text = response.name
-            characterImageView.image = Snowe(rawValue: response.type)?.getImage(level: response.level)
+            characterImageView.image = Snowe(rawValue: response.type)?.getImage(level: 0)
             goalLabel.text = response.objective
         }
     }
@@ -24,8 +24,9 @@ final class PopUpViewController: UIViewController {
     }
 
     private let titleLabel = UILabel().then {
-        $0.font = .spoqa(size: 20, family: .bold)
+        $0.font = .spoqa(size: 24, family: .regular)
         $0.text = "눈덩이 생성 완료!"
+        $0.textColor = Color.text_Primary
     }
 
     private let characterImageView = UIImageView().then {
@@ -33,17 +34,19 @@ final class PopUpViewController: UIViewController {
     }
 
     private let nameLabel = UILabel().then {
-        $0.font = .spoqa(size: 18, family: .medium)
+        $0.font = .spoqa(size: 24, family: .bold)
+        $0.textColor = Color.text_Primary
     }
 
     private let goalLabel = UILabel().then {
         $0.font = .spoqa(size: 16, family: .regular)
+        $0.textColor = Color.text_Primary
     }
 
     private lazy var okButton = UIButton().then {
         $0.setTitle("확인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.setBackgroundColor(.systemBlue, for: .normal)
+        $0.setBackgroundColor(Color.button_blue, for: .normal)
         $0.titleLabel?.font = .spoqa(size: 18, family: .bold)
 
         $0.makeRound()
@@ -109,7 +112,7 @@ extension PopUpViewController {
         characterImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(180)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(75)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
         }
 
         nameLabel.snp.makeConstraints {
@@ -119,7 +122,7 @@ extension PopUpViewController {
 
         goalLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(nameLabel.snp.bottom).offset(17)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(12)
         }
 
         okButton.snp.makeConstraints {
