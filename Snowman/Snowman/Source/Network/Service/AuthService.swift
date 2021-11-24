@@ -53,7 +53,7 @@ final class AuthService {
         let decoder = JSONDecoder()
 
         switch statusCode {
-        case 200:
+        case 200..<300:
             guard let decodedData = try? decoder.decode(AuthResponse.self, from: data) else {
                 return .pathErr
             }
