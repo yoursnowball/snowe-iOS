@@ -59,11 +59,6 @@ final class MyPageContentTableViewCell: UITableViewCell {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(20)
         }
-
-        contentView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.height.equalTo(48)
-        }
     }
 
     public func setTitle(title: String, isOnlyTitle: Bool = false) {
