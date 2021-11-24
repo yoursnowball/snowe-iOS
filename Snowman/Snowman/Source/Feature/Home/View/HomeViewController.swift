@@ -7,6 +7,7 @@
 
 import UIKit
 
+// swiftlint:disable file_length
 final class HomeViewController: BaseViewController {
 
     private var userResponse: UserResponse? {
@@ -17,6 +18,26 @@ final class HomeViewController: BaseViewController {
     }
 
     private var goals: [GoalResponse?] = []
+
+    private let maxIndex: Int = 4
+
+    private lazy var currentIndex: Int = 0 {
+        didSet {
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                guard let self = self else {return}
+                if self.currentIndex == 0 {
+                    self.leftChervonButton.alpha = 0
+                    self.rightChervonButton.alpha = 1
+                } else if self.currentIndex == self.maxIndex - 1 {
+                    self.rightChervonButton.alpha = 0
+                    self.leftChervonButton.alpha = 1
+                } else {
+                    self.rightChervonButton.alpha = 1
+                    self.leftChervonButton.alpha = 1
+                }
+            }
+        }
+    }
 
     private let flowLayout = ZoomAndSnapFlowLayout()
 
@@ -83,7 +104,7 @@ final class HomeViewController: BaseViewController {
         $0.sizeToFit()
     }
 
-    private let leftChervonButton = UIButton().then {
+    private lazy var leftChervonButton = UIButton().then {
         $0.setImage(
             Image.chevronLeftBold
                 .withRenderingMode(.alwaysTemplate),
@@ -91,7 +112,8 @@ final class HomeViewController: BaseViewController {
         )
         $0.adjustsImageWhenHighlighted = false
     }
-    private let rightChervonButton = UIButton().then {
+
+    private lazy var rightChervonButton = UIButton().then {
         $0.setImage(
             Image.chevronRightBold
                 .withRenderingMode(.alwaysTemplate),
@@ -104,6 +126,7 @@ final class HomeViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        currentIndex = 0
         setPlaceholderView()
         reloadView()
     }
@@ -124,7 +147,7 @@ final class HomeViewController: BaseViewController {
             guard let self = self else { return }
             self.collectionView.reloadData()
             self.collectionView.scrollToItem(
-                at: IndexPath(item: 0, section: 0),
+                at: IndexPath(item: self.currentIndex, section: 0),
                 at: .centeredHorizontally,
                 animated: false
             )
@@ -179,9 +202,9 @@ extension HomeViewController {
     private func setPlaceholderView() {
         nameLabel.text = ""
         goalLabel.text = ""
+        view.backgroundColor = Color.bg_blue
         levelStickerView.isHidden = true
         hideBubble(isHidden: true)
-        view.backgroundColor = Color.bg_blue
         leftChervonButton.tintColor = Color.todo_blue
         rightChervonButton.tintColor = Color.todo_blue
     }
@@ -215,13 +238,15 @@ extension HomeViewController: UIScrollViewDelegate {
         ) / cellWidthIncludeSpacing
 
         let roundedIndex = Int(round(index))
-        if roundedIndex > -1 && roundedIndex < goals.count {
-            updateGoal(goal: goals[roundedIndex])
-            for index in 0...3 {
-                if index == roundedIndex {
-                    setOpacityCell(index: index, alpha: 1)
-                } else {
-                    setOpacityCell(index: index, alpha: 0.6)
+
+        if roundedIndex > -1 && roundedIndex < maxIndex {
+            if goals.count > 0 {
+                updateGoal(goal: goals[roundedIndex % goals.count])
+                currentIndex = roundedIndex
+                setOpacityCell(index: roundedIndex, alpha: 1)
+                if roundedIndex > 0 && roundedIndex < maxIndex - 1 {
+                    setOpacityCell(index: roundedIndex-1, alpha: 0.5)
+                    setOpacityCell(index: roundedIndex+1, alpha: 0.5)
                 }
             }
         }
@@ -238,7 +263,7 @@ extension HomeViewController: UIScrollViewDelegate {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if goals[indexPath.item] == nil {
+        if goals[indexPath.item % goals.count] == nil {
             generator.impactOccurred()
 
             let nvc = BaseNavigationController(rootViewController: GoalQuestionViewController())
@@ -253,7 +278,7 @@ extension HomeViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return goals.count
+        return maxIndex
     }
 
     func collectionView(
@@ -261,8 +286,12 @@ extension HomeViewController: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell: SnoweCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.updateData(goal: goals[indexPath.item])
-        if indexPath.row == 0 {
+
+        if goals.count>0 {
+            cell.updateData(goal: goals[indexPath.item % goals.count])
+        }
+
+        if indexPath.item == currentIndex {
             cell.characterImageView.alpha = 1
         }
         return cell
