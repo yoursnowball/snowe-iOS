@@ -37,7 +37,7 @@ extension NameQuestionViewController {
     private func goToNextViewController() {
         postNewCharacter { [weak self] response in
             self?.hideButton()
-            let popUpView = PopUpViewController()
+            let popUpView = GoalCreationViewController()
             popUpView.goalResponse = response
             popUpView.modalPresentationStyle = .overCurrentContext
             popUpView.modalTransitionStyle = .crossDissolve

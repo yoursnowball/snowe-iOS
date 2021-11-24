@@ -27,6 +27,8 @@ class DeleteCharacterViewController: BaseViewController {
         }
     }
 
+    private var selectedIndex = 0
+
     private lazy var tableView = UITableView().then {
         $0.registerReusableCell(AwardTableViewCell.self)
         $0.dataSource = self
@@ -91,11 +93,22 @@ extension DeleteCharacterViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        selectedIndex = indexPath.row
+        let popUpView = PopUpViewController()
+        popUpView.modalTransitionStyle = .crossDissolve
+        popUpView.modalPresentationStyle = .overCurrentContext
+        popUpView.delegate = self
+        popUpView.setText(
+            title: "삭제하시겠어요?",
+            content: "캐릭터를 삭제하면\n더 이상 복구할 수 없어요.",
+            rightButtonText: "삭제"
+        )
+        present(popUpView, animated: true, completion: nil)
     }
 }
 
 extension DeleteCharacterViewController {
-    func getGoals() {
+    private func getGoals() {
         NetworkService.shared.user.getUsers {[weak self] result in
             switch result {
             case .success(let response):
@@ -107,6 +120,25 @@ extension DeleteCharacterViewController {
                 print("error")
             }
         }
+    }
+
+    private func deleteGoal(goalId: Int) {
+        NetworkService.shared.goal.deleteGoal(goalId: goalId) {[weak self] result in
+            switch result {
+            case 200..<300:
+                self?.getGoals()
+                self?.dismiss(animated: true, completion: nil)
+            default:
+                break
+            }
+        }
+    }
+}
+
+extension DeleteCharacterViewController: PopUpActionDelegate {
+    func touchRightButton(button: UIButton) {
+        guard let goal = goals[selectedIndex] else { return }
+        deleteGoal(goalId: goal.id)
     }
 }
 

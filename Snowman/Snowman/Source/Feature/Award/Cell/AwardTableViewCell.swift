@@ -43,6 +43,7 @@ final class AwardTableViewCell: UITableViewCell {
 }
 
 extension AwardTableViewCell {
+    // swiftlint:disable function_parameter_count
     public func updateAwardData(
         with type: Snowe,
         goalText: String,
