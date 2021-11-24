@@ -8,6 +8,7 @@
 import UIKit.UITableView
 
 extension UITableViewCell: Reusable { }
+extension UITableViewHeaderFooterView: Reusable { }
 
 extension UITableView {
     func registerReusableCell<T: UITableViewCell>(_: T.Type) {

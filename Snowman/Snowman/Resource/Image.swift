@@ -23,6 +23,7 @@ enum Image {
     static let notification = UIImage(named: "notification_outline")!
     static let heart = UIImage(named: "heart_outline")!
     static let chevronLeft = UIImage(named: "chevron_big_left")!
+    static let chevronRight = UIImage(named: "chevron_big_right")!
 
     static let rankAward = UIImage(named: "rankAward")!
 
