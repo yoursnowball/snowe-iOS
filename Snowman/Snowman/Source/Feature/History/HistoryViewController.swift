@@ -98,7 +98,10 @@ class HistoryViewController: BaseViewController {
         NetworkService.shared.goal.getGoal(goalId: goalId) { [weak self] result in
             switch result {
             case .success(let response):
-                guard let data = response as? GoalResponse else { return }                
+                guard let data = response as? GoalResponse else { return }
+                
+                print("데이터 출력")
+                print(data)
                 
                 self?.characterImageView.image = Snowe(rawValue: data.type)?.getImage(level: data.level)
                 self?.levelLabel.text = "lv \(data.level)"
