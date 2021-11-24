@@ -84,6 +84,8 @@ extension MyPageViewController: UITableViewDelegate {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
+            case 0:
+                navigationController?.pushViewController(DeleteCharacterViewController(), animated: true)
             case 1:
                 let defaults = UserDefaults.standard
                 let dictionary = defaults.dictionaryRepresentation()
