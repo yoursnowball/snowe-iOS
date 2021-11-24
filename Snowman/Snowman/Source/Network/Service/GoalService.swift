@@ -71,11 +71,10 @@ final class GoalService {
     }
 
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
-
         let decoder = JSONDecoder()
 
         switch statusCode {
-        case 200:
+        case 200..<300:
             guard let decodedData = try? decoder.decode(GoalResponse.self, from: data) else {
                 return .pathErr
             }
