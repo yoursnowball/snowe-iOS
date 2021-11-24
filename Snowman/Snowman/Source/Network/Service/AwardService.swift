@@ -82,7 +82,7 @@ final class AwardService {
             }
             return .success(decodedData)
         case .getRank:
-            guard let decodedData = try? decoder.decode(RankResponse.self, from: data) else {
+            guard let decodedData = try? decoder.decode(GenericPageArrayResponse<RankInfoResponse>.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)
