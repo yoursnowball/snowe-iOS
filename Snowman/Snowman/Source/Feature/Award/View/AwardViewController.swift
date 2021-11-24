@@ -71,6 +71,7 @@ extension AwardViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: AwardTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+        cell.selectionStyle = .none
         if let characterType = Snowe(rawValue: awards[indexPath.row].type) {
             cell.updateData(
                 with: characterType,
@@ -87,8 +88,6 @@ extension AwardViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("cell select")
-        
         let cell: AwardTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
         let vc = HistoryViewController()
         vc.goalId = cell.goalId
