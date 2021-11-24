@@ -50,9 +50,9 @@ class TopTabBarViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setLayouts()
         setNavigationTitle()
         setTabItemViews()
-        setLayouts()
         customTabbar.selectItem(
             at: IndexPath(item: 0, section: 0),
             animated: true,
