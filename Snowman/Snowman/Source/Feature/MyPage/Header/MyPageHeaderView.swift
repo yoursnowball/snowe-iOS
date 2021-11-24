@@ -5,31 +5,28 @@
 //  Created by 김윤서 on 2021/11/24.
 //
 
-
 import UIKit
 
 import SnapKit
 
-final class MyPageSectionHeaderView: UITableViewHeaderFooterView {
+final class MyPageSectionHeaderView: UIView {
 
     private let titleLabel = UILabel().then {
-        $0.font = .spoqa(size: 14, family: .bold)
+        $0.font = .spoqa(size: 14, family: .medium)
     }
 
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
         initSectionHeaderView()
-
         setLayouts()
     }
 
-    @available(*, unavailable)
-    required init?(coder _: NSCoder) {
-        fatalError("coder doesn't exist")
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func initSectionHeaderView() {
-        contentView.backgroundColor = .white
+        backgroundColor = .white
     }
 
     private func setLayouts() {
@@ -38,14 +35,10 @@ final class MyPageSectionHeaderView: UITableViewHeaderFooterView {
     }
 
     private func setViewHierarchy() {
-        contentView.addSubview(titleLabel)
+        addSubview(titleLabel)
     }
 
     private func setConstraints() {
-        contentView.snp.remakeConstraints {
-            $0.edges.equalToSuperview()
-        }
-
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
             $0.bottom.equalToSuperview().offset(-12)

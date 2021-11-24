@@ -16,10 +16,12 @@ final class MyPageViewController: BaseViewController {
         $0.delegate = self
         $0.dataSource = self
         $0.registerReusableCell(MyPageContentTableViewCell.self)
-        $0.registerReusableHeaderFooterView(MyPageSectionHeaderView.self)
     }
 
-    private let accountTableContents: [String] = ["로그아웃"]
+    private let datasource = [
+        ["캐릭터 삭제", "로그아웃"],
+        ["제작자들"]
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +32,15 @@ final class MyPageViewController: BaseViewController {
 
 extension MyPageViewController: UITableViewDelegate {
     func numberOfSections(in _: UITableView) -> Int {
-        return 3
+        return 2
     }
 
     func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header: MyPageSectionHeaderView = tableView.dequeueReusableHeaderFooterView()
+        let header = MyPageSectionHeaderView()
         switch section {
         case 0:
-            header.setTitleText(title: "목표")
+            header.setTitleText(title: "My")
         case 1:
-            header.setTitleText(title: "계정")
-        case 2:
             header.setTitleText(title: "앱 정보")
         default:
             break
@@ -57,13 +57,33 @@ extension MyPageViewController: UITableViewDelegate {
         return 48
     }
 
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = UIView()
+        let seperator = UIView()
+        footer.addSubviews(seperator)
+        seperator.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        seperator.backgroundColor = Color.Gray300
+        return footer
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 9
+        default:
+            return 0
+        }
+    }
+
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
         switch indexPath.section {
-        case 1:
+        case 0:
             switch indexPath.row {
-            case 0:
+            case 1:
                 let defaults = UserDefaults.standard
                 let dictionary = defaults.dictionaryRepresentation()
                 dictionary.keys.forEach { key in
@@ -81,23 +101,13 @@ extension MyPageViewController: UITableViewDelegate {
 
 extension MyPageViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 1:
-            return accountTableContents.count
-        default:
-            return 0
-        }
+        return datasource[section].count
     }
 
     func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 1:
-            let cell: MyPageContentTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
-            cell.setTitle(title: accountTableContents[indexPath.row], isOnlyTitle: true)
-            return cell
-        default:
-            return UITableViewCell()
-        }
+        let cell: MyPageContentTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
+        cell.setTitle(title: datasource[indexPath.section][indexPath.row], isOnlyTitle: true)
+        return cell
     }
 }
 
