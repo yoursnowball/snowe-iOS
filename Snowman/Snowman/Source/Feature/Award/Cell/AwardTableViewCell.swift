@@ -8,13 +8,12 @@
 import UIKit
 
 final class AwardTableViewCell: UITableViewCell {
-    
+
     var goalId: Int?
     var awardAt: String?
 
     private let cardView = UIView().then {
         $0.makeRound(16)
-        $0.backgroundColor = .blue
     }
 
     private let goalLabel = UILabel().then {
@@ -33,6 +32,7 @@ final class AwardTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = UIColor.white
         setLayouts()
     }
 
@@ -43,7 +43,7 @@ final class AwardTableViewCell: UITableViewCell {
 }
 
 extension AwardTableViewCell {
-    public func updateData(
+    public func updateAwardData(
         with type: Snowe,
         goalText: String,
         nameText: String,
@@ -60,6 +60,23 @@ extension AwardTableViewCell {
         self.goalId = goalId
         self.awardAt = awardAt
     }
+
+    public func updateMyPageData(
+        with type: Snowe,
+        goalText: String,
+        nameText: String,
+        level: Int,
+        goalId: Int
+    ) {
+        cardView.backgroundColor = Color.Gray100
+        goalLabel.text = goalText
+        nameLabel.text = nameText
+        characterImageView.image = type.getImage(level: level)
+        levelStickerView.level = level
+        levelStickerView.type = type
+        self.goalId = goalId
+        self.awardAt = nil
+    }
 }
 
 extension AwardTableViewCell {
@@ -75,7 +92,7 @@ extension AwardTableViewCell {
         cardView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(105)
+            $0.height.equalTo(98)
         }
 
         goalLabel.snp.makeConstraints {
@@ -89,7 +106,8 @@ extension AwardTableViewCell {
         }
 
         characterImageView.snp.makeConstraints {
-            $0.trailing.bottom.equalToSuperview().inset(20)
+            $0.top.equalToSuperview().inset(14)
+            $0.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(73)
             $0.width.equalTo(52)
         }

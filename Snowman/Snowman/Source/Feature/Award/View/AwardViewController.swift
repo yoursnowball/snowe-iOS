@@ -56,7 +56,7 @@ final class AwardViewController: BaseViewController {
 
 extension AwardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 121
+        return 114
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -73,7 +73,7 @@ extension AwardViewController: UITableViewDataSource {
         let cell: AwardTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
         cell.selectionStyle = .none
         if let characterType = Snowe(rawValue: awards[indexPath.row].type) {
-            cell.updateData(
+            cell.updateAwardData(
                 with: characterType,
                 goalText: awards[indexPath.row].name,
                 nameText: awards[indexPath.row].name,

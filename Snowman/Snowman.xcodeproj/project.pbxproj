@@ -67,6 +67,7 @@
 		DD70F31D2741254B0053374B /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DD70F31C2741254B0053374B /* Moya */; };
 		DD7D17DE274EA16C00462331 /* MakerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7D17DD274EA16C00462331 /* MakerInfoViewController.swift */; };
 		DD7D17E0274EA6F600462331 /* MakerInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7D17DF274EA6F600462331 /* MakerInfoHeaderView.swift */; };
+		DD7D17E2274EAFF700462331 /* DeleteCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7D17E1274EAFF700462331 /* DeleteCharacterViewController.swift */; };
 		DD86CBE62748210100F6EC8D /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBE52748210100F6EC8D /* BaseTargetType.swift */; };
 		DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBE72748216D00F6EC8D /* GoalAPI.swift */; };
 		DD86CBEA2748232600F6EC8D /* URLConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86CBE92748232600F6EC8D /* URLConst.swift */; };
@@ -175,6 +176,7 @@
 		DD70F30027411F0A0053374B /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		DD7D17DD274EA16C00462331 /* MakerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerInfoViewController.swift; sourceTree = "<group>"; };
 		DD7D17DF274EA6F600462331 /* MakerInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakerInfoHeaderView.swift; sourceTree = "<group>"; };
+		DD7D17E1274EAFF700462331 /* DeleteCharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCharacterViewController.swift; sourceTree = "<group>"; };
 		DD86CBE52748210100F6EC8D /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		DD86CBE72748216D00F6EC8D /* GoalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalAPI.swift; sourceTree = "<group>"; };
 		DD86CBE92748232600F6EC8D /* URLConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConst.swift; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 			children = (
 				DDBAFAE9274E578A0089CCD9 /* MyPageViewController.swift */,
 				DD7D17DD274EA16C00462331 /* MakerInfoViewController.swift */,
+				DD7D17E1274EAFF700462331 /* DeleteCharacterViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -938,6 +941,7 @@
 				DDE00F0C274B8F7300BD2C20 /* NotificationViewController.swift in Sources */,
 				DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */,
 				C7D92FC2274D402E00DAA184 /* String+.swift in Sources */,
+				DD7D17E2274EAFF700462331 /* DeleteCharacterViewController.swift in Sources */,
 				DD86CBF3274826FA00F6EC8D /* GoalResponse.swift in Sources */,
 				DD02A98527495F5700D9B324 /* AwardService.swift in Sources */,
 			);
