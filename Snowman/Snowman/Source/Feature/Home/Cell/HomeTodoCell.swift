@@ -1,15 +1,18 @@
 //
-//  TodoCell.swift
+//  HomeTodoCell.swift
 //  Snowman
 //
-//  Created by Yonghyun on 2021/11/21.
+//  Created by Yonghyun on 2021/11/24.
 //
 
 import Foundation
 import UIKit
 import SnapKit
 
-class TodoCell: UITableViewCell {
+class HomeTodoCell: UITableViewCell {
+    var type: Snowe?
+    var historyTodoGroup: HistoryTodoGroup?
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -17,51 +20,41 @@ class TodoCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
-    var todoListData: TodoListGroup!
 
     private let titleView: UIView = {
-        let v = UIView()
-        v.backgroundColor = .white
-        return v
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
     }()
-    
+
     private let characterImageView = UIImageView()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "토익 900점 달성하기"
-        label.textColor = .black
+        label.textColor = Color.text_Primary
         label.font = UIFont.spoqa(size: 14, family: .bold)
         label.sizeToFit()
         return label
     }()
-    
+
     private let todoCountLabel = UILabel().then {
-        $0.text = "0/0"
-        $0.textColor = .lightGray
+        $0.textColor = Color.text_Teritary
         $0.font = UIFont.spoqa(size: 14, family: .regular)
         $0.sizeToFit()
     }
-    
-    private let addButton = UIButton().then {
-        $0.setImage(UIImage(named: "plus_circle"), for: .normal)
-    }
 
     private let contextView: UIView = {
-        let v = UIView()
-        v.backgroundColor = .white
-        return v
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
     }()
 
     private lazy var stackView: UIStackView = {
-        let sv = UIStackView()
-        sv.axis = .vertical
-        sv.alignment = .fill
-        return sv
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        return stackView
     }()
-
-    private var stackViewData: [TodoList] = []
 
     override func prepareForReuse() {
         titleLabel.text = nil
@@ -81,50 +74,52 @@ class TodoCell: UITableViewCell {
     private func setupUI() {
         backgroundColor = .clear
         setLayout()
-        stackView.isUserInteractionEnabled = true
+        stackView.isUserInteractionEnabled = false
     }
 
-    func setData(data: TodoListGroup) {
-        titleLabel.text = data.title
-        self.todoListData = data
-        
-        switch data.characterType {
+    func setData(historyTodoGroup: HistoryTodoGroup) {
+
+        self.type = historyTodoGroup.type
+
+        switch historyTodoGroup.type {
             case .blue:
-                characterImageView.image = UIImage(named: "blue_snow")
+                characterImageView.image = UIImage(named: "char2_blue_history")
             case .green:
-                characterImageView.image = UIImage(named: "green_snow")
+                characterImageView.image = UIImage(named: "char2_green_history")
             case .orange:
-                characterImageView.image = UIImage(named: "orange_snow")
+                characterImageView.image = UIImage(named: "char2_orange_history")
             case .pink:
-                characterImageView.image = UIImage(named: "pink_snow")
+                characterImageView.image = UIImage(named: "char2_pink_history")
         }
 
-        for list in data.todoList {
-            addStackViewData(todoList: list)
+        titleLabel.text = historyTodoGroup.title
+        todoCountLabel.text = "\(historyTodoGroup.historyTodos.filter { $0.succeed == true }.count)/\(historyTodoGroup.historyTodos.count)"
+
+        for todo in historyTodoGroup.historyTodos {
+            addStackViewData(todo)
         }
     }
 }
 
 // MARK: - UI Layout & addSubview
-extension TodoCell {
+extension HomeTodoCell {
     private func setLayout() {
         self.addSubviews(
             titleView,
             contextView)
-        
+
         titleView.addSubviews(characterImageView,
                               titleLabel,
-                              todoCountLabel,
-                              addButton)
-        
+                              todoCountLabel)
+
         contextView.addSubview(stackView)
-        
+
         titleView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(32)
         }
-        
+
         characterImageView.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview()
             $0.width.equalTo(characterImageView.snp.height)
@@ -134,16 +129,10 @@ extension TodoCell {
             $0.centerY.equalTo(characterImageView)
             $0.leading.equalTo(characterImageView.snp.trailing).offset(8)
         }
-        
+
         todoCountLabel.snp.makeConstraints {
             $0.centerY.equalTo(characterImageView)
             $0.leading.equalTo(titleLabel.snp.trailing).offset(8)
-        }
-        
-        addButton.snp.makeConstraints {
-            $0.centerY.equalTo(characterImageView)
-            $0.trailing.equalToSuperview().offset(-2)
-            $0.width.height.equalTo(20)
         }
 
         contextView.snp.makeConstraints {
@@ -158,26 +147,16 @@ extension TodoCell {
 }
 
 // MARK: - addStackViewData
-extension TodoCell {
-    private func addStackViewData(todoList: TodoList) {
-        let backView: UIView = {
-            let v = UIView()
-            return v
-        }()
-        
-        let checkButtonView = CheckButtonView1().then {
-            $0.backgroundColor = .lightGray
-            $0.characterType = todoList.characterType
-            $0.isDone = todoList.isDone
-        }
-        
+extension HomeTodoCell {
+    private func addStackViewData(_ todo: HistoryTodo) {
+        let backView = UIView()
+
         let checkButtonImage = UIImageView().then {
-            if todoList.isDone {
-                
-                // 체크표시가 보이게 배경색 변경
-                $0.backgroundColor = .lightGray
-                
-                switch todoList.characterType {
+            $0.backgroundColor = Color.Gray100
+
+            if todo.succeed {
+                guard let type = self.type else { return }
+                switch type {
                 case .blue:
                     $0.image = UIImage(named: "24_check_blue")
                 case .green:
@@ -190,91 +169,106 @@ extension TodoCell {
             } else {
                 $0.image = nil
                 $0.layer.cornerRadius = 23.33 / 2
-                $0.backgroundColor = .white
                 $0.layer.borderWidth = 1.33
-                $0.layer.borderColor = UIColor.gray.cgColor
+                $0.layer.borderColor = Color.Gray500.cgColor
             }
         }
-        
-        let todoTitleLabel = UILabel().then {
-            $0.text = todoList.title
+
+        let checkButton = UIButton()
+
+        let todoNameTextField = UITextField().then {
+            $0.text = todo.name
             $0.font = UIFont.spoqa(size: 14, family: .regular)
             $0.textColor = .black
+            $0.delegate = self
         }
-        
-        let view = UIView().then {
+
+        let todoSelectButton = UIButton()
+
+        let todoView = TodoView().then {
             $0.backgroundColor = .lightGray
             $0.layer.cornerRadius = 8
+            $0.goalId = todo.goalId
+            $0.todoId = todo.todoId
         }
-        
-        stackViewData.append(todoList)
-        
-        backView.addSubview(view)
-        view.addSubviews(
-            checkButtonView,
+
+        backView.addSubview(todoView)
+        todoView.addSubviews(
             checkButtonImage,
-            todoTitleLabel)
-        
+            checkButton,
+            todoNameTextField,
+            todoSelectButton)
+
         addSubview(backView)
-        
+
         stackView.addArrangedSubview(backView)
-        
+
         backView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.height.greaterThanOrEqualTo(56)
 //            $0.height.equalTo(56)
         }
 
-        view.snp.makeConstraints {
+        todoView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalToSuperview().offset(4)
             $0.bottom.equalToSuperview().offset(-4)
         }
-        
-        checkButtonView.snp.makeConstraints {
+
+        checkButtonImage.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(18)
             $0.width.height.equalTo(23.33)
             $0.centerY.equalToSuperview()
         }
-        
-        checkButtonImage.snp.makeConstraints {
-            $0.edges.equalTo(checkButtonView)
+
+        checkButton.snp.makeConstraints {
+            $0.edges.equalTo(checkButtonImage)
         }
-        
-        todoTitleLabel.snp.makeConstraints {
-            $0.leading.equalTo(checkButtonView.snp.trailing).offset(12)
-            $0.centerY.equalTo(checkButtonView)
-            $0.trailing.equalToSuperview()
+
+        todoNameTextField.snp.makeConstraints {
+            $0.leading.equalTo(checkButtonImage.snp.trailing).offset(12)
+            $0.top.trailing.bottom.equalToSuperview()
         }
-        
-        
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(checkTodo))
-        checkButtonView.addGestureRecognizer(gesture)
-        
-        
-        
-        // checkButton에 함수 연결하기
+
+        todoSelectButton.snp.makeConstraints {
+            $0.edges.equalTo(todoNameTextField)
+        }
+
+        checkButton.addTarget(self, action: #selector(checkTodo), for: .touchUpInside)
+        todoSelectButton.addTarget(self, action: #selector(showTodoMenu), for: .touchUpInside)
     }
 
-    @objc func checkTodo(_ sender: UIGestureRecognizer) {
-        if let view = sender.view as? CheckButtonView1 {
-            
-            
-            // todoListData 비교해서 바꾸고 api 날리기
-            // stackView  removeAllSubviews 하고
-            // 다시 setData
-            
-            if view.isDone {
-                
-            } else {
-                
-            }
-            
+    @objc func checkTodo(sender: UIButton) {
+        if let todoView = sender.superview as? TodoView {
+//            todoView.goalId
+//            todoView.todoId
         }
+    }
+
+    @objc func showTodoMenu(sender: UIButton) {
+
+        if let todoView = sender.superview as? TodoView {
+//            todoView.goalId
+//            todoView.todoId
+        }
+
+        // 수정
+        // 삭제
+        // 완료
+        // 취소
     }
 }
 
-class CheckButtonView1: UIView {
-    var characterType: CharacterType!
-    var isDone: Bool!
+class TodoView: UIView {
+    var goalId: Int!
+    var todoId: Int!
+}
+
+extension HomeTodoCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let todoView = textField.superview as? TodoView {
+//            todoView.goalId
+//            todoView.todoId
+        }
+    }
 }

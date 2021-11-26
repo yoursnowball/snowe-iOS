@@ -14,11 +14,24 @@ final class HomeViewController: BaseViewController {
         didSet {
             guard let response = userResponse else { return }
             self.goals = response.goals
+
+            let todoArr = goals[currentIndex]?.todos
+                              .filter { $0.todoDate == getTodayString() }
+                              .map { HistoryTodo(name: $0.name,
+                                                 succeed: $0.succeed,
+                                                 goalId: goals[currentIndex]?.id,
+                                                 todoId: $0.id)}
+
+            self.homeTodoGroup = HistoryTodoGroup(type: Snowe(rawValue: goals[currentIndex]!.type)!,
+                                                  title: goals[currentIndex]?.objective,
+                                                  date: "",
+                                                  todoTotalCount: nil,
+                                                  historyTodos: todoArr ?? [])
         }
     }
 
     private var goals: [GoalResponse?] = []
-    private var todayTodoGroup: TodayTodoGroup?
+    private var homeTodoGroup: HistoryTodoGroup?
 
     private let maxIndex: Int = 4
 
@@ -104,13 +117,13 @@ final class HomeViewController: BaseViewController {
         $0.textColor = Color.text_Secondary
         $0.sizeToFit()
     }
-    
+
     private lazy var todoTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = false
-        tableView.register(TodoCell.self, forCellReuseIdentifier: "TodoCell")
+        tableView.register(HomeTodoCell.self, forCellReuseIdentifier: "HomeTodoCell")
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 10
@@ -121,8 +134,7 @@ final class HomeViewController: BaseViewController {
 
     private lazy var leftChervonButton = UIButton().then {
         $0.setImage(
-            Image.chevronLeftBold
-                .withRenderingMode(.alwaysTemplate),
+            Image.chevronLeftBold.withRenderingMode(.alwaysTemplate),
             for: .normal
         )
         $0.adjustsImageWhenHighlighted = false
@@ -130,8 +142,7 @@ final class HomeViewController: BaseViewController {
 
     private lazy var rightChervonButton = UIButton().then {
         $0.setImage(
-            Image.chevronRightBold
-                .withRenderingMode(.alwaysTemplate),
+            Image.chevronRightBold.withRenderingMode(.alwaysTemplate),
             for: .normal
         )
         $0.adjustsImageWhenHighlighted = false
@@ -158,7 +169,7 @@ final class HomeViewController: BaseViewController {
 
     @objc
     private func reloadView() {
-        getHome {[weak self] in
+        getHome { [weak self] in
             guard let self = self else { return }
             self.collectionView.reloadData()
             self.collectionView.scrollToItem(
@@ -168,6 +179,39 @@ final class HomeViewController: BaseViewController {
             )
             self.updateGoal(goal: self.goals.first ?? nil)
         }
+    }
+
+    func getTodayString() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
+
+    @objc func touchRankButton() {
+        guard let level = self.goals[currentIndex]?.level else { return }
+
+        if level > 5 {
+            // 명예의 전당
+        } else {
+            showToastMessageAlert(message: "레벨5가 되기 전에는 명예의 전당으로 보낼 수 없습니다.")
+        }
+    }
+
+    func showToastMessageAlert(message: String) {
+        let alert = UIAlertController(title: message,
+                                      message: "",
+                                      preferredStyle: .alert)
+
+        present(alert, animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            alert.dismiss(animated: true)
+        }
+    }
+
+    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
+        view.endEditing(true)
     }
 }
 
@@ -278,19 +322,46 @@ extension HomeViewController: UIScrollViewDelegate {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return sampleData.count
+        return 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TodoCell = todoTableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoCell
+        let cell: HomeTodoCell = todoTableView.dequeueReusableCell(indexPath: indexPath)
         cell.selectionStyle = .none
-        cell.setData(data: sampleData[indexPath.item])
+        if let homeTodoGroup = self.homeTodoGroup {
+            cell.setData(historyTodoGroup: homeTodoGroup)
+        }
         cell.contentView.isUserInteractionEnabled = false
         return cell
     }
 
     func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let rankButton = UIButton().then {
+            guard let level = self.goals[currentIndex]?.level else { return }
+
+            $0.titleLabel?.font = UIFont.spoqa(size: 18, family: .bold)
+            $0.setTitle("명예의 전당", for: .normal)
+
+            if level > 5 {
+                $0.backgroundColor = Color.button_blue
+                $0.setTitleColor(Color.Gray000, for: .normal)
+                $0.isEnabled = false
+            } else {
+                $0.backgroundColor = Color.Gray300
+                $0.setTitleColor(Color.text_Teritary, for: .normal)
+                $0.isEnabled = true
+            }
+        }
+
+
+        // 명예의 전당 보내기
+//        rankButton.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
+
+        return rankButton
     }
 }
 
@@ -358,7 +429,8 @@ extension HomeViewController {
             characterInfoStackView,
             goalLabel,
             leftChervonButton,
-            rightChervonButton
+            rightChervonButton,
+            todoTableView
         )
 
         textStackView.addArrangedSubviews(
@@ -422,6 +494,12 @@ extension HomeViewController {
             $0.width.height.equalTo(24)
             $0.centerY.equalTo(collectionView.snp.centerY).offset(12)
             $0.centerX.equalTo(collectionView.snp.centerX).offset(115)
+        }
+        
+        todoTableView.snp.makeConstraints {
+            $0.top.equalTo(goalLabel.snp.bottom).offset(32)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview()
         }
     }
 }
