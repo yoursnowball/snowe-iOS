@@ -178,6 +178,7 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
+        registerTarget()
         registerNotificationcenter()
     }
 
@@ -531,5 +532,14 @@ extension HomeViewController {
         }
 
         calendarButton.layer.cornerRadius = (self.view.frame.size.width * 56 / 375) / 2
+    }
+
+    func registerTarget() {
+        calendarButton.addTarget(self, action: #selector(pushCalendarVC), for: .touchUpInside)
+    }
+
+    @objc func pushCalendarVC() {
+        let pushVC = CalendarViewController()
+        self.navigationController?.pushViewController(pushVC, animated: true)
     }
 }
