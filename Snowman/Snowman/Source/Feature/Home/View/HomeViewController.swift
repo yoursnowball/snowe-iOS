@@ -15,23 +15,30 @@ final class HomeViewController: BaseViewController {
             guard let response = userResponse else { return }
             self.goals = response.goals
 
-            let todoArr = goals[currentIndex]?.todos
-                              .filter { $0.todoDate == getTodayString() }
-                              .map { HistoryTodo(name: $0.name,
-                                                 succeed: $0.succeed,
-                                                 goalId: goals[currentIndex]?.id,
-                                                 todoId: $0.id)}
+            if !goals.isEmpty {
+                for goal in goals {
+                    let todoArr = goal?.todos
+                                      .filter { $0.todoDate == getTodayString() }
+                                      .map { HistoryTodo(name: $0.name,
+                                                         succeed: $0.succeed,
+                                                         goalId: goal?.id,
+                                                         todoId: $0.id)}
 
-            self.homeTodoGroup = HistoryTodoGroup(type: Snowe(rawValue: goals[currentIndex]!.type)!,
-                                                  title: goals[currentIndex]?.objective,
-                                                  date: "",
-                                                  todoTotalCount: nil,
-                                                  historyTodos: todoArr ?? [])
+                    if let stringType = goal?.type, let type = Snowe(rawValue: stringType) {
+                        print("HistoryTodoGroup type type type \(type)")
+                        self.homeTodoGroup.append(HistoryTodoGroup(type: type,
+                                                                   title: goal?.objective,
+                                                                   date: "",
+                                                                   todoTotalCount: nil,
+                                                                   historyTodos: todoArr ?? []))
+                    }
+                }
+            }
         }
     }
 
     private var goals: [GoalResponse?] = []
-    private var homeTodoGroup: HistoryTodoGroup?
+    private var homeTodoGroup: [HistoryTodoGroup] = []
 
     private let maxIndex: Int = 4
 
@@ -124,7 +131,7 @@ final class HomeViewController: BaseViewController {
         tableView.dataSource = self
         tableView.isScrollEnabled = false
         tableView.register(HomeTodoCell.self, forCellReuseIdentifier: "HomeTodoCell")
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .clear
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 10
         tableView.separatorStyle = .none
@@ -146,6 +153,17 @@ final class HomeViewController: BaseViewController {
             for: .normal
         )
         $0.adjustsImageWhenHighlighted = false
+    }
+
+    private let calendarButton = UIButton().then {
+        $0.setImage(UIImage(named: "calendar_check"), for: .normal)
+        $0.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        $0.layer.shadowColor = UIColor(red: 0.737, green: 0.737, blue: 0.737, alpha: 1).cgColor
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowRadius = 8
+        $0.layer.shadowOffset = .zero
+        $0.layer.shadowPath = nil
+        $0.backgroundColor = Color.button_blue
     }
 
     private let generator = UIImpactFeedbackGenerator(style: .light)
@@ -178,6 +196,7 @@ final class HomeViewController: BaseViewController {
                 animated: false
             )
             self.updateGoal(goal: self.goals.first ?? nil)
+            self.todoTableView.reloadData()
         }
     }
 
@@ -302,6 +321,7 @@ extension HomeViewController: UIScrollViewDelegate {
             if goals.count > 0 {
                 updateGoal(goal: goals[roundedIndex % goals.count])
                 currentIndex = roundedIndex
+                todoTableView.reloadData()
                 setOpacityCell(index: roundedIndex, alpha: 1)
                 if roundedIndex > 0 && roundedIndex < maxIndex - 1 {
                     setOpacityCell(index: roundedIndex-1, alpha: 0.5)
@@ -328,10 +348,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: HomeTodoCell = todoTableView.dequeueReusableCell(indexPath: indexPath)
         cell.selectionStyle = .none
-        if let homeTodoGroup = self.homeTodoGroup {
-            cell.setData(historyTodoGroup: homeTodoGroup)
-        }
         cell.contentView.isUserInteractionEnabled = false
+
+        if !homeTodoGroup.isEmpty {
+            cell.setData(historyTodoGroup: homeTodoGroup[currentIndex])
+        }
+
         return cell
     }
 
@@ -339,30 +361,29 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableView.automaticDimension
     }
 
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let rankButton = UIButton().then {
-            guard let level = self.goals[currentIndex]?.level else { return }
-
-            $0.titleLabel?.font = UIFont.spoqa(size: 18, family: .bold)
-            $0.setTitle("명예의 전당", for: .normal)
-
-            if level > 5 {
-                $0.backgroundColor = Color.button_blue
-                $0.setTitleColor(Color.Gray000, for: .normal)
-                $0.isEnabled = false
-            } else {
-                $0.backgroundColor = Color.Gray300
-                $0.setTitleColor(Color.text_Teritary, for: .normal)
-                $0.isEnabled = true
-            }
-        }
-
-
-        // 명예의 전당 보내기
-//        rankButton.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
-
-        return rankButton
-    }
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let rankButton = UIButton().then {
+//            guard let level = self.goals[currentIndex]?.level else { return }
+//
+//            $0.titleLabel?.font = UIFont.spoqa(size: 18, family: .bold)
+//            $0.setTitle("명예의 전당", for: .normal)
+//
+//            if level > 5 {
+//                $0.backgroundColor = Color.button_blue
+//                $0.setTitleColor(Color.Gray000, for: .normal)
+//                $0.isEnabled = false
+//            } else {
+//                $0.backgroundColor = Color.Gray300
+//                $0.setTitleColor(Color.text_Teritary, for: .normal)
+//                $0.isEnabled = true
+//            }
+//        }
+//
+//        // 명예의 전당 보내기
+////        rankButton.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
+//
+//        return rankButton
+//    }
 }
 
 extension HomeViewController: UICollectionViewDelegate {
@@ -430,7 +451,8 @@ extension HomeViewController {
             goalLabel,
             leftChervonButton,
             rightChervonButton,
-            todoTableView
+            todoTableView,
+            calendarButton
         )
 
         textStackView.addArrangedSubviews(
@@ -495,11 +517,19 @@ extension HomeViewController {
             $0.centerY.equalTo(collectionView.snp.centerY).offset(12)
             $0.centerX.equalTo(collectionView.snp.centerX).offset(115)
         }
-        
+
         todoTableView.snp.makeConstraints {
             $0.top.equalTo(goalLabel.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview()
         }
+
+        calendarButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-44)
+            $0.width.height.equalTo(self.view.frame.size.width * 56 / 375)
+        }
+
+        calendarButton.layer.cornerRadius = (self.view.frame.size.width * 56 / 375) / 2
     }
 }

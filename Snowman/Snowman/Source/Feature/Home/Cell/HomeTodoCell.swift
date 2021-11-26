@@ -23,7 +23,7 @@ class HomeTodoCell: UITableViewCell {
 
     private let titleView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         return view
     }()
 
@@ -56,6 +56,14 @@ class HomeTodoCell: UITableViewCell {
         return stackView
     }()
 
+    private let emptyTodoLabel = UILabel().then {
+        $0.font = UIFont.spoqa(size: 14, family: .regular)
+        $0.textColor = Color.text_Teritary
+        $0.text = "아직 투두가 작성되지 않았어요 😢"
+        $0.sizeToFit()
+        $0.isHidden = true
+    }
+
     override func prepareForReuse() {
         titleLabel.text = nil
         stackView.removeAllArrangedSubviews()
@@ -78,25 +86,31 @@ class HomeTodoCell: UITableViewCell {
     }
 
     func setData(historyTodoGroup: HistoryTodoGroup) {
-
         self.type = historyTodoGroup.type
-
         switch historyTodoGroup.type {
-            case .blue:
-                characterImageView.image = UIImage(named: "char2_blue_history")
-            case .green:
-                characterImageView.image = UIImage(named: "char2_green_history")
-            case .orange:
-                characterImageView.image = UIImage(named: "char2_orange_history")
-            case .pink:
-                characterImageView.image = UIImage(named: "char2_pink_history")
+        case .blue:
+            characterImageView.image = UIImage(named: "char2_blue_history")
+        case .green:
+            characterImageView.image = UIImage(named: "char2_green_history")
+        case .orange:
+            characterImageView.image = UIImage(named: "char2_orange_history")
+        case .pink:
+            characterImageView.image = UIImage(named: "char2_pink_history")
         }
 
         titleLabel.text = historyTodoGroup.title
-        todoCountLabel.text = "\(historyTodoGroup.historyTodos.filter { $0.succeed == true }.count)/\(historyTodoGroup.historyTodos.count)"
+        let succeedNum = historyTodoGroup.historyTodos.filter { $0.succeed == true }.count
+        let totalNum = historyTodoGroup.historyTodos.count
 
-        for todo in historyTodoGroup.historyTodos {
-            addStackViewData(todo)
+        todoCountLabel.text = "\(succeedNum)/\(totalNum)"
+
+        if historyTodoGroup.historyTodos.isEmpty {
+            emptyTodoLabel.isHidden = false
+        } else {
+            emptyTodoLabel.isHidden = true
+            for todo in historyTodoGroup.historyTodos {
+                addStackViewData(todo)
+            }
         }
     }
 }
@@ -106,7 +120,8 @@ extension HomeTodoCell {
     private func setLayout() {
         self.addSubviews(
             titleView,
-            contextView)
+            contextView,
+            emptyTodoLabel)
 
         titleView.addSubviews(characterImageView,
                               titleLabel,
@@ -142,6 +157,11 @@ extension HomeTodoCell {
 
         stackView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
+        }
+
+        emptyTodoLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(65)
+            $0.centerX.equalToSuperview()
         }
     }
 }
