@@ -87,7 +87,7 @@ final class RankCollectionViewCell: UICollectionViewCell {
 }
 
 extension RankCollectionViewCell {
-    public func updateData(rankUserInfo: RankUserInfo, rank: Int) {
+    public func updateData(rankUserInfo: RankInfoResponse, rank: Int) {
         userNameLabel.text = rankUserInfo.userName
         snoweNameLabel.text = rankUserInfo.name
         goalLabel.text = rankUserInfo.objective

@@ -11,6 +11,7 @@ import Moya
 enum GoalAPI {
     case postNewGoal(name: String, type: String, objective: String)
     case getGoal(goalId: Int, date: String? = nil)
+    case deleteGoal(goalId: Int)
 }
 
 extension GoalAPI: BaseTargetType {
@@ -24,6 +25,8 @@ extension GoalAPI: BaseTargetType {
             } else {
                 return URLConst.goals + "/\(goalId)"
             }
+        case .deleteGoal(let goalId):
+            return URLConst.goals + "/\(goalId)"
         }
     }
 
@@ -33,6 +36,8 @@ extension GoalAPI: BaseTargetType {
             return .post
         case .getGoal:
             return .get
+        case .deleteGoal:
+            return .delete
         }
     }
 
@@ -45,6 +50,8 @@ extension GoalAPI: BaseTargetType {
                 "objective": objective
             ], encoding: JSONEncoding.default)
         case .getGoal:
+            return .requestPlain
+        case .deleteGoal:
             return .requestPlain
         }
     }

@@ -12,7 +12,21 @@ import Then
 
 final class NotificationViewController: BaseViewController {
 
-    private var alarms: [Alarm] = [] {
+    var nextPage: Int = 0
+    var isLast: Bool = false
+
+    private var data: GenericPageArrayResponse<AlarmResponse>? {
+        didSet {
+            guard let data = data else {
+                return
+            }
+            alarms.append(contentsOf: data.content)
+            nextPage = data.currentPage + 1
+            isLast = data.isLast
+        }
+    }
+
+    private var alarms: [AlarmResponse] = [] {
         didSet {
             noAlarmsLabel.isHidden = alarms.count != 0
             tableView.reloadData()
@@ -41,7 +55,7 @@ final class NotificationViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getAlarmList()
+        getAlarmList(page: nextPage)
     }
 
     override func viewDidLoad() {
@@ -54,6 +68,12 @@ final class NotificationViewController: BaseViewController {
 extension NotificationViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == alarms.count - 1 {
+            getAlarmList(page: nextPage)
+        }
     }
 }
 
@@ -70,16 +90,18 @@ extension NotificationViewController: UITableViewDataSource {
 }
 
 extension NotificationViewController {
-    private func getAlarmList() {
-        NetworkService.shared.user.getAlarmList { [weak self] result in
-            switch result {
-            case .success(let response):
-                guard let data = response as? [Alarm] else { return }
-                self?.alarms = data
-            case .requestErr(let errorResponse):
-                dump(errorResponse)
-            default:
-                print("error")
+    private func getAlarmList(page: Int) {
+        if !isLast {
+            NetworkService.shared.user.getAlarmList(page: page) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    guard let data = response as? GenericPageArrayResponse<AlarmResponse> else { return }
+                    self?.data = data
+                case .requestErr(let errorResponse):
+                    dump(errorResponse)
+                default:
+                    print("error")
+                }
             }
         }
     }

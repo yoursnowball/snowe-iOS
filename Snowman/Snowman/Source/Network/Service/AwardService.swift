@@ -57,7 +57,7 @@ final class AwardService {
 
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         switch statusCode {
-        case 200:
+        case 200..<300:
             switch responseData {
             case .getAwards, .getRank:
                 return isValidData(data: data, responseData: responseData)
@@ -82,7 +82,7 @@ final class AwardService {
             }
             return .success(decodedData)
         case .getRank:
-            guard let decodedData = try? decoder.decode(RankResponse.self, from: data) else {
+            guard let decodedData = try? decoder.decode(GenericPageArrayResponse<RankInfoResponse>.self, from: data) else {
                 return .pathErr
             }
             return .success(decodedData)

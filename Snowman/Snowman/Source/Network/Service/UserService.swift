@@ -39,9 +39,10 @@ final class UserService {
     }
 
     public func getAlarmList(
+        page: Int,
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-        goalProvider.request(.getAlarms) { result in
+        goalProvider.request(.getAlarms(page: page)) { result in
             switch result {
             case.success(let response):
 
@@ -79,7 +80,7 @@ final class UserService {
 
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         switch statusCode {
-        case 200:
+        case 200..<300:
             switch responseData {
             case .getUsers, .getAlarmList, .postFCMToken:
                 return isValidData(data: data, responseData: responseData)
@@ -104,10 +105,10 @@ final class UserService {
             }
             return .success(decodedData)
         case .getAlarmList:
-            guard let decodedData = try? decoder.decode(AlarmsResponse.self, from: data) else {
+            guard let decodedData = try? decoder.decode(GenericPageArrayResponse<AlarmResponse>.self, from: data) else {
                 return .pathErr
             }
-            return .success(decodedData.alarms)
+            return .success(decodedData)
         case .postFCMToken:
             guard let decodedData = try? decoder.decode(String.self, from: data) else {
                 return .pathErr
