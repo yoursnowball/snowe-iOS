@@ -19,11 +19,18 @@ extension Date {
     var year: Int {
         return Calendar.current.component(.year, from: self)
     }
-    
+
     func toString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone(identifier: "UTC")
         return dateFormatter.string(from: self)
+    }
+    
+    func getTodayString() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
     }
 }
