@@ -25,6 +25,10 @@ enum URLConst {
 
     /// 회원가입
     static let signUp = "/auth/sign-up"
+    
+    // MARK: - Todo
+    /// 투두
+    static let todo = "/todos"
 
     // MARK: - User
     /// 내 정보 가져오기 - 홈
