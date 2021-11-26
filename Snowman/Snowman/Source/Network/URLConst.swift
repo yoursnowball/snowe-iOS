@@ -7,7 +7,7 @@
 
 enum URLConst {
     // MARK: - baseURL
-    static let base = "http://52.79.60.149:8080"
+    static let base = "http://snowe.ml"
 
     // MARK: - Goal
     static let goals = "/goals"

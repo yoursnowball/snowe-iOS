@@ -68,7 +68,7 @@ final class PopUpViewController: UIViewController {
     }
 
     private func makeDimBackground() {
-        view.backgroundColor = .black.withAlphaComponent(0.4)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
     }
 
     public func setText(
