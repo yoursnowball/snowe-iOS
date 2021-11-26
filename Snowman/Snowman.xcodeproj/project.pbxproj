@@ -27,10 +27,13 @@
 		C7C9CDFF2737625F00DC2A09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7C9CDFD2737625F00DC2A09 /* LaunchScreen.storyboard */; };
 		C7D38D722748D5440049F3AA /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D38D712748D5440049F3AA /* DateFormatters.swift */; };
 		C7D38D782748D8090049F3AA /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D38D772748D8090049F3AA /* Date+.swift */; };
-		C7D92FCD274E6A4F00DAA184 /* TodayTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FCC274E6A4F00DAA184 /* TodayTodo.swift */; };
 		C7D92FBF274D1D4400DAA184 /* HistoryTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FBE274D1D4400DAA184 /* HistoryTodo.swift */; };
 		C7D92FC2274D402E00DAA184 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FC1274D402E00DAA184 /* String+.swift */; };
 		C7D92FC5274D442F00DAA184 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FC4274D442F00DAA184 /* Sequence+.swift */; };
+		C7D92FD4274E6D4100DAA184 /* HomeTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FD3274E6D4100DAA184 /* HomeTodoCell.swift */; };
+		C7D92FD8274E874700DAA184 /* TodoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FD7274E874700DAA184 /* TodoAPI.swift */; };
+		C7D92FDF274E89C400DAA184 /* TodoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FDE274E89C400DAA184 /* TodoService.swift */; };
+		C7D92FE2274E8AA200DAA184 /* PutTodoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FE1274E8AA200DAA184 /* PutTodoResponse.swift */; };
 		C7DE7FC7274A5B6B00C8DFB4 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FC6274A5B6B00C8DFB4 /* HistoryViewController.swift */; };
 		C7DE7FCB274A6CEC00C8DFB4 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FCA274A6CEC00C8DFB4 /* HistoryCell.swift */; };
 		C7DE7FD2274A830300C8DFB4 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FD1274A830300C8DFB4 /* SignInViewController.swift */; };
@@ -135,10 +138,13 @@
 		C7C9CE002737625F00DC2A09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D38D712748D5440049F3AA /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 		C7D38D772748D8090049F3AA /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
-		C7D92FCC274E6A4F00DAA184 /* TodayTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTodo.swift; sourceTree = "<group>"; };
 		C7D92FBE274D1D4400DAA184 /* HistoryTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTodo.swift; sourceTree = "<group>"; };
 		C7D92FC1274D402E00DAA184 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		C7D92FC4274D442F00DAA184 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
+		C7D92FD3274E6D4100DAA184 /* HomeTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTodoCell.swift; sourceTree = "<group>"; };
+		C7D92FD7274E874700DAA184 /* TodoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAPI.swift; sourceTree = "<group>"; };
+		C7D92FDE274E89C400DAA184 /* TodoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoService.swift; sourceTree = "<group>"; };
+		C7D92FE1274E8AA200DAA184 /* PutTodoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutTodoResponse.swift; sourceTree = "<group>"; };
 		C7DE7FC6274A5B6B00C8DFB4 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		C7DE7FCA274A6CEC00C8DFB4 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		C7DE7FD1274A830300C8DFB4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -357,7 +363,6 @@
 			children = (
 				DD02A9792748C09A00D9B324 /* Snowe.swift */,
 				DD02A97E2749482900D9B324 /* NewGoal.swift */,
-				C7D92FCC274E6A4F00DAA184 /* TodayTodo.swift */,
 				C7D92FBE274D1D4400DAA184 /* HistoryTodo.swift */,
 			);
 			path = AppModel;
@@ -386,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				DD02A98D2749766500D9B324 /* SnoweCollectionViewCell.swift */,
+				C7D92FD3274E6D4100DAA184 /* HomeTodoCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -510,6 +516,7 @@
 				DD02A98227495D9E00D9B324 /* AwardAPI.swift */,
 				C7F65E2D274BC50200D57086 /* AuthAPI.swift */,
 				DDF283C4274C04E800C426D7 /* UserAPI.swift */,
+				C7D92FD7274E874700DAA184 /* TodoAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -521,6 +528,7 @@
 				DD02A98427495F5700D9B324 /* AwardService.swift */,
 				C7F65E30274BC50900D57086 /* AuthService.swift */,
 				DDF283C6274C064A00C426D7 /* UserService.swift */,
+				C7D92FDE274E89C400DAA184 /* TodoService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -538,6 +546,7 @@
 				C7F65E33274BCB5400D57086 /* AuthResponse.swift */,
 				DDF283CF274C3BCF00C426D7 /* AlarmsResponse.swift */,
 				DDBF0A6C274CE88F00DA429D /* RankResponse.swift */,
+				C7D92FE1274E8AA200DAA184 /* PutTodoResponse.swift */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -806,10 +815,10 @@
 				C768D12A27499E04000E0677 /* CalendarView+Extensions.swift in Sources */,
 				C768D131274A032E000E0677 /* ContentSizedTableView.swift in Sources */,
 				DD894D3527473FF7004AF5A6 /* CharacterCollectionViewCell.swift in Sources */,
-				C7D92FCD274E6A4F00DAA184 /* TodayTodo.swift in Sources */,
 				DDD7489F27477B980056C505 /* AwardTableViewCell.swift in Sources */,
 				DDBF0A6D274CE88F00DA429D /* RankResponse.swift in Sources */,
 				DD86CBF52748278E00F6EC8D /* TodoResponse.swift in Sources */,
+				C7D92FD8274E874700DAA184 /* TodoAPI.swift in Sources */,
 				C7F65E2E274BC50200D57086 /* AuthAPI.swift in Sources */,
 				C7DE7FCB274A6CEC00C8DFB4 /* HistoryCell.swift in Sources */,
 				DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */,
@@ -828,6 +837,7 @@
 				DD02A98127495CF000D9B324 /* AwardsResponse.swift in Sources */,
 				DD02A98E2749766500D9B324 /* SnoweCollectionViewCell.swift in Sources */,
 				DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */,
+				C7D92FDF274E89C400DAA184 /* TodoService.swift in Sources */,
 				DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */,
 				DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */,
 				C7F65E34274BCB5400D57086 /* AuthResponse.swift in Sources */,
@@ -842,6 +852,7 @@
 				C768D12E27499E04000E0677 /* CalendarView+Delegate.swift in Sources */,
 				DD894D2D27473833004AF5A6 /* GoalQuestionViewController.swift in Sources */,
 				DD70F2FD27411EFB0053374B /* Image.swift in Sources */,
+				C7D92FD4274E6D4100DAA184 /* HomeTodoCell.swift in Sources */,
 				DD02A98727496ABF00D9B324 /* LevelStickerView.swift in Sources */,
 				C768D12727499E04000E0677 /* CalendarHeaderView.swift in Sources */,
 				C75A5916274687AE0001CDD1 /* CalendarViewController.swift in Sources */,
@@ -849,6 +860,7 @@
 				DD02A98B2749762300D9B324 /* HomeViewController.swift in Sources */,
 				DD02A98327495D9E00D9B324 /* AwardAPI.swift in Sources */,
 				DDFAF150274583F0005A3097 /* UITableVIew+Reusable.swift in Sources */,
+				C7D92FE2274E8AA200DAA184 /* PutTodoResponse.swift in Sources */,
 				DD70F2FF27411F020053374B /* Color.swift in Sources */,
 				DDF283C5274C04E800C426D7 /* UserAPI.swift in Sources */,
 				DD86CBEF2748257B00F6EC8D /* ErrorResponse.swift in Sources */,

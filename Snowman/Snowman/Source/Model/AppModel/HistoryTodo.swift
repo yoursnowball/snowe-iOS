@@ -18,4 +18,6 @@ struct HistoryTodoGroup {
 struct HistoryTodo {
     var name: String
     var succeed: Bool
+    var goalId: Int? = nil
+    var todoId: Int? = nil
 }
