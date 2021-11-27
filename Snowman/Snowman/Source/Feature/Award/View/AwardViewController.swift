@@ -75,7 +75,7 @@ extension AwardViewController: UITableViewDataSource {
         if let characterType = Snowe(rawValue: awards[indexPath.row].type) {
             cell.updateAwardData(
                 with: characterType,
-                goalText: awards[indexPath.row].name,
+                goalText: awards[indexPath.row].objective,
                 nameText: awards[indexPath.row].name,
                 level: awards[indexPath.row].level,
                 goalId: awards[indexPath.row].id,
