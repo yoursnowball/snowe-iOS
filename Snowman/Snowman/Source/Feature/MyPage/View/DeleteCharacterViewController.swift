@@ -12,9 +12,10 @@ class DeleteCharacterViewController: BaseViewController {
     private var userResponse: UserResponse? {
         didSet {
             guard let response = userResponse else { return }
-            self.goals = response.goals
-            self.goalsCount = response.goalCount
-            self.tableView.reloadData()
+            goals = response.goals
+            goalsCount = response.goalCount
+            tableView.reloadData()
+            noCharacterLabel.isHidden = response.goalCount != 0
         }
     }
 
@@ -46,6 +47,7 @@ class DeleteCharacterViewController: BaseViewController {
         $0.textColor = .lightGray
         $0.numberOfLines = 2
         $0.textAlignment = .center
+        $0.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +82,7 @@ extension DeleteCharacterViewController: UITableViewDataSource {
             if let characterType = Snowe(rawValue: goal.type) {
                 cell.updateMyPageData(
                     with: characterType,
-                    goalText: goal.name,
+                    goalText: goal.objective,
                     nameText: goal.name,
                     level: goal.level,
                     goalId: goal.id

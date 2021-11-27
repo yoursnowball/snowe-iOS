@@ -58,7 +58,7 @@ final class UserService {
         }
     }
 
-    public func postFCMToken(
+    public func postPushToken(
         fcm: String,
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
@@ -77,6 +77,21 @@ final class UserService {
             }
         }
     }
+
+    public func deletePushToken(
+        completion: @escaping (Int) -> Void
+    ) {
+        goalProvider.request(.deletePushToken) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                completion(statusCode)
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+
 
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         switch statusCode {

@@ -16,14 +16,14 @@ class SignUpPasswordViewController: UIViewController {
     var isButtonStatusChange: Bool = false {
         didSet {
             if isButtonStatusChange {
-                signUpButton.setBackgroundColor(UIColor.blue, for: .normal)
+                signUpButton.setBackgroundColor(Color.button_blue, for: .normal)
                 signUpButton.isEnabled = true
                 passwordTextField.returnKeyType = .done
                 passwordCheckTextField.returnKeyType = .done
                 passwordTextField.reloadInputViews()
                 passwordCheckTextField.reloadInputViews()
             } else {
-                signUpButton.setBackgroundColor(UIColor.gray, for: .normal)
+                signUpButton.setBackgroundColor(Color.Gray500, for: .normal)
                 signUpButton.isEnabled = false
                 passwordTextField.returnKeyType = .default
                 passwordCheckTextField.returnKeyType = .default
@@ -51,18 +51,17 @@ class SignUpPasswordViewController: UIViewController {
 
     let passwordCheckTextField = UITextField()
 
-    let signUpButton = UIButton().then {
+    let signUpButton = UIButton(type: .system).then {
         $0.setTitle("회원가입", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        $0.setBackgroundColor(UIColor.gray, for: .normal)
+        $0.setBackgroundColor(Color.Gray500, for: .normal)
         $0.isEnabled = false
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-//        setNavBar()
+        title = ViewTitle.signUp
         setIdTextField()
         setPasswordTextField()
         setLayouts()
@@ -99,13 +98,6 @@ class SignUpPasswordViewController: UIViewController {
     @objc private func focusToUnderButtonDidTap() {
         passwordTextField.resignFirstResponder()
         passwordCheckTextField.becomeFirstResponder()
-    }
-
-    private func setNavBar() {
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.title = "회원가입"
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.shadowImage = UIImage()
     }
 
     func signUp() {
@@ -154,7 +146,7 @@ class SignUpPasswordViewController: UIViewController {
     func setIdTextField() {
         passwordTextField.placeholder = "아이디"
         passwordTextField.delegate = self
-        passwordTextField.backgroundColor = UIColor.lightGray
+        passwordTextField.backgroundColor = Color.Gray300
         passwordTextField.isSecureTextEntry = true
         passwordTextField.clipsToBounds = true
         passwordTextField.layer.cornerRadius = 8
@@ -170,7 +162,7 @@ class SignUpPasswordViewController: UIViewController {
     func setPasswordTextField() {
         passwordCheckTextField.placeholder = "비밀번호"
         passwordCheckTextField.delegate = self
-        passwordCheckTextField.backgroundColor = UIColor.lightGray
+        passwordCheckTextField.backgroundColor = Color.Gray300
         passwordCheckTextField.isSecureTextEntry = true
         passwordCheckTextField.isSecureTextEntry = true
         passwordCheckTextField.clipsToBounds = true
