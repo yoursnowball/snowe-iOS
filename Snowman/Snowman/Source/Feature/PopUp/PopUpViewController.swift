@@ -71,6 +71,7 @@ final class PopUpViewController: UIViewController {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
     }
 
+    /// 버튼이 하나라면 rightButtonText 에만 넣어주시고, leftButtonText 에는 nil을 넣어주세요
     public func setText(
         title: String?,
         content: String,
@@ -81,6 +82,7 @@ final class PopUpViewController: UIViewController {
         contentLabel.text = content
         leftButton.setTitle(leftButtonText, for: .normal)
         rightButton.setTitle(rightButtonText, for: .normal)
+        leftButton.isHidden = leftButtonText == nil
     }
 }
 
@@ -117,7 +119,7 @@ extension PopUpViewController {
         }
 
         buttonStackView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.leading.trailing.equalToSuperview().inset(leftButton.isHidden ? 82 : 20)
             $0.bottom.equalToSuperview().inset(20)
             $0.height.equalTo(36)
         }
