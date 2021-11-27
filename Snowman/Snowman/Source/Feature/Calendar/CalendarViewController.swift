@@ -9,12 +9,26 @@ import UIKit
 import SnapKit
 import Then
 
+
+// 목표 설정 버튼 연결하기
+
 class CalendarViewController: BaseViewController {
 
     var goalIds: [Int] = []
-    private var goals: [GoalResponse?] = []
-    private var calendarTodoGroup: [HistoryTodoGroup] = []
-    lazy var selectedDate: String = getTodayString()
+
+    var goals: [GoalResponse] = [] {
+        didSet {
+            if goals.count == goalIds.count {
+                let succeedCount = goals.flatMap { $0.todos }.filter { $0.succeed == true }.count
+                let totalCount = goals.flatMap { $0.todos }.map { $0.succeed }.count
+                todoCountLabel.text = "\(succeedCount)/\(totalCount)"
+
+                self.todoTableView.reloadData()
+            }
+        }
+    }
+
+    private lazy var selectedDate: String = Date.getTodayString()
 
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -53,8 +67,7 @@ class CalendarViewController: BaseViewController {
         $0.sizeToFit()
     }
     
-    var todoCount = UILabel().then {
-        $0.text = "30/30"
+    var todoCountLabel = UILabel().then {
         $0.font = UIFont.spoqa(size: 14, family: .regular)
         $0.textColor = .lightGray
         $0.sizeToFit()
@@ -70,21 +83,31 @@ class CalendarViewController: BaseViewController {
     
     var noGoalLabel = UILabel().then {
         $0.font = UIFont.spoqa(size: 14, family: .regular)
-        $0.textColor = .lightGray
+        $0.textColor = Color.text_Teritary
         $0.text = "아직 목표 설정을 하지 않았어요!"
         $0.textAlignment = .center
     }
     
     var setGoalButton = UIButton().then {
         $0.layer.cornerRadius = 10
-        $0.backgroundColor = .blue
+        $0.backgroundColor = Color.button_blue
         $0.setTitle("목표 설정", for: .normal)
         $0.titleLabel?.font = UIFont.spoqa(size: 18, family: .bold)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(Color.Gray000, for: .normal)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if goalIds.count == 0 {
+            noGoalLabel.isHidden = false
+            setGoalButton.isHidden = false
+            todoTableView.isHidden = true
+        } else {
+            noGoalLabel.isHidden = true
+            setGoalButton.isHidden = true
+            todoTableView.isHidden = false
+        }
 
         calendarView = CalendarView()
 
@@ -102,26 +125,21 @@ class CalendarViewController: BaseViewController {
         myStyle.headerTextColor          = UIColor.black
         myStyle.headerHeight             = 30
         
-        myStyle.cellTextColorDefault     = UIColor.gray
-        myStyle.cellTextColorToday       = UIColor.gray
-        myStyle.cellTextColorWeekend     = UIColor.gray
+        myStyle.cellTextColorDefault     = Color.text_Secondary
+        myStyle.cellTextColorToday       = Color.text_Secondary
+        myStyle.cellTextColorWeekend     = Color.text_Secondary
         myStyle.cellColorOutOfRange      = UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1.0)
-        myStyle.cellSelectedTextColor    = UIColor.blue
+        myStyle.cellSelectedTextColor    = Color.line_blue
 
         myStyle.headerBackgroundColor    = UIColor.white
         myStyle.weekdaysBackgroundColor  = UIColor.white
         myStyle.firstWeekday             = .sunday
         myStyle.locale                   = Locale(identifier: "ko_KR")
 
-        
-        
-        // 폰트 수정하기
         myStyle.cellFont = UIFont.systemFont(ofSize: 16, weight: .heavy)
         myStyle.headerFont = UIFont.systemFont(ofSize: 17, weight: .bold)
         myStyle.weekdaysFont = UIFont.systemFont(ofSize: 16, weight: .heavy)
 
-        
-        
         calendarView.style = myStyle
         
         calendarView.dataSource = self
@@ -132,11 +150,17 @@ class CalendarViewController: BaseViewController {
         
         calendarView.backgroundColor = UIColor.white
         
+        let today = Date()
+        self.calendarView.selectDate(today)
+        self.calendarView.setDisplayDate(today)
+        
         
         todoTableView.delegate = self
         todoTableView.dataSource = self
         todoTableView.isScrollEnabled = false
         todoTableView.register(CalendarTodoCell.self, forCellReuseIdentifier: "CalendarTodoCell")
+        
+        getTodos()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,49 +169,28 @@ class CalendarViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let today = Date()
-        
-        var tomorrowComponents = DateComponents()
-        tomorrowComponents.day = 1
-        
-        let tomorrow = self.calendarView.calendar.date(byAdding: tomorrowComponents, to: today)!
-        self.calendarView.selectDate(tomorrow)
-        self.calendarView.setDisplayDate(today)
-        
-//        todoTableView.updateConstraint(attribute: NSLayoutConstraint.Attribute.height, constant: todoTableView.contentSize.height)
-        todoTableView.reloadData()
-        
-        
-        
-        
-        // 네트워크 통해서 조건 추가하기
-        todoTableView.isHidden = false
     }
     
+    
+    
+    
+    // 날짜 바뀔때마다 호출
+    // goals 배열 비워주고 다시 채우기
     func getTodos() {
-        
         for goalId in goalIds {
             NetworkService.shared.goal.getGoal(goalId: goalId,
                                                date: selectedDate) { [weak self] result in
                 switch result {
                 case .success(let response):
                     guard let data = response as? GoalResponse else { return }
-                    
+                    self?.goals.append(data)
                 case .requestErr(let errorResponse):
                     dump(errorResponse)
                 default:
-                    print("history - error")
+                    print("calendar getTodos - error")
                 }
             }
         }
-    }
-    
-    func getTodayString() -> String {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: date)
     }
 }
 
@@ -197,7 +200,6 @@ extension CalendarViewController: CalendarViewDataSource {
     }
     
     func startDate() -> Date {
-        
         var dateComponents = DateComponents()
         dateComponents.month = -1
         
@@ -208,7 +210,6 @@ extension CalendarViewController: CalendarViewDataSource {
     }
     
     func endDate() -> Date {
-        
         var dateComponents = DateComponents()
         dateComponents.month = 12
         
@@ -216,7 +217,6 @@ extension CalendarViewController: CalendarViewDataSource {
         let twoYearsFromNow = self.calendarView.calendar.date(byAdding: dateComponents, to: today)!
         
         return twoYearsFromNow
-  
     }}
 
 extension CalendarViewController: CalendarViewDelegate {
@@ -228,19 +228,19 @@ extension CalendarViewController: CalendarViewDelegate {
     }
     
     func calendar(_ calendar: CalendarView, canSelectDate date: Date) -> Bool {
-        print("new date \(date)")
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        let selectedDate = dateFormatter.string(from: date)
+        print("selected date \(selectedDate)")
+        
+        // 오늘 이전 날짜면 투두 입력 못 하게 막기
+
         return true
     }
     
     func calendar(_ calendar: CalendarView, didSelectDate date : Date, withEvents events: [CalendarEvent]) {
-        print("Did Select: \(date) with \(events.count) events")
-        
-        for event in events {
-            print("\t\"\(event.title)\" - Starting at:\(event.startDate)")
-        }
-        
-        
-        // 오늘 이전 날짜면 투두 입력 못 하게 막기
     }
 
     func calendar(_ calendar: CalendarView, didLongPressDate date : Date, withEvents events: [CalendarEvent]?) {
@@ -255,7 +255,14 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CalendarTodoCell = todoTableView.dequeueReusableCell(withIdentifier: "CalendarTodoCell", for: indexPath) as! CalendarTodoCell
         cell.selectionStyle = .none
-        cell.setData(historyTodoGroup: calendarTodoGroup[indexPath.item])
+        cell.cvc = self
+        cell.selectedDate = selectedDate
+
+        if !goals.isEmpty {
+            cell.setData(goalResponse: goals[indexPath.item])
+            cell.goalId = goalIds[indexPath.item]
+        }
+
         cell.contentView.isUserInteractionEnabled = false
         return cell
     }
@@ -276,7 +283,7 @@ extension CalendarViewController {
             calendarView,
             lineView,
             todoLabel,
-            todoCount,
+            todoCountLabel,
             todoTableView,
             noGoalLabel,
             setGoalButton)
@@ -323,7 +330,7 @@ extension CalendarViewController {
             $0.height.equalTo(1)
         }
         
-        todoCount.snp.makeConstraints {
+        todoCountLabel.snp.makeConstraints {
             $0.centerY.equalTo(lineView)
             $0.trailing.equalToSuperview().offset(-20)
             
@@ -331,7 +338,7 @@ extension CalendarViewController {
         
         todoLabel.snp.makeConstraints {
             $0.centerY.equalTo(lineView)
-            $0.trailing.equalTo(todoCount.snp.leading).offset(-5)
+            $0.trailing.equalTo(todoCountLabel.snp.leading).offset(-5)
             $0.leading.equalTo(lineView.snp.trailing).offset(6)
         }
         

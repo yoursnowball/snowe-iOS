@@ -11,7 +11,9 @@ import SnapKit
 
 class CalendarTodoCell: UITableViewCell {
     var type: Snowe?
-    var historyTodoGroup: HistoryTodoGroup?
+    var goalId: Int?
+    var cvc: CalendarViewController?
+    var selectedDate: String?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,6 +70,7 @@ class CalendarTodoCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+        addButton.addTarget(self, action: #selector(addTodo), for: .touchUpInside)
     }
 
     @available(*, unavailable)
@@ -81,9 +84,9 @@ class CalendarTodoCell: UITableViewCell {
         stackView.isUserInteractionEnabled = true
     }
 
-    func setData(historyTodoGroup: HistoryTodoGroup) {
-        self.type = historyTodoGroup.type
-        switch historyTodoGroup.type {
+    func setData(goalResponse: GoalResponse) {
+        self.type = Snowe(rawValue: goalResponse.type)
+        switch self.type {
         case .blue:
             characterImageView.image = UIImage(named: "char2_blue_history")
         case .green:
@@ -92,19 +95,37 @@ class CalendarTodoCell: UITableViewCell {
             characterImageView.image = UIImage(named: "char2_orange_history")
         case .pink:
             characterImageView.image = UIImage(named: "char2_pink_history")
+        case .none:
+            break
         }
 
-        titleLabel.text = historyTodoGroup.title
-        let succeedNum = historyTodoGroup.historyTodos.filter { $0.succeed == true }.count
-        let totalNum = historyTodoGroup.historyTodos.count
+        titleLabel.text = goalResponse.objective
+        let succeedNum = goalResponse.todos.filter { $0.succeed == true }.count
+        let totalNum = goalResponse.todos.count
 
         todoCountLabel.text = "\(succeedNum)/\(totalNum)"
 
-        if !historyTodoGroup.historyTodos.isEmpty {
-            for todo in historyTodoGroup.historyTodos {
+        if !goalResponse.todos.isEmpty {
+            for todo in goalResponse.todos {
                 addStackViewData(todo)
             }
         }
+    }
+    
+    @objc func addTodo() {
+        guard let goalId = goalId else { return }
+        guard let cvc = cvc else { return }
+
+        postTodo() { result in
+            for i in 0..<cvc.goals.count {
+                if cvc.goals[i].id == goalId {
+                    cvc.goals[i].todos = result.todos
+                    break
+                }
+            }
+        }
+        
+        cvc.todoTableView.reloadData()
     }
 }
 
@@ -162,7 +183,7 @@ extension CalendarTodoCell {
 
 // MARK: - addStackViewData
 extension CalendarTodoCell {
-    private func addStackViewData(_ todo: HistoryTodo) {
+    private func addStackViewData(_ todo: TodoResponse) {
         let backView = UIView()
 
         let checkButtonImage = UIImageView().then {
@@ -202,8 +223,9 @@ extension CalendarTodoCell {
         let todoView = TodoView().then {
             $0.backgroundColor = .lightGray
             $0.layer.cornerRadius = 8
-            $0.goalId = todo.goalId
-            $0.todoId = todo.todoId
+            $0.todoId = todo.id
+            $0.name = todo.name
+            $0.succeed = todo.succeed
         }
 
         backView.addSubview(todoView)
@@ -214,7 +236,6 @@ extension CalendarTodoCell {
             todoSelectButton)
 
         addSubview(backView)
-
         stackView.addArrangedSubview(backView)
 
         backView.snp.makeConstraints {
@@ -254,13 +275,33 @@ extension CalendarTodoCell {
 
     @objc func checkTodo(sender: UIButton) {
         if let todoView = sender.superview as? TodoView {
-//            todoView.goalId
-//            todoView.todoId
+            putTodo(todoId: todoView.todoId,
+                    name: todoView.name,
+                    succeed: !todoView.succeed) { [weak self] result in
+                if result.isLevelUp {
+                    // 레벨업 됐을 때 화면
+                } else {
+                    guard let goalId = self?.goalId else { return }
+                    guard let cvc = self?.cvc else { return }
+
+                    for i in 0..<cvc.goals.count {
+                        if cvc.goals[i].id == goalId {
+                            for j in 0..<cvc.goals[i].todos.count {
+                                if cvc.goals[i].todos[j].id == todoView.todoId {
+                                    cvc.goals[i].todos[j].succeed = !cvc.goals[i].todos[j].succeed
+                                    cvc.todoTableView.reloadData()
+                                    break
+                                }
+                            }
+                            break
+                        }
+                    }
+                }
+            }
         }
     }
 
     @objc func showTodoMenu(sender: UIButton) {
-
         if let todoView = sender.superview as? TodoView {
 //            todoView.goalId
 //            todoView.todoId
@@ -275,9 +316,83 @@ extension CalendarTodoCell {
 
 extension CalendarTodoCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let todoView = textField.superview as? TodoView {
-//            todoView.goalId
-//            todoView.todoId
+        if let todoView = textField.superview as? TodoView, let text = textField.text {
+            putTodo(todoId: todoView.todoId,
+                    name: text,
+                    succeed: !todoView.succeed) { [weak self] result in
+                if result.isLevelUp {
+                    // 레벨업 됐을 때 화면
+                } else {
+                    guard let goalId = self?.goalId else { return }
+                    guard let cvc = self?.cvc else { return }
+
+                    for i in 0..<cvc.goals.count {
+                        if cvc.goals[i].id == goalId {
+                            for j in 0..<cvc.goals[i].todos.count {
+                                if cvc.goals[i].todos[j].id == todoView.todoId {
+                                    cvc.goals[i].todos[j].name = text
+                                    cvc.todoTableView.reloadData()
+                                    break
+                                }
+                            }
+                            break
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension CalendarTodoCell {
+    func postTodo(completion: @escaping(PostTodoResponse) -> Void) {
+        guard let goalId = goalId else { return }
+        guard let date = selectedDate else { return }
+
+        NetworkService.shared.todo.postTodo(goalId: goalId,
+                                            date: date,
+                                            todo: "") { result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? PostTodoResponse else { return }
+                completion(data)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("calendar todo cell - postTodo error")
+            }
+        }
+    }
+
+    func putTodo(todoId: Int, name: String, succeed: Bool, completion: @escaping(PutTodoResponse) -> Void) {
+        guard let goalId = goalId else { return }
+        NetworkService.shared.todo.putTodo(goalId: goalId,
+                                           todoId: todoId,
+                                           name: name,
+                                           succeed: succeed) { result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? PutTodoResponse else { return }
+                completion(data)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("calendar todo cell - putTodo error")
+            }
+        }
+    }
+
+    func deleteTodo(todoId: Int, completion: @escaping() -> Void) {
+        guard let goalId = goalId else { return }
+        NetworkService.shared.todo.deleteTodo(goalId: goalId, todoId: todoId) { result in
+            switch result {
+            case .success(_):
+                completion()
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("calendar todo cell - deleteTodo error")
+            }
         }
     }
 }
