@@ -8,7 +8,7 @@
 struct TodoResponse: Codable {
     let createdAt, finishedAt: String
     let id: Int
-    let name: String
-    let succeed: Bool
+    var name: String
+    var succeed: Bool
     let todoDate: String
 }
