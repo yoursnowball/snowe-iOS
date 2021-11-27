@@ -32,7 +32,7 @@ final class AwardTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = UIColor.white
+        selectionStyle = .none
         setLayouts()
     }
 

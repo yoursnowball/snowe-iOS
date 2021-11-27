@@ -9,8 +9,10 @@ import Foundation
 
 enum ViewTitle {
 
-    /// 온보딩
+    /// 로그인
     static let login = "로그인"
+
+    /// 회원가입
     static let signUp = "회원가입"
 
     /// 알림
@@ -21,7 +23,11 @@ enum ViewTitle {
 
     /// 마이페이지
     static let myPage = "마이페이지"
+
+    /// 제작작자들
     static let makerInfo = "제작자들"
+
+    /// 캐릭터 삭제
     static let deleteCharacter = "캐릭터 삭제"
 
 }
