@@ -9,21 +9,14 @@ import UIKit
 import SnapKit
 import Then
 
-
-
-
-
-
-
-
-// 목표 설정 버튼 연결하기
-// 년도, 월 binding
-
-
 class CalendarViewController: BaseViewController {
 
     var goalIds: [Int] = []
 
+    
+    
+    // 과거 날짜 선택했을 때 어떻게 할지 생각하기
+    // 과거 날짜만으로 이전 목표, 투두 가져오는 API가 없음
     var goals: [GoalResponse] = [] {
         didSet {
             if goals.count == goalIds.count {
@@ -32,6 +25,8 @@ class CalendarViewController: BaseViewController {
                 todoCountLabel.text = "\(succeedCount)/\(totalCount)"
 
                 self.todoTableView.reloadData()
+            } else {
+                
             }
         }
     }
@@ -54,9 +49,8 @@ class CalendarViewController: BaseViewController {
     }()
     
     var yearMonthLabel = UILabel().then {
-        $0.text = "2021 OCT"
-        $0.textColor = .black
-        $0.sizeToFit()
+        $0.textColor = Color.text_Primary
+        $0.font = UIFont.spoqa(size: 16, family: .bold)
     }
     
     var previousMonthButton = UIButton().then {
@@ -70,19 +64,19 @@ class CalendarViewController: BaseViewController {
     var calendarView: CalendarView!
     
     var lineView = UIView().then {
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = Color.Gray300
     }
     
     var todoLabel = UILabel().then {
         $0.text = "Todo"
         $0.font = UIFont.spoqa(size: 14, family: .bold)
-        $0.textColor = .black
+        $0.textColor = Color.text_Primary
         $0.sizeToFit()
     }
     
     var todoCountLabel = UILabel().then {
         $0.font = UIFont.spoqa(size: 14, family: .regular)
-        $0.textColor = .lightGray
+        $0.textColor = Color.text_Teritary
         $0.sizeToFit()
     }
     
@@ -166,8 +160,11 @@ class CalendarViewController: BaseViewController {
         let today = Date()
         self.calendarView.selectDate(today)
         self.calendarView.setDisplayDate(today)
-        
-        
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy MMM"
+        yearMonthLabel.text = dateFormatter.string(from: today).uppercased()
+
         todoTableView.delegate = self
         todoTableView.dataSource = self
         todoTableView.isScrollEnabled = false
@@ -229,7 +226,9 @@ extension CalendarViewController: CalendarViewDataSource {
 
 extension CalendarViewController: CalendarViewDelegate {
     func calendar(_ calendar: CalendarView, didScrollToMonth date: Date) {
-        print("change month")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy MMM"
+        yearMonthLabel.text = dateFormatter.string(from: date).uppercased()
     }
     
     func calendar(_ calendar: CalendarView, didDeselectDate date: Date) {
@@ -239,10 +238,8 @@ extension CalendarViewController: CalendarViewDelegate {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        selectedDate = dateFormatter.string(from: date)
 
-        let selectedDate = dateFormatter.string(from: date)
-        print("selected date \(selectedDate)")
-        
         // 오늘 이전 날짜면 투두 입력 못 하게 막기
 
         return true
@@ -310,6 +307,7 @@ extension CalendarViewController {
             $0.top.equalToSuperview().offset(3)
             $0.leading.equalToSuperview().offset(20)
             $0.height.equalTo(20)
+            $0.width.equalTo(80)
         }
         
         previousMonthButton.snp.makeConstraints {
