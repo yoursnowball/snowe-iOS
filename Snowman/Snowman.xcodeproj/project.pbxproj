@@ -44,7 +44,7 @@
 		C7EDAD23274563EA008C699C /* SpoqaHanSansNeo-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD20274563E8008C699C /* SpoqaHanSansNeo-bold.otf */; };
 		C7EDAD24274563EA008C699C /* SpoqaHanSansNeo-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */; };
 		C7EDAD25274563EA008C699C /* SpoqaHanSansNeo-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */; };
-		C7F4B8E427497EB0002DD317 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4B8E327497EB0002DD317 /* TodoCell.swift */; };
+		C7F4B8E427497EB0002DD317 /* CalendarTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4B8E327497EB0002DD317 /* CalendarTodoCell.swift */; };
 		C7F65E2E274BC50200D57086 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E2D274BC50200D57086 /* AuthAPI.swift */; };
 		C7F65E31274BC50900D57086 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E30274BC50900D57086 /* AuthService.swift */; };
 		C7F65E34274BCB5400D57086 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E33274BCB5400D57086 /* AuthResponse.swift */; };
@@ -87,12 +87,11 @@
 		DD894D2F2747384A004AF5A6 /* NameQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D2E2747384A004AF5A6 /* NameQuestionViewController.swift */; };
 		DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3027473DEF004AF5A6 /* CharacterChoiceViewController.swift */; };
 		DD894D3527473FF7004AF5A6 /* CharacterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */; };
-		DD894D3727474F98004AF5A6 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3627474F98004AF5A6 /* PopUpViewController.swift */; };
-		DDBAFAF3274E8F0E0089CCD9 /* RankUserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBAFAF2274E8F0E0089CCD9 /* RankUserInfoResponse.swift */; };
 		DD894D3727474F98004AF5A6 /* GoalCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3627474F98004AF5A6 /* GoalCreationViewController.swift */; };
 		DDBAFAEA274E578A0089CCD9 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBAFAE9274E578A0089CCD9 /* MyPageViewController.swift */; };
 		DDBAFAEE274E5A420089CCD9 /* MyPageContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBAFAED274E5A420089CCD9 /* MyPageContentTableViewCell.swift */; };
 		DDBAFAF1274E5C7E0089CCD9 /* MyPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBAFAF0274E5C7E0089CCD9 /* MyPageHeaderView.swift */; };
+		DDBAFAF3274E8F0E0089CCD9 /* RankUserInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBAFAF2274E8F0E0089CCD9 /* RankUserInfoResponse.swift */; };
 		DDBF0A69274CC7AD00DA429D /* RankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBF0A68274CC7AD00DA429D /* RankViewController.swift */; };
 		DDBF0A6B274CC7D600DA429D /* RankCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBF0A6A274CC7D600DA429D /* RankCollectionViewCell.swift */; };
 		DDBF0A6D274CE88F00DA429D /* GenericPageArrayResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBF0A6C274CE88F00DA429D /* GenericPageArrayResponse.swift */; };
@@ -164,7 +163,7 @@
 		C7EDAD20274563E8008C699C /* SpoqaHanSansNeo-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-bold.otf"; sourceTree = "<group>"; };
 		C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-medium.otf"; sourceTree = "<group>"; };
 		C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-regular.otf"; sourceTree = "<group>"; };
-		C7F4B8E327497EB0002DD317 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
+		C7F4B8E327497EB0002DD317 /* CalendarTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoCell.swift; sourceTree = "<group>"; };
 		C7F65E2D274BC50200D57086 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		C7F65E30274BC50900D57086 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		C7F65E33274BCB5400D57086 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
@@ -202,12 +201,11 @@
 		DD894D2E2747384A004AF5A6 /* NameQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameQuestionViewController.swift; sourceTree = "<group>"; };
 		DD894D3027473DEF004AF5A6 /* CharacterChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterChoiceViewController.swift; sourceTree = "<group>"; };
 		DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollectionViewCell.swift; sourceTree = "<group>"; };
-		DD894D3627474F98004AF5A6 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
-		DDBAFAF2274E8F0E0089CCD9 /* RankUserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUserInfoResponse.swift; sourceTree = "<group>"; };
 		DD894D3627474F98004AF5A6 /* GoalCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCreationViewController.swift; sourceTree = "<group>"; };
 		DDBAFAE9274E578A0089CCD9 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		DDBAFAED274E5A420089CCD9 /* MyPageContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageContentTableViewCell.swift; sourceTree = "<group>"; };
 		DDBAFAF0274E5C7E0089CCD9 /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
+		DDBAFAF2274E8F0E0089CCD9 /* RankUserInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUserInfoResponse.swift; sourceTree = "<group>"; };
 		DDBF0A68274CC7AD00DA429D /* RankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankViewController.swift; sourceTree = "<group>"; };
 		DDBF0A6A274CC7D600DA429D /* RankCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDBF0A6C274CE88F00DA429D /* GenericPageArrayResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericPageArrayResponse.swift; sourceTree = "<group>"; };
@@ -294,7 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				C75A5915274687AE0001CDD1 /* CalendarViewController.swift */,
-				C7F4B8E327497EB0002DD317 /* TodoCell.swift */,
+				C7F4B8E327497EB0002DD317 /* CalendarTodoCell.swift */,
 				C768D1192749955B000E0677 /* TodoModel.swift */,
 			);
 			path = Calendar;
@@ -564,7 +562,6 @@
 		DD86CBED2748253900F6EC8D /* APIModel */ = {
 			isa = PBXGroup;
 			children = (
-				DDBF0A6C274CE88F00DA429D /* GenericPageArrayResponse.swift */,
 				DD86CBEE2748257B00F6EC8D /* ErrorResponse.swift */,
 				DD86CBF2274826FA00F6EC8D /* GoalResponse.swift */,
 				DD86CBF42748278E00F6EC8D /* TodoResponse.swift */,
@@ -574,7 +571,7 @@
 				DD892244274AC72E00316FE0 /* UserResponse.swift */,
 				C7F65E33274BCB5400D57086 /* AuthResponse.swift */,
 				DDF283CF274C3BCF00C426D7 /* AlarmsResponse.swift */,
-				DDBF0A6C274CE88F00DA429D /* RankResponse.swift */,
+				DDBF0A6C274CE88F00DA429D /* GenericPageArrayResponse.swift */,
 				C7D92FE1274E8AA200DAA184 /* PutTodoResponse.swift */,
 				DDBAFAF2274E8F0E0089CCD9 /* RankUserInfoResponse.swift */,
 			);
@@ -958,7 +955,7 @@
 				C7DE7FC7274A5B6B00C8DFB4 /* HistoryViewController.swift in Sources */,
 				C7DE7FDA274A882300C8DFB4 /* StartSignInViewController.swift in Sources */,
 				C7C9CDF32737625800DC2A09 /* AppDelegate.swift in Sources */,
-				C7F4B8E427497EB0002DD317 /* TodoCell.swift in Sources */,
+				C7F4B8E427497EB0002DD317 /* CalendarTodoCell.swift in Sources */,
 				C7D92FC5274D442F00DAA184 /* Sequence+.swift in Sources */,
 				DD86CBF12748265200F6EC8D /* NetworkResult.swift in Sources */,
 				DD892245274AC72E00316FE0 /* UserResponse.swift in Sources */,

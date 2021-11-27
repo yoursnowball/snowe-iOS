@@ -82,7 +82,7 @@ class HomeTodoCell: UITableViewCell {
     private func setupUI() {
         backgroundColor = .clear
         setLayout()
-        stackView.isUserInteractionEnabled = false
+        stackView.isUserInteractionEnabled = true
     }
 
     func setData(historyTodoGroup: HistoryTodoGroup) {

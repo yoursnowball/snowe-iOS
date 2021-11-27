@@ -32,6 +32,10 @@ final class HomeViewController: BaseViewController {
                                                                    todoTotalCount: nil,
                                                                    historyTodos: todoArr ?? []))
                     }
+
+                    if let id = goal?.id {
+                        goalIds.append(id)
+                    }
                 }
             }
         }
@@ -39,6 +43,7 @@ final class HomeViewController: BaseViewController {
 
     private var goals: [GoalResponse?] = []
     private var homeTodoGroup: [HistoryTodoGroup] = []
+    private var goalIds: [Int] = []
 
     private let maxIndex: Int = 4
 
@@ -539,7 +544,8 @@ extension HomeViewController {
     }
 
     @objc func pushCalendarVC() {
-        let pushVC = CalendarViewController()
-        self.navigationController?.pushViewController(pushVC, animated: true)
+        let calendarVC = CalendarViewController()
+        calendarVC.goalIds = self.goalIds
+        self.navigationController?.pushViewController(calendarVC, animated: true)
     }
 }

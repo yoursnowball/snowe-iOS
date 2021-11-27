@@ -10,48 +10,11 @@ import SnapKit
 import Then
 
 class CalendarViewController: BaseViewController {
-    
-    let sampleData: [TodoListGroup] = [
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .blue, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue)
-        ]),
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .green, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green)
-        ]),
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .orange, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange)
-        ]),
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .pink, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink)
-        ])
-    ]
-    
-//    let sampleData: [TodoListGroup] = [
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .blue, todoList: [
-//
-//        ]),
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .green, todoList: [
-//
-//        ]),
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .orange, todoList: [
-//
-//        ]),
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .pink, todoList: [
-//
-//        ])
-//    ]
+
+    var goalIds: [Int] = []
+    private var goals: [GoalResponse?] = []
+    private var calendarTodoGroup: [HistoryTodoGroup] = []
+    lazy var selectedDate: String = getTodayString()
 
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -122,9 +85,9 @@ class CalendarViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         calendarView = CalendarView()
-        
+
         setLayout()
         registerTarget()
         
@@ -173,7 +136,7 @@ class CalendarViewController: BaseViewController {
         todoTableView.delegate = self
         todoTableView.dataSource = self
         todoTableView.isScrollEnabled = false
-        todoTableView.register(TodoCell.self, forCellReuseIdentifier: "TodoCell")
+        todoTableView.register(CalendarTodoCell.self, forCellReuseIdentifier: "CalendarTodoCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -200,6 +163,31 @@ class CalendarViewController: BaseViewController {
         
         // 네트워크 통해서 조건 추가하기
         todoTableView.isHidden = false
+    }
+    
+    func getTodos() {
+        
+        for goalId in goalIds {
+            NetworkService.shared.goal.getGoal(goalId: goalId,
+                                               date: selectedDate) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    guard let data = response as? GoalResponse else { return }
+                    
+                case .requestErr(let errorResponse):
+                    dump(errorResponse)
+                default:
+                    print("history - error")
+                }
+            }
+        }
+    }
+    
+    func getTodayString() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
     }
 }
 
@@ -240,6 +228,7 @@ extension CalendarViewController: CalendarViewDelegate {
     }
     
     func calendar(_ calendar: CalendarView, canSelectDate date: Date) -> Bool {
+        print("new date \(date)")
         return true
     }
     
@@ -260,13 +249,13 @@ extension CalendarViewController: CalendarViewDelegate {
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return sampleData.count
+        return goalIds.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TodoCell = todoTableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoCell
+        let cell: CalendarTodoCell = todoTableView.dequeueReusableCell(withIdentifier: "CalendarTodoCell", for: indexPath) as! CalendarTodoCell
         cell.selectionStyle = .none
-        cell.setData(data: sampleData[indexPath.item])
+        cell.setData(historyTodoGroup: calendarTodoGroup[indexPath.item])
         cell.contentView.isUserInteractionEnabled = false
         return cell
     }
