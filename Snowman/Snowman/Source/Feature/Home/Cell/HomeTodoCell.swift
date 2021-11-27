@@ -208,7 +208,6 @@ extension HomeTodoCell {
         let todoView = TodoView().then {
             $0.backgroundColor = .lightGray
             $0.layer.cornerRadius = 8
-            $0.goalId = todo.goalId
             $0.todoId = todo.todoId
         }
 
@@ -280,8 +279,9 @@ extension HomeTodoCell {
 }
 
 class TodoView: UIView {
-    var goalId: Int!
     var todoId: Int!
+    var name: String!
+    var succeed: Bool!
 }
 
 extension HomeTodoCell: UITextFieldDelegate {
