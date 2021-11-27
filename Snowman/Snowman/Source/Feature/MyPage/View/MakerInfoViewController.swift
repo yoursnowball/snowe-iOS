@@ -34,14 +34,14 @@ final class MakerInfoViewController: BaseViewController {
             "https://github.com/ktj1997"
         ],
         [
-            "",
+            "https://decorous-turquoise-af1.notion.site/bd3b9d5b6c9643bfb936c14c5061a9c8",
             "https://www.notion.so/joeum/0370e5a5de8f461da434a8a8e91279a9"
         ]
     ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "제작자들"
+        title = ViewTitle.makerInfo
         setLayouts()
     }
 }
