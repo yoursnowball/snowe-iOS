@@ -60,7 +60,7 @@ final class NotificationViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Alert"
+        title = ViewTitle.alarms
         setLayouts()
     }
 }

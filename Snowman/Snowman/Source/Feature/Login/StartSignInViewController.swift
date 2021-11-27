@@ -8,31 +8,31 @@
 import SnapKit
 import UIKit
 
-class StartSignInViewController: UIViewController {
+class StartSignInViewController: BaseViewController {
 
     let logoImageView = UIImageView().then {
         $0.image = UIImage(named: "snoweLogo")
     }
 
-    let signInButton = UIButton().then {
+    let signInButton = UIButton(type: .system).then {
         $0.setTitle("로그인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.spoqa(size: 18, family: .bold)
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
-        $0.setBackgroundColor(UIColor.blue, for: .normal)
+        $0.setBackgroundColor(Color.button_blue, for: .normal)
         $0.addTarget(self, action: #selector(signInTap), for: .touchUpInside)
     }
 
-    let signUpButton = UIButton().then {
+    let signUpButton = UIButton(type: .system).then {
         $0.setTitle("회원가입", for: .normal)
-        $0.setTitleColor(UIColor.blue, for: .normal)
+        $0.setTitleColor(Color.button_blue, for: .normal)
         $0.titleLabel?.font = UIFont.spoqa(size: 18, family: .bold)
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
         $0.setBackgroundColor(UIColor.white, for: .normal)
         $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.blue.cgColor
+        $0.layer.borderColor = Color.button_blue.cgColor
         $0.addTarget(self, action: #selector(signUpTap), for: .touchUpInside)
     }
 

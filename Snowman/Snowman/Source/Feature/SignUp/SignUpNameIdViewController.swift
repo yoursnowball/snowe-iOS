@@ -8,18 +8,18 @@
 import SnapKit
 import UIKit
 
-class SignUpNameIdViewController: UIViewController {
+class SignUpNameIdViewController: BaseViewController {
     var isButtonStatusChange: Bool = false {
         didSet {
             if isButtonStatusChange {
-                nextButton.setBackgroundColor(UIColor.blue, for: .normal)
+                nextButton.setBackgroundColor(Color.button_blue, for: .normal)
                 nextButton.isEnabled = true
                 nicknameTextField.returnKeyType = .done
                 idTextField.returnKeyType = .done
                 nicknameTextField.reloadInputViews()
                 idTextField.reloadInputViews()
             } else {
-                nextButton.setBackgroundColor(UIColor.gray, for: .normal)
+                nextButton.setBackgroundColor(Color.Gray500, for: .normal)
                 nextButton.isEnabled = false
                 nicknameTextField.returnKeyType = .default
                 idTextField.returnKeyType = .default
@@ -31,8 +31,8 @@ class SignUpNameIdViewController: UIViewController {
 
     let nicknameLabel = UILabel().then {
         $0.text = "닉네임"
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        $0.textColor = UIColor.black
+        $0.font = .spoqa(size: 16, family: .regular)
+        $0.textColor = Color.text_Primary
         $0.sizeToFit()
     }
 
@@ -40,25 +40,24 @@ class SignUpNameIdViewController: UIViewController {
 
     let idLabel = UILabel().then {
         $0.text = "아이디"
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        $0.textColor = UIColor.black
+        $0.font = .spoqa(size: 16, family: .regular)
+        $0.textColor = Color.text_Primary
         $0.sizeToFit()
     }
 
     let idTextField = UITextField()
 
-    let nextButton = UIButton().then {
+    let nextButton = UIButton(type: .system).then {
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        $0.setBackgroundColor(UIColor.gray, for: .normal)
+        $0.titleLabel?.font = .spoqa(size: 18, family: .regular)
+        $0.setBackgroundColor(Color.Gray500, for: .normal)
         $0.isEnabled = false
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-//        setNavBar()
+        title = ViewTitle.signUp
         setNameTextField()
         setIdTextField()
         setLayouts()
@@ -102,13 +101,6 @@ class SignUpNameIdViewController: UIViewController {
         idTextField.becomeFirstResponder()
     }
 
-    private func setNavBar() {
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.title = "회원가입"
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.shadowImage = UIImage()
-    }
-
     func goToNextVC() {
         let viewController = SignUpPasswordViewController()
         viewController.nickname = nicknameTextField.text
@@ -120,7 +112,7 @@ class SignUpNameIdViewController: UIViewController {
     func setNameTextField() {
         nicknameTextField.placeholder = "이름"
         nicknameTextField.delegate = self
-        nicknameTextField.backgroundColor = UIColor.lightGray
+        nicknameTextField.backgroundColor = Color.Gray100
         nicknameTextField.clipsToBounds = true
         nicknameTextField.layer.cornerRadius = 8
         nicknameTextField.clearButtonMode = .never
@@ -133,7 +125,7 @@ class SignUpNameIdViewController: UIViewController {
     func setIdTextField() {
         idTextField.placeholder = "아이디"
         idTextField.delegate = self
-        idTextField.backgroundColor = UIColor.lightGray
+        idTextField.backgroundColor = Color.Gray100
         idTextField.clipsToBounds = true
         idTextField.layer.cornerRadius = 8
         idTextField.clearButtonMode = .never

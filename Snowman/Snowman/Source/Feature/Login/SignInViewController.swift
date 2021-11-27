@@ -8,18 +8,18 @@
 import SnapKit
 import UIKit
 
-class SignInViewController: UIViewController {
+class SignInViewController: BaseViewController {
     var isButtonStatusChange: Bool = false {
         didSet {
             if isButtonStatusChange {
-                signInButton.setBackgroundColor(UIColor.blue, for: .normal)
+                signInButton.setBackgroundColor(Color.button_blue, for: .normal)
                 signInButton.isEnabled = true
                 idTextField.returnKeyType = .done
                 passwordTextField.returnKeyType = .done
                 idTextField.reloadInputViews()
                 passwordTextField.reloadInputViews()
             } else {
-                signInButton.setBackgroundColor(UIColor.gray, for: .normal)
+                signInButton.setBackgroundColor(Color.Gray500, for: .normal)
                 signInButton.isEnabled = false
                 idTextField.returnKeyType = .default
                 passwordTextField.returnKeyType = .default
@@ -32,7 +32,7 @@ class SignInViewController: UIViewController {
     let idLabel = UILabel().then {
         $0.text = "아이디"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        $0.textColor = UIColor.black
+        $0.textColor = Color.text_Primary
         $0.sizeToFit()
     }
 
@@ -40,27 +40,26 @@ class SignInViewController: UIViewController {
 
     let passwordLabel = UILabel().then {
         $0.text = "비밀번호"
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        $0.textColor = UIColor.black
+        $0.font = .spoqa(size: 16, family: .regular)
+        $0.textColor = Color.text_Primary
         $0.sizeToFit()
     }
 
     let passwordTextField = UITextField()
 
-    let signInButton = UIButton().then {
+    let signInButton = UIButton(type: .system).then {
         $0.setTitle("로그인", for: .normal)
         $0.setTitleColor(UIColor.white, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        $0.titleLabel?.font = .spoqa(size: 18, family: .regular)
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
-        $0.setBackgroundColor(UIColor.gray, for: .normal)
+        $0.setBackgroundColor(Color.Gray500, for: .normal)
         $0.isEnabled = false
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-//        setNavBar()
+        title = ViewTitle.login
         setIdTextField()
         setPasswordTextField()
         setLayouts()
@@ -98,13 +97,6 @@ class SignInViewController: UIViewController {
         passwordTextField.becomeFirstResponder()
     }
 
-    private func setNavBar() {
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.title = "로그인"
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.shadowImage = UIImage()
-    }
-
     func signIn() {
         guard let userName = self.idTextField.text else { return }
         guard let password = self.passwordTextField.text else { return }
@@ -135,7 +127,7 @@ class SignInViewController: UIViewController {
     func setIdTextField() {
         idTextField.placeholder = "아이디"
         idTextField.delegate = self
-        idTextField.backgroundColor = UIColor.lightGray
+        idTextField.backgroundColor = Color.Gray100
         idTextField.clipsToBounds = true
         idTextField.layer.cornerRadius = 8
         idTextField.clearButtonMode = .never
@@ -150,7 +142,7 @@ class SignInViewController: UIViewController {
     func setPasswordTextField() {
         passwordTextField.placeholder = "비밀번호"
         passwordTextField.delegate = self
-        passwordTextField.backgroundColor = UIColor.lightGray
+        passwordTextField.backgroundColor = Color.Gray100
         passwordTextField.isSecureTextEntry = true
         passwordTextField.clipsToBounds = true
         passwordTextField.layer.cornerRadius = 8
