@@ -21,7 +21,7 @@ final class NameQuestionViewController: QuestionBaseViewController {
 
     override func textFieldDidChange(_ textField: UITextField) {
         super.textFieldDidChange(textField)
-        NewGoal.shared.objective = textField.text
+        NewGoal.shared.name = textField.text
     }
 }
 
