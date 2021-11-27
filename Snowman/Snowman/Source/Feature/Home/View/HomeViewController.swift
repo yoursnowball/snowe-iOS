@@ -16,16 +16,17 @@ final class HomeViewController: BaseViewController {
             self.goals = response.goals
 
             if !goals.isEmpty {
+                homeTodoGroup.removeAll()
+                goalIds.removeAll()
+
                 for goal in goals {
                     let todoArr = goal?.todos
-                                      .filter { $0.todoDate == getTodayString() }
-                                      .map { HistoryTodo(name: $0.name,
-                                                         succeed: $0.succeed,
-                                                         goalId: goal?.id,
-                                                         todoId: $0.id)}
+                                        .filter { $0.todoDate == Date.getTodayString() }
+                                        .map { HistoryTodo(name: $0.name,
+                                                        succeed: $0.succeed,
+                                                        todoId: $0.id)}
 
                     if let stringType = goal?.type, let type = Snowe(rawValue: stringType) {
-                        print("HistoryTodoGroup type type type \(type)")
                         self.homeTodoGroup.append(HistoryTodoGroup(type: type,
                                                                    title: goal?.objective,
                                                                    date: "",
@@ -204,13 +205,6 @@ final class HomeViewController: BaseViewController {
             self.updateGoal(goal: self.goals.first ?? nil)
             self.todoTableView.reloadData()
         }
-    }
-
-    func getTodayString() -> String {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: date)
     }
 
     @objc func touchRankButton() {
