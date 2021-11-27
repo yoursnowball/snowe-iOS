@@ -224,6 +224,12 @@ extension CalendarTodoCell {
             $0.font = UIFont.spoqa(size: 14, family: .regular)
             $0.textColor = .black
             $0.delegate = self
+            $0.returnKeyType = .done
+        }
+        
+        let keyboardToolbar = UIToolbar().then {
+            $0.backgroundColor = .white
+            $0.sizeToFit()
         }
 
         let todoSelectButton = UIButton()
@@ -276,9 +282,20 @@ extension CalendarTodoCell {
         todoSelectButton.snp.makeConstraints {
             $0.edges.equalTo(todoNameTextField)
         }
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonDidTap))
+        
+        keyboardToolbar.setItems([flexibleSpace, doneButton], animated: false)
+        keyboardToolbar.isUserInteractionEnabled = true
+        todoNameTextField.inputAccessoryView = keyboardToolbar
 
         checkButton.addTarget(self, action: #selector(checkTodo), for: .touchUpInside)
         todoSelectButton.addTarget(self, action: #selector(showTodoMenu), for: .touchUpInside)
+    }
+    
+    @objc func doneButtonDidTap() {
+        self.cvc?.view.endEditing(true)
     }
 
     @objc func checkTodo(sender: UIButton) {
@@ -348,6 +365,10 @@ extension CalendarTodoCell: UITextFieldDelegate {
                 }
             }
         }
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
 }
 
