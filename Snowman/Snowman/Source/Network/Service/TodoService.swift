@@ -10,7 +10,7 @@ import Moya
 
 final class TodoService {
     private let todoProvider = MoyaProvider<TodoAPI>(plugins: [MoyaLoggingPlugin()])
-    
+
     public func postTodo(
         goalId: Int,
         date: String,
@@ -19,13 +19,13 @@ final class TodoService {
         todoProvider.request(.postTodo(goalId: goalId, date: date, todo: todo)) { result in
             switch result {
             case .success(let response):
-                
+
                 let statusCode = response.statusCode
                 let data = response.data
-                
+
                 let networkResult = self.judgeStatus(by: statusCode, data)
                 completion(networkResult)
-                
+
             case .failure(let err):
                 print(err)
             }
