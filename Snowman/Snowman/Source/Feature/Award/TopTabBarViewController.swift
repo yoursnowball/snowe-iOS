@@ -64,7 +64,7 @@ class TopTabBarViewController: BaseViewController {
 
 extension TopTabBarViewController {
     private func setNavigationTitle() {
-        title = "Awards"
+        title = ViewTitle.award
     }
 
     func setTabItemViews() {

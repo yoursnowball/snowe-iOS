@@ -25,7 +25,7 @@ final class MyPageViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "마이페이지"
+        title = ViewTitle.myPage
         setLayouts()
     }
 }
