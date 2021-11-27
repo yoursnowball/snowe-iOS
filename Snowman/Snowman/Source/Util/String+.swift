@@ -12,7 +12,7 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        
+
         return dateFormatter.date(from: self)!
     }
 }
