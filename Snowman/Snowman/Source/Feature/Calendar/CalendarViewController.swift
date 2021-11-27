@@ -11,6 +11,8 @@ import Then
 
 class CalendarViewController: BaseViewController {
 
+    var manySucceedType: Snowe?
+    var succeedCount: Int?
     var goalIds: [Int] = []
 
     // 과거 날짜 선택했을 때 어떻게 할지 생각하기
@@ -20,21 +22,34 @@ class CalendarViewController: BaseViewController {
             if goals.count == goalIds.count {
                 goals = goals.sorted(by: { $0.id < $1.id })
 
-                let succeedCount = goals.flatMap { $0.todos }.filter { $0.succeed == true }.count
+                succeedCount = goals.flatMap { $0.todos }.filter { $0.succeed == true }.count
                 let totalCount = goals.flatMap { $0.todos }.map { $0.succeed }.count
-                todoCountLabel.text = "\(succeedCount)/\(totalCount)"
+                todoCountLabel.text = "\(succeedCount ?? 0)/\(totalCount)"
 
                 self.todoTableView.reloadData()
+                self.calendarView.reloadData()
             } else {
                 
             }
         }
     }
 
-    private lazy var selectedDate: String = Date.getTodayString() {
+    lazy var selectedDate: String = Date.getTodayString() {
         didSet {
             goals.removeAll()
             getTodos()
+        }
+    }
+
+    lazy var numberOfWeeks: Int = Date.numberOfWeeksInMonth(Date()) {
+        didSet {
+            switch numberOfWeeks {
+            case 4: calendarView.updateConstraint(attribute: NSLayoutConstraint.Attribute.height, constant: self.view.frame.size.width - 40 - 30 - 30)
+            case 5:
+                self.calendarView.updateConstraint(attribute: NSLayoutConstraint.Attribute.height, constant: self.view.frame.size.width - 40 - 30)
+            default:
+                self.calendarView.updateConstraint(attribute: NSLayoutConstraint.Attribute.height, constant: self.view.frame.size.width - 40 + 30)
+            }
         }
     }
 
@@ -117,6 +132,7 @@ class CalendarViewController: BaseViewController {
         }
 
         calendarView = CalendarView()
+        calendarView.cvc = self
 
         setLayout()
         registerTarget()
@@ -234,6 +250,8 @@ extension CalendarViewController: CalendarViewDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy MMM"
         yearMonthLabel.text = dateFormatter.string(from: date).uppercased()
+
+        numberOfWeeks = Date.numberOfWeeksInMonth(date)
     }
     
     func calendar(_ calendar: CalendarView, didDeselectDate date: Date) {
@@ -330,9 +348,7 @@ extension CalendarViewController {
         calendarView.snp.makeConstraints {
             $0.top.equalTo(yearMonthLabel.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(calendarView.snp.width)
-            
-            // 높이 동적으로 바꾸기
+            $0.height.equalTo(self.view.frame.size.width - 40 - 30)
         }
         
         lineView.snp.makeConstraints {

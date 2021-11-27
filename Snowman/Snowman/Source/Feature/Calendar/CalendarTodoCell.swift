@@ -203,11 +203,11 @@ extension CalendarTodoCell {
                 case .blue:
                     $0.image = UIImage(named: "24_check_blue")
                 case .green:
-                    $0.image = UIImage(named: "24_check_blue")
+                    $0.image = UIImage(named: "24_check_green")
                 case .orange:
-                    $0.image = UIImage(named: "24_check_blue")
+                    $0.image = UIImage(named: "24_check_orange")
                 case .pink:
-                    $0.image = UIImage(named: "24_check_blue")
+                    $0.image = UIImage(named: "24_check_pink")
                 }
             } else {
                 $0.image = nil

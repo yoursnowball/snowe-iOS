@@ -85,6 +85,8 @@ extension CalendarViewDelegate {
 
 public class CalendarView: UIView {
     
+    var cvc: CalendarViewController?
+    
     public let cellReuseIdentifier = "CalendarDayCell"
     
     var headerView: CalendarHeaderView!
@@ -265,7 +267,7 @@ public class CalendarView: UIView {
             x: 0.0,
             y: style.headerHeight,
             width: self.frame.size.width,
-            height: self.frame.size.height - style.headerHeight
+            height: self.frame.size.width
         )
         
         flowLayout.itemSize = self.cellSize(in: self.bounds)

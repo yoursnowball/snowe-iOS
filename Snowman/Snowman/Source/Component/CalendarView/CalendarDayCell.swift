@@ -29,6 +29,8 @@ import Then
 
 open class CalendarDayCell: UICollectionViewCell {
     
+    var cvc: CalendarViewController?
+    
     var style: CalendarView.Style = CalendarView.Style.Default
     
     override open var description: String {
@@ -137,7 +139,7 @@ open class CalendarDayCell: UICollectionViewCell {
     }
     
     let checkBackView = UIView().then {
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = Color.Gray300
     }
     
     let checkImageView = UIImageView()
@@ -149,7 +151,7 @@ open class CalendarDayCell: UICollectionViewCell {
     }
     
     // 일 표시
-    let textLabel   = UILabel().then {
+    let textLabel = UILabel().then {
         $0.textAlignment = .center
         $0.font = UIFont.spoqa(size: 11, family: .regular)
         $0.textColor = .gray
@@ -175,7 +177,9 @@ open class CalendarDayCell: UICollectionViewCell {
         
         setLayout()
         
-        
+        if cvc?.selectedDate == Date.getTodayString() {
+            checkLabel.text = "\(cvc?.succeedCount ?? 0)"
+        }
     }
     
     
