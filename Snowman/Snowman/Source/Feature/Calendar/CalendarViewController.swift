@@ -52,6 +52,8 @@ class CalendarViewController: BaseViewController {
             }
         }
     }
+    
+    var topY: CGFloat = 0
 
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -187,14 +189,34 @@ class CalendarViewController: BaseViewController {
         todoTableView.register(CalendarTodoCell.self, forCellReuseIdentifier: "CalendarTodoCell")
         
         getTodos()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowForTextField), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideForTextField), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        topY = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    @objc func keyboardWillShowForTextField(notification _: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = self.topY - self.todoTableView.frame.origin.y
+        }
+    }
+
+    @objc func keyboardWillHideForTextField(notification _: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
     }
 
     func getTodos() {
@@ -383,7 +405,6 @@ extension CalendarViewController {
         setGoalButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview().offset(-34)
-//            $0.height.equalTo(setGoalButton.snp.width).multipliedBy(53/335)
             $0.height.equalTo(53)
             $0.top.equalTo(noGoalLabel.snp.bottom).offset(165)
         }

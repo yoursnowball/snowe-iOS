@@ -368,7 +368,11 @@ extension CalendarTodoCell: UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        UIView.animate(withDuration: 0.3) { [self] in
+            cvc?.view.frame.origin.y = 0
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }
 
