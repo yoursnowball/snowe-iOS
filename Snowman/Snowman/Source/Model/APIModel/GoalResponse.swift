@@ -10,6 +10,6 @@ struct GoalResponse: Codable {
     let id, level, levelTodoCount: Int
     let name, objective: String
     let succeedTodoCount: Int
-    let todos: [TodoResponse]
+    var todos: [TodoResponse]
     let type: String
 }
