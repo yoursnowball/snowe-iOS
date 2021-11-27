@@ -16,7 +16,7 @@ class RootViewControllerChanger {
 
         if UserDefaults.standard.bool(forKey: UserDefaultKey.loginStatus) {
             guard let token = UserDefaults.standard.value(forKey: UserDefaultKey.fcmToken) as? String else { return }
-            NetworkService.shared.user.postFCMToken(fcm: token) { result in
+            NetworkService.shared.user.postPushToken(fcm: token) { result in
                 dump(result)
             }
             appDelegate?.window?.rootViewController = HomeNavigationViewController(rootViewController: Home())

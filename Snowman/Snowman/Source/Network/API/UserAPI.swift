@@ -12,6 +12,7 @@ enum UserAPI {
     case getUsers
     case getAlarms(page: Int)
     case postPushToken(token: String)
+    case deletePushToken
 }
 
 extension UserAPI: BaseTargetType {
@@ -21,7 +22,7 @@ extension UserAPI: BaseTargetType {
             return URLConst.users
         case .getAlarms:
             return URLConst.alarms
-        case .postPushToken:
+        case .postPushToken, .deletePushToken:
             return URLConst.fcm
         }
     }
@@ -32,12 +33,14 @@ extension UserAPI: BaseTargetType {
             return .get
         case .postPushToken:
             return .post
+        case .deletePushToken:
+            return .delete
         }
     }
 
     var task: Task {
         switch self {
-        case .getUsers:
+        case .getUsers, .deletePushToken:
             return .requestPlain
         case .getAlarms(let page):
             return .requestParameters(parameters: [

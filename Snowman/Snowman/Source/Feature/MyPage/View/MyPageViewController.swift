@@ -87,12 +87,7 @@ extension MyPageViewController: UITableViewDelegate {
             case 0:
                 navigationController?.pushViewController(DeleteCharacterViewController(), animated: true)
             case 1:
-                let defaults = UserDefaults.standard
-                let dictionary = defaults.dictionaryRepresentation()
-                dictionary.keys.forEach { key in
-                    defaults.removeObject(forKey: key)
-                }
-                RootViewControllerChanger.updateRootViewController()
+                deletePushToken()
             default:
                 break
             }
@@ -119,6 +114,23 @@ extension MyPageViewController: UITableViewDataSource {
         let cell: MyPageContentTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
         cell.setTitle(title: datasource[indexPath.section][indexPath.row], isOnlyTitle: true)
         return cell
+    }
+}
+
+extension MyPageViewController {
+    private func deletePushToken() {
+        NetworkService.shared.user.deletePushToken { result in
+            switch result {
+            case 200..<300:
+                [UserDefaultKey.loginStatus, UserDefaultKey.token].forEach {
+                    UserDefaults.standard.removeObject(forKey: $0)
+                }
+                UserDefaults.standard.synchronize()
+                RootViewControllerChanger.updateRootViewController()
+            default:
+                break
+            }
+        }
     }
 }
 
