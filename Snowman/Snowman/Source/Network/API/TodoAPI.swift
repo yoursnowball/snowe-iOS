@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum TodoAPI {
-//    case postTodo(goalId: Int, date: String, )
+    case postTodo(goalId: Int, date: String, todo: String)
     case putTodo(goalId: Int, todoId: Int, name: String, succeed: Bool)
     case deleteTodo(goalId: Int, todoId: Int)
 }
@@ -17,8 +17,10 @@ enum TodoAPI {
 extension TodoAPI: BaseTargetType {
     var path: String {
         switch self {
-        case .putTodo(let goadId, let todoId, _, _):
-            return URLConst.goals + "/\(goadId)" + URLConst.todo + "/\(todoId)"
+        case .postTodo(let goalId, _, _):
+            return URLConst.goals + "/\(goalId)" + URLConst.todo
+        case .putTodo(let goalId, let todoId, _, _):
+            return URLConst.goals + "/\(goalId)" + URLConst.todo + "/\(todoId)"
         case .deleteTodo(let goalId, let todoId):
             return URLConst.goals + "/\(goalId)" + URLConst.todo + "/\(todoId)"
         }
@@ -26,6 +28,8 @@ extension TodoAPI: BaseTargetType {
 
     var method: Moya.Method {
         switch self {
+        case .postTodo:
+            return .post
         case .putTodo:
             return .put
         case .deleteTodo:
@@ -35,6 +39,11 @@ extension TodoAPI: BaseTargetType {
 
     var task: Task {
         switch self {
+        case .postTodo(_, let date, let todo):
+            return .requestParameters(parameters: [
+                "date": date,
+                "todo": todo
+            ], encoding: JSONEncoding.default)
         case .putTodo(_, _, let name, let succeed):
             return .requestParameters(parameters: [
                 "name": name,

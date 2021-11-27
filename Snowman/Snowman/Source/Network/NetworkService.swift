@@ -17,4 +17,6 @@ final class NetworkService {
     let auth = AuthService()
 
     let user = UserService()
+    
+    let todo = TodoService()
 }
