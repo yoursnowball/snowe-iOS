@@ -10,7 +10,15 @@ import SnapKit
 import Then
 
 
+
+
+
+
+
+
 // 목표 설정 버튼 연결하기
+// 년도, 월 binding
+
 
 class CalendarViewController: BaseViewController {
 
@@ -28,7 +36,12 @@ class CalendarViewController: BaseViewController {
         }
     }
 
-    private lazy var selectedDate: String = Date.getTodayString()
+    private lazy var selectedDate: String = Date.getTodayString() {
+        didSet {
+            goals.removeAll()
+            getTodos()
+        }
+    }
 
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -170,12 +183,7 @@ class CalendarViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
-    
-    
-    
-    // 날짜 바뀔때마다 호출
-    // goals 배열 비워주고 다시 채우기
+
     func getTodos() {
         for goalId in goalIds {
             NetworkService.shared.goal.getGoal(goalId: goalId,
@@ -365,11 +373,11 @@ extension CalendarViewController {
 
 extension CalendarViewController {
     private func registerTarget() {
-        [previousMonthButton, nextMonthButton].forEach {
+        [previousMonthButton, nextMonthButton, setGoalButton].forEach {
             $0.addTarget(self, action: #selector(buttonTapAction(_:)), for: .touchUpInside)
         }
     }
-    
+
     @objc
     private func buttonTapAction(_ sender: UIButton) {
         switch sender {
@@ -377,6 +385,10 @@ extension CalendarViewController {
             self.calendarView.goToPreviousMonth()
         case nextMonthButton:
             self.calendarView.goToNextMonth()
+        case setGoalButton:
+            let nvc = BaseNavigationController(rootViewController: GoalQuestionViewController())
+            nvc.modalPresentationStyle = .fullScreen
+            present(nvc, animated: true, completion: nil)
         default:
             return
         }
