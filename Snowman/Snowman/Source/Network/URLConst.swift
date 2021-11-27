@@ -7,7 +7,7 @@
 
 enum URLConst {
     // MARK: - baseURL
-    static let base = "http://snowe.ml"
+    static let base = "https://snowe.ml"
 
     // MARK: - Goal
     static let goals = "/goals"
@@ -25,7 +25,7 @@ enum URLConst {
 
     /// 회원가입
     static let signUp = "/auth/sign-up"
-    
+
     // MARK: - Todo
     /// 투두
     static let todo = "/todos"
