@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		641F87721BD4E2A9612BD226 /* Pods_Snowman.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA2FF155FE64827A2BCD39F /* Pods_Snowman.framework */; };
+		C714B23F275268CB0062AACB /* PostTodoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C714B23E275268CA0062AACB /* PostTodoResponse.swift */; };
 		C75A5916274687AE0001CDD1 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A5915274687AE0001CDD1 /* CalendarViewController.swift */; };
 		C768D11A2749955B000E0677 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C768D1192749955B000E0677 /* TodoModel.swift */; };
 		C768D12627499E04000E0677 /* EventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C768D11D27499E02000E0677 /* EventsManager.swift */; };
@@ -126,6 +127,7 @@
 		788ACA07E071AF9CA17DB541 /* Pods-Snowman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowman.release.xcconfig"; path = "Target Support Files/Pods-Snowman/Pods-Snowman.release.xcconfig"; sourceTree = "<group>"; };
 		7CA2FF155FE64827A2BCD39F /* Pods_Snowman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snowman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9688495685D4CE9B2C338215 /* Pods-Snowman.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowman.debug.xcconfig"; path = "Target Support Files/Pods-Snowman/Pods-Snowman.debug.xcconfig"; sourceTree = "<group>"; };
+		C714B23E275268CA0062AACB /* PostTodoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTodoResponse.swift; sourceTree = "<group>"; };
 		C75A5915274687AE0001CDD1 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		C768D1192749955B000E0677 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		C768D11D27499E02000E0677 /* EventsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManager.swift; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				DDF283CF274C3BCF00C426D7 /* AlarmsResponse.swift */,
 				DDBF0A6C274CE88F00DA429D /* GenericPageArrayResponse.swift */,
 				C7D92FE1274E8AA200DAA184 /* PutTodoResponse.swift */,
+				C714B23E275268CA0062AACB /* PostTodoResponse.swift */,
 				DDBAFAF2274E8F0E0089CCD9 /* RankUserInfoResponse.swift */,
 			);
 			path = APIModel;
@@ -893,6 +896,7 @@
 				DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */,
 				DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */,
 				DDBF0A69274CC7AD00DA429D /* RankViewController.swift in Sources */,
+				C714B23F275268CB0062AACB /* PostTodoResponse.swift in Sources */,
 				DD7D17DE274EA16C00462331 /* MakerInfoViewController.swift in Sources */,
 				DD86CBEA2748232600F6EC8D /* URLConst.swift in Sources */,
 				DDFAF15427458441005A3097 /* UIView+.swift in Sources */,

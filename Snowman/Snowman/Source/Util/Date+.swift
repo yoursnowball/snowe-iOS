@@ -27,7 +27,7 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
-    func getTodayString() -> String {
+    static func getTodayString() -> String {
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
