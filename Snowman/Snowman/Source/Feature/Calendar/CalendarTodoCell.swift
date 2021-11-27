@@ -116,16 +116,24 @@ class CalendarTodoCell: UITableViewCell {
         guard let goalId = goalId else { return }
         guard let cvc = cvc else { return }
 
-        postTodo() { result in
+        postTodo() { [weak self] result in
             for i in 0..<cvc.goals.count {
                 if cvc.goals[i].id == goalId {
                     cvc.goals[i].todos = result.todos
+                    cvc.todoTableView.reloadData()
+                    
+//                    let temp = self?.stackView.arrangedSubviews.last?.subviews.flatMap { $0.subviews }.filter { $0 is UITextField }
+//                    temp?.first?.becomeFirstResponder()
+                    
+                    
+//                    let temp = self?.stackView.arrangedSubviews.last?.subviews.filter { $0 is TodoView }
+//                    temp?.first?.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
+                    
+                    
                     break
                 }
             }
         }
-        
-        cvc.todoTableView.reloadData()
     }
 }
 
@@ -221,7 +229,7 @@ extension CalendarTodoCell {
         let todoSelectButton = UIButton()
 
         let todoView = TodoView().then {
-            $0.backgroundColor = .lightGray
+            $0.backgroundColor = Color.Gray100
             $0.layer.cornerRadius = 8
             $0.todoId = todo.id
             $0.name = todo.name
@@ -303,8 +311,7 @@ extension CalendarTodoCell {
 
     @objc func showTodoMenu(sender: UIButton) {
         if let todoView = sender.superview as? TodoView {
-//            todoView.goalId
-//            todoView.todoId
+            todoView.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
         }
 
         // 수정
@@ -319,7 +326,7 @@ extension CalendarTodoCell: UITextFieldDelegate {
         if let todoView = textField.superview as? TodoView, let text = textField.text {
             putTodo(todoId: todoView.todoId,
                     name: text,
-                    succeed: !todoView.succeed) { [weak self] result in
+                    succeed: todoView.succeed) { [weak self] result in
                 if result.isLevelUp {
                     // 레벨업 됐을 때 화면
                 } else {

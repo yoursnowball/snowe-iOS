@@ -13,13 +13,13 @@ class CalendarViewController: BaseViewController {
 
     var goalIds: [Int] = []
 
-    
-    
     // 과거 날짜 선택했을 때 어떻게 할지 생각하기
     // 과거 날짜만으로 이전 목표, 투두 가져오는 API가 없음
     var goals: [GoalResponse] = [] {
         didSet {
             if goals.count == goalIds.count {
+                goals = goals.sorted(by: { $0.id < $1.id })
+
                 let succeedCount = goals.flatMap { $0.todos }.filter { $0.succeed == true }.count
                 let totalCount = goals.flatMap { $0.todos }.map { $0.succeed }.count
                 todoCountLabel.text = "\(succeedCount)/\(totalCount)"
@@ -197,6 +197,10 @@ class CalendarViewController: BaseViewController {
             }
         }
     }
+    
+    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
 extension CalendarViewController: CalendarViewDataSource {
@@ -222,7 +226,8 @@ extension CalendarViewController: CalendarViewDataSource {
         let twoYearsFromNow = self.calendarView.calendar.date(byAdding: dateComponents, to: today)!
         
         return twoYearsFromNow
-    }}
+    }
+}
 
 extension CalendarViewController: CalendarViewDelegate {
     func calendar(_ calendar: CalendarView, didScrollToMonth date: Date) {
@@ -264,8 +269,8 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectedDate = selectedDate
 
         if !goals.isEmpty {
-            cell.setData(goalResponse: goals[indexPath.item])
-            cell.goalId = goalIds[indexPath.item]
+            cell.setData(goalResponse: goals[indexPath.row])
+            cell.goalId = goalIds[indexPath.row]
         }
 
         cell.contentView.isUserInteractionEnabled = false
