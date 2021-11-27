@@ -20,7 +20,6 @@ final class UserService {
     public func getUsers(
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-
         goalProvider.request(.getUsers) { result in
             switch result {
             case.success(let response):

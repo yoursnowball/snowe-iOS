@@ -434,7 +434,7 @@ extension HomeViewController {
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
-                print("error")
+                print("home - get home error")
             }
         }
     }
