@@ -116,7 +116,7 @@ final class HomeViewController: BaseViewController {
     }
 
     lazy var todoTableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(HomeTodoCell.self, forCellReuseIdentifier: "HomeTodoCell")
@@ -229,7 +229,16 @@ final class HomeViewController: BaseViewController {
         guard let level = self.goals[currentIndex]?.level else { return }
 
         if level > 5 {
-            // 명예의 전당
+            let popUpView = PopUpViewController()
+            popUpView.modalTransitionStyle = .crossDissolve
+            popUpView.modalPresentationStyle = .overCurrentContext
+            popUpView.delegate = self
+            popUpView.setText(
+                title: "",
+                content: "명예의 전당으로 보내시면\n더 이상 투두를 작성할 수 없어요!",
+                rightButtonText: "보내기"
+            )
+            present(popUpView, animated: true, completion: nil)
         } else {
             showToastMessageAlert(message: "레벨5가 되기 전에는 명예의 전당으로 보낼 수 없습니다.")
         }
@@ -323,7 +332,6 @@ extension HomeViewController {
         ) as? SnoweCollectionViewCell {
             cell.characterImageView.alpha = alpha
         }
-
     }
 }
 
@@ -389,29 +397,57 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableView.automaticDimension
     }
 
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let rankButton = UIButton().then {
-//            guard let level = self.goals[currentIndex]?.level else { return }
-//
-//            $0.titleLabel?.font = UIFont.spoqa(size: 18, family: .bold)
-//            $0.setTitle("명예의 전당", for: .normal)
-//
-//            if level > 5 {
-//                $0.backgroundColor = Color.button_blue
-//                $0.setTitleColor(Color.Gray000, for: .normal)
-//                $0.isEnabled = false
-//            } else {
-//                $0.backgroundColor = Color.Gray300
-//                $0.setTitleColor(Color.text_Teritary, for: .normal)
-//                $0.isEnabled = true
-//            }
-//        }
-//
-//        // 명예의 전당 보내기
-////        rankButton.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
-//
-//        return rankButton
-//    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 200
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let buttonView = UIView()
+
+        let label = UILabel().then {
+            $0.text = "5레벨 달성시 활성화"
+            $0.textColor = Color.text_Teritary
+            $0.font = UIFont.spoqa(size: 12, family: .regular)
+            $0.sizeToFit()
+        }
+
+        let rankButton = UIButton().then {
+            $0.titleLabel?.font = UIFont.spoqa(size: 18, family: .bold)
+            $0.setTitle("명예의 전당", for: .normal)
+            $0.layer.cornerRadius = 10
+
+            if !goals.isEmpty {
+                if let goal = goals[currentIndex] {
+                    if goal.level > 5 {
+                        $0.backgroundColor = Color.button_blue
+                        $0.setTitleColor(Color.Gray000, for: .normal)
+                        $0.isEnabled = false
+                    } else {
+                        $0.backgroundColor = Color.Gray300
+                        $0.setTitleColor(Color.text_Teritary, for: .normal)
+                        $0.isEnabled = true
+                    }
+                }
+            }
+        }
+
+        buttonView.addSubviews(label, rankButton)
+
+        label.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(30)
+            $0.leading.equalToSuperview()
+        }
+
+        rankButton.snp.makeConstraints {
+            $0.top.equalTo(label.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(53)
+        }
+
+        rankButton.addTarget(self, action: #selector(touchRankButton), for: .touchUpInside)
+
+        return buttonView
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegate {
@@ -571,5 +607,27 @@ extension HomeViewController {
         let calendarNVC = BaseNavigationController(rootViewController: calendarVC)
         calendarNVC.modalPresentationStyle = .fullScreen
         present(calendarNVC, animated: true, completion: nil)
+    }
+}
+
+extension HomeViewController: PopUpActionDelegate {
+    func touchRightButton(button: UIButton) {
+        guard let goalId = self.goals[currentIndex]?.id else { return }
+
+        NetworkService.shared.goal.postAwards(goalId: goalId) { [weak self] result in
+            switch result {
+            case .success:
+                // 명예의 전당 보내고 난 뒤의 받는 데이터
+//            case .success(let response):
+//                guard let data = response as? Award else { return }
+                self?.reloadView()
+                let awardVC = AwardViewController()
+                self?.present(awardVC, animated: true)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("home - post award error")
+            }
+        }
     }
 }
