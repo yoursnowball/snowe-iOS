@@ -34,12 +34,12 @@ class StampViewController: UIViewController {
     }()
 
     private var stamps: [Stamp] = [
-        Stamp(id: 0, name: "또다른나", info: "눈덩이 1회 생성하세요", hasBadge: true),
-        Stamp(id: 1, name: "100점투두", info: "투두 100개를 달성하세요", hasBadge: false),
-        Stamp(id: 2, name: "꾸준한당신", info: "매일매일 투두를 완료하세요", hasBadge: false),
-        Stamp(id: 3, name: "랭킹1위", info: "랭킹1위가 되어보아요", hasBadge: false),
-        Stamp(id: 4, name: "눈덩이의변화", info: "눈덩이의 변화가 생겼어요", hasBadge: false),
-        Stamp(id: 5, name: "마지막단계", info: "5레벨이 되었어요", hasBadge: false)
+        Stamp(id: 0, name: "또다른나", info: "눈덩이 1회 생성하세요", hasStamp: true),
+        Stamp(id: 1, name: "100점투두", info: "투두 100개를 달성하세요", hasStamp: false),
+        Stamp(id: 2, name: "꾸준한당신", info: "매일매일 투두를 완료하세요", hasStamp: false),
+        Stamp(id: 3, name: "랭킹1위", info: "랭킹1위가 되어보아요", hasStamp: false),
+        Stamp(id: 4, name: "눈덩이의변화", info: "눈덩이의 변화가 생겼어요", hasStamp: false),
+        Stamp(id: 5, name: "마지막단계", info: "5레벨이 되었어요", hasStamp: false)
     ]
 
 // MARK: - View Life Cycle
@@ -116,12 +116,12 @@ extension StampViewController: UICollectionViewDelegate {
         didSelectItemAt indexPath: IndexPath
     ) {
 
-        let badgeModalViewController = StampModalViewController(stamp: stamps[indexPath.item])
+        let stampModalViewController = StampModalViewController(stamp: stamps[indexPath.item])
 
-        badgeModalViewController.modalPresentationStyle = .custom
-        badgeModalViewController.transitioningDelegate = self
+        stampModalViewController.modalPresentationStyle = .custom
+        stampModalViewController.transitioningDelegate = self
 
-        self.present(badgeModalViewController, animated: true, completion: nil)
+        self.present(stampModalViewController, animated: true, completion: nil)
     }
 }
 
@@ -139,7 +139,7 @@ extension StampViewController: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell: StampCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.setData(badge: stamps[indexPath.item])
+        cell.setData(stamp: stamps[indexPath.item])
         return cell
     }
 

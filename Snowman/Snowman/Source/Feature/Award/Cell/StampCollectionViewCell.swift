@@ -67,10 +67,10 @@ class StampCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    public func setData(badge: Stamp) {
-        imageView.image = badge.hasBadge ? Image.stampComplete : Image.stampUnabled
-        nameLabel.text = badge.name
-        nameLabel.textColor = badge.hasBadge ? Color.button_blue : Color.text_Teritary
+    public func setData(stamp: Stamp) {
+        imageView.image = stamp.hasStamp ? Image.stampComplete : Image.stampUnabled
+        nameLabel.text = stamp.name
+        nameLabel.textColor = stamp.hasStamp ? Color.button_blue : Color.text_Teritary
     }
 
 }

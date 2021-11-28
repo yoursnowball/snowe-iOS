@@ -19,7 +19,7 @@ class StampModalViewController: UIViewController {
         $0.backgroundColor = .white
     }
 
-    private let badgeImageView = UIImageView()
+    private let stampImageView = UIImageView()
 
     private let nameLabel = UILabel().then {
         $0.font = .spoqa(size: 18, family: .bold)
@@ -72,7 +72,7 @@ class StampModalViewController: UIViewController {
 
     private func setViewHierachy() {
         view.addSubview(backgroundView)
-        backgroundView.addSubviews(badgeImageView, nameLabel, stickerView, infoLabel)
+        backgroundView.addSubviews(stampImageView, nameLabel, stickerView, infoLabel)
     }
 
     private func setConstraints() {
@@ -82,14 +82,14 @@ class StampModalViewController: UIViewController {
             $0.height.equalTo(290)
         }
 
-        badgeImageView.snp.makeConstraints {
+        stampImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(42)
             $0.width.height.equalTo(100)
         }
 
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(badgeImageView.snp.bottom).offset(24)
+            $0.top.equalTo(stampImageView.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview().inset(42)
         }
 
@@ -108,10 +108,10 @@ class StampModalViewController: UIViewController {
     }
 
     private func setData() {
-        guard let badge = stamp else {return}
-        nameLabel.text = badge.name
-        infoLabel.text = badge.info
-        badgeImageView.image = badge.hasBadge ? Image.stampComplete : Image.stampUnabled
+        guard let stamp = stamp else {return}
+        nameLabel.text = stamp.name
+        infoLabel.text = stamp.info
+        stampImageView.image = stamp.hasStamp ? Image.stampComplete : Image.stampUnabled
     }
 
 }

@@ -7,14 +7,13 @@
 
 import Foundation
 
-struct StampData: Codable {
-    let badges: [Stamp]
+struct StampResponse: Codable {
+    let stamps: [Stamp]
 
 }
 
 struct Stamp: Codable {
     let id: Int
     let name, info: String
-    let hasBadge: Bool
-
+    let hasStamp: Bool
 }
