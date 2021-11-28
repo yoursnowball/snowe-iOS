@@ -254,14 +254,13 @@ extension CalendarTodoCell {
 
         backView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.height.greaterThanOrEqualTo(56)
-//            $0.height.equalTo(56)
+            $0.height.equalTo(56).priority(.high)
         }
 
         todoView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalToSuperview().offset(4)
-            $0.bottom.equalToSuperview().offset(-4)
+            $0.height.equalTo(48)
+            $0.centerY.equalToSuperview()
         }
 
         checkButtonImage.snp.makeConstraints {
