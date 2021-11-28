@@ -339,7 +339,8 @@ extension CalendarViewController {
             setGoalButton)
         
         scrollView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
 
         contentView.snp.makeConstraints {
