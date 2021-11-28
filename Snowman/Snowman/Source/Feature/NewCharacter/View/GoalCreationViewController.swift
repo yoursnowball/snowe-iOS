@@ -73,6 +73,7 @@ extension GoalCreationViewController {
         guard let pvc = self.presentingViewController else { return }
         dismiss(animated: true) {
             pvc.dismiss(animated: true, completion: nil)
+            RootViewControllerChanger.updateRootViewController()
         }
     }
 }

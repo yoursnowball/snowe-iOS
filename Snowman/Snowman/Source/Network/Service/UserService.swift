@@ -20,7 +20,6 @@ final class UserService {
     public func getUsers(
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-
         goalProvider.request(.getUsers) { result in
             switch result {
             case.success(let response):
@@ -91,7 +90,6 @@ final class UserService {
             }
         }
     }
-
 
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         switch statusCode {

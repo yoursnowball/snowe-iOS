@@ -29,6 +29,8 @@ import Then
 
 open class CalendarDayCell: UICollectionViewCell {
     
+    var cvc: CalendarViewController?
+    
     var style: CalendarView.Style = CalendarView.Style.Default
     
     override open var description: String {
@@ -57,7 +59,6 @@ open class CalendarDayCell: UICollectionViewCell {
     func updateTextColor() {
         if isSelected {
             self.textLabel.textColor = style.cellSelectedTextColor
-            print("isSelected \(self.textLabel.text!)")
         }
         else if isToday {
             self.textLabel.textColor = style.cellTextColorToday
@@ -111,17 +112,19 @@ open class CalendarDayCell: UICollectionViewCell {
         didSet {
             switch isSelected {
             case true:
-                self.bgView.layer.borderColor = style.cellSelectedBorderColor.cgColor
-                self.bgView.layer.borderWidth = style.cellSelectedBorderWidth
-                self.bgView.backgroundColor = style.cellSelectedColor
+                textLabel.font = UIFont.spoqa(size: 11, family: .bold)
+                let text = String(day ?? 0)
+                let textRange = NSRange(location: 0, length: text.count)
+                let attributedText = NSMutableAttributedString(string: text)
+                attributedText.addAttribute(.underlineStyle,
+                                            value: NSUnderlineStyle.single.rawValue,
+                                            range: textRange)
+                textLabel.attributedText = attributedText
             case false:
-                self.bgView.layer.borderColor = style.cellBorderColor.cgColor
-                self.bgView.layer.borderWidth = style.cellBorderWidth
-                if self.isToday {
-                    self.bgView.backgroundColor = style.cellColorToday
-                } else {
-                    self.bgView.backgroundColor = style.cellColorDefault
-                }
+                textLabel.font = UIFont.spoqa(size: 11, family: .regular)
+                let text = String(day ?? 0)
+                let attributedText = NSMutableAttributedString(string: text)
+                textLabel.attributedText = attributedText
             }
             
             updateTextColor()
@@ -138,7 +141,7 @@ open class CalendarDayCell: UICollectionViewCell {
     }
     
     let checkBackView = UIView().then {
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = Color.Gray300
     }
     
     let checkImageView = UIImageView()
@@ -150,7 +153,7 @@ open class CalendarDayCell: UICollectionViewCell {
     }
     
     // 일 표시
-    let textLabel   = UILabel().then {
+    let textLabel = UILabel().then {
         $0.textAlignment = .center
         $0.font = UIFont.spoqa(size: 11, family: .regular)
         $0.textColor = .gray
@@ -176,7 +179,9 @@ open class CalendarDayCell: UICollectionViewCell {
         
         setLayout()
         
-        
+        if cvc?.selectedDate == Date.getTodayString() {
+            checkLabel.text = "\(cvc?.succeedCount ?? 0)"
+        }
     }
     
     

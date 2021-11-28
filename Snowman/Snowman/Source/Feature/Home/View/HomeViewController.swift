@@ -14,10 +14,21 @@ final class HomeViewController: BaseViewController {
         didSet {
             guard let response = userResponse else { return }
             self.goals = response.goals
+
+            if !goals.isEmpty {
+                goalIds.removeAll()
+
+                for goal in goals {
+                    if let id = goal?.id {
+                        goalIds.append(id)
+                    }
+                }
+            }
         }
     }
 
-    private var goals: [GoalResponse?] = []
+    var goals: [GoalResponse?] = []
+    private var goalIds: [Int] = []
 
     private let maxIndex: Int = 4
 
@@ -104,10 +115,22 @@ final class HomeViewController: BaseViewController {
         $0.sizeToFit()
     }
 
+    lazy var todoTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(HomeTodoCell.self, forCellReuseIdentifier: "HomeTodoCell")
+        tableView.backgroundColor = .clear
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 10
+        tableView.separatorStyle = .none
+        tableView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+        return tableView
+    }()
+
     private lazy var leftChervonButton = UIButton().then {
         $0.setImage(
-            Image.chevronLeftBold
-                .withRenderingMode(.alwaysTemplate),
+            Image.chevronLeftBold.withRenderingMode(.alwaysTemplate),
             for: .normal
         )
         $0.adjustsImageWhenHighlighted = false
@@ -115,11 +138,21 @@ final class HomeViewController: BaseViewController {
 
     private lazy var rightChervonButton = UIButton().then {
         $0.setImage(
-            Image.chevronRightBold
-                .withRenderingMode(.alwaysTemplate),
+            Image.chevronRightBold.withRenderingMode(.alwaysTemplate),
             for: .normal
         )
         $0.adjustsImageWhenHighlighted = false
+    }
+
+    private let calendarButton = UIButton().then {
+        $0.setImage(UIImage(named: "calendar_check"), for: .normal)
+        $0.imageEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        $0.layer.shadowColor = UIColor(red: 0.737, green: 0.737, blue: 0.737, alpha: 1).cgColor
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowRadius = 8
+        $0.layer.shadowOffset = .zero
+        $0.layer.shadowPath = nil
+        $0.backgroundColor = Color.button_blue
     }
 
     private let generator = UIImpactFeedbackGenerator(style: .light)
@@ -134,16 +167,52 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
+        registerTarget()
         registerNotificationcenter()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func keyboardWillHideForTextField(notification _: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
     }
 
     private func registerNotificationcenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .refreshHomeVC, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideForTextField), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        registerForKeyboardNotification()
+    }
+
+    func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(adjustView),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+    }
+
+    @objc private func adjustView(noti: Notification) {
+        guard let userInfo = noti.userInfo else { return }
+        guard let keyboardFrame = (
+            userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+        )?.cgRectValue else { return }
+
+        let adjustmentHeight = keyboardFrame.height
+
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = -adjustmentHeight
+        }
     }
 
     @objc
     private func reloadView() {
-        getHome {[weak self] in
+        getHome { [weak self] in
             guard let self = self else { return }
             self.collectionView.reloadData()
             self.collectionView.scrollToItem(
@@ -152,13 +221,41 @@ final class HomeViewController: BaseViewController {
                 animated: false
             )
             self.updateGoal(goal: self.goals.first ?? nil)
+            self.todoTableView.reloadData()
         }
+    }
+
+    @objc func touchRankButton() {
+        guard let level = self.goals[currentIndex]?.level else { return }
+
+        if level > 5 {
+            // 명예의 전당
+        } else {
+            showToastMessageAlert(message: "레벨5가 되기 전에는 명예의 전당으로 보낼 수 없습니다.")
+        }
+    }
+
+    func showToastMessageAlert(message: String) {
+        let alert = UIAlertController(title: message,
+                                      message: "",
+                                      preferredStyle: .alert)
+
+        present(alert, animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            alert.dismiss(animated: true)
+        }
+    }
+
+    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
+        view.endEditing(true)
     }
 }
 
 extension HomeViewController {
     private func updateGoal(goal: GoalResponse?) {
         if let goal = goal {
+            todoTableView.isHidden = false
 
             let snowe = Snowe(rawValue: goal.type) ?? .pink
 
@@ -196,6 +293,7 @@ extension HomeViewController {
             setPlaceholderView()
             nameLabel.text = "눈덩이를 생성하세요!"
             goalLabel.text = "원하는 목표를 달성할 수 있도록 도와줄게요."
+            todoTableView.isHidden = true
         }
     }
 
@@ -243,6 +341,7 @@ extension HomeViewController: UIScrollViewDelegate {
             if goals.count > 0 {
                 updateGoal(goal: goals[roundedIndex % goals.count])
                 currentIndex = roundedIndex
+                todoTableView.reloadData()
                 setOpacityCell(index: roundedIndex, alpha: 1)
                 if roundedIndex > 0 && roundedIndex < maxIndex - 1 {
                     setOpacityCell(index: roundedIndex-1, alpha: 0.5)
@@ -259,6 +358,56 @@ extension HomeViewController: UIScrollViewDelegate {
     ) {
         generator.impactOccurred()
     }
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: HomeTodoCell = todoTableView.dequeueReusableCell(indexPath: indexPath)
+        cell.selectionStyle = .none
+        cell.contentView.isUserInteractionEnabled = false
+        cell.hvc = self
+
+        if !goals.isEmpty {
+            if let goal = goals[currentIndex] {
+                cell.setData(goalResponse: goal)
+                cell.goalId = goalIds[indexPath.row]
+            }
+        }
+
+        return cell
+    }
+
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let rankButton = UIButton().then {
+//            guard let level = self.goals[currentIndex]?.level else { return }
+//
+//            $0.titleLabel?.font = UIFont.spoqa(size: 18, family: .bold)
+//            $0.setTitle("명예의 전당", for: .normal)
+//
+//            if level > 5 {
+//                $0.backgroundColor = Color.button_blue
+//                $0.setTitleColor(Color.Gray000, for: .normal)
+//                $0.isEnabled = false
+//            } else {
+//                $0.backgroundColor = Color.Gray300
+//                $0.setTitleColor(Color.text_Teritary, for: .normal)
+//                $0.isEnabled = true
+//            }
+//        }
+//
+//        // 명예의 전당 보내기
+////        rankButton.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
+//
+//        return rankButton
+//    }
 }
 
 extension HomeViewController: UICollectionViewDelegate {
@@ -309,7 +458,7 @@ extension HomeViewController {
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
-                print("error")
+                print("home - get home error")
             }
         }
     }
@@ -325,7 +474,9 @@ extension HomeViewController {
             characterInfoStackView,
             goalLabel,
             leftChervonButton,
-            rightChervonButton
+            rightChervonButton,
+            todoTableView,
+            calendarButton
         )
 
         textStackView.addArrangedSubviews(
@@ -390,5 +541,29 @@ extension HomeViewController {
             $0.centerY.equalTo(collectionView.snp.centerY).offset(12)
             $0.centerX.equalTo(collectionView.snp.centerX).offset(115)
         }
+
+        todoTableView.snp.makeConstraints {
+            $0.top.equalTo(goalLabel.snp.bottom).offset(32)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview()
+        }
+
+        calendarButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-44)
+            $0.width.height.equalTo(self.view.frame.size.width * 56 / 375)
+        }
+
+        calendarButton.layer.cornerRadius = (self.view.frame.size.width * 56 / 375) / 2
+    }
+
+    func registerTarget() {
+        calendarButton.addTarget(self, action: #selector(pushCalendarVC), for: .touchUpInside)
+    }
+
+    @objc func pushCalendarVC() {
+        let calendarVC = CalendarViewController()
+        calendarVC.goalIds = self.goalIds
+        self.navigationController?.pushViewController(calendarVC, animated: true)
     }
 }

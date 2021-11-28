@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		641F87721BD4E2A9612BD226 /* Pods_Snowman.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA2FF155FE64827A2BCD39F /* Pods_Snowman.framework */; };
+		C714B23F275268CB0062AACB /* PostTodoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C714B23E275268CA0062AACB /* PostTodoResponse.swift */; };
+		C714B27D2752CAD90062AACB /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C714B27C2752CAD90062AACB /* TodoView.swift */; };
+		C714B2802752CD370062AACB /* HomeTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C714B27F2752CD370062AACB /* HomeTodoCell.swift */; };
+		C714B2852753543E0062AACB /* NoNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C714B2842753543E0062AACB /* NoNetworkViewController.swift */; };
+		C714B288275356F80062AACB /* InternetConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C714B287275356F80062AACB /* InternetConnectivity.swift */; };
 		C75A5916274687AE0001CDD1 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A5915274687AE0001CDD1 /* CalendarViewController.swift */; };
 		C768D11A2749955B000E0677 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C768D1192749955B000E0677 /* TodoModel.swift */; };
 		C768D12627499E04000E0677 /* EventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C768D11D27499E02000E0677 /* EventsManager.swift */; };
@@ -30,6 +35,9 @@
 		C7D92FBF274D1D4400DAA184 /* HistoryTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FBE274D1D4400DAA184 /* HistoryTodo.swift */; };
 		C7D92FC2274D402E00DAA184 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FC1274D402E00DAA184 /* String+.swift */; };
 		C7D92FC5274D442F00DAA184 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FC4274D442F00DAA184 /* Sequence+.swift */; };
+		C7D92FD8274E874700DAA184 /* TodoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FD7274E874700DAA184 /* TodoAPI.swift */; };
+		C7D92FDF274E89C400DAA184 /* TodoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FDE274E89C400DAA184 /* TodoService.swift */; };
+		C7D92FE2274E8AA200DAA184 /* PutTodoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D92FE1274E8AA200DAA184 /* PutTodoResponse.swift */; };
 		C7DE7FC7274A5B6B00C8DFB4 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FC6274A5B6B00C8DFB4 /* HistoryViewController.swift */; };
 		C7DE7FCB274A6CEC00C8DFB4 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FCA274A6CEC00C8DFB4 /* HistoryCell.swift */; };
 		C7DE7FD2274A830300C8DFB4 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE7FD1274A830300C8DFB4 /* SignInViewController.swift */; };
@@ -40,7 +48,7 @@
 		C7EDAD23274563EA008C699C /* SpoqaHanSansNeo-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD20274563E8008C699C /* SpoqaHanSansNeo-bold.otf */; };
 		C7EDAD24274563EA008C699C /* SpoqaHanSansNeo-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */; };
 		C7EDAD25274563EA008C699C /* SpoqaHanSansNeo-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */; };
-		C7F4B8E427497EB0002DD317 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4B8E327497EB0002DD317 /* TodoCell.swift */; };
+		C7F4B8E427497EB0002DD317 /* CalendarTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F4B8E327497EB0002DD317 /* CalendarTodoCell.swift */; };
 		C7F65E2E274BC50200D57086 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E2D274BC50200D57086 /* AuthAPI.swift */; };
 		C7F65E31274BC50900D57086 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E30274BC50900D57086 /* AuthService.swift */; };
 		C7F65E34274BCB5400D57086 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F65E33274BCB5400D57086 /* AuthResponse.swift */; };
@@ -122,6 +130,11 @@
 		788ACA07E071AF9CA17DB541 /* Pods-Snowman.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowman.release.xcconfig"; path = "Target Support Files/Pods-Snowman/Pods-Snowman.release.xcconfig"; sourceTree = "<group>"; };
 		7CA2FF155FE64827A2BCD39F /* Pods_Snowman.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snowman.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9688495685D4CE9B2C338215 /* Pods-Snowman.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snowman.debug.xcconfig"; path = "Target Support Files/Pods-Snowman/Pods-Snowman.debug.xcconfig"; sourceTree = "<group>"; };
+		C714B23E275268CA0062AACB /* PostTodoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTodoResponse.swift; sourceTree = "<group>"; };
+		C714B27C2752CAD90062AACB /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
+		C714B27F2752CD370062AACB /* HomeTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTodoCell.swift; sourceTree = "<group>"; };
+		C714B2842753543E0062AACB /* NoNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkViewController.swift; sourceTree = "<group>"; };
+		C714B287275356F80062AACB /* InternetConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectivity.swift; sourceTree = "<group>"; };
 		C75A5915274687AE0001CDD1 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		C768D1192749955B000E0677 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		C768D11D27499E02000E0677 /* EventsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManager.swift; sourceTree = "<group>"; };
@@ -146,6 +159,9 @@
 		C7D92FBE274D1D4400DAA184 /* HistoryTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTodo.swift; sourceTree = "<group>"; };
 		C7D92FC1274D402E00DAA184 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		C7D92FC4274D442F00DAA184 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
+		C7D92FD7274E874700DAA184 /* TodoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAPI.swift; sourceTree = "<group>"; };
+		C7D92FDE274E89C400DAA184 /* TodoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoService.swift; sourceTree = "<group>"; };
+		C7D92FE1274E8AA200DAA184 /* PutTodoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutTodoResponse.swift; sourceTree = "<group>"; };
 		C7DE7FC6274A5B6B00C8DFB4 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		C7DE7FCA274A6CEC00C8DFB4 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		C7DE7FD1274A830300C8DFB4 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +172,7 @@
 		C7EDAD20274563E8008C699C /* SpoqaHanSansNeo-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-bold.otf"; sourceTree = "<group>"; };
 		C7EDAD21274563E9008C699C /* SpoqaHanSansNeo-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-medium.otf"; sourceTree = "<group>"; };
 		C7EDAD22274563EA008C699C /* SpoqaHanSansNeo-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-regular.otf"; sourceTree = "<group>"; };
-		C7F4B8E327497EB0002DD317 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
+		C7F4B8E327497EB0002DD317 /* CalendarTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoCell.swift; sourceTree = "<group>"; };
 		C7F65E2D274BC50200D57086 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		C7F65E30274BC50900D57086 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		C7F65E33274BCB5400D57086 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
@@ -286,7 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				C75A5915274687AE0001CDD1 /* CalendarViewController.swift */,
-				C7F4B8E327497EB0002DD317 /* TodoCell.swift */,
+				C7F4B8E327497EB0002DD317 /* CalendarTodoCell.swift */,
 				C768D1192749955B000E0677 /* TodoModel.swift */,
 			);
 			path = Calendar;
@@ -401,6 +417,7 @@
 			isa = PBXGroup;
 			children = (
 				DD02A98D2749766500D9B324 /* SnoweCollectionViewCell.swift */,
+				C714B27F2752CD370062AACB /* HomeTodoCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -472,6 +489,7 @@
 				DDD50EEB274681C100EA508F /* NewCharacter */,
 				C75A5914274687980001CDD1 /* Calendar */,
 				C7C9CDF62737625800DC2A09 /* ViewController.swift */,
+				C714B2842753543E0062AACB /* NoNetworkViewController.swift */,
 				C7F65E36274BD03600D57086 /* RootViewControllerChanger.swift */,
 			);
 			path = Feature;
@@ -517,6 +535,7 @@
 				DDF283C8274C0FE100C426D7 /* Notification.Name+.swift */,
 				C7D92FC1274D402E00DAA184 /* String+.swift */,
 				C7D92FC4274D442F00DAA184 /* Sequence+.swift */,
+				C714B287275356F80062AACB /* InternetConnectivity.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -536,6 +555,7 @@
 				DD02A98227495D9E00D9B324 /* AwardAPI.swift */,
 				C7F65E2D274BC50200D57086 /* AuthAPI.swift */,
 				DDF283C4274C04E800C426D7 /* UserAPI.swift */,
+				C7D92FD7274E874700DAA184 /* TodoAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -547,6 +567,7 @@
 				DD02A98427495F5700D9B324 /* AwardService.swift */,
 				C7F65E30274BC50900D57086 /* AuthService.swift */,
 				DDF283C6274C064A00C426D7 /* UserService.swift */,
+				C7D92FDE274E89C400DAA184 /* TodoService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -554,7 +575,6 @@
 		DD86CBED2748253900F6EC8D /* APIModel */ = {
 			isa = PBXGroup;
 			children = (
-				DDBF0A6C274CE88F00DA429D /* GenericPageArrayResponse.swift */,
 				DD86CBEE2748257B00F6EC8D /* ErrorResponse.swift */,
 				DD86CBF2274826FA00F6EC8D /* GoalResponse.swift */,
 				DD86CBF42748278E00F6EC8D /* TodoResponse.swift */,
@@ -564,6 +584,9 @@
 				DD892244274AC72E00316FE0 /* UserResponse.swift */,
 				C7F65E33274BCB5400D57086 /* AuthResponse.swift */,
 				DDF283CF274C3BCF00C426D7 /* AlarmsResponse.swift */,
+				DDBF0A6C274CE88F00DA429D /* GenericPageArrayResponse.swift */,
+				C7D92FE1274E8AA200DAA184 /* PutTodoResponse.swift */,
+				C714B23E275268CA0062AACB /* PostTodoResponse.swift */,
 				DDBAFAF2274E8F0E0089CCD9 /* RankUserInfoResponse.swift */,
 			);
 			path = APIModel;
@@ -693,6 +716,7 @@
 			isa = PBXGroup;
 			children = (
 				DD02A98627496ABF00D9B324 /* LevelStickerView.swift */,
+				C714B27C2752CAD90062AACB /* TodoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -874,12 +898,14 @@
 				DDD7489F27477B980056C505 /* AwardTableViewCell.swift in Sources */,
 				DDBF0A6D274CE88F00DA429D /* GenericPageArrayResponse.swift in Sources */,
 				DD86CBF52748278E00F6EC8D /* TodoResponse.swift in Sources */,
+				C7D92FD8274E874700DAA184 /* TodoAPI.swift in Sources */,
 				C7F65E2E274BC50200D57086 /* AuthAPI.swift in Sources */,
 				DD7D17E0274EA6F600462331 /* MakerInfoHeaderView.swift in Sources */,
 				C7DE7FCB274A6CEC00C8DFB4 /* HistoryCell.swift in Sources */,
 				DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */,
 				DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */,
 				DDBF0A69274CC7AD00DA429D /* RankViewController.swift in Sources */,
+				C714B23F275268CB0062AACB /* PostTodoResponse.swift in Sources */,
 				DD7D17DE274EA16C00462331 /* MakerInfoViewController.swift in Sources */,
 				DD86CBEA2748232600F6EC8D /* URLConst.swift in Sources */,
 				DDFAF15427458441005A3097 /* UIView+.swift in Sources */,
@@ -895,6 +921,7 @@
 				DD02A98127495CF000D9B324 /* AwardsResponse.swift in Sources */,
 				DD02A98E2749766500D9B324 /* SnoweCollectionViewCell.swift in Sources */,
 				DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */,
+				C7D92FDF274E89C400DAA184 /* TodoService.swift in Sources */,
 				DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */,
 				DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */,
 				C7F65E34274BCB5400D57086 /* AuthResponse.swift in Sources */,
@@ -904,6 +931,7 @@
 				C7D38D722748D5440049F3AA /* DateFormatters.swift in Sources */,
 				C768D12827499E04000E0677 /* CalendarView+DataSource.swift in Sources */,
 				DDBAFAEE274E5A420089CCD9 /* MyPageContentTableViewCell.swift in Sources */,
+				C714B288275356F80062AACB /* InternetConnectivity.swift in Sources */,
 				DDF283C7274C064A00C426D7 /* UserService.swift in Sources */,
 				C7DE7FDF274A90B400C8DFB4 /* UITextField+.swift in Sources */,
 				C7F65E31274BC50900D57086 /* AuthService.swift in Sources */,
@@ -917,20 +945,24 @@
 				DD02A98B2749762300D9B324 /* HomeViewController.swift in Sources */,
 				DD02A98327495D9E00D9B324 /* AwardAPI.swift in Sources */,
 				DDFAF150274583F0005A3097 /* UITableVIew+Reusable.swift in Sources */,
+				C7D92FE2274E8AA200DAA184 /* PutTodoResponse.swift in Sources */,
 				DD70F2FF27411F020053374B /* Color.swift in Sources */,
 				DDF283C5274C04E800C426D7 /* UserAPI.swift in Sources */,
 				DD5DDFDB2751FAEF007E29DD /* ViewTitle.swift in Sources */,
 				DD86CBEF2748257B00F6EC8D /* ErrorResponse.swift in Sources */,
 				DDD7489C274776C30056C505 /* AwardViewController.swift in Sources */,
 				C7DE7FD6274A830A00C8DFB4 /* SignUpNameIdViewController.swift in Sources */,
+				C714B27D2752CAD90062AACB /* TodoView.swift in Sources */,
 				DD70F30127411F0A0053374B /* Font.swift in Sources */,
 				DDFAF15827458488005A3097 /* UIStackView+.swift in Sources */,
 				C768D11A2749955B000E0677 /* TodoModel.swift in Sources */,
+				C714B2852753543E0062AACB /* NoNetworkViewController.swift in Sources */,
 				DDD748A127477D430056C505 /* TopTabBarViewController.swift in Sources */,
 				DDFAF15627458457005A3097 /* UIButton+.swift in Sources */,
 				DD02A990274976A700D9B324 /* ZoomAndSnapFlowLayout.swift in Sources */,
 				DDF283CE274C346600C426D7 /* HomeNavigationViewController.swift in Sources */,
 				DD86CBF72748284D00F6EC8D /* NetworkService.swift in Sources */,
+				C714B2802752CD370062AACB /* HomeTodoCell.swift in Sources */,
 				DDFAF14E274583AA005A3097 /* Reusable.swift in Sources */,
 				C768D12B27499E04000E0677 /* CalendarView+Style.swift in Sources */,
 				C7D38D782748D8090049F3AA /* Date+.swift in Sources */,
@@ -943,7 +975,7 @@
 				C7DE7FC7274A5B6B00C8DFB4 /* HistoryViewController.swift in Sources */,
 				C7DE7FDA274A882300C8DFB4 /* StartSignInViewController.swift in Sources */,
 				C7C9CDF32737625800DC2A09 /* AppDelegate.swift in Sources */,
-				C7F4B8E427497EB0002DD317 /* TodoCell.swift in Sources */,
+				C7F4B8E427497EB0002DD317 /* CalendarTodoCell.swift in Sources */,
 				C7D92FC5274D442F00DAA184 /* Sequence+.swift in Sources */,
 				DD86CBF12748265200F6EC8D /* NetworkResult.swift in Sources */,
 				DD892245274AC72E00316FE0 /* UserResponse.swift in Sources */,

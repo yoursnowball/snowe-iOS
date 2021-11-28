@@ -10,6 +10,7 @@ import Foundation
 struct HistoryTodoGroup {
     var type: Snowe
     var title: String?
+    var goalId: Int? = nil
     var date: String
     var todoTotalCount: String?
     var historyTodos: [HistoryTodo]
@@ -18,4 +19,5 @@ struct HistoryTodoGroup {
 struct HistoryTodo {
     var name: String
     var succeed: Bool
+    var todoId: Int? = nil
 }

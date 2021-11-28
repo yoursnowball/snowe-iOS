@@ -10,8 +10,7 @@ import SnapKit
 import Then
 
 class HistoryViewController: BaseViewController {
-    
-    // TODO - 윤서 (이전 뷰에서 데이터 넣어주고 푸시하기)
+
     var goalId: Int?
     var awardAt: String?
     var historyTodoGroups: [HistoryTodoGroup] = []

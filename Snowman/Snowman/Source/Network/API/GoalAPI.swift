@@ -19,12 +19,8 @@ extension GoalAPI: BaseTargetType {
         switch self {
         case .postNewGoal:
             return URLConst.goals
-        case .getGoal(let goalId, let date):
-            if let date = date {
-                return URLConst.goals + "/\(goalId)?date=\(date)"
-            } else {
-                return URLConst.goals + "/\(goalId)"
-            }
+        case .getGoal(let goalId, _):
+            return URLConst.goals + "/\(goalId)"
         case .deleteGoal(let goalId):
             return URLConst.goals + "/\(goalId)"
         }
@@ -49,8 +45,14 @@ extension GoalAPI: BaseTargetType {
                 "type": type,
                 "objective": objective
             ], encoding: JSONEncoding.default)
-        case .getGoal:
-            return .requestPlain
+        case .getGoal(_, let date):
+            if let date = date {
+                return .requestParameters(parameters: [
+                    "date": date
+                ], encoding: URLEncoding.default)
+            } else {
+                return .requestPlain
+            }
         case .deleteGoal:
             return .requestPlain
         }

@@ -10,48 +10,50 @@ import SnapKit
 import Then
 
 class CalendarViewController: BaseViewController {
+
+    var manySucceedType: Snowe?
+    var succeedCount: Int?
+    var goalIds: [Int] = []
+
+    // 과거 날짜 선택했을 때 어떻게 할지 생각하기
+    // 과거 날짜만으로 이전 목표, 투두 가져오는 API가 없음
+    var goals: [GoalResponse] = [] {
+        didSet {
+            if goals.count == goalIds.count {
+                goals = goals.sorted(by: { $0.id < $1.id })
+
+                succeedCount = goals.flatMap { $0.todos }.filter { $0.succeed == true }.count
+                let totalCount = goals.flatMap { $0.todos }.map { $0.succeed }.count
+                todoCountLabel.text = "\(succeedCount ?? 0)/\(totalCount)"
+
+                self.todoTableView.reloadData()
+                self.calendarView.reloadData()
+            } else {
+                
+            }
+        }
+    }
+
+    lazy var selectedDate: String = Date.getTodayString() {
+        didSet {
+            goals.removeAll()
+            getTodos()
+        }
+    }
+
+    lazy var numberOfWeeks: Int = Date.numberOfWeeksInMonth(Date()) {
+        didSet {
+            switch numberOfWeeks {
+            case 4: calendarView.updateConstraint(attribute: NSLayoutConstraint.Attribute.height, constant: self.view.frame.size.width - 40 - 30 - 30)
+            case 5:
+                self.calendarView.updateConstraint(attribute: NSLayoutConstraint.Attribute.height, constant: self.view.frame.size.width - 40 - 30)
+            default:
+                self.calendarView.updateConstraint(attribute: NSLayoutConstraint.Attribute.height, constant: self.view.frame.size.width - 40 + 30)
+            }
+        }
+    }
     
-    let sampleData: [TodoListGroup] = [
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .blue, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .blue)
-        ]),
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .green, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .green)
-        ]),
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .orange, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .orange)
-        ]),
-        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .pink, todoList: [
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink),
-            TodoList(title: "LC Part 1 36문제 풀기 채점", isDone: false, characterType: .pink)
-        ])
-    ]
-    
-//    let sampleData: [TodoListGroup] = [
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .blue, todoList: [
-//
-//        ]),
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .green, todoList: [
-//
-//        ]),
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .orange, todoList: [
-//
-//        ]),
-//        TodoListGroup(title: "토익 900점 달성하기", totalTodoCount: 4, doneTodoCount: 0, characterType: .pink, todoList: [
-//
-//        ])
-//    ]
+    var topY: CGFloat = 0
 
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -64,9 +66,8 @@ class CalendarViewController: BaseViewController {
     }()
     
     var yearMonthLabel = UILabel().then {
-        $0.text = "2021 OCT"
-        $0.textColor = .black
-        $0.sizeToFit()
+        $0.textColor = Color.text_Primary
+        $0.font = UIFont.spoqa(size: 16, family: .bold)
     }
     
     var previousMonthButton = UIButton().then {
@@ -80,20 +81,19 @@ class CalendarViewController: BaseViewController {
     var calendarView: CalendarView!
     
     var lineView = UIView().then {
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = Color.Gray300
     }
     
     var todoLabel = UILabel().then {
         $0.text = "Todo"
         $0.font = UIFont.spoqa(size: 14, family: .bold)
-        $0.textColor = .black
+        $0.textColor = Color.text_Primary
         $0.sizeToFit()
     }
     
-    var todoCount = UILabel().then {
-        $0.text = "30/30"
+    var todoCountLabel = UILabel().then {
         $0.font = UIFont.spoqa(size: 14, family: .regular)
-        $0.textColor = .lightGray
+        $0.textColor = Color.text_Teritary
         $0.sizeToFit()
     }
     
@@ -107,24 +107,35 @@ class CalendarViewController: BaseViewController {
     
     var noGoalLabel = UILabel().then {
         $0.font = UIFont.spoqa(size: 14, family: .regular)
-        $0.textColor = .lightGray
+        $0.textColor = Color.text_Teritary
         $0.text = "아직 목표 설정을 하지 않았어요!"
         $0.textAlignment = .center
     }
     
     var setGoalButton = UIButton().then {
         $0.layer.cornerRadius = 10
-        $0.backgroundColor = .blue
+        $0.backgroundColor = Color.button_blue
         $0.setTitle("목표 설정", for: .normal)
         $0.titleLabel?.font = UIFont.spoqa(size: 18, family: .bold)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(Color.Gray000, for: .normal)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        if goalIds.count == 0 {
+            noGoalLabel.isHidden = false
+            setGoalButton.isHidden = false
+            todoTableView.isHidden = true
+        } else {
+            noGoalLabel.isHidden = true
+            setGoalButton.isHidden = true
+            todoTableView.isHidden = false
+        }
+
         calendarView = CalendarView()
-        
+        calendarView.cvc = self
+
         setLayout()
         registerTarget()
         
@@ -139,26 +150,21 @@ class CalendarViewController: BaseViewController {
         myStyle.headerTextColor          = UIColor.black
         myStyle.headerHeight             = 30
         
-        myStyle.cellTextColorDefault     = UIColor.gray
-        myStyle.cellTextColorToday       = UIColor.gray
-        myStyle.cellTextColorWeekend     = UIColor.gray
+        myStyle.cellTextColorDefault     = Color.text_Secondary
+        myStyle.cellTextColorToday       = Color.text_Secondary
+        myStyle.cellTextColorWeekend     = Color.text_Secondary
         myStyle.cellColorOutOfRange      = UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1.0)
-        myStyle.cellSelectedTextColor    = UIColor.blue
+        myStyle.cellSelectedTextColor    = Color.line_blue
 
         myStyle.headerBackgroundColor    = UIColor.white
         myStyle.weekdaysBackgroundColor  = UIColor.white
         myStyle.firstWeekday             = .sunday
         myStyle.locale                   = Locale(identifier: "ko_KR")
 
-        
-        
-        // 폰트 수정하기
         myStyle.cellFont = UIFont.systemFont(ofSize: 16, weight: .heavy)
         myStyle.headerFont = UIFont.systemFont(ofSize: 17, weight: .bold)
         myStyle.weekdaysFont = UIFont.systemFont(ofSize: 16, weight: .heavy)
 
-        
-        
         calendarView.style = myStyle
         
         calendarView.dataSource = self
@@ -169,38 +175,69 @@ class CalendarViewController: BaseViewController {
         
         calendarView.backgroundColor = UIColor.white
         
-        
+        let today = Date()
+        self.calendarView.selectDate(today)
+        self.calendarView.setDisplayDate(today)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy MMM"
+        yearMonthLabel.text = dateFormatter.string(from: today).uppercased()
+
         todoTableView.delegate = self
         todoTableView.dataSource = self
         todoTableView.isScrollEnabled = false
+        todoTableView.register(CalendarTodoCell.self, forCellReuseIdentifier: "CalendarTodoCell")
         
-        todoTableView.register(TodoCell.self, forCellReuseIdentifier: "TodoCell")
+        getTodos()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowForTextField), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideForTextField), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        topY = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let today = Date()
-        
-        var tomorrowComponents = DateComponents()
-        tomorrowComponents.day = 1
-        
-        let tomorrow = self.calendarView.calendar.date(byAdding: tomorrowComponents, to: today)!
-        self.calendarView.selectDate(tomorrow)
-        self.calendarView.setDisplayDate(today)
-        
-//        todoTableView.updateConstraint(attribute: NSLayoutConstraint.Attribute.height, constant: todoTableView.contentSize.height)
-        todoTableView.reloadData()
-        
-        
-        
-        
-        // 네트워크 통해서 조건 추가하기
-        todoTableView.isHidden = false
+    }
+    
+    @objc func keyboardWillShowForTextField(notification _: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = self.topY - self.todoTableView.frame.origin.y
+        }
+    }
+
+    @objc func keyboardWillHideForTextField(notification _: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
+    }
+
+    func getTodos() {
+        for goalId in goalIds {
+            NetworkService.shared.goal.getGoal(goalId: goalId,
+                                               date: selectedDate) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    guard let data = response as? GoalResponse else { return }
+                    self?.goals.append(data)
+                case .requestErr(let errorResponse):
+                    dump(errorResponse)
+                default:
+                    print("calendar getTodos - error")
+                }
+            }
+        }
+    }
+    
+    override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
+        view.endEditing(true)
     }
 }
 
@@ -210,7 +247,6 @@ extension CalendarViewController: CalendarViewDataSource {
     }
     
     func startDate() -> Date {
-        
         var dateComponents = DateComponents()
         dateComponents.month = -1
         
@@ -221,7 +257,6 @@ extension CalendarViewController: CalendarViewDataSource {
     }
     
     func endDate() -> Date {
-        
         var dateComponents = DateComponents()
         dateComponents.month = 12
         
@@ -229,30 +264,33 @@ extension CalendarViewController: CalendarViewDataSource {
         let twoYearsFromNow = self.calendarView.calendar.date(byAdding: dateComponents, to: today)!
         
         return twoYearsFromNow
-  
-    }}
+    }
+}
 
 extension CalendarViewController: CalendarViewDelegate {
     func calendar(_ calendar: CalendarView, didScrollToMonth date: Date) {
-        print("change month")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy MMM"
+        yearMonthLabel.text = dateFormatter.string(from: date).uppercased()
+
+        numberOfWeeks = Date.numberOfWeeksInMonth(date)
     }
     
     func calendar(_ calendar: CalendarView, didDeselectDate date: Date) {
     }
     
     func calendar(_ calendar: CalendarView, canSelectDate date: Date) -> Bool {
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        selectedDate = dateFormatter.string(from: date)
+
+        // 오늘 이전 날짜면 투두 입력 못 하게 막기
+
         return true
     }
     
     func calendar(_ calendar: CalendarView, didSelectDate date : Date, withEvents events: [CalendarEvent]) {
-        print("Did Select: \(date) with \(events.count) events")
-        
-        for event in events {
-            print("\t\"\(event.title)\" - Starting at:\(event.startDate)")
-        }
-        
-        
-        // 오늘 이전 날짜면 투두 입력 못 하게 막기
     }
 
     func calendar(_ calendar: CalendarView, didLongPressDate date : Date, withEvents events: [CalendarEvent]?) {
@@ -261,13 +299,20 @@ extension CalendarViewController: CalendarViewDelegate {
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return sampleData.count
+        return goalIds.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TodoCell = todoTableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoCell
+        let cell: CalendarTodoCell = todoTableView.dequeueReusableCell(withIdentifier: "CalendarTodoCell", for: indexPath) as! CalendarTodoCell
         cell.selectionStyle = .none
-        cell.setData(data: sampleData[indexPath.item])
+        cell.cvc = self
+        cell.selectedDate = selectedDate
+
+        if !goals.isEmpty {
+            cell.setData(goalResponse: goals[indexPath.row])
+            cell.goalId = goalIds[indexPath.row]
+        }
+
         cell.contentView.isUserInteractionEnabled = false
         return cell
     }
@@ -288,7 +333,7 @@ extension CalendarViewController {
             calendarView,
             lineView,
             todoLabel,
-            todoCount,
+            todoCountLabel,
             todoTableView,
             noGoalLabel,
             setGoalButton)
@@ -307,6 +352,7 @@ extension CalendarViewController {
             $0.top.equalToSuperview().offset(3)
             $0.leading.equalToSuperview().offset(20)
             $0.height.equalTo(20)
+            $0.width.equalTo(80)
         }
         
         previousMonthButton.snp.makeConstraints {
@@ -324,9 +370,7 @@ extension CalendarViewController {
         calendarView.snp.makeConstraints {
             $0.top.equalTo(yearMonthLabel.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(calendarView.snp.width)
-            
-            // 높이 동적으로 바꾸기
+            $0.height.equalTo(self.view.frame.size.width - 40 - 30)
         }
         
         lineView.snp.makeConstraints {
@@ -335,7 +379,7 @@ extension CalendarViewController {
             $0.height.equalTo(1)
         }
         
-        todoCount.snp.makeConstraints {
+        todoCountLabel.snp.makeConstraints {
             $0.centerY.equalTo(lineView)
             $0.trailing.equalToSuperview().offset(-20)
             
@@ -343,7 +387,7 @@ extension CalendarViewController {
         
         todoLabel.snp.makeConstraints {
             $0.centerY.equalTo(lineView)
-            $0.trailing.equalTo(todoCount.snp.leading).offset(-5)
+            $0.trailing.equalTo(todoCountLabel.snp.leading).offset(-5)
             $0.leading.equalTo(lineView.snp.trailing).offset(6)
         }
         
@@ -361,7 +405,6 @@ extension CalendarViewController {
         setGoalButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview().offset(-34)
-//            $0.height.equalTo(setGoalButton.snp.width).multipliedBy(53/335)
             $0.height.equalTo(53)
             $0.top.equalTo(noGoalLabel.snp.bottom).offset(165)
         }
@@ -370,11 +413,11 @@ extension CalendarViewController {
 
 extension CalendarViewController {
     private func registerTarget() {
-        [previousMonthButton, nextMonthButton].forEach {
+        [previousMonthButton, nextMonthButton, setGoalButton].forEach {
             $0.addTarget(self, action: #selector(buttonTapAction(_:)), for: .touchUpInside)
         }
     }
-    
+
     @objc
     private func buttonTapAction(_ sender: UIButton) {
         switch sender {
@@ -382,6 +425,10 @@ extension CalendarViewController {
             self.calendarView.goToPreviousMonth()
         case nextMonthButton:
             self.calendarView.goToNextMonth()
+        case setGoalButton:
+            let nvc = BaseNavigationController(rootViewController: GoalQuestionViewController())
+            nvc.modalPresentationStyle = .fullScreen
+            present(nvc, animated: true, completion: nil)
         default:
             return
         }
