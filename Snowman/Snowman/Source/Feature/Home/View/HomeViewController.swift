@@ -568,6 +568,8 @@ extension HomeViewController {
     @objc func pushCalendarVC() {
         let calendarVC = CalendarViewController()
         calendarVC.goalIds = self.goalIds
-        self.navigationController?.pushViewController(calendarVC, animated: true)
+        let calendarNVC = BaseNavigationController(rootViewController: calendarVC)
+        calendarNVC.modalPresentationStyle = .fullScreen
+        present(calendarNVC, animated: true, completion: nil)
     }
 }

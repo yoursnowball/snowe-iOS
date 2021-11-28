@@ -123,6 +123,8 @@ class CalendarViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        makeCloseButton()
+
         if goalIds.count == 0 {
             noGoalLabel.isHidden = false
             setGoalButton.isHidden = false
