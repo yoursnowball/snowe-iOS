@@ -374,7 +374,7 @@ extension HomeTodoCell {
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
-                print("calendar todo cell - putTodo error")
+                print("home todo cell - putTodo error")
             }
         }
     }
