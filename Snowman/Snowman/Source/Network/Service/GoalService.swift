@@ -11,6 +11,12 @@ import Moya
 final class GoalService {
     private let goalProvider = MoyaProvider<GoalAPI>(plugins: [MoyaLoggingPlugin()])
 
+    private enum ResponseData {
+        case postNewGoal
+        case getGoal
+        case postAwards
+    }
+
     public func postNewGoal(
         name: String,
         type: String,
@@ -25,7 +31,7 @@ final class GoalService {
                 let statusCode = response.statusCode
                 let data = response.data
 
-                let networkResult = self.judgeStatus(by: statusCode, data)
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .postNewGoal)
                 completion(networkResult)
 
             case .failure(let err):
@@ -46,7 +52,7 @@ final class GoalService {
                 let statusCode = response.statusCode
                 let data = response.data
 
-                let networkResult = self.judgeStatus(by: statusCode, data)
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getGoal)
                 completion(networkResult)
 
             case .failure(let err):
@@ -70,15 +76,35 @@ final class GoalService {
         }
     }
 
-    private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+    public func postAwards(
+        goalId: Int,
+        completion: @escaping (NetworkResult<Any>) -> Void
+    ) {
+        goalProvider.request(.postAwards(goalId: goalId)) { result in
+            switch result {
+            case .success(let response):
+
+                let statusCode = response.statusCode
+                let data = response.data
+
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .postAwards)
+                completion(networkResult)
+
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+
+    private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
 
         switch statusCode {
         case 200..<300:
-            guard let decodedData = try? decoder.decode(GoalResponse.self, from: data) else {
-                return .pathErr
+            switch responseData {
+            case .postNewGoal, .getGoal, .postAwards:
+                return isValidData(data: data, responseData: responseData)
             }
-            return .success(decodedData)
         case 400..<500:
             guard let decodedData = try? decoder.decode(ErrorResponse.self, from: data) else {
                 return .pathErr
@@ -88,6 +114,23 @@ final class GoalService {
             return .serverErr
         default:
             return .networkFail
+        }
+    }
+
+    private func isValidData(data: Data, responseData: ResponseData) -> NetworkResult<Any> {
+        let decoder = JSONDecoder()
+
+        switch responseData {
+        case .postNewGoal, .getGoal:
+            guard let decodedData = try? decoder.decode(GoalResponse.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
+        case .postAwards:
+            guard let decodedData = try? decoder.decode(Award.self, from: data) else {
+                return .pathErr
+            }
+            return .success(decodedData)
         }
     }
 }
