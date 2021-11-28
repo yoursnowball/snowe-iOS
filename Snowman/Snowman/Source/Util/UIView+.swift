@@ -25,4 +25,13 @@ extension UIView {
         layer.masksToBounds = true
         layer.cornerRadius = radius
     }
+
+    func makeRoundedSpecificCorner(corners: UIRectCorner, cornerRadius: Double) {
+        let size = CGSize(width: cornerRadius, height: cornerRadius)
+        let bezierPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: size)
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.frame = self.bounds
+        shapeLayer.path = bezierPath.cgPath
+        layer.mask = shapeLayer
+    }
 }

@@ -12,7 +12,7 @@ import Then
 
 class TopTabBarViewController: BaseViewController {
 
-    private let menuList = ["랭킹", "뱃지", "명예의 전당"]
+    private let menuList = ["랭킹", "스탬프", "명예의 전당"]
 
     private lazy var menuCount: CGFloat = CGFloat(menuList.count)
 
@@ -78,7 +78,7 @@ extension TopTabBarViewController {
         addChild(vc1)
         mainScrollView.addSubview(vc1.view)
 
-        let vc2 = UIViewController()
+        let vc2 = StampViewController()
         vc2.view.frame = CGRect(
             x: UIScreen.main.bounds.width,
             y: 0,

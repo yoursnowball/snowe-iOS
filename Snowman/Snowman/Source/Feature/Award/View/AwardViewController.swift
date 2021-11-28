@@ -132,6 +132,7 @@ extension AwardViewController {
         headerView.snp.makeConstraints {
             $0.height.equalTo(72)
         }
+        
         headerTitleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview().inset(18)
