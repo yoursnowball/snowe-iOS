@@ -631,3 +631,25 @@ extension HomeViewController: PopUpActionDelegate {
         }
     }
 }
+
+extension HomeViewController: PopUpActionDelegate {
+    func touchRightButton(button: UIButton) {
+        guard let goalId = self.goals[currentIndex]?.id else { return }
+
+        NetworkService.shared.goal.postAwards(goalId: goalId) { [weak self] result in
+            switch result {
+            case .success:
+                // 명예의 전당 보내고 난 뒤의 받는 데이터
+//            case .success(let response):
+//                guard let data = response as? Award else { return }
+                self?.reloadView()
+                let awardVC = AwardViewController()
+                self?.present(awardVC, animated: true)
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("home - post award error")
+            }
+        }
+    }
+}
