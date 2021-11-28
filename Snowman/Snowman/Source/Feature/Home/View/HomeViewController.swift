@@ -256,6 +256,7 @@ extension HomeViewController {
     private func updateGoal(goal: GoalResponse?) {
         if let goal = goal {
             todoTableView.isHidden = false
+            todoTableView.reloadData()
 
             let snowe = Snowe(rawValue: goal.type) ?? .pink
 
@@ -328,24 +329,25 @@ extension HomeViewController {
 
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let cellWidthIncludeSpacing = flowLayout.itemSize.width + flowLayout.minimumLineSpacing
-        let offsetX = collectionView.contentOffset.x
+        if scrollView is UICollectionView {
+            let cellWidthIncludeSpacing = flowLayout.itemSize.width + flowLayout.minimumLineSpacing
+            let offsetX = collectionView.contentOffset.x
 
-        let index = (
-            offsetX + collectionView.contentInset.left + collectionView.contentInset.right
-        ) / cellWidthIncludeSpacing
+            let index = (
+                offsetX + collectionView.contentInset.left + collectionView.contentInset.right
+            ) / cellWidthIncludeSpacing
 
-        let roundedIndex = Int(round(index))
+            let roundedIndex = Int(round(index))
 
-        if roundedIndex > -1 && roundedIndex < maxIndex {
-            if goals.count > 0 {
-                updateGoal(goal: goals[roundedIndex % goals.count])
-                currentIndex = roundedIndex
-                todoTableView.reloadData()
-                setOpacityCell(index: roundedIndex, alpha: 1)
-                if roundedIndex > 0 && roundedIndex < maxIndex - 1 {
-                    setOpacityCell(index: roundedIndex-1, alpha: 0.5)
-                    setOpacityCell(index: roundedIndex+1, alpha: 0.5)
+            if roundedIndex > -1 && roundedIndex < maxIndex {
+                if goals.count > 0 {
+                    updateGoal(goal: goals[roundedIndex % goals.count])
+                    currentIndex = roundedIndex
+                    setOpacityCell(index: roundedIndex, alpha: 1)
+                    if roundedIndex > 0 && roundedIndex < maxIndex - 1 {
+                        setOpacityCell(index: roundedIndex-1, alpha: 0.5)
+                        setOpacityCell(index: roundedIndex+1, alpha: 0.5)
+                    }
                 }
             }
         }
@@ -356,7 +358,9 @@ extension HomeViewController: UIScrollViewDelegate {
         withVelocity velocity: CGPoint,
         targetContentOffset: UnsafeMutablePointer<CGPoint>
     ) {
-        generator.impactOccurred()
+        if scrollView is UICollectionView {
+            generator.impactOccurred()
+        }
     }
 }
 
