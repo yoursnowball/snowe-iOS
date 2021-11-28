@@ -45,6 +45,12 @@ open class CalendarDayCell: UICollectionViewCell {
         }
     }
     
+//    var checkData: CheckData? {
+//        didSet {
+//
+//        }
+//    }
+    
     var day: Int? {
         set {
             guard let value = newValue else { return self.textLabel.text = nil }
@@ -268,3 +274,8 @@ open class CalendarDayCell: UICollectionViewCell {
     
     
 }
+
+//class CheckData {
+//    var type: Snowe!
+//    var count
+//}
