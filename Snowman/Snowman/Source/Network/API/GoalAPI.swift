@@ -12,6 +12,7 @@ enum GoalAPI {
     case postNewGoal(name: String, type: String, objective: String)
     case getGoal(goalId: Int, date: String? = nil)
     case deleteGoal(goalId: Int)
+    case postAwards(goalId: Int)
 }
 
 extension GoalAPI: BaseTargetType {
@@ -23,6 +24,8 @@ extension GoalAPI: BaseTargetType {
             return URLConst.goals + "/\(goalId)"
         case .deleteGoal(let goalId):
             return URLConst.goals + "/\(goalId)"
+        case .postAwards(let goalId):
+            return URLConst.goals + "/\(goalId)" + URLConst.awards
         }
     }
 
@@ -34,6 +37,8 @@ extension GoalAPI: BaseTargetType {
             return .get
         case .deleteGoal:
             return .delete
+        case .postAwards:
+            return .post
         }
     }
 
@@ -54,6 +59,8 @@ extension GoalAPI: BaseTargetType {
                 return .requestPlain
             }
         case .deleteGoal:
+            return .requestPlain
+        case .postAwards:
             return .requestPlain
         }
     }
