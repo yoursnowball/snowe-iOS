@@ -7,7 +7,6 @@
 
 import UIKit
 
-/// level sticker 높이는 무조건 16
 final class LevelStickerView: UIView {
 
     public var type: Snowe = .orange {
@@ -19,12 +18,22 @@ final class LevelStickerView: UIView {
     public var level: Int = 0 {
         didSet {
             label.text = "lv \(level)"
+            label.font = .spoqa(size: 11, family: .medium)
+            makeRound(8)
+            render()
+        }
+    }
+
+    public var text: String = "" {
+        didSet {
+            label.text = text
+            label.font = .spoqa(size: 14, family: .bold)
+            makeRound(27/2)
             render()
         }
     }
 
     private let label = UILabel().then {
-        $0.font = .spoqa(size: 11, family: .medium)
         $0.textAlignment = .center
     }
 
@@ -41,7 +50,6 @@ final class LevelStickerView: UIView {
 
 extension LevelStickerView {
     private func makeBorder() {
-        makeRound(8)
         layer.borderWidth = 0.5
     }
 
