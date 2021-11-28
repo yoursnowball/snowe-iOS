@@ -112,17 +112,19 @@ open class CalendarDayCell: UICollectionViewCell {
         didSet {
             switch isSelected {
             case true:
-                self.bgView.layer.borderColor = style.cellSelectedBorderColor.cgColor
-                self.bgView.layer.borderWidth = style.cellSelectedBorderWidth
-                self.bgView.backgroundColor = style.cellSelectedColor
+                textLabel.font = UIFont.spoqa(size: 11, family: .bold)
+                let text = String(day ?? 0)
+                let textRange = NSRange(location: 0, length: text.count)
+                let attributedText = NSMutableAttributedString(string: text)
+                attributedText.addAttribute(.underlineStyle,
+                                            value: NSUnderlineStyle.single.rawValue,
+                                            range: textRange)
+                textLabel.attributedText = attributedText
             case false:
-                self.bgView.layer.borderColor = style.cellBorderColor.cgColor
-                self.bgView.layer.borderWidth = style.cellBorderWidth
-                if self.isToday {
-                    self.bgView.backgroundColor = style.cellColorToday
-                } else {
-                    self.bgView.backgroundColor = style.cellColorDefault
-                }
+                textLabel.font = UIFont.spoqa(size: 11, family: .regular)
+                let text = String(day ?? 0)
+                let attributedText = NSMutableAttributedString(string: text)
+                textLabel.attributedText = attributedText
             }
             
             updateTextColor()
