@@ -378,7 +378,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if !goals.isEmpty {
             if let goal = goals[currentIndex] {
                 cell.setData(goalResponse: goal)
-                cell.goalId = goalIds[indexPath.row]
+                cell.goalId = goalIds[currentIndex]
             }
         }
 
