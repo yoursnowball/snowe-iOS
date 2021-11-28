@@ -5,3 +5,4 @@ excluded:
 - Snowman/Source/Feature/Calendar
 - Snowman/Source/Feature/History
 - Snowman/Resource/Color.swift
+- Snowman/Source/Feature/Home/Cell/HomeTodoCell.swift

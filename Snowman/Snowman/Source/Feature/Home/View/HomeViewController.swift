@@ -16,24 +16,9 @@ final class HomeViewController: BaseViewController {
             self.goals = response.goals
 
             if !goals.isEmpty {
-                homeTodoGroup.removeAll()
                 goalIds.removeAll()
 
                 for goal in goals {
-                    let todoArr = goal?.todos
-                                        .filter { $0.todoDate == Date.getTodayString() }
-                                        .map { HistoryTodo(name: $0.name,
-                                                        succeed: $0.succeed,
-                                                        todoId: $0.id)}
-
-                    if let stringType = goal?.type, let type = Snowe(rawValue: stringType) {
-                        self.homeTodoGroup.append(HistoryTodoGroup(type: type,
-                                                                   title: goal?.objective,
-                                                                   date: "",
-                                                                   todoTotalCount: nil,
-                                                                   historyTodos: todoArr ?? []))
-                    }
-
                     if let id = goal?.id {
                         goalIds.append(id)
                     }
@@ -42,8 +27,7 @@ final class HomeViewController: BaseViewController {
         }
     }
 
-    private var goals: [GoalResponse?] = []
-    private var homeTodoGroup: [HistoryTodoGroup] = []
+    var goals: [GoalResponse?] = []
     private var goalIds: [Int] = []
 
     private let maxIndex: Int = 4
@@ -131,11 +115,10 @@ final class HomeViewController: BaseViewController {
         $0.sizeToFit()
     }
 
-    private lazy var todoTableView: UITableView = {
+    lazy var todoTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.isScrollEnabled = false
         tableView.register(HomeTodoCell.self, forCellReuseIdentifier: "HomeTodoCell")
         tableView.backgroundColor = .clear
         tableView.rowHeight = UITableView.automaticDimension
@@ -188,8 +171,43 @@ final class HomeViewController: BaseViewController {
         registerNotificationcenter()
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc func keyboardWillHideForTextField(notification _: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
+    }
+
     private func registerNotificationcenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: .refreshHomeVC, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideForTextField), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        registerForKeyboardNotification()
+    }
+
+    func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(adjustView),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+    }
+
+    @objc private func adjustView(noti: Notification) {
+        guard let userInfo = noti.userInfo else { return }
+        guard let keyboardFrame = (
+            userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+        )?.cgRectValue else { return }
+
+        let adjustmentHeight = keyboardFrame.height
+
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = -adjustmentHeight
+        }
     }
 
     @objc
@@ -237,6 +255,7 @@ final class HomeViewController: BaseViewController {
 extension HomeViewController {
     private func updateGoal(goal: GoalResponse?) {
         if let goal = goal {
+            todoTableView.isHidden = false
 
             let snowe = Snowe(rawValue: goal.type) ?? .pink
 
@@ -274,6 +293,7 @@ extension HomeViewController {
             setPlaceholderView()
             nameLabel.text = "눈덩이를 생성하세요!"
             goalLabel.text = "원하는 목표를 달성할 수 있도록 도와줄게요."
+            todoTableView.isHidden = true
         }
     }
 
@@ -349,9 +369,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let cell: HomeTodoCell = todoTableView.dequeueReusableCell(indexPath: indexPath)
         cell.selectionStyle = .none
         cell.contentView.isUserInteractionEnabled = false
+        cell.hvc = self
 
-        if !homeTodoGroup.isEmpty {
-            cell.setData(historyTodoGroup: homeTodoGroup[currentIndex])
+        if !goals.isEmpty {
+            if let goal = goals[currentIndex] {
+                cell.setData(goalResponse: goal)
+                cell.goalId = goalIds[indexPath.row]
+            }
         }
 
         return cell
