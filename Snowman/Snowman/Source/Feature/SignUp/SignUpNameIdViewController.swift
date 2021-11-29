@@ -110,7 +110,7 @@ class SignUpNameIdViewController: BaseViewController {
     }
 
     func setNameTextField() {
-        nicknameTextField.placeholder = "이름"
+        nicknameTextField.placeholder = "닉네임"
         nicknameTextField.delegate = self
         nicknameTextField.backgroundColor = Color.Gray100
         nicknameTextField.clipsToBounds = true

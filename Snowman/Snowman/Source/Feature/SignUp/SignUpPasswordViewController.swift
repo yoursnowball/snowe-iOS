@@ -144,7 +144,7 @@ class SignUpPasswordViewController: UIViewController {
     }
 
     func setIdTextField() {
-        passwordTextField.placeholder = "아이디"
+        passwordTextField.placeholder = "비밀번호"
         passwordTextField.delegate = self
         passwordTextField.backgroundColor = Color.Gray300
         passwordTextField.isSecureTextEntry = true
@@ -160,7 +160,7 @@ class SignUpPasswordViewController: UIViewController {
     }
 
     func setPasswordTextField() {
-        passwordCheckTextField.placeholder = "비밀번호"
+        passwordCheckTextField.placeholder = "비밀번호 확인"
         passwordCheckTextField.delegate = self
         passwordCheckTextField.backgroundColor = Color.Gray300
         passwordCheckTextField.isSecureTextEntry = true
