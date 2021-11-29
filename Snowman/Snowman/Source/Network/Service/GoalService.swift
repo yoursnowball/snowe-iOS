@@ -16,6 +16,7 @@ final class GoalService {
         case getGoal
         case postAwards
         case getGoalsByDate
+        case getGoalsForCalendar
     }
 
     public func postNewGoal(
@@ -118,13 +119,34 @@ final class GoalService {
         }
     }
 
+    public func getGoalsForCalendar(
+        start: String,
+        end: String,
+        completion: @escaping (NetworkResult<Any>) -> Void
+    ) {
+        goalProvider.request(.getGoalsForCalendar(start: start, end: end)) { result in
+            switch result {
+            case .success(let response):
+
+                let statusCode = response.statusCode
+                let data = response.data
+
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getGoalsForCalendar)
+                completion(networkResult)
+
+            case .failure(let err):
+                print(err)
+            }
+        }
+    }
+
     private func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
 
         switch statusCode {
         case 200..<300:
             switch responseData {
-            case .postNewGoal, .getGoal, .postAwards, .getGoalsByDate:
+            case .postNewGoal, .getGoal, .postAwards, .getGoalsByDate, .getGoalsForCalendar:
                 return isValidData(data: data, responseData: responseData)
             }
         case 400..<500:
@@ -157,6 +179,16 @@ final class GoalService {
             guard let decodedData = try? decoder.decode(GetGoalsByDateResponse.self, from: data) else {
                 return .pathErr
             }
+            return .success(decodedData)
+        case .getGoalsForCalendar:
+            guard let decodedData = try? decoder.decode(GetGoalsForCalendarResponse.self, from: data) else {
+                return .pathErr
+            }
+            
+            
+//            let decodedData = try! decoder.decode(GetGoalsForCalendarResponse.self, from: data)
+            
+            
             return .success(decodedData)
         }
     }
