@@ -14,6 +14,7 @@
 		C714B2852753543E0062AACB /* NoNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C714B2842753543E0062AACB /* NoNetworkViewController.swift */; };
 		C714B288275356F80062AACB /* InternetConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C714B287275356F80062AACB /* InternetConnectivity.swift */; };
 		C714B28D2753AF2E0062AACB /* GetGoalsByDateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C714B28C2753AF2E0062AACB /* GetGoalsByDateResponse.swift */; };
+		C714B2942753D74C0062AACB /* GetDailyGoalsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C714B2932753D74C0062AACB /* GetDailyGoalsResponse.swift */; };
 		C75A5916274687AE0001CDD1 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A5915274687AE0001CDD1 /* CalendarViewController.swift */; };
 		C768D11A2749955B000E0677 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C768D1192749955B000E0677 /* TodoModel.swift */; };
 		C768D12627499E04000E0677 /* EventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C768D11D27499E02000E0677 /* EventsManager.swift */; };
@@ -142,6 +143,7 @@
 		C714B2842753543E0062AACB /* NoNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkViewController.swift; sourceTree = "<group>"; };
 		C714B287275356F80062AACB /* InternetConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectivity.swift; sourceTree = "<group>"; };
 		C714B28C2753AF2E0062AACB /* GetGoalsByDateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGoalsByDateResponse.swift; sourceTree = "<group>"; };
+		C714B2932753D74C0062AACB /* GetDailyGoalsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDailyGoalsResponse.swift; sourceTree = "<group>"; };
 		C75A5915274687AE0001CDD1 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		C768D1192749955B000E0677 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		C768D11D27499E02000E0677 /* EventsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManager.swift; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				DDBAFAF2274E8F0E0089CCD9 /* RankUserInfoResponse.swift */,
 				C714B28C2753AF2E0062AACB /* GetGoalsByDateResponse.swift */,
 				DDA1F56D2753A8F400D9C2FB /* StampResponse.swift */,
+				C714B2932753D74C0062AACB /* GetDailyGoalsResponse.swift */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -941,6 +944,7 @@
 				DD18EDF4274B93F700F4BCC1 /* NotificationResponse.swift in Sources */,
 				DD02A98127495CF000D9B324 /* AwardsResponse.swift in Sources */,
 				DD02A98E2749766500D9B324 /* SnoweCollectionViewCell.swift in Sources */,
+				C714B2942753D74C0062AACB /* GetDailyGoalsResponse.swift in Sources */,
 				DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */,
 				C7D92FDF274E89C400DAA184 /* TodoService.swift in Sources */,
 				DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */,
