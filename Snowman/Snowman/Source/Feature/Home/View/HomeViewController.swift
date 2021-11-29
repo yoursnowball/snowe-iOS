@@ -445,6 +445,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
         rankButton.addTarget(self, action: #selector(touchRankButton), for: .touchUpInside)
 
+        if !goals.isEmpty {
+            if let goal = goals[currentIndex] {
+                if goal.todos.isEmpty {
+                    buttonView.isHidden = true
+                } else {
+                    buttonView.isHidden = false
+                }
+            } else {
+                buttonView.isHidden = true
+            }
+        } else {
+            buttonView.isHidden = true
+        }
+
         return buttonView
     }
 }
