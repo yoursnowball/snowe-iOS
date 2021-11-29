@@ -19,7 +19,7 @@ class BaseViewController: UIViewController {
     }
 
     @objc
-    private func buttonDidTapped() {
+    private func closeButtonDidTapped() {
         dismiss(animated: true, completion: nil)
     }
 }
@@ -29,7 +29,7 @@ extension BaseViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "xmark"),
             style: .plain,
-            target: self, action: #selector(buttonDidTapped)
+            target: self, action: #selector(closeButtonDidTapped)
         )
     }
 }
