@@ -28,6 +28,7 @@
 		C768D12E27499E04000E0677 /* CalendarView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C768D12527499E04000E0677 /* CalendarView+Delegate.swift */; };
 		C768D131274A032E000E0677 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C768D130274A032E000E0677 /* ContentSizedTableView.swift */; };
 		C768D13A274A20FA000E0677 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C768D139274A20FA000E0677 /* Poppins-Black.ttf */; };
+		C7B7C04527550053005AD305 /* GetGoalsForCalendarResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7C04427550053005AD305 /* GetGoalsForCalendarResponse.swift */; };
 		C7C9CDF32737625800DC2A09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9CDF22737625800DC2A09 /* AppDelegate.swift */; };
 		C7C9CDF72737625800DC2A09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9CDF62737625800DC2A09 /* ViewController.swift */; };
 		C7C9CDFC2737625F00DC2A09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7C9CDFB2737625F00DC2A09 /* Assets.xcassets */; };
@@ -158,6 +159,7 @@
 		C768D12527499E04000E0677 /* CalendarView+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CalendarView+Delegate.swift"; sourceTree = "<group>"; };
 		C768D130274A032E000E0677 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		C768D139274A20FA000E0677 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.ttf"; sourceTree = "<group>"; };
+		C7B7C04427550053005AD305 /* GetGoalsForCalendarResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGoalsForCalendarResponse.swift; sourceTree = "<group>"; };
 		C7C9CDEF2737625800DC2A09 /* Snowman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C9CDF22737625800DC2A09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7C9CDF62737625800DC2A09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 				C714B28C2753AF2E0062AACB /* GetGoalsByDateResponse.swift */,
 				DDA1F56D2753A8F400D9C2FB /* StampResponse.swift */,
 				C714B2932753D74C0062AACB /* GetDailyGoalsResponse.swift */,
+				C7B7C04427550053005AD305 /* GetGoalsForCalendarResponse.swift */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -959,6 +962,7 @@
 				DD86CBE82748216D00F6EC8D /* GoalAPI.swift in Sources */,
 				C7D92FDF274E89C400DAA184 /* TodoService.swift in Sources */,
 				DD02A97F2749482900D9B324 /* NewGoal.swift in Sources */,
+				C7B7C04527550053005AD305 /* GetGoalsForCalendarResponse.swift in Sources */,
 				DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */,
 				C7F65E34274BCB5400D57086 /* AuthResponse.swift in Sources */,
 				DDBF0A6B274CC7D600DA429D /* RankCollectionViewCell.swift in Sources */,

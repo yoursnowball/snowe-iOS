@@ -86,6 +86,7 @@ extension CalendarViewDelegate {
 public class CalendarView: UIView {
     
     var cvc: CalendarViewController?
+    var yearMonth: String?
     
     public let cellReuseIdentifier = "CalendarDayCell"
     

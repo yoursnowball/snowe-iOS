@@ -30,6 +30,7 @@ import Then
 open class CalendarDayCell: UICollectionViewCell {
     
     var cvc: CalendarViewController?
+    var yearMonth: String?
     
     var style: CalendarView.Style = CalendarView.Style.Default
     
@@ -44,17 +45,42 @@ open class CalendarDayCell: UICollectionViewCell {
             self.setNeedsLayout()
         }
     }
-    
-//    var checkData: CheckData? {
-//        didSet {
-//
-//        }
-//    }
-    
+
+    var checkData: CheckData? {
+        didSet {
+            if let data = checkData {
+                checkLabel.isHidden = false
+                
+                checkLabel.text = String(data.count)
+                
+                switch data.type {
+                case .blue: checkBackView.backgroundColor = Snowe.blue.todoColor
+                case .green: checkBackView.backgroundColor = Snowe.green.todoColor
+                case .orange: checkBackView.backgroundColor = Snowe.orange.todoColor
+                case .pink: checkBackView.backgroundColor = Snowe.pink.todoColor
+                }
+            } else {
+                checkLabel.isHidden = true
+                checkBackView.backgroundColor = Color.Gray300
+            }
+        }
+    }
+
     var day: Int? {
         set {
             guard let value = newValue else { return self.textLabel.text = nil }
             self.textLabel.text = String(value)
+            
+            if let yearMonth = yearMonth, let cvc = cvc {
+                let tempDate = yearMonth + "-\(value)"
+
+                if let data = cvc.goalsForCalendar[tempDate] {
+                    if let snowe = Snowe(rawValue: data.type) {
+                        self.checkData = CheckData(type: snowe,
+                                                   count: data.succeedTodoCount)
+                    }
+                }
+            }
         }
         get {
             guard let value = self.textLabel.text else { return nil }
@@ -148,13 +174,17 @@ open class CalendarDayCell: UICollectionViewCell {
     
     let checkBackView = UIView().then {
         $0.backgroundColor = Color.Gray300
+        
+        
+        // 머지 전에 주석 풀기
+//        $0.backgroundColor = Snowe.blue.todoColor
     }
     
     let checkImageView = UIImageView()
     
     let checkLabel = UILabel().then {
         $0.textColor = .white
-        $0.font = UIFont.poppins()
+        $0.font = UIFont.poppins(size: 10)
         $0.textAlignment = .center
     }
     
@@ -262,20 +292,12 @@ open class CalendarDayCell: UICollectionViewCell {
 //            self.bgView.layer.cornerRadius = radius
 //        }
         
-        
-        
-        
         checkBackView.layer.cornerRadius = checkBackView.frame.height/2
         checkBackView.layer.masksToBounds = true
-        
-        
     }
-    
-    
-    
 }
 
-//class CheckData {
-//    var type: Snowe!
-//    var count
-//}
+struct CheckData {
+    var type: Snowe
+    var count: Int
+}
