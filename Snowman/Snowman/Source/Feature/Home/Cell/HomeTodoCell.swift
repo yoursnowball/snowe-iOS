@@ -295,7 +295,7 @@ extension HomeTodoCell {
 
                             if result.isLevelUp {
                                 let levelUpView = LevelUpViewController()
-                                levelUpView.snoweImage = Snowe(rawValue: goal.type)?.getImage(level: goal.level)
+                                levelUpView.snoweImage = Snowe(rawValue: goal.type)?.getImage(level: goal.level + 1)
                                 levelUpView.modalPresentationStyle = .fullScreen
                                 hvc.present(levelUpView, animated: true, completion: nil)
                             }
