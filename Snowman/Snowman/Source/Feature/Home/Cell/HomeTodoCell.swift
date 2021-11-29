@@ -67,6 +67,7 @@ class HomeTodoCell: UITableViewCell {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         titleLabel.text = nil
         stackView.removeAllArrangedSubviews()
     }

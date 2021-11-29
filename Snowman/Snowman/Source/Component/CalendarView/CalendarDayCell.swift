@@ -257,7 +257,14 @@ open class CalendarDayCell: UICollectionViewCell {
             $0.edges.equalTo(checkBackView)
         }
     }
-    
+
+    open override func prepareForReuse() {
+        super.prepareForReuse()
+        checkBackView.backgroundColor = Color.Gray300
+        textLabel.text = nil
+        checkImageView.image = nil
+        checkLabel.text = nil
+    }
     
     
     
