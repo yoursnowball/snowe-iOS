@@ -31,9 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        RootViewControllerChanger.updateRootViewController()
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
+
+        RootViewControllerChanger.updateRootViewController()
+
         return true
     }
 

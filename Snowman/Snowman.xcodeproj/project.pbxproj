@@ -93,6 +93,7 @@
 		DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3027473DEF004AF5A6 /* CharacterChoiceViewController.swift */; };
 		DD894D3527473FF7004AF5A6 /* CharacterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */; };
 		DD894D3727474F98004AF5A6 /* GoalCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3627474F98004AF5A6 /* GoalCreationViewController.swift */; };
+		DD8D19702754B21C00483D32 /* LevelUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D196F2754B21C00483D32 /* LevelUpViewController.swift */; };
 		DDA1F5662753A67300D9C2FB /* StampViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA1F5652753A67300D9C2FB /* StampViewController.swift */; };
 		DDA1F5682753A6EC00D9C2FB /* StampCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA1F5672753A6EC00D9C2FB /* StampCollectionViewCell.swift */; };
 		DDA1F56A2753A7F800D9C2FB /* StampModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA1F5692753A7F800D9C2FB /* StampModalViewController.swift */; };
@@ -217,6 +218,7 @@
 		DD894D3027473DEF004AF5A6 /* CharacterChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterChoiceViewController.swift; sourceTree = "<group>"; };
 		DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD894D3627474F98004AF5A6 /* GoalCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCreationViewController.swift; sourceTree = "<group>"; };
+		DD8D196F2754B21C00483D32 /* LevelUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpViewController.swift; sourceTree = "<group>"; };
 		DDA1F5652753A67300D9C2FB /* StampViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampViewController.swift; sourceTree = "<group>"; };
 		DDA1F5672753A6EC00D9C2FB /* StampCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDA1F5692753A7F800D9C2FB /* StampModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampModalViewController.swift; sourceTree = "<group>"; };
@@ -488,6 +490,7 @@
 		DD70F2EF27411C3D0053374B /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				DD8D196E2754B1F400483D32 /* LevelUp */,
 				DD7D17E3274EBB4A00462331 /* PopUp */,
 				DDBAFAE8274E57740089CCD9 /* MyPage */,
 				DDE00F0A274B8F3A00BD2C20 /* Notification */,
@@ -621,6 +624,14 @@
 				DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DD8D196E2754B1F400483D32 /* LevelUp */ = {
+			isa = PBXGroup;
+			children = (
+				DD8D196F2754B21C00483D32 /* LevelUpViewController.swift */,
+			);
+			path = LevelUp;
 			sourceTree = "<group>";
 		};
 		DDBAFAE8274E57740089CCD9 /* MyPage */ = {
@@ -943,6 +954,7 @@
 				DDD748A327477DA30056C505 /* MenuItemCollectionViewCell.swift in Sources */,
 				C7F65E34274BCB5400D57086 /* AuthResponse.swift in Sources */,
 				DDBF0A6B274CC7D600DA429D /* RankCollectionViewCell.swift in Sources */,
+				DD8D19702754B21C00483D32 /* LevelUpViewController.swift in Sources */,
 				DDF283C9274C0FE100C426D7 /* Notification.Name+.swift in Sources */,
 				C7C9CDF72737625800DC2A09 /* ViewController.swift in Sources */,
 				C7D38D722748D5440049F3AA /* DateFormatters.swift in Sources */,

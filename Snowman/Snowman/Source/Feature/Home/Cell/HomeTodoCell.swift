@@ -280,27 +280,37 @@ extension HomeTodoCell {
 
     @objc func checkTodo(sender: UIButton) {
         if let todoView = sender.superview as? TodoView {
-            putTodo(todoId: todoView.todoId,
-                    name: todoView.name,
-                    succeed: !todoView.succeed) { [weak self] result in
-                if result.isLevelUp {
-                    // 레벨업 됐을 때 화면
-                } else {
-                    guard let goalId = self?.goalId else { return }
-                    guard let hvc = self?.hvc else { return }
+            putTodo(
+                todoId: todoView.todoId,
+                name: todoView.name,
+                succeed: !todoView.succeed
+            ) { [weak self] result in
 
-                    for i in 0..<hvc.goals.count {
-                        if hvc.goals[i]?.id == goalId {
-                            if let goal = hvc.goals[i] {
-                                for j in 0..<goal.todos.count {
-                                    if goal.todos[j].id == todoView.todoId {
-                                        hvc.goals[i]?.todos[j].succeed = !goal.todos[j].succeed
-                                        hvc.todoTableView.reloadData()
-                                        break
-                                    }
-                                }
-                                break
+                guard let goalId = self?.goalId else { return }
+                guard let hvc = self?.hvc else { return }
+
+                for i in 0..<hvc.goals.count {
+                    if hvc.goals[i]?.id == goalId {
+                        if let goal = hvc.goals[i] {
+
+                            if result.isLevelUp {
+                                let levelUpView = LevelUpViewController()
+                                levelUpView.snoweImage = Snowe(rawValue: goal.type)?.getImage(level: goal.level)
+                                levelUpView.modalPresentationStyle = .fullScreen
+                                hvc.present(levelUpView, animated: true, completion: nil)
                             }
+
+                            for j in 0..<goal.todos.count {
+                                if goal.todos[j].id == todoView.todoId {
+                                    hvc.goals[i]?.todos[j].succeed = !goal.todos[j].succeed 
+                                    var newGoal = goal
+                                    newGoal.level = goal.level + 1
+                                    newGoal.todos[j] = result.todo
+                                    hvc.updateGoal(goal: newGoal)
+                                    break
+                                }
+                            }
+                            break
                         }
                     }
                 }
@@ -323,30 +333,44 @@ extension HomeTodoCell {
 extension HomeTodoCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let todoView = textField.superview as? TodoView, let text = textField.text {
-            putTodo(todoId: todoView.todoId,
-                    name: text,
-                    succeed: todoView.succeed) { [weak self] result in
-                if result.isLevelUp {
-                    // 레벨업 됐을 때 화면
-                } else {
-                    guard let goalId = self?.goalId else { return }
-                    guard let hvc = self?.hvc else { return }
+            putTodo(
+                todoId: todoView.todoId,
+                name: text,
+                succeed: todoView.succeed
+            ) { [weak self] result in
 
-                    for i in 0..<hvc.goals.count {
-                        if hvc.goals[i]?.id == goalId {
-                            if let goal = hvc.goals[i] {
-                                for j in 0..<goal.todos.count {
-                                    if goal.todos[j].id == todoView.todoId {
-                                        hvc.goals[i]?.todos[j].name = text
-                                        hvc.todoTableView.reloadData()
-                                        break
-                                    }
-                                }
-                                break
+
+                guard let goalId = self?.goalId else { return }
+                guard let hvc = self?.hvc else { return }
+
+
+                for i in 0..<hvc.goals.count {
+                    if hvc.goals[i]?.id == goalId {
+                        if let goal = hvc.goals[i] {
+
+                            if result.isLevelUp {
+                                let levelUpView = LevelUpViewController()
+                                levelUpView.snoweImage = Snowe(rawValue: goal.type)?.getImage(level: goal.level+1)
+                                levelUpView.modalPresentationStyle = .fullScreen
+                                hvc.present(levelUpView, animated: true, completion: nil)
                             }
+
+                            // 나중에 goal 오면 바꿔요!
+                            for j in 0..<goal.todos.count {
+                                if goal.todos[j].id == todoView.todoId {
+                                    hvc.goals[i]?.todos[j].name = text
+                                    var newGoal = goal
+                                    newGoal.level = goal.level + 1
+                                    newGoal.todos[j] = result.todo
+                                    hvc.updateGoal(goal: newGoal)
+                                    break
+                                }
+                            }
+                            break
                         }
                     }
                 }
+
             }
         }
     }
