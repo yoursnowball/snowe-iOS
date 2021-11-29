@@ -14,6 +14,7 @@ class CalendarViewController: BaseViewController {
     var manySucceedType: Snowe?
     var succeedCount: Int?
     var goalIds: [Int] = []
+    var goalsForCalendar: Dictionary<String, GoalSummary> = [:]
 
     // 과거 날짜 선택했을 때 어떻게 할지 생각하기
     // 과거 날짜만으로 이전 목표, 투두 가져오는 API가 없음
@@ -191,6 +192,8 @@ class CalendarViewController: BaseViewController {
         todoTableView.register(CalendarTodoCell.self, forCellReuseIdentifier: "CalendarTodoCell")
         
         getTodos()
+        getGoalsForCalendar(start: Date().startOfMonth().toString(),
+                            end: Date().endOfMonth().toString())
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowForTextField), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideForTextField), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -238,6 +241,21 @@ class CalendarViewController: BaseViewController {
         }
     }
     
+    func getGoalsForCalendar(start: String, end: String) {
+        NetworkService.shared.goal.getGoalsForCalendar(start: start, end: end) { [weak self] result in
+            switch result {
+            case .success(let response):
+                guard let data = response as? GetGoalsForCalendarResponse else { return }
+                self?.goalsForCalendar = data.goals
+                self?.calendarView.reloadData()
+            case .requestErr(let errorResponse):
+                dump(errorResponse)
+            default:
+                print("calendar getGoalsForCalendar - error")
+            }
+        }
+    }
+    
     override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
         view.endEditing(true)
     }
@@ -272,6 +290,28 @@ extension CalendarViewController: CalendarViewDataSource {
 extension CalendarViewController: CalendarViewDelegate {
     func calendar(_ calendar: CalendarView, didScrollToMonth date: Date) {
         let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM"
+        
+        var endDay: String?
+        
+        switch Int(dateFormatter.string(from: date)) {
+        case 1, 3, 5, 7, 8, 10, 12: endDay = "-31"
+        case 4, 6, 9, 11: endDay = "-30"
+        case 2: endDay = "-27" //윤년은 나중에 체크...
+        default:
+            break
+        }
+        
+        dateFormatter.dateFormat = "yyyy-MM"
+        let yearMonth = dateFormatter.string(from: date)
+        let start = yearMonth + "-01"
+        if let endDay = endDay {
+            let end = yearMonth + endDay
+            getGoalsForCalendar(start: start, end: end)
+        }
+        calendarView.yearMonth = yearMonth
+        
+        
         dateFormatter.dateFormat = "yyyy MMM"
         yearMonthLabel.text = dateFormatter.string(from: date).uppercased()
 
