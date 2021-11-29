@@ -99,6 +99,7 @@
 		DD894D3527473FF7004AF5A6 /* CharacterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */; };
 		DD894D3727474F98004AF5A6 /* GoalCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD894D3627474F98004AF5A6 /* GoalCreationViewController.swift */; };
 		DD8D19702754B21C00483D32 /* LevelUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D196F2754B21C00483D32 /* LevelUpViewController.swift */; };
+		DD9CEFD22755228400DD7713 /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9CEFD12755228400DD7713 /* UIDevice+.swift */; };
 		DDA1F5662753A67300D9C2FB /* StampViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA1F5652753A67300D9C2FB /* StampViewController.swift */; };
 		DDA1F5682753A6EC00D9C2FB /* StampCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA1F5672753A6EC00D9C2FB /* StampCollectionViewCell.swift */; };
 		DDA1F56A2753A7F800D9C2FB /* StampModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA1F5692753A7F800D9C2FB /* StampModalViewController.swift */; };
@@ -229,6 +230,7 @@
 		DD894D3427473FF7004AF5A6 /* CharacterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD894D3627474F98004AF5A6 /* GoalCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCreationViewController.swift; sourceTree = "<group>"; };
 		DD8D196F2754B21C00483D32 /* LevelUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelUpViewController.swift; sourceTree = "<group>"; };
+		DD9CEFD12755228400DD7713 /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
 		DDA1F5652753A67300D9C2FB /* StampViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampViewController.swift; sourceTree = "<group>"; };
 		DDA1F5672753A6EC00D9C2FB /* StampCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDA1F5692753A7F800D9C2FB /* StampModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampModalViewController.swift; sourceTree = "<group>"; };
@@ -561,6 +563,7 @@
 				C7D92FC1274D402E00DAA184 /* String+.swift */,
 				C7D92FC4274D442F00DAA184 /* Sequence+.swift */,
 				C714B287275356F80062AACB /* InternetConnectivity.swift */,
+				DD9CEFD12755228400DD7713 /* UIDevice+.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1036,6 +1039,7 @@
 				DDD748A52747B1D80056C505 /* UIImage+.swift in Sources */,
 				DDFAF14927457FA4005A3097 /* BaseNavigationController.swift in Sources */,
 				DD86CBEC274824EA00F6EC8D /* GoalService.swift in Sources */,
+				DD9CEFD22755228400DD7713 /* UIDevice+.swift in Sources */,
 				DDBAFAEA274E578A0089CCD9 /* MyPageViewController.swift in Sources */,
 				DDE00F0C274B8F7300BD2C20 /* NotificationViewController.swift in Sources */,
 				DD894D3127473DEF004AF5A6 /* CharacterChoiceViewController.swift in Sources */,

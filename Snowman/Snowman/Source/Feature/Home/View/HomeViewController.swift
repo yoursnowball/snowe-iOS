@@ -568,14 +568,14 @@ extension HomeViewController {
         }
 
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(133)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(UIDevice.current.hasNotch ? 133 : 90)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(195)
+            $0.height.equalTo(UIDevice.current.hasNotch ? 195 : 180)
         }
 
         todoBubbleImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(collectionView.snp.top).offset(-20)
+            $0.bottom.equalTo(collectionView.snp.top).offset(UIDevice.current.hasNotch ? -20 : -10)
         }
 
         bubblePolygonImageView.snp.makeConstraints {
@@ -596,7 +596,7 @@ extension HomeViewController {
         }
 
         todoTableView.snp.makeConstraints {
-            $0.top.equalTo(goalLabel.snp.bottom).offset(32)
+            $0.top.equalTo(goalLabel.snp.bottom).offset(UIDevice.current.hasNotch ? 32 : 0)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview()
         }

@@ -8,15 +8,16 @@ import UIKit
 
 public class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
 
-    public private(set) var activeDistance: CGFloat = 600
-    public private(set) var zoomFactor: CGFloat = 1.2
+    public private(set) var activeDistance: CGFloat = UIDevice.current.hasNotch ? 600 : 400
+    public private(set) var zoomFactor: CGFloat =  UIDevice.current.hasNotch ? 1.2 : 1
 
     override init() {
         super.init()
 
         scrollDirection = .horizontal
         minimumLineSpacing = 140
-        itemSize = CGSize(width: 63, height: 90)
+        itemSize = UIDevice.current.hasNotch ?
+        CGSize(width: 63, height: 90) : CGSize(width: 56, height: 80)
     }
 
     public required init?(coder aDecoder: NSCoder) {
