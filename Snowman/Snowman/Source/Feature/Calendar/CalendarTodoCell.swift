@@ -315,7 +315,11 @@ extension CalendarTodoCell {
 
                         for i in 0..<cvc.goals.count {
                             if cvc.goals[i].id == goalId {
-                                if result.isLevelUp {
+                                guard let levelChange = LevelChange(rawValue: result.levelChange) else { return }
+                                switch levelChange {
+                                case .keep, .levelDown:
+                                    break
+                                case .levelUp:
                                     let levelUpView = LevelUpViewController()
                                     levelUpView.snoweImage = Snowe(rawValue: cvc.goals[i].type)?.getImage(level: cvc.goals[i].level + 1)
                                     levelUpView.modalPresentationStyle = .fullScreen
