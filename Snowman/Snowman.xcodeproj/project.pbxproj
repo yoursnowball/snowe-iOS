@@ -26,6 +26,7 @@
 		C768D12E27499E04000E0677 /* CalendarView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C768D12527499E04000E0677 /* CalendarView+Delegate.swift */; };
 		C768D131274A032E000E0677 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C768D130274A032E000E0677 /* ContentSizedTableView.swift */; };
 		C768D13A274A20FA000E0677 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C768D139274A20FA000E0677 /* Poppins-Black.ttf */; };
+		C7B7C04A2755235A005AD305 /* LevelChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B7C0492755235A005AD305 /* LevelChange.swift */; };
 		C7C9CDF32737625800DC2A09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9CDF22737625800DC2A09 /* AppDelegate.swift */; };
 		C7C9CDF72737625800DC2A09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C9CDF62737625800DC2A09 /* ViewController.swift */; };
 		C7C9CDFC2737625F00DC2A09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7C9CDFB2737625F00DC2A09 /* Assets.xcassets */; };
@@ -154,6 +155,7 @@
 		C768D12527499E04000E0677 /* CalendarView+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CalendarView+Delegate.swift"; sourceTree = "<group>"; };
 		C768D130274A032E000E0677 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		C768D139274A20FA000E0677 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.ttf"; sourceTree = "<group>"; };
+		C7B7C0492755235A005AD305 /* LevelChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelChange.swift; sourceTree = "<group>"; };
 		C7C9CDEF2737625800DC2A09 /* Snowman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snowman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C9CDF22737625800DC2A09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7C9CDF62737625800DC2A09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				DD02A9792748C09A00D9B324 /* Snowe.swift */,
 				DD02A97E2749482900D9B324 /* NewGoal.swift */,
 				C7D92FBE274D1D4400DAA184 /* HistoryTodo.swift */,
+				C7B7C0492755235A005AD305 /* LevelChange.swift */,
 			);
 			path = AppModel;
 			sourceTree = "<group>";
@@ -931,6 +934,7 @@
 				C7DE7FCB274A6CEC00C8DFB4 /* HistoryCell.swift in Sources */,
 				DDFAF15B27458556005A3097 /* MoyaLoggingPlugin.swift in Sources */,
 				DD02A97C2748CAE900D9B324 /* GoalRequest.swift in Sources */,
+				C7B7C04A2755235A005AD305 /* LevelChange.swift in Sources */,
 				DDBF0A69274CC7AD00DA429D /* RankViewController.swift in Sources */,
 				C714B23F275268CB0062AACB /* PostTodoResponse.swift in Sources */,
 				DD7D17DE274EA16C00462331 /* MakerInfoViewController.swift in Sources */,
