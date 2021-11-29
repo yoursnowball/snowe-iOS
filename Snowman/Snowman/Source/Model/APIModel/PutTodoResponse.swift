@@ -6,6 +6,6 @@
 //
 
 struct PutTodoResponse: Codable {
-    let isLevelUp: Bool
+    let levelChange: String
     let todo: TodoResponse
 }
