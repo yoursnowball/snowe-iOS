@@ -121,15 +121,16 @@ class CalendarTodoCell: UITableViewCell {
                 if cvc.goals[i].id == goalId {
                     cvc.goals[i].todos = result.todos
                     cvc.todoTableView.reloadData()
-                    
+
+                    // 투두 생성하자마자 바로 키보드 올라오게 하기...
+
 //                    let temp = self?.stackView.arrangedSubviews.last?.subviews.flatMap { $0.subviews }.filter { $0 is UITextField }
 //                    temp?.first?.becomeFirstResponder()
-                    
-                    
+
+
 //                    let temp = self?.stackView.arrangedSubviews.last?.subviews.filter { $0 is TodoView }
 //                    temp?.first?.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
-                    
-                    
+
                     break
                 }
             }
@@ -299,25 +300,37 @@ extension CalendarTodoCell {
 
     @objc func checkTodo(sender: UIButton) {
         if let todoView = sender.superview as? TodoView {
-            putTodo(todoId: todoView.todoId,
-                    name: todoView.name,
-                    succeed: !todoView.succeed) { [weak self] result in
-                if result.isLevelUp {
-                    // 레벨업 됐을 때 화면
+            if todoView.succeed {
+                showToastMessageAlert(message: "이미 완료한 투두입니다.")
+            } else {
+                if todoView.name == "" {
+                    showToastMessageAlert(message: "투두를 입력해주세요.")
                 } else {
-                    guard let goalId = self?.goalId else { return }
-                    guard let cvc = self?.cvc else { return }
+                    putTodo(todoId: todoView.todoId,
+                            name: todoView.name,
+                            succeed: !todoView.succeed) { [weak self] result in
 
-                    for i in 0..<cvc.goals.count {
-                        if cvc.goals[i].id == goalId {
-                            for j in 0..<cvc.goals[i].todos.count {
-                                if cvc.goals[i].todos[j].id == todoView.todoId {
-                                    cvc.goals[i].todos[j].succeed = !cvc.goals[i].todos[j].succeed
-                                    cvc.todoTableView.reloadData()
-                                    break
+                        guard let goalId = self?.goalId else { return }
+                        guard let cvc = self?.cvc else { return }
+
+                        for i in 0..<cvc.goals.count {
+                            if cvc.goals[i].id == goalId {
+                                if result.isLevelUp {
+                                    let levelUpView = LevelUpViewController()
+                                    levelUpView.snoweImage = Snowe(rawValue: cvc.goals[i].type)?.getImage(level: cvc.goals[i].level + 1)
+                                    levelUpView.modalPresentationStyle = .fullScreen
+                                    cvc.present(levelUpView, animated: true, completion: nil)
                                 }
+
+                                for j in 0..<cvc.goals[i].todos.count {
+                                    if cvc.goals[i].todos[j].id == todoView.todoId {
+                                        cvc.goals[i].todos[j].succeed = !cvc.goals[i].todos[j].succeed
+                                        cvc.todoTableView.reloadData()
+                                        break
+                                    }
+                                }
+                                break
                             }
-                            break
                         }
                     }
                 }
@@ -335,6 +348,18 @@ extension CalendarTodoCell {
         // 완료
         // 취소
     }
+
+    func showToastMessageAlert(message: String) {
+        let alert = UIAlertController(title: message,
+                                      message: "",
+                                      preferredStyle: .alert)
+
+        cvc?.present(alert, animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            alert.dismiss(animated: true)
+        }
+    }
 }
 
 extension CalendarTodoCell: UITextFieldDelegate {
@@ -343,23 +368,19 @@ extension CalendarTodoCell: UITextFieldDelegate {
             putTodo(todoId: todoView.todoId,
                     name: text,
                     succeed: todoView.succeed) { [weak self] result in
-                if result.isLevelUp {
-                    // 레벨업 됐을 때 화면
-                } else {
-                    guard let goalId = self?.goalId else { return }
-                    guard let cvc = self?.cvc else { return }
+                guard let goalId = self?.goalId else { return }
+                guard let cvc = self?.cvc else { return }
 
-                    for i in 0..<cvc.goals.count {
-                        if cvc.goals[i].id == goalId {
-                            for j in 0..<cvc.goals[i].todos.count {
-                                if cvc.goals[i].todos[j].id == todoView.todoId {
-                                    cvc.goals[i].todos[j].name = text
-                                    cvc.todoTableView.reloadData()
-                                    break
-                                }
+                for i in 0..<cvc.goals.count {
+                    if cvc.goals[i].id == goalId {
+                        for j in 0..<cvc.goals[i].todos.count {
+                            if cvc.goals[i].todos[j].id == todoView.todoId {
+                                cvc.goals[i].todos[j].name = text
+                                cvc.todoTableView.reloadData()
+                                break
                             }
-                            break
                         }
+                        break
                     }
                 }
             }

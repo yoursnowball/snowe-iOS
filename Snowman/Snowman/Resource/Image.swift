@@ -31,8 +31,10 @@ enum Image {
     static let chevronLeftBold = UIImage(named: "24_left")!
     static let chevronRightBold = UIImage(named: "24_right")!
 
-
     /// stamp
     static let stampComplete = UIImage(named: "stamp_complete")!
     static let stampUnabled = UIImage(named: "stamp_unabled")!
+
+    /// levelUp
+    static let levelUpCongratulation = UIImage(named: "level_up_congratulation")!
 }

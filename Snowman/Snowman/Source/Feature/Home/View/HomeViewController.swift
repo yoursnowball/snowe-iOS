@@ -221,7 +221,6 @@ final class HomeViewController: BaseViewController {
                 animated: false
             )
             self.updateGoal(goal: self.goals.first ?? nil)
-            self.todoTableView.reloadData()
         }
     }
 
@@ -262,7 +261,7 @@ final class HomeViewController: BaseViewController {
 }
 
 extension HomeViewController {
-    private func updateGoal(goal: GoalResponse?) {
+    public func updateGoal(goal: GoalResponse?) {
         if let goal = goal {
             todoTableView.isHidden = false
             todoTableView.reloadData()
@@ -446,6 +445,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
         rankButton.addTarget(self, action: #selector(touchRankButton), for: .touchUpInside)
 
+        if !goals.isEmpty {
+            if let goal = goals[currentIndex] {
+                if goal.todos.isEmpty {
+                    buttonView.isHidden = true
+                } else {
+                    buttonView.isHidden = false
+                }
+            } else {
+                buttonView.isHidden = true
+            }
+        } else {
+            buttonView.isHidden = true
+        }
+
         return buttonView
     }
 }
@@ -488,7 +501,7 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 extension HomeViewController {
-    private func getHome(completion: @escaping () -> Void) {
+    public func getHome(completion: @escaping () -> Void) {
         NetworkService.shared.user.getUsers {[weak self] result in
             switch result {
             case .success(let response):
