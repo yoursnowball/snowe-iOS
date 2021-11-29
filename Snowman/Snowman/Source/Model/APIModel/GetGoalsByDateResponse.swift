@@ -6,5 +6,5 @@
 //
 
 struct GetGoalsByDateResponse: Codable {
-    let goals: [GoalResponse]
+    let goals: [GetDailyGoalsResponse]
 }
