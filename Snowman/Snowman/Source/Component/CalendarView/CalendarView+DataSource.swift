@@ -152,6 +152,7 @@ extension CalendarView: UICollectionViewDataSource {
         
         dayCell.cvc = cvc
         dayCell.style = style
+        dayCell.yearMonth = yearMonth
         dayCell.clearStyles()
         
         dayCell.transform = _isRtl
@@ -238,5 +239,3 @@ extension CalendarView: UICollectionViewDataSource {
         return dayCell
     }
 }
-
-

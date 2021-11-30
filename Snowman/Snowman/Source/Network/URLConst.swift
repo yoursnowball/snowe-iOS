@@ -11,6 +11,7 @@ enum URLConst {
 
     // MARK: - Goal
     static let goals = "/goals"
+    static let calendar = "/calendar"
 
     // MARK: - Awards
     /// 명예의 전당 리스트 가져오기

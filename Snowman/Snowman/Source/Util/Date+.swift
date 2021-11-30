@@ -40,4 +40,41 @@ extension Date {
         let weekRange = calendar.range(of: .weekOfMonth, in: .month, for: date)
         return weekRange!.count
    }
+
+    func startOfMonth() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM"
+        let date = dateFormatter.string(from: Date())
+        let start = date + "-01"
+
+        return start
+    }
+
+    func endOfMonth() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM"
+
+        var endDay: String?
+
+        switch Int(dateFormatter.string(from: Date())) {
+        case 1, 3, 5, 7, 8, 10, 12: endDay = "-31"
+        case 4, 6, 9, 11: endDay = "-30"
+        case 2: endDay = "-27"
+        default:
+            break
+        }
+
+        dateFormatter.dateFormat = "yyyy-MM"
+        let date = dateFormatter.string(from: Date())
+        let end = date + endDay!
+
+        return end
+    }
+
+    public var removeTimeStamp : Date? {
+        guard let date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: self)) else {
+            return nil
+    }
+        return date
+    }
 }
