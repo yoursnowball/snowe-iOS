@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class SignUpPasswordViewController: UIViewController {
+class SignUpPasswordViewController: BaseViewController {
 
     var nickname: String!
     var id: String!

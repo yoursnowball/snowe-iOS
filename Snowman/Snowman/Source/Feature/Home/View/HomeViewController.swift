@@ -24,6 +24,8 @@ final class HomeViewController: BaseViewController {
                     }
                 }
             }
+
+            collectionView.isHidden = false
         }
     }
 
@@ -62,6 +64,7 @@ final class HomeViewController: BaseViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isHidden = true
         return collectionView
     }()
 
@@ -125,6 +128,7 @@ final class HomeViewController: BaseViewController {
         tableView.estimatedRowHeight = 10
         tableView.separatorStyle = .none
         tableView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
 
