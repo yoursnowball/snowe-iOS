@@ -111,8 +111,10 @@ class HistoryViewController: BaseViewController {
                 self?.infoContentLabel[2].text = self?.awardAt
 
                 let df = DateFormatter()
-                df.dateFormat = "yyyy-MM-dd"
-                df.timeZone = TimeZone(identifier: "UTC")
+                df.dateFormat = "yyyy-MM-dd"                
+                df.locale = Locale(identifier: "ko_KR")
+                df.timeZone = TimeZone(abbreviation: "KST")
+
                 
                 let dates = data.todos.map { $0.todoDate }.uniqued()
                 let sortedDates = dates.sorted { df.date(from: $0)! > df.date(from: $1)! }

@@ -23,7 +23,8 @@ extension Date {
     func toString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
         return dateFormatter.string(from: self)
     }
 
@@ -31,6 +32,8 @@ extension Date {
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
         return formatter.string(from: date)
     }
 
@@ -44,6 +47,9 @@ extension Date {
     func startOfMonth() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+
         let date = dateFormatter.string(from: Date())
         let start = date + "-01"
 
@@ -53,6 +59,8 @@ extension Date {
     func endOfMonth() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
 
         var endDay: String?
 
