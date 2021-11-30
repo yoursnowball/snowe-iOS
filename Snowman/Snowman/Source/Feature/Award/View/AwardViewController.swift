@@ -89,8 +89,8 @@ extension AwardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell: AwardTableViewCell = tableView.dequeueReusableCell(indexPath: indexPath)
         let vc = HistoryViewController()
-        vc.goalId = cell.goalId
-        vc.awardAt = cell.awardAt
+//        vc.goalId = cell.goalId
+//        vc.awardAt = cell.awardAt
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
