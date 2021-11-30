@@ -275,7 +275,7 @@ extension CalendarViewController: CalendarViewDataSource {
     
     func startDate() -> Date {
         var dateComponents = DateComponents()
-        dateComponents.month = -1
+        dateComponents.month = -12
         
         let today = Date()
         let threeMonthsAgo = self.calendarView.calendar.date(byAdding: dateComponents, to: today)!
