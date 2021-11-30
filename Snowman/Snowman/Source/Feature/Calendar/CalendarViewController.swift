@@ -14,7 +14,11 @@ class CalendarViewController: BaseViewController {
     var manySucceedType: Snowe?
     var succeedCount: Int?
     var goalIds: [Int] = []
-    var goalsForCalendar: Dictionary<String, GoalSummary> = [:]
+    var goalsForCalendar: Dictionary<String, GoalSummary> = [:] {
+        didSet {
+            self.calendarView.reloadData()
+        }
+    }
 
     // 과거 날짜 선택했을 때 어떻게 할지 생각하기
     // 과거 날짜만으로 이전 목표, 투두 가져오는 API가 없음
@@ -192,8 +196,8 @@ class CalendarViewController: BaseViewController {
         todoTableView.register(CalendarTodoCell.self, forCellReuseIdentifier: "CalendarTodoCell")
         
         getTodos()
-        getGoalsForCalendar(start: Date().startOfMonth().toString(),
-                            end: Date().endOfMonth().toString())
+        getGoalsForCalendar(start: Date().startOfMonth(),
+                            end: Date().endOfMonth())
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowForTextField), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideForTextField), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -474,6 +478,18 @@ extension CalendarViewController {
             present(nvc, animated: true, completion: nil)
         default:
             return
+        }
+    }
+
+    func showToastMessageAlert(message: String) {
+        let alert = UIAlertController(title: message,
+                                      message: "",
+                                      preferredStyle: .alert)
+
+        present(alert, animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            alert.dismiss(animated: true)
         }
     }
 }
