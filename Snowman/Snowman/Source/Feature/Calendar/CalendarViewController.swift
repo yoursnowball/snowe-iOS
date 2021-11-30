@@ -188,6 +188,9 @@ class CalendarViewController: BaseViewController {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy MMM"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+
         yearMonthLabel.text = dateFormatter.string(from: today).uppercased()
 
         todoTableView.delegate = self
@@ -295,7 +298,9 @@ extension CalendarViewController: CalendarViewDelegate {
     func calendar(_ calendar: CalendarView, didScrollToMonth date: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM"
-        
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+
         var endDay: String?
         
         switch Int(dateFormatter.string(from: date)) {
@@ -329,6 +334,9 @@ extension CalendarViewController: CalendarViewDelegate {
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+
         selectedDate = dateFormatter.string(from: date)
 
         // 오늘 이전 날짜면 투두 입력 못 하게 막기

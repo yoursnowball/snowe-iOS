@@ -299,23 +299,42 @@ extension HomeTodoCell {
                         for i in 0..<hvc.goals.count {
                             if hvc.goals[i]?.id == goalId {
                                 if let goal = hvc.goals[i] {
-
-                                    if result.isLevelUp {
+                                    guard let levelChange = LevelChange(rawValue: result.levelChange) else { return }
+                                    switch levelChange {
+                                    case .keep:
+                                        for j in 0..<goal.todos.count {
+                                            if goal.todos[j].id == todoView.todoId {
+                                                hvc.goals[i]?.todos[j].succeed = !goal.todos[j].succeed
+                                                hvc.updateGoal(goal: goal)
+                                                break
+                                            }
+                                        }
+                                    case .levelUp:
                                         let levelUpView = LevelUpViewController()
                                         levelUpView.snoweImage = Snowe(rawValue: goal.type)?.getImage(level: goal.level + 1)
                                         levelUpView.modalPresentationStyle = .fullScreen
                                         hvc.present(levelUpView, animated: true, completion: nil)
-                                    }
-
-                                    // 나중에 goal 오면 바꿔요!
-                                    for j in 0..<goal.todos.count {
-                                        if goal.todos[j].id == todoView.todoId {
-                                            hvc.goals[i]?.todos[j].succeed = !goal.todos[j].succeed
-                                            var newGoal = goal
-                                            newGoal.level = goal.level + 1
-                                            newGoal.todos[j] = result.todo
-                                            hvc.updateGoal(goal: newGoal)
-                                            break
+                                        
+                                        for j in 0..<goal.todos.count {
+                                            if goal.todos[j].id == todoView.todoId {
+                                                hvc.goals[i]?.todos[j].succeed = !goal.todos[j].succeed
+                                                var newGoal = goal
+                                                newGoal.level = goal.level + 1
+                                                newGoal.todos[j] = result.todo
+                                                hvc.updateGoal(goal: newGoal)
+                                                break
+                                            }
+                                        }
+                                    case .levelDown:
+                                        for j in 0..<goal.todos.count {
+                                            if goal.todos[j].id == todoView.todoId {
+                                                hvc.goals[i]?.todos[j].succeed = !goal.todos[j].succeed
+                                                var newGoal = goal
+                                                newGoal.level = goal.level - 1
+                                                newGoal.todos[j] = result.todo
+                                                hvc.updateGoal(goal: newGoal)
+                                                break
+                                            }
                                         }
                                     }
                                     break
