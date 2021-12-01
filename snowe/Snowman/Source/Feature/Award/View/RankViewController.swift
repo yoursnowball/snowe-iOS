@@ -43,7 +43,12 @@ final class RankViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getRank(page: nextPage)
+//        getRank(page: nextPage)
+
+        rankInfos.append(RankInfoResponse(awardAt: "", createdAt: "", id: 0, level: 7,
+                                          name: "예비 공무원", objective: "7급 공무원 시험 합격하기", succeedTodoCount: 591, totalTodoCount: 700, type: "GREEN", userName: "스노위"))
+        rankInfos.append(RankInfoResponse(awardAt: "", createdAt: "", id: 0, level: 6,
+                                          name: "미래의 의사", objective: "국가 의사 고시 합격하기", succeedTodoCount: 321, totalTodoCount: 529, type: "PINK", userName: "스노우맨"))
     }
 
     override func viewDidLoad() {
@@ -127,7 +132,7 @@ extension RankViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 0
+        return 16
     }
 
     func collectionView(
@@ -135,7 +140,7 @@ extension RankViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 14
+        return 16
     }
 }
 

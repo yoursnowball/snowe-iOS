@@ -28,17 +28,17 @@ import SnapKit
 import Then
 
 open class CalendarDayCell: UICollectionViewCell {
-    
+
     var cvc: CalendarViewController?
     var yearMonth: String?
-    
+
     var style: CalendarView.Style = CalendarView.Style.Default
-    
+
     override open var description: String {
         let dayString = self.textLabel.text ?? " "
         return "<DayCell (text:\"\(dayString)\")>"
     }
-    
+
     var eventsCount = 0 {
         didSet {
             self.dotsView.isHidden = (eventsCount == 0)
@@ -50,9 +50,9 @@ open class CalendarDayCell: UICollectionViewCell {
         didSet {
             if let data = checkData {
                 checkLabel.isHidden = false
-                
+
                 checkLabel.text = String(data.count)
-                
+
                 switch data.type {
                 case .blue: checkBackView.backgroundColor = Snowe.blue.todoColor
                 case .green: checkBackView.backgroundColor = Snowe.green.todoColor
@@ -70,9 +70,15 @@ open class CalendarDayCell: UICollectionViewCell {
         set {
             guard let value = newValue else { return self.textLabel.text = nil }
             self.textLabel.text = String(value)
-            
+
             if let yearMonth = yearMonth, let cvc = cvc {
-                let tempDate = yearMonth + "-\(value)"
+                var tempDate: String = ""
+
+                if value < 10 {
+                    tempDate = yearMonth + "-0\(value)"
+                } else {
+                    tempDate = yearMonth + "-\(value)"
+                }
 
                 if let data = cvc.goalsForCalendar[tempDate] {
                     if let snowe = Snowe(rawValue: data.type) {
@@ -87,7 +93,7 @@ open class CalendarDayCell: UICollectionViewCell {
             return Int(value)
         }
     }
-    
+
     func updateTextColor() {
         if isSelected {
             self.textLabel.textColor = style.cellSelectedTextColor
@@ -108,7 +114,7 @@ open class CalendarDayCell: UICollectionViewCell {
             self.textLabel.textColor = style.cellTextColorDefault
         }
     }
-    
+
     var isToday : Bool = false {
         didSet {
             switch isToday {
@@ -117,29 +123,29 @@ open class CalendarDayCell: UICollectionViewCell {
             case false:
                 self.bgView.backgroundColor = style.cellColorDefault
             }
-            
+
             updateTextColor()
         }
     }
-    
+
     var isOutOfRange : Bool = false {
         didSet {
             updateTextColor()
         }
     }
-    
+
     var isAdjacent : Bool = false {
         didSet {
             updateTextColor()
         }
     }
-    
+
     var isWeekend: Bool = false {
         didSet {
             updateTextColor()
         }
     }
-    
+
     override open var isSelected : Bool {
         didSet {
             switch isSelected {
@@ -158,11 +164,11 @@ open class CalendarDayCell: UICollectionViewCell {
                 let attributedText = NSMutableAttributedString(string: text)
                 textLabel.attributedText = attributedText
             }
-            
+
             updateTextColor()
         }
     }
-    
+
     // MARK: - Public methods
     public func clearStyles() {
         self.bgView.layer.borderColor = style.cellBorderColor.cgColor
@@ -171,88 +177,88 @@ open class CalendarDayCell: UICollectionViewCell {
         self.textLabel.textColor = style.cellTextColorDefault
         self.eventsCount = 0
     }
-    
+
     let checkBackView = UIView().then {
         $0.backgroundColor = Color.Gray300
-        
-        
+
+
         // 머지 전에 주석 풀기
 //        $0.backgroundColor = Snowe.blue.todoColor
     }
-    
+
     let checkImageView = UIImageView()
-    
+
     let checkLabel = UILabel().then {
         $0.textColor = .white
         $0.font = UIFont.poppins(size: 10)
         $0.textAlignment = .center
     }
-    
+
     // 일 표시
     let textLabel = UILabel().then {
         $0.textAlignment = .center
         $0.font = UIFont.spoqa(size: 11, family: .regular)
         $0.textColor = .gray
     }
-    
-    
-    
-    
+
+
+
+
     let dotsView    = UIView()
     let bgView      = UIView()
-    
+
     override init(frame: CGRect) {
-        
+
 //        self.dotsView.backgroundColor = style.cellEventColor
-        
+
         super.init(frame: frame)
-        
+
 //        self.addSubview(self.bgView)
 //        self.addSubview(self.textLabel)
 //        self.addSubview(self.dotsView)
-        
-        
-        
+
+
+
         setLayout()
-        
+
         if cvc?.selectedDate == Date.getTodayString() {
             checkLabel.text = "\(cvc?.succeedCount ?? 0)"
         }
     }
-    
-    
+
+
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     func setLayout() {
         self.addSubviews(
             checkBackView,
             textLabel)
-        
+
         checkBackView.addSubviews(
             checkImageView,
             checkLabel)
-        
+
         checkBackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(6)
             $0.leading.trailing.equalToSuperview().inset(10)
             $0.height.equalTo(checkBackView.snp.width)
         }
-        
+
         textLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
         }
-        
+
         checkImageView.snp.makeConstraints {
             $0.edges.equalTo(checkBackView)
         }
-        
+
         checkLabel.snp.makeConstraints {
             $0.edges.equalTo(checkBackView)
         }
@@ -265,9 +271,9 @@ open class CalendarDayCell: UICollectionViewCell {
         checkImageView.image = nil
         checkLabel.text = nil
     }
-    
-    
-    
+
+
+
     override open func layoutSubviews() {
 
         super.layoutSubviews()
@@ -298,7 +304,7 @@ open class CalendarDayCell: UICollectionViewCell {
 //        case .bevel(let radius):
 //            self.bgView.layer.cornerRadius = radius
 //        }
-        
+
         checkBackView.layer.cornerRadius = checkBackView.frame.height/2
         checkBackView.layer.masksToBounds = true
     }
