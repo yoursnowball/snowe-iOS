@@ -231,7 +231,7 @@ final class HomeViewController: BaseViewController {
     @objc func touchRankButton() {
         guard let level = self.goals[currentIndex]?.level else { return }
 
-        if level > 5 {
+        if level > 4 {
             let popUpView = PopUpViewController()
             popUpView.modalTransitionStyle = .crossDissolve
             popUpView.modalPresentationStyle = .overCurrentContext
@@ -421,14 +421,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
             if !goals.isEmpty {
                 if let goal = goals[currentIndex] {
-                    if goal.level > 5 {
+                    if goal.level > 4 {
                         $0.backgroundColor = Color.button_blue
                         $0.setTitleColor(Color.Gray000, for: .normal)
-                        $0.isEnabled = false
                     } else {
                         $0.backgroundColor = Color.Gray300
                         $0.setTitleColor(Color.text_Teritary, for: .normal)
-                        $0.isEnabled = true
                     }
                 }
             }
