@@ -115,66 +115,41 @@ class CalendarTodoCell: UITableViewCell {
     @objc func addTodo() {
         guard let goalId = goalId else { return }
         guard let cvc = cvc else { return }
-        
-        
-        
-        
-        
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd"
-//        formatter.locale = Locale(identifier: "ko_KR")
-//        formatter.timeZone = TimeZone(abbreviation: "KST")
-//
-//        let selectedDate = cvc.selectedDate
-//        guard let pastDate = formatter.date(from: selectedDate) else { return }
-//        guard let presentDate = Date().removeTimeStamp else { return }
-//
-//        if pastDate < presentDate {
-//            showToastMessageAlert(message: "과거 날짜에서는 투두를\n추가할 수 없습니다.")
-//        } else {
-//            postTodo() { [weak self] result in
-//                for i in 0..<cvc.goals.count {
-//                    if cvc.goals[i].id == goalId {
-//                        cvc.goals[i].todos = result.todos
-//                        cvc.todoTableView.reloadData()
-//
-//                        // 투두 생성하자마자 바로 키보드 올라오게 하는 코드인데 작동 안함
-//                        // 공모전 끝나고 확인할게요
-//                        // 코드 삭제하지 말고 놔두시면 돼요!!
-//    //                    let temp = self?.stackView.arrangedSubviews.last?.subviews.flatMap { $0.subviews }.filter { $0 is UITextField }
-//    //                    temp?.first?.becomeFirstResponder()
-//
-//    //                    let temp = self?.stackView.arrangedSubviews.last?.subviews.filter { $0 is TodoView }
-//    //                    temp?.first?.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
-//
-//                        break
-//                    }
-//                }
-//            }
-//        }
-        
-        
-        
-        // 과거 시점 투두 막기 - 위 코드 주석 풀고 아랙 코드 지워주세요
-        // 코드 지우는 거 시작
-        postTodo() { [weak self] result in
-            for i in 0..<cvc.goals.count {
-                if cvc.goals[i].id == goalId {
-                    cvc.goals[i].todos = result.todos
-                    cvc.todoTableView.reloadData()
 
-                    // 투두 생성하자마자 바로 키보드 올라오게 하기...
-//                    let temp = self?.stackView.arrangedSubviews.last?.subviews.flatMap { $0.subviews }.filter { $0 is UITextField }
-//                    temp?.first?.becomeFirstResponder()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
 
-//                    let temp = self?.stackView.arrangedSubviews.last?.subviews.filter { $0 is TodoView }
-//                    temp?.first?.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
+        let selectedDate = cvc.selectedDate
+        guard let pastDate = formatter.date(from: selectedDate) else { return }
+        guard let presentDate = Date().removeTimeStamp else { return }
 
-                    break
+        if pastDate < presentDate {
+            showToastMessageAlert(message: "과거 날짜에서는 투두를\n추가할 수 없습니다.")
+        } else {
+            postTodo() { [weak self] result in
+                for i in 0..<cvc.goals.count {
+                    if cvc.goals[i].id == goalId {
+                        cvc.goals[i].todos = result.todos
+                        cvc.todoTableView.reloadData()
+
+                        // 투두 생성하자마자 바로 키보드 올라오게 하는 코드인데 작동 안함
+                        // 공모전 끝나고 확인할게요
+                        // 코드 삭제하지 말고 놔두시면 돼요!!
+    //                    let temp = self?.stackView.arrangedSubviews.last?.subviews.flatMap { $0.subviews }.filter { $0 is UITextField }
+    //                    temp?.first?.becomeFirstResponder()
+
+    //                    let temp = self?.stackView.arrangedSubviews.last?.subviews.filter { $0 is TodoView }
+    //                    temp?.first?.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
+
+                        break
+                    }
                 }
             }
         }
-        // 여기까지 지워주세요!!
+        
+
 
     }
 }
@@ -340,137 +315,88 @@ extension CalendarTodoCell {
     }
 
     @objc func checkTodo(sender: UIButton) {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd"
-//        formatter.locale = Locale(identifier: "ko_KR")
-//        formatter.timeZone = TimeZone(abbreviation: "KST")
-//
-//        guard let selectedDate = cvc?.selectedDate else { return }
-//        guard let pastDate = formatter.date(from: selectedDate) else { return }
-//        guard let presentDate = Date().removeTimeStamp else { return }
-//
-//        if pastDate < presentDate {
-//            showToastMessageAlert(message: "과거 날짜에서는 투두를\n체크할 수 없습니다.")
-//        } else {
-//            if let todoView = sender.superview as? TodoView {
-//                if todoView.succeed {
-//                    showToastMessageAlert(message: "이미 완료한 투두입니다.")
-//                } else {
-//                    if todoView.name == "" {
-//                        showToastMessageAlert(message: "투두를 입력해주세요.")
-//                    } else {
-//                        putTodo(todoId: todoView.todoId,
-//                                name: todoView.name,
-//                                succeed: !todoView.succeed) { [weak self] result in
-//
-//                            guard let goalId = self?.goalId else { return }
-//                            guard let cvc = self?.cvc else { return }
-//
-//                            for i in 0..<cvc.goals.count {
-//                                if cvc.goals[i].id == goalId {
-//                                    guard let levelChange = LevelChange(rawValue: result.levelChange) else { return }
-//                                    switch levelChange {
-//                                    case .keep, .levelDown:
-//                                        break
-//                                    case .levelUp:
-//                                        let levelUpView = LevelUpViewController()
-//                                        levelUpView.snoweImage = Snowe(rawValue: cvc.goals[i].type)?.getImage(level: cvc.goals[i].level + 1)
-//                                        levelUpView.modalPresentationStyle = .fullScreen
-//                                        cvc.present(levelUpView, animated: true, completion: nil)
-//                                    }
-//
-//                                    for j in 0..<cvc.goals[i].todos.count {
-//                                        if cvc.goals[i].todos[j].id == todoView.todoId {
-//                                            cvc.goals[i].todos[j].succeed = !cvc.goals[i].todos[j].succeed
-//                                            cvc.todoTableView.reloadData()
-//                                            break
-//                                        }
-//                                    }
-//                                    break
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-        
-        // 과거 시점 투두 막기 - 위 코드 주석 풀고 아랙 코드 지워주세요
-        // 코드 지우는 거 시작
-        if let todoView = sender.superview as? TodoView {
-            if todoView.succeed {
-                showToastMessageAlert(message: "이미 완료한 투두입니다.")
-            } else {
-                if todoView.name == "" {
-                    showToastMessageAlert(message: "투두를 입력해주세요.")
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+
+        guard let selectedDate = cvc?.selectedDate else { return }
+        guard let pastDate = formatter.date(from: selectedDate) else { return }
+        guard let presentDate = Date().removeTimeStamp else { return }
+
+        if pastDate < presentDate {
+            showToastMessageAlert(message: "과거 날짜에서는 투두를\n체크할 수 없습니다.")
+        } else {
+            if let todoView = sender.superview as? TodoView {
+                if todoView.succeed {
+                    showToastMessageAlert(message: "이미 완료한 투두입니다.")
                 } else {
-                    putTodo(todoId: todoView.todoId,
-                            name: todoView.name,
-                            succeed: !todoView.succeed) { [weak self] result in
+                    if todoView.name == "" {
+                        showToastMessageAlert(message: "투두를 입력해주세요.")
+                    } else {
+                        putTodo(todoId: todoView.todoId,
+                                name: todoView.name,
+                                succeed: !todoView.succeed) { [weak self] result in
 
-                        guard let goalId = self?.goalId else { return }
-                        guard let cvc = self?.cvc else { return }
+                            guard let goalId = self?.goalId else { return }
+                            guard let cvc = self?.cvc else { return }
 
-                        for i in 0..<cvc.goals.count {
-                            if cvc.goals[i].id == goalId {
-                                guard let levelChange = LevelChange(rawValue: result.levelChange) else { return }
-                                switch levelChange {
-                                case .keep, .levelDown:
-                                    break
-                                case .levelUp:
-                                    let levelUpView = LevelUpViewController()
-                                    levelUpView.snoweImage = Snowe(rawValue: cvc.goals[i].type)?.getImage(level: cvc.goals[i].level + 1)
-                                    levelUpView.modalPresentationStyle = .fullScreen
-                                    cvc.present(levelUpView, animated: true, completion: nil)
-                                }
-
-                                for j in 0..<cvc.goals[i].todos.count {
-                                    if cvc.goals[i].todos[j].id == todoView.todoId {
-                                        cvc.goals[i].todos[j].succeed = !cvc.goals[i].todos[j].succeed
-                                        cvc.todoTableView.reloadData()
+                            for i in 0..<cvc.goals.count {
+                                if cvc.goals[i].id == goalId {
+                                    guard let levelChange = LevelChange(rawValue: result.levelChange) else { return }
+                                    switch levelChange {
+                                    case .keep, .levelDown:
                                         break
+                                    case .levelUp:
+                                        let levelUpView = LevelUpViewController()
+                                        levelUpView.snoweImage = Snowe(rawValue: cvc.goals[i].type)?.getImage(level: cvc.goals[i].level + 1)
+                                        levelUpView.modalPresentationStyle = .fullScreen
+                                        cvc.present(levelUpView, animated: true, completion: nil)
                                     }
+
+                                    for j in 0..<cvc.goals[i].todos.count {
+                                        if cvc.goals[i].todos[j].id == todoView.todoId {
+                                            cvc.goals[i].todos[j].succeed = !cvc.goals[i].todos[j].succeed
+                                            cvc.todoTableView.reloadData()
+                                            break
+                                        }
+                                    }
+                                    break
                                 }
-                                break
                             }
                         }
                     }
                 }
             }
         }
-        // 여기까지 지워주세요!!
+
+
         
     }
 
     @objc func showTodoMenu(sender: UIButton) {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy-MM-dd"
-//        formatter.locale = Locale(identifier: "ko_KR")
-//        formatter.timeZone = TimeZone(abbreviation: "KST")
-//
-//
-//        guard let selectedDate = cvc?.selectedDate else { return }
-//        guard let pastDate = formatter.date(from: selectedDate) else { return }
-//        guard let presentDate = Date().removeTimeStamp else { return }
-//
-//        print("pastDate \(pastDate)")
-//        print("presentDate \(presentDate)")
-//
-//
-//        if pastDate < presentDate {
-//            showToastMessageAlert(message: "과거 날짜에서는 투두를\n수정할 수 없습니다.")
-//        } else {
-//            if let todoView = sender.superview as? TodoView {
-//                todoView.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
-//            }
-//        }
-        
-        // 과거 시점 투두 막기 - 위 코드 주석 풀고 아랙 코드 지워주세요
-        // 코드 지우는 거 시작
-        if let todoView = sender.superview as? TodoView {
-            todoView.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(abbreviation: "KST")
+
+
+        guard let selectedDate = cvc?.selectedDate else { return }
+        guard let pastDate = formatter.date(from: selectedDate) else { return }
+        guard let presentDate = Date().removeTimeStamp else { return }
+
+        print("pastDate \(pastDate)")
+        print("presentDate \(presentDate)")
+
+
+        if pastDate < presentDate {
+            showToastMessageAlert(message: "과거 날짜에서는 투두를\n수정할 수 없습니다.")
+        } else {
+            if let todoView = sender.superview as? TodoView {
+                todoView.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
+            }
         }
-        // 여기까지 지워주세요!!
+
         
     }
 
