@@ -429,7 +429,12 @@ extension CalendarViewController {
         calendarView.snp.makeConstraints {
             $0.top.equalTo(yearMonthLabel.snp.bottom).offset(12)
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(self.view.frame.size.width - 40 - 30)
+
+            switch numberOfWeeks {
+            case 4: $0.height.equalTo(self.view.frame.size.width - 40 - 30 - 30)
+            case 5: $0.height.equalTo(self.view.frame.size.width - 40 - 30)
+            default: $0.height.equalTo(self.view.frame.size.width - 40 + 30)
+            }
         }
 
         lineView.snp.makeConstraints {
