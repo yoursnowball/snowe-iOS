@@ -369,9 +369,6 @@ extension CalendarTodoCell {
                 }
             }
         }
-
-
-        
     }
 
     @objc func showTodoMenu(sender: UIButton) {
@@ -380,24 +377,94 @@ extension CalendarTodoCell {
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.timeZone = TimeZone(abbreviation: "KST")
 
-
         guard let selectedDate = cvc?.selectedDate else { return }
         guard let pastDate = formatter.date(from: selectedDate) else { return }
         guard let presentDate = Date().removeTimeStamp else { return }
-
-        print("pastDate \(pastDate)")
-        print("presentDate \(presentDate)")
-
 
         if pastDate < presentDate {
             showToastMessageAlert(message: "과거 날짜에서는 투두를\n수정할 수 없습니다.")
         } else {
             if let todoView = sender.superview as? TodoView {
-                todoView.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
+                if let textfield = (todoView.subviews.filter { $0 is UITextField }.first) as? UITextField {
+                    if textfield.text == "" {
+                        textfield.becomeFirstResponder()
+                    } else {
+                        let actionsheet = UIAlertController(title: "투두 설정", message: nil, preferredStyle: .actionSheet)
+
+                        let doneAction = UIAlertAction(title: "완료", style: .default) { _ in
+                            if todoView.succeed {
+                                self.showToastMessageAlert(message: "이미 완료한 투두입니다.")
+                            } else {
+                                self.putTodo(todoId: todoView.todoId,
+                                             name: todoView.name,
+                                             succeed: !todoView.succeed) { [weak self] result in
+
+                                    guard let goalId = self?.goalId else { return }
+                                    guard let cvc = self?.cvc else { return }
+
+                                    for i in 0..<cvc.goals.count {
+                                        if cvc.goals[i].id == goalId {
+                                            guard let levelChange = LevelChange(rawValue: result.levelChange) else { return }
+                                            switch levelChange {
+                                            case .keep, .levelDown:
+                                                break
+                                            case .levelUp:
+                                                let levelUpView = LevelUpViewController()
+                                                levelUpView.snoweImage = Snowe(rawValue: cvc.goals[i].type)?.getImage(level: cvc.goals[i].level + 1)
+                                                levelUpView.modalPresentationStyle = .fullScreen
+                                                cvc.present(levelUpView, animated: true, completion: nil)
+                                            }
+
+                                            for j in 0..<cvc.goals[i].todos.count {
+                                                if cvc.goals[i].todos[j].id == todoView.todoId {
+                                                    cvc.goals[i].todos[j].succeed = !cvc.goals[i].todos[j].succeed
+                                                    cvc.todoTableView.reloadData()
+                                                    break
+                                                }
+                                            }
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        let modifyAction = UIAlertAction(title: "수정", style: .default) { _ in
+                            textfield.becomeFirstResponder()
+                        }
+
+                        let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
+                            self.deleteTodo(todoId: todoView.todoId) {
+                                guard let goalId = self.goalId else { return }
+                                guard let cvc = self.cvc else { return }
+                                
+                                for i in 0..<cvc.goals.count {
+                                    if cvc.goals[i].id == goalId {
+                                        for j in 0..<cvc.goals[i].todos.count {
+                                            if cvc.goals[i].todos[j].id == todoView.todoId {
+                                                cvc.goals[i].todos = cvc.goals[i].todos.filter { $0.id != todoView.todoId }
+                                                cvc.todoTableView.reloadData()
+                                                break
+                                            }
+                                        }
+                                    }
+                                    break
+                                }
+                            }
+                        }
+
+                        let actionCancel = UIAlertAction(title: "닫기", style: .cancel, handler: nil)
+
+                        actionsheet.addAction(doneAction)
+                        actionsheet.addAction(modifyAction)
+                        actionsheet.addAction(deleteAction)
+                        actionsheet.addAction(actionCancel)
+                        
+                        self.cvc?.present(actionsheet, animated: true, completion: nil)
+                    }
+                }
             }
         }
-
-        
     }
 
     func showToastMessageAlert(message: String) {
@@ -493,6 +560,8 @@ extension CalendarTodoCell {
                 completion()
             case .requestErr(let errorResponse):
                 dump(errorResponse)
+                guard let data = errorResponse as? ErrorResponse else { return }
+                self.cvc?.showToastMessageAlert(message: data.message)
             default:
                 print("calendar todo cell - deleteTodo error")
             }
