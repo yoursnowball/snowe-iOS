@@ -52,7 +52,6 @@ final class TodoService {
             case .failure(let err):
                 print(err)
             }
-
         }
     }
 
@@ -93,7 +92,6 @@ final class TodoService {
             }
             return .success(decodedData)
         case 204:
-            // delete response 확인하기
             return .success(data)
         case 400..<500:
             guard let decodedData = try? decoder.decode(ErrorResponse.self, from: data) else {
