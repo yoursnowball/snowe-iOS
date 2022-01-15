@@ -118,9 +118,23 @@ class SignInViewController: BaseViewController {
                 completion(data)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
+                guard let data = errorResponse as? ErrorResponse else { return }
+                self.showToastMessageAlert(message: data.message)
             default:
                 print("sign in error")
             }
+        }
+    }
+
+    func showToastMessageAlert(message: String) {
+        let alert = UIAlertController(title: message,
+                                      message: "",
+                                      preferredStyle: .alert)
+
+        present(alert, animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+            alert.dismiss(animated: true)
         }
     }
 
