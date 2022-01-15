@@ -349,13 +349,84 @@ extension HomeTodoCell {
 
     @objc func showTodoMenu(sender: UIButton) {
         if let todoView = sender.superview as? TodoView {
-            todoView.subviews.filter { $0 is UITextField }.first?.becomeFirstResponder()
-        }
+            if let textfield = (todoView.subviews.filter { $0 is UITextField }.first) as? UITextField {
+                if textfield.text == "" {
+                    textfield.becomeFirstResponder()
+                } else {
+                    let actionsheet = UIAlertController(title: "투두 설정", message: nil, preferredStyle: .actionSheet)
 
-        // 수정
-        // 삭제
-        // 완료
-        // 취소
+                    let doneAction = UIAlertAction(title: "완료", style: .default) { _ in
+                        if todoView.succeed {
+                            self.showToastMessageAlert(message: "이미 완료한 투두입니다.")
+                        } else {
+                            self.putTodo(todoId: todoView.todoId,
+                                         name: todoView.name,
+                                         succeed: !todoView.succeed) { [weak self] result in
+
+                                guard let goalId = self?.goalId else { return }
+                                guard let hvc = self?.hvc else { return }
+
+                                for i in 0..<hvc.goals.count {
+                                    if hvc.goals[i]?.id == goalId {
+                                        if let goal = hvc.goals[i] {
+                                            guard let levelChange = LevelChange(rawValue: result.levelChange) else { return }
+                                            switch levelChange {
+                                            case .keep, .levelDown:
+                                                break
+                                            case .levelUp:
+                                                let levelUpView = LevelUpViewController()
+                                                levelUpView.snoweImage = Snowe(rawValue: goal.type)?.getImage(level: goal.level + 1)
+                                                levelUpView.modalPresentationStyle = .fullScreen
+                                                hvc.present(levelUpView, animated: true, completion: nil)
+                                            }
+
+                                            for j in 0..<goal.todos.count {
+                                                if goal.todos[j].id == todoView.todoId {
+                                                    hvc.goals[i]?.todos[j].succeed = !goal.todos[j].succeed
+                                                    hvc.updateGoal(goal: goal)
+                                                    break
+                                                }
+                                            }
+                                            break
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    let modifyAction = UIAlertAction(title: "수정", style: .default) { _ in
+                        textfield.becomeFirstResponder()
+                    }
+
+                    let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
+                        self.deleteTodo(todoId: todoView.todoId) {
+                            guard let goalId = self.goalId else { return }
+                            guard let hvc = self.hvc else { return }
+                            
+                            for i in 0..<hvc.goals.count {
+                                if hvc.goals[i]?.id == goalId {
+                                    if let goal = hvc.goals[i] {
+                                        hvc.goals[i]?.todos = goal.todos.filter { $0.id != todoView.todoId }
+                                        hvc.updateGoal(goal: goal)
+                                        break
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    let actionCancel = UIAlertAction(title: "닫기", style: .cancel, handler: nil)
+
+                    actionsheet.addAction(doneAction)
+                    actionsheet.addAction(modifyAction)
+                    actionsheet.addAction(deleteAction)
+                    actionsheet.addAction(actionCancel)
+
+                    self.hvc?.present(actionsheet, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     func showToastMessageAlert(message: String) {
@@ -440,6 +511,8 @@ extension HomeTodoCell {
                 completion()
             case .requestErr(let errorResponse):
                 dump(errorResponse)
+                guard let data = errorResponse as? ErrorResponse else { return }
+                self.showToastMessageAlert(message: data.message)
             default:
                 print("calendar todo cell - deleteTodo error")
             }
