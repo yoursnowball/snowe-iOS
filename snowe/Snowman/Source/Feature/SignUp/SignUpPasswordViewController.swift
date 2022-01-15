@@ -106,7 +106,7 @@ class SignUpPasswordViewController: BaseViewController {
         guard let password = self.passwordTextField.text else { return }
         guard let passwordCheck = self.passwordCheckTextField.text else { return }
 
-        if userName == password || userName == passwordCheck {
+        if userName == password {
             showToastMessageAlert(message: "아이디, 비밀번호가 일치합니다. 다르게 입력해주세요.")
         } else if password != passwordCheck {
             showToastMessageAlert(message: "비밀번호가 일치하지 않습니다.")
@@ -137,6 +137,8 @@ class SignUpPasswordViewController: BaseViewController {
                 completion(data)
             case .requestErr(let errorResponse):
                 dump(errorResponse)
+                guard let data = errorResponse as? ErrorResponse else { return }
+                self.showToastMessageAlert(message: data.message)
             default:
                 print("sign up error")
             }
