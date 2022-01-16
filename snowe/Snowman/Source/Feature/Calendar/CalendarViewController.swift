@@ -32,7 +32,6 @@ class CalendarViewController: BaseViewController {
                 todoCountLabel.text = "\(succeedCount ?? 0)/\(totalCount)"
 
                 self.todoTableView.reloadData()
-                self.calendarView.reloadData()
             } else {
 
             }
@@ -150,7 +149,7 @@ class CalendarViewController: BaseViewController {
 
         myStyle.cellShape                = .round
         myStyle.cellColorDefault         = UIColor.clear
-        myStyle.cellColorToday           = UIColor.clear
+        myStyle.cellColorToday           = Color.line_blue
         myStyle.cellSelectedBorderColor  = UIColor.clear
         myStyle.cellSelectedColor        = UIColor.clear
         myStyle.cellEventColor           = UIColor.clear
@@ -258,7 +257,6 @@ class CalendarViewController: BaseViewController {
             case .success(let response):
                 guard let data = response as? GetGoalsForCalendarResponse else { return }
                 self?.goalsForCalendar = data.goals
-                self?.calendarView.reloadData()
             case .requestErr(let errorResponse):
                 dump(errorResponse)
             default:
