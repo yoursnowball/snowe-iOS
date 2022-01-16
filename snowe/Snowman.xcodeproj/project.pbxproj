@@ -310,9 +310,9 @@
 			isa = PBXGroup;
 			children = (
 				C768D12427499E04000E0677 /* CalendarDayCell.swift */,
+				C768D12027499E03000E0677 /* CalendarView.swift */,
 				C768D12327499E03000E0677 /* CalendarFlowLayout.swift */,
 				C768D11E27499E02000E0677 /* CalendarHeaderView.swift */,
-				C768D12027499E03000E0677 /* CalendarView.swift */,
 				C768D11F27499E03000E0677 /* CalendarView+DataSource.swift */,
 				C768D12527499E04000E0677 /* CalendarView+Delegate.swift */,
 				C768D12127499E03000E0677 /* CalendarView+Extensions.swift */,

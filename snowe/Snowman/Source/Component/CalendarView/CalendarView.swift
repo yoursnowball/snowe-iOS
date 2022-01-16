@@ -184,6 +184,15 @@ public class CalendarView: UIView {
         self.setup()
     }
     
+    public var allowsMultipleSelection: Bool {
+        set {
+            self.collectionView.allowsMultipleSelection = newValue
+        }
+        get {
+            return self.collectionView.allowsMultipleSelection
+        }
+    }
+    
     // MARK: Create Subviews
     private func setup() {
         
@@ -210,7 +219,7 @@ public class CalendarView: UIView {
         self.collectionView.backgroundColor     = UIColor.clear
         self.collectionView.showsHorizontalScrollIndicator  = false
         self.collectionView.showsVerticalScrollIndicator    = false
-        self.collectionView.allowsMultipleSelection         = false
+        self.collectionView.allowsMultipleSelection         = true
         self.collectionView.register(CalendarDayCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         
         self.addSubview(self.collectionView)
@@ -413,19 +422,19 @@ extension CalendarView {
      function: - scroll calendar at date (month/year) passed as parameter.
      */
     public func setDisplayDate(_ date : Date, animated: Bool = false) {
-		if #available(iOS 10.0, *) {
-			guard
-				let startDate = calendar.dateInterval(of: .month, for: startDateCache)?.start,
-				let endDate = calendar.dateInterval(of: .month, for: endDateCache)?.end,
-				(startDate..<endDate).contains(date)
-			else {
-				return
-			}
-		}
-		else {
-			guard (startDateCache..<endDateCache).contains(date) else { return }
-		}
-		
+        if #available(iOS 10.0, *) {
+            guard
+                let startDate = calendar.dateInterval(of: .month, for: startDateCache)?.start,
+                let endDate = calendar.dateInterval(of: .month, for: endDateCache)?.end,
+                (startDate..<endDate).contains(date)
+            else {
+                return
+            }
+        }
+        else {
+            guard (startDateCache..<endDateCache).contains(date) else { return }
+        }
+        
         self.collectionView?.reloadData()
         self.collectionView?.setContentOffset(self.scrollViewOffset(for: date), animated: animated)
         self.displayDateOnHeader(date)
