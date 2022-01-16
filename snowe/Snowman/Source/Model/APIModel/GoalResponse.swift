@@ -8,7 +8,7 @@
 struct GoalResponse: Codable {
     let createdAt: String
     let id, levelTodoCount: Int
-    var level : Int
+    var level: Int
     let name, objective: String
     let succeedTodoCount: Int
     var todos: [TodoResponse]
