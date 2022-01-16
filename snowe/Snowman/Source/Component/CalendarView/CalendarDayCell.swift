@@ -98,7 +98,7 @@ open class CalendarDayCell: UICollectionViewCell {
             self.textLabel.textColor = style.cellSelectedTextColor
         }
         else if isToday {
-            self.textLabel.textColor = style.cellTextColorToday
+            self.textLabel.textColor = style.cellSelectedTextColor
         }
         else if isOutOfRange {
             self.textLabel.textColor = style.cellColorOutOfRange

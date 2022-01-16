@@ -87,7 +87,7 @@ extension CalendarView {
         public var cellSelectedBorderColor   = UIColor(red: 254.0/255.0, green: 73.0/255.0, blue: 64.0/255.0, alpha: 0.8)
         public var cellSelectedBorderWidth   = CGFloat(2.0)
         public var cellSelectedColor         = UIColor.clear
-        public var cellSelectedTextColor     = UIColor.black
+        public var cellSelectedTextColor     = Color.line_blue
         
         //Weekend Style
         public var cellTextColorWeekend      = UIColor(red:1.00, green:0.84, blue:0.65, alpha:1.00)
